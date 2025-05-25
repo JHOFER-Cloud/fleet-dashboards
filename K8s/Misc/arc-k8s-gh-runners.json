@@ -112,9 +112,9 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
+            "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by(le) (increase(gha_job_startup_duration_seconds_bucket{namespace=~\"$SystemNamespace\", pod=~\"$Scaleset\"}[$__rate_interval]))",
+            "expr": "sum by(le) (increase(gha_job_startup_duration_seconds_bucket{namespace=~\"$SystemNamespace\", pod=~\"$Scaleset.*\"}[$__rate_interval]))",
             "format": "heatmap",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -203,7 +203,7 @@
             "disableTextWrap": false,
             "editorMode": "builder",
             "exemplar": false,
-            "expr": "sum by(le) (increase(gha_job_execution_duration_seconds_bucket{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"}[$__rate_interval]))",
+            "expr": "sum by(le) (increase(gha_job_execution_duration_seconds_bucket{pod=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"}[$__rate_interval]))",
             "format": "heatmap",
             "fullMetaSearch": false,
             "includeNullMetadata": false,
@@ -277,7 +277,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "builder",
-            "expr": "sum(gha_registered_runners{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "expr": "sum(gha_registered_runners{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -352,7 +352,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "builder",
-            "expr": "sum(gha_idle_runners{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "expr": "sum(gha_idle_runners{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -426,8 +426,8 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "sum(gha_assigned_jobs{namespace=~\"$SystemNamespace\", pod=~\"$Scaleset\"})",
+            "editorMode": "builder",
+            "expr": "sum(gha_assigned_jobs{namespace=~\"$SystemNamespace\", name=~\"$Scaleset.*\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -442,7 +442,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(gha_desired_runners{namespace=~\"$SystemNamespace\", pod=~\"$Scaleset\"}) + 1",
+            "expr": "sum(gha_desired_runners{namespace=~\"$SystemNamespace\", name=~\"$Scaleset.*\"}) + 1",
             "hide": false,
             "instant": false,
             "legendFormat": "__auto",
@@ -530,7 +530,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum (gha_running_jobs{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "expr": "sum (gha_running_jobs{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "instant": false,
             "legendFormat": "__auto",
             "range": true,
@@ -599,7 +599,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(gha_controller_failed_ephemeral_runners{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "expr": "sum(gha_controller_failed_ephemeral_runners{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "instant": false,
             "legendFormat": "__auto",
             "range": true,
@@ -744,7 +744,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "builder",
-            "expr": "sum(gha_controller_pending_ephemeral_runners{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "expr": "sum(gha_controller_pending_ephemeral_runners{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -849,8 +849,8 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "sum(gha_desired_runners{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "editorMode": "builder",
+            "expr": "sum(gha_desired_runners{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -924,8 +924,8 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "code",
-            "expr": "max(gha_controller_running_ephemeral_runners{pod=~\"$Scaleset\", namespace=~\"$SystemNamespace\"})",
+            "editorMode": "builder",
+            "expr": "max(gha_controller_running_ephemeral_runners{name=~\"$Scaleset.*\", namespace=~\"$SystemNamespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -2140,7 +2140,9 @@
         },
         {
           "current": {
-            "text": "All",
+            "text": [
+              "All"
+            ],
             "value": [
               "$__all"
             ]
@@ -2149,7 +2151,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "definition": "label_values(gha_desired_runners,pod)",
+          "definition": "label_values(gha_controller_running_ephemeral_runners,name)",
           "description": "The name of the runner scale set",
           "includeAll": true,
           "label": "Scale Set",
@@ -2158,7 +2160,7 @@
           "options": [],
           "query": {
             "qryType": 1,
-            "query": "label_values(gha_desired_runners,pod)",
+            "query": "label_values(gha_controller_running_ephemeral_runners,name)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
@@ -2176,7 +2178,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "definition": "label_values(gha_desired_runners{pod=~\"$Scaleset\"},exported_namespace)",
+          "definition": "label_values(gha_desired_runners{name=~\"$Scaleset.*\"},exported_namespace)",
           "description": "Namespace containing the runners",
           "includeAll": true,
           "label": "Runner Namespace",
@@ -2185,7 +2187,7 @@
           "options": [],
           "query": {
             "qryType": 1,
-            "query": "label_values(gha_desired_runners{pod=~\"$Scaleset\"},exported_namespace)",
+            "query": "label_values(gha_desired_runners{name=~\"$Scaleset.*\"},exported_namespace)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
