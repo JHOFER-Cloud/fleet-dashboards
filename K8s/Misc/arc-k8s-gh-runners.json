@@ -132,7 +132,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "Heat map showing the typical time to complete a job and whether the number of jobs in that time bucket are increasing or decreasing.",
         "fieldConfig": {
@@ -198,7 +198,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -220,7 +220,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of runners registered for processing queued jobs",
         "fieldConfig": {
@@ -273,7 +273,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(gha_registered_runners{pod=~\"$Scaleset\", namespace=~\"$RunnerNamespace\"})",
@@ -289,7 +289,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "Number of registered runners that do not have assigned jobs.",
         "fieldConfig": {
@@ -344,7 +344,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -364,7 +364,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of jobs assigned to the scale set.  The threshold is triggered with the number of assigned jobs exceeds the number of desired runners. This indicates that not all jobs will have an available runner.",
         "fieldConfig": {
@@ -419,7 +419,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -435,7 +435,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(gha_desired_runners{namespace=~\"$RunnerNamespace\", pod=~\"$Scaleset\"}) + 1",
@@ -470,7 +470,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of workflow jobs currently executing",
         "fieldConfig": {
@@ -523,7 +523,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum (gha_running_jobs{pod=~\"$Scaleset\", namespace=~\"$RunnerNamespace\"})",
@@ -539,7 +539,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of runners in a failed state. These runners are typically misconfigured and count against the scale set's maximum limit.",
         "fieldConfig": {
@@ -592,7 +592,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(gha_controller_failed_ephemeral_runners{pod=~\"$Scaleset\", namespace=~\"$RunnerNamespace\"})",
@@ -608,7 +608,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of active scale set listeners",
         "fieldConfig": {
@@ -664,7 +664,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(gha_controller_running_listeners{namespace=~\"$SystemNamespace\"})",
@@ -681,7 +681,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "Number of runner pods that are waiting to be created. When this number exceeds the number of pods Kubernetes reports as Waiting, it indicate cluster performance issues.",
         "fieldConfig": {
@@ -736,7 +736,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -752,7 +752,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(kube_pod_container_status_waiting{namespace=~\"$RunnerNamespace\"}) != 0 or vector(0)",
@@ -787,7 +787,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "Number of runners desired by the scale set",
         "fieldConfig": {
@@ -842,7 +842,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -862,7 +862,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "Number of runner pods in a running state",
         "fieldConfig": {
@@ -917,7 +917,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -937,7 +937,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of containers that are reporting that they were terminated by an out-of-memory condition (OOMK.iller)",
         "fieldConfig": {
@@ -992,7 +992,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\",namespace=~\"$RunnerNamespace\"}) by (namespace)",
@@ -1007,7 +1007,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The peak memory used by a container in a given scale set's namespace.",
         "fieldConfig": {
@@ -1062,7 +1062,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max(container_memory_working_set_bytes{namespace=~\"$RunnerNamespace\"}) by (namespace)",
@@ -1079,7 +1079,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The sum of the reads and writes occurring within the runner namespace.",
         "fieldConfig": {
@@ -1164,7 +1164,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(rate(container_fs_writes_bytes_total{namespace=~\"$RunnerNamespace\"}[$__rate_interval])) \u003e 0 or vector(0)",
@@ -1176,7 +1176,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(rate(container_fs_reads_bytes_total{namespace=~\"$RunnerNamespace\"}[$__rate_interval])) \u003e 0 or vector(0)",
@@ -1193,7 +1193,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The Kubernetes-reported pod status.",
         "fieldConfig": {
@@ -1256,7 +1256,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -1276,7 +1276,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(kube_pod_container_status_waiting{namespace=~\"$RunnerNamespace\"}) != 0 or vector(0)",
@@ -1289,7 +1289,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(kube_pod_container_status_terminated_reason{namespace=~\"$RunnerNamespace\", reason=\"Completed\"}) != 0 or vector(0)",
@@ -1303,7 +1303,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum(kube_pod_container_status_terminated_reason{namespace=~\"$RunnerNamespace\", reason=\"Error\"}) != 0 or vector(0)",
@@ -1316,7 +1316,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -1376,7 +1376,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The average time required for a reconciliation request to be processed. This reflects the time required for the controller to process a single request to modify a Kubernetes resource.",
         "fieldConfig": {
@@ -1460,7 +1460,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -1480,7 +1480,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The average time a queued reconciliation request spends waiting to be processed.",
         "fieldConfig": {
@@ -1564,7 +1564,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -1583,7 +1583,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "Errors indicate that controller has not achieved a desired state and is requesting Kubernetes to queue another request for reconciliation. Ideally, this number remains close to zero. An increasing number can indicate resource contention or delays processing API server requests.",
         "fieldConfig": {
@@ -1666,7 +1666,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -1686,7 +1686,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of reconcile requests that are waiting to be processed by the controller. A growing queue depth can indicate that the Kubernetes API Server or the controller does not have enough resources. This can lead to pods taking longer to be deleted or started. ",
         "fieldConfig": {
@@ -1741,7 +1741,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum (workqueue_depth{namespace=\"$SystemNamespace\"}) by (name)",
@@ -1756,7 +1756,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of workers that are currently being used to process reconcile requests. Increasing this number can reduce the work queue duration, but each new worker adds a small amount of time due to context switching.",
         "fieldConfig": {
@@ -1810,7 +1810,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (controller) (controller_runtime_active_workers)",
@@ -1825,7 +1825,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The number of calls to the API server",
         "fieldConfig": {
@@ -1908,7 +1908,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "sum by (method, code) (rate(rest_client_requests_total{namespace=\"$SystemNamespace\"}[$__rate_interval]))",
@@ -1937,7 +1937,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "The time required by Prometheus to read and process metrics. Long scrape times can delay metrics updates or lead to metrics loss. Increasing time often indicates issues with metrics cardinality or cluster resources.",
         "fieldConfig": {
@@ -1986,7 +1986,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2018,12 +2019,12 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.0.0",
+        "pluginVersion": "12.1.0-88661",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -2051,8 +2052,8 @@
         {
           "allowCustomValue": false,
           "current": {
-            "text": "k8_dev_hla1",
-            "value": "aef9f9k9lvwn4b"
+            "text": "k8_live_hla1",
+            "value": "eef9f89usay9sb"
           },
           "name": "datasource",
           "options": [],
@@ -2118,7 +2119,9 @@
         {
           "current": {
             "text": "All",
-            "value": "$__all"
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
