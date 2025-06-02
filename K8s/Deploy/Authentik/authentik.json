@@ -234,26 +234,36 @@
               "type": "prometheus",
               "uid": "${datasource}"
             },
+            "disableTextWrap": false,
+            "editorMode": "builder",
             "exemplar": true,
-            "expr": "sum(authentik_system_tasks{namespace=~\"$namespace\",status=\"TaskResultStatus.ERROR\"})",
+            "expr": "sum(authentik_system_tasks{namespace=~\"$namespace\", status=\"error\"})",
             "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "instant": true,
             "interval": "",
             "legendFormat": "Failed",
-            "refId": "A"
+            "refId": "A",
+            "useBackend": false
           },
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${datasource}"
             },
+            "disableTextWrap": false,
+            "editorMode": "builder",
             "exemplar": true,
-            "expr": "sum(authentik_system_tasks{namespace=~\"$namespace\",status=\"TaskResultStatus.SUCCESSFUL\"})",
+            "expr": "sum(authentik_system_tasks{namespace=~\"$namespace\", status=\"successful\"})",
+            "fullMetaSearch": false,
             "hide": false,
+            "includeNullMetadata": true,
             "instant": true,
             "interval": "",
             "legendFormat": "Successful",
-            "refId": "B"
+            "refId": "B",
+            "useBackend": false
           }
         ],
         "title": "Task status",
@@ -998,10 +1008,12 @@
               "type": "prometheus",
               "uid": "${datasource}"
             },
+            "editorMode": "code",
             "exemplar": true,
             "expr": "sum by (host) (rate(authentik_outpost_proxy_requests_sum{outpost_name=\"$outpost_proxy\", namespace=~\"$namespace\",user=\"\"}[5m]))",
             "interval": "",
             "legendFormat": "{{ host }}",
+            "range": true,
             "refId": "A"
           }
         ],
@@ -1487,9 +1499,7 @@
         },
         {
           "current": {
-            "text": [
-              "All"
-            ],
+            "text": "All",
             "value": [
               "$__all"
             ]
@@ -1514,15 +1524,19 @@
             "text": "authentik Embedded Outpost",
             "value": "authentik Embedded Outpost"
           },
-          "datasource": "aef9f9k9lvwn4b",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "definition": "authentik_outpost_info{outpost_type=\"proxy\"}",
           "hide": 2,
           "includeAll": false,
           "name": "outpost_proxy",
           "options": [],
           "query": {
+            "qryType": 4,
             "query": "authentik_outpost_info{outpost_type=\"proxy\"}",
-            "refId": "StandardVariableQuery"
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 1,
           "regex": "/.*outpost_name=\"([^\"]*).*/",
@@ -1533,16 +1547,16 @@
             "text": "",
             "value": ""
           },
-          "datasource": "aef9f9k9lvwn4b",
-          "definition": "authentik_outpost_info{outpost_type=\"ldap\"}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "definition": "",
           "hide": 2,
           "includeAll": false,
           "name": "outpost_ldap",
           "options": [],
-          "query": {
-            "query": "authentik_outpost_info{outpost_type=\"ldap\"}",
-            "refId": "StandardVariableQuery"
-          },
+          "query": "",
           "refresh": 1,
           "regex": "/.*outpost_name=\"([^\"]*).*/",
           "type": "query"
