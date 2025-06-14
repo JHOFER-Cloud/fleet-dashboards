@@ -1544,30 +1544,6 @@
                   "value": 0
                 }
               ]
-            },
-            {
-              "__systemRef": "hideSeriesFrom",
-              "matcher": {
-                "id": "byNames",
-                "options": {
-                  "mode": "exclude",
-                  "names": [
-                    "nextcloud"
-                  ],
-                  "prefix": "All except:",
-                  "readOnly": true
-                }
-              },
-              "properties": [
-                {
-                  "id": "custom.hideFrom",
-                  "value": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": true
-                  }
-                }
-              ]
             }
           ]
         },
@@ -1677,32 +1653,7 @@
             },
             "unit": "bytes"
           },
-          "overrides": [
-            {
-              "__systemRef": "hideSeriesFrom",
-              "matcher": {
-                "id": "byNames",
-                "options": {
-                  "mode": "exclude",
-                  "names": [
-                    "nextcloud"
-                  ],
-                  "prefix": "All except:",
-                  "readOnly": true
-                }
-              },
-              "properties": [
-                {
-                  "id": "custom.hideFrom",
-                  "value": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": true
-                  }
-                }
-              ]
-            }
-          ]
+          "overrides": []
         },
         "gridPos": {
           "h": 8,
@@ -2585,8 +2536,8 @@
       "list": [
         {
           "current": {
-            "text": "k8_dev_hla1",
-            "value": "aef9f9k9lvwn4b"
+            "text": "k8_live_hla1",
+            "value": "eef9f89usay9sb"
           },
           "includeAll": false,
           "name": "datasource",
@@ -2624,8 +2575,8 @@
         },
         {
           "current": {
-            "text": "dielinke",
-            "value": "dielinke"
+            "text": "renovate",
+            "value": "renovate"
           },
           "datasource": {
             "type": "prometheus",
@@ -2740,7 +2691,7 @@
       ]
     },
     "time": {
-      "from": "now-30m",
+      "from": "now-24h",
       "to": "now"
     },
     "timepicker": {},
