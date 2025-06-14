@@ -739,7 +739,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"})",
+            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"})",
             "instant": true,
             "interval": "$resolution",
             "legendFormat": "Limits",
@@ -1544,6 +1544,30 @@
                   "value": 0
                 }
               ]
+            },
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "nextcloud"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
             }
           ]
         },
@@ -1653,7 +1677,32 @@
             },
             "unit": "bytes"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "nextcloud"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
           "h": 8,
@@ -2691,7 +2740,7 @@
       ]
     },
     "time": {
-      "from": "now-24h",
+      "from": "now-30m",
       "to": "now"
     },
     "timepicker": {},
