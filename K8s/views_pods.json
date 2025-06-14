@@ -739,7 +739,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"})",
+            "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"})",
             "instant": true,
             "interval": "$resolution",
             "legendFormat": "Limits",
@@ -2536,8 +2536,8 @@
       "list": [
         {
           "current": {
-            "text": "k8_dev_hla1",
-            "value": "aef9f9k9lvwn4b"
+            "text": "k8_live_hla1",
+            "value": "eef9f89usay9sb"
           },
           "includeAll": false,
           "name": "datasource",
@@ -2575,8 +2575,8 @@
         },
         {
           "current": {
-            "text": "dielinke",
-            "value": "dielinke"
+            "text": "renovate",
+            "value": "renovate"
           },
           "datasource": {
             "type": "prometheus",
