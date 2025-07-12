@@ -39,7 +39,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -342,12 +342,12 @@
             }
           ]
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -362,7 +362,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -377,7 +377,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -392,7 +392,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -407,7 +407,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -422,7 +422,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -437,7 +437,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -494,7 +494,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -576,12 +576,12 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "pve_cpu_usage_ratio{instance=\"$instance\"} and on(id) pve_node_info",
@@ -592,7 +592,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -625,7 +625,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -692,12 +692,12 @@
           "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -716,7 +716,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -778,12 +778,12 @@
           "textMode": "value_and_name",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -801,7 +801,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -884,12 +884,12 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "pve_memory_usage_bytes{instance=\"$instance\"} and on(id) pve_node_info",
@@ -900,7 +900,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -933,7 +933,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1000,12 +1000,12 @@
           "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1024,7 +1024,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1114,12 +1114,12 @@
           "textMode": "value_and_name",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1133,7 +1133,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1148,7 +1148,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1181,7 +1181,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1269,12 +1269,12 @@
             "sort": "asc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max by(id, instance, name, type) (\n  (pve_cpu_usage_ratio{instance=\"$instance\"} / pve_cpu_usage_limit) \n  * on(id, instance) group_left(name, type) \n  (\n    max by(id, instance, name, type) (pve_guest_info)\n  ) \n  and on(id, instance) pve_up == 1\n)",
@@ -1292,7 +1292,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1380,12 +1380,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max by(id, instance, name, type) (\n  (pve_memory_usage_bytes{instance=\"$instance\"} / pve_memory_size_bytes) \n  * on(id, instance) group_left(name, type) \n  (\n    max by(id, instance, name, type) (pve_guest_info)\n  ) \n  and on(id, instance) pve_up == 1\n)",
@@ -1403,7 +1403,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1468,12 +1468,12 @@
           "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "exemplar": true,
             "expr": "pve_disk_usage_bytes{instance=\"$instance\", id=~\"storage/.+\"} / pve_disk_size_bytes * on (id, instance) group_left(storage) pve_storage_info",
@@ -1491,7 +1491,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1553,12 +1553,12 @@
           },
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1593,7 +1593,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1683,12 +1683,12 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max by(id, instance, name, type) (\n  (pve_disk_usage_bytes{instance=\"$instance\"} / pve_disk_size_bytes{instance=\"$instance\"}) \n  * on(id, instance) group_left(name, type) \n  (\n    max by(id, instance, name, type) (pve_guest_info{type=\"lxc\"})\n  )\n)",
@@ -1706,7 +1706,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1807,12 +1807,12 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max by(id, instance, name, type) (\n  (rate(pve_network_receive_bytes{instance=\"$instance\"}[5m]) \n  * on(id, instance) group_left(name, type) \n  (\n    max by(id, instance, name, type) (pve_guest_info)\n  )) \n  and on(id, instance) pve_up == 1\n)",
@@ -1826,7 +1826,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max by(id, instance, name, type) (\n  (rate(pve_network_transmit_bytes{instance=\"$instance\"}[5m]) \n  * on(id, instance) group_left(name, type) \n  (\n    max by(id, instance, name, type) (pve_guest_info)\n  )) \n  and on(id, instance) pve_up == 1\n)",
@@ -1844,7 +1844,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "description": "",
         "fieldConfig": {
@@ -1932,12 +1932,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91168",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "expr": "max by(id, instance, name, type) (\n  ((rate(pve_disk_write_bytes{instance=\"$instance\"}[5m]) + rate(pve_disk_read_bytes{instance=\"$instance\"}[5m])) \n  * on(id, instance) group_left(name, type) \n  (\n    max by(id, instance, name, type) (pve_guest_info)\n  )) \n  and on(id, instance) pve_up == 1\n)",
@@ -1960,13 +1960,26 @@
     "templating": {
       "list": [
         {
+          "allowCustomValue": false,
+          "current": {
+            "text": "k8_dev_hla1",
+            "value": "aef9f9k9lvwn4b"
+          },
+          "name": "datasource",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
           "current": {
             "text": "pve-1.hla1.jhofer.lan:443",
             "value": "pve-1.hla1.jhofer.lan:443"
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "aef9f9k9lvwn4b"
+            "uid": "${datasource}"
           },
           "definition": "label_values(pve_node_info, instance)",
           "includeAll": false,
@@ -1984,7 +1997,7 @@
       ]
     },
     "time": {
-      "from": "now-3h",
+      "from": "now-2d",
       "to": "now"
     },
     "timepicker": {},
