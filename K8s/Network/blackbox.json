@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 49,
+  "id": 1856469594214400,
   "links": [],
   "panels": [
     {
@@ -80,7 +80,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "blue",
@@ -122,7 +123,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -132,7 +133,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_http_status_code{instance=~\"$instance\", job=~\"$job\", namespace=~\"$namespace\"}",
+          "expr": "min by(instance) (probe_http_status_code{instance=~\"$instance\", job=~\"$job\", namespace=~\"$namespace\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -183,7 +184,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d44a3a"
+                "color": "#d44a3a",
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -226,22 +228,26 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_success{instance=~\"$instance\", namespace=~\"$namespace\"}",
+          "expr": "min by(instance) (probe_success{instance=~\"$instance\", namespace=~\"$namespace\"})",
           "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "interval": "$interval",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "timeFrom": "now-5m",
@@ -285,7 +291,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46"
+                "color": "#299c46",
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -328,22 +335,26 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_http_status_code{instance=~\"$instance\"}",
+          "expr": "min by(instance) (probe_http_status_code{instance=~\"$instance\"})",
           "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "interval": "$interval",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "timeFrom": "now-5m",
@@ -375,7 +386,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -414,22 +426,26 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_http_version{instance=~\"$instance\", namespace=~\"$namespace\"}",
+          "expr": "min by(instance) (probe_http_version{instance=~\"$instance\", namespace=~\"$namespace\"})",
           "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "timeFrom": "now-5m",
@@ -484,7 +500,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-green"
+                "color": "dark-green",
+                "value": 0
               },
               {
                 "color": "orange",
@@ -522,7 +539,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -531,7 +548,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_duration_seconds{instance=~\"$instance\", job=~\"$job\", namespace=~\"$namespace\"}",
+          "expr": "max by (instance) (probe_duration_seconds{instance=~\"$instance\", job=~\"$job\", namespace=~\"$namespace\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -568,7 +585,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-green"
+                "color": "dark-green",
+                "value": 0
               },
               {
                 "color": "orange",
@@ -611,7 +629,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -657,7 +675,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -696,7 +715,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -705,7 +724,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_ip_protocol{instance=~\"$instance\", namespace=~\"$namespace\"}",
+          "expr": "min by (instance) (probe_ip_protocol{instance=~\"$instance\", namespace=~\"$namespace\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -743,7 +762,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-green"
+                "color": "dark-green",
+                "value": 0
               },
               {
                 "color": "orange",
@@ -786,7 +806,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -843,7 +863,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d44a3a"
+                "color": "#d44a3a",
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -886,7 +907,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -895,7 +916,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_http_ssl{instance=~\"$instance\", namespace=~\"$namespace\"}",
+          "expr": "min by (instance) (probe_http_ssl{instance=~\"$instance\", namespace=~\"$namespace\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -945,7 +966,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d44a3a"
+                "color": "#d44a3a",
+                "value": 0
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -988,7 +1010,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -997,7 +1019,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_ssl_earliest_cert_expiry{instance=~\"$instance\", namespace=~\"$namespace\"} - time()",
+          "expr": "min by (instance) (probe_ssl_earliest_cert_expiry{instance=~\"$instance\", namespace=~\"$namespace\"} - time())",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -1042,7 +1064,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1078,22 +1101,26 @@
           }
         ]
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_tls_version_info{instance=~\"$instance\", namespace=~\"$namespace\"}",
+          "expr": "min by(instance, namespace, version) (probe_tls_version_info{instance=~\"$instance\", namespace=~\"$namespace\"})",
           "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}",
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "title": "TLS version",
@@ -1175,7 +1202,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1197,7 +1225,7 @@
       "maxPerRow": 2,
       "options": {
         "legend": {
-          "calcs": ["mean"],
+          "calcs": ["mean", "max"],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
@@ -1210,7 +1238,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.1",
+      "pluginVersion": "12.1.0-91168",
       "targets": [
         {
           "datasource": {
@@ -1219,7 +1247,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "probe_http_duration_seconds{instance=~\"$instance\", job=~\"$job\", phase=~\"$phase\", namespace=~\"$namespace\"}",
+          "expr": "max by (instance, phase) (probe_http_duration_seconds{instance=~\"$instance\", job=~\"$job\", phase=~\"$phase\", namespace=~\"$namespace\"})",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -1434,5 +1462,5 @@
   "timezone": "",
   "title": "K8s / BlackBox",
   "uid": "k8s_blackbox",
-  "version": 20
+  "version": 1
 }
