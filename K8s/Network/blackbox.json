@@ -486,7 +486,7 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "barWidthFactor": 0.6,
-              "drawStyle": "bars",
+              "drawStyle": "line",
               "fillOpacity": 10,
               "gradientMode": "none",
               "hideFrom": {
@@ -1202,7 +1202,7 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "barWidthFactor": 0.6,
-              "drawStyle": "line",
+              "drawStyle": "bars",
               "fillOpacity": 10,
               "gradientMode": "none",
               "hideFrom": {
