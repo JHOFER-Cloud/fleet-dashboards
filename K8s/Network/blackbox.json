@@ -54,7 +54,7 @@
               "axisSoftMax": 599,
               "barAlignment": 0,
               "barWidthFactor": 0.6,
-              "drawStyle": "line",
+              "drawStyle": "bars",
               "fillOpacity": 10,
               "gradientMode": "none",
               "hideFrom": {
@@ -63,7 +63,7 @@
                 "viz": false
               },
               "insertNulls": false,
-              "lineInterpolation": "smooth",
+              "lineInterpolation": "stepAfter",
               "lineStyle": {
                 "fill": "solid"
               },
@@ -143,7 +143,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by(instance) (probe_http_status_code{instance=~\"$instance\", job=~\"$job\", namespace=~\"$namespace\"})",
+            "expr": "max by(instance) (probe_http_status_code{instance=~\"$instance\", job=~\"$job\", namespace=~\"$namespace\"})",
             "format": "time_series",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -250,7 +250,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by(instance) (probe_success{instance=~\"$instance\", namespace=~\"$namespace\"})",
+            "expr": "max by(instance) (probe_success{instance=~\"$instance\", namespace=~\"$namespace\"})",
             "format": "time_series",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -359,7 +359,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by(instance) (probe_http_status_code{instance=~\"$instance\"})",
+            "expr": "max by(instance) (probe_http_status_code{instance=~\"$instance\"})",
             "format": "time_series",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -452,7 +452,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by(instance) (probe_http_version{instance=~\"$instance\", namespace=~\"$namespace\"})",
+            "expr": "max by(instance) (probe_http_version{instance=~\"$instance\", namespace=~\"$namespace\"})",
             "format": "time_series",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -746,7 +746,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by (instance) (probe_ip_protocol{instance=~\"$instance\", namespace=~\"$namespace\"})",
+            "expr": "max by (instance) (probe_ip_protocol{instance=~\"$instance\", namespace=~\"$namespace\"})",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 1,
@@ -942,7 +942,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by (instance) (probe_http_ssl{instance=~\"$instance\", namespace=~\"$namespace\"})",
+            "expr": "max by (instance) (probe_http_ssl{instance=~\"$instance\", namespace=~\"$namespace\"})",
             "format": "time_series",
             "interval": "$interval",
             "intervalFactor": 1,
@@ -1141,7 +1141,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": true,
-            "expr": "min by(instance, namespace, version) (probe_tls_version_info{instance=~\"$instance\", namespace=~\"$namespace\"})",
+            "expr": "max by(instance, namespace, version) (probe_tls_version_info{instance=~\"$instance\", namespace=~\"$namespace\"})",
             "format": "table",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -1271,7 +1271,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91168",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1492,7 +1492,7 @@
       ]
     },
     "time": {
-      "from": "now-24h",
+      "from": "now-45m",
       "to": "now"
     },
     "timepicker": {},
