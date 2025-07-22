@@ -143,20 +143,24 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${datasource}"
             },
+            "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": true,
-            "expr": "avg(sum by (instance, cpu) (rate(node_cpu_seconds_total{mode!~\"idle|iowait|steal\", node=~\"$node\", job=\"$job\"}[$__rate_interval])))",
+            "expr": "avg(sum by(instance, cpu) (rate(node_cpu_seconds_total{mode!~\"idle|iowait|steal\", instance=~\"$node\", job=\"$job\"}[$__rate_interval])))",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "legendFormat": "Real Linux",
             "range": true,
-            "refId": "Real Linux"
+            "refId": "Real Linux",
+            "useBackend": false
           },
           {
             "datasource": {
@@ -298,7 +302,7 @@
           "text": {},
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -307,7 +311,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(node_memory_MemTotal_bytes{node=~\"$node\", job=\"$job\"} - node_memory_MemAvailable_bytes{node=~\"$node\", job=\"$job\"}) / sum(node_memory_MemTotal_bytes{node=~\"$node\", job=\"$job\"})",
+            "expr": "sum(node_memory_MemTotal_bytes{instance=~\"$node\", job=\"$job\"} - node_memory_MemAvailable_bytes{instance=~\"$node\", job=\"$job\"}) / sum(node_memory_MemTotal_bytes{instance=~\"$node\", job=\"$job\"})",
             "hide": false,
             "interval": "",
             "legendFormat": "Real Linux",
@@ -437,7 +441,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -543,7 +547,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -778,7 +782,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -843,7 +847,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -999,7 +1003,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1151,7 +1155,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1272,7 +1276,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1408,7 +1412,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1545,7 +1549,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1653,7 +1657,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1760,7 +1764,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -1880,7 +1884,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2006,7 +2010,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2117,7 +2121,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2236,7 +2240,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2354,7 +2358,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2461,7 +2465,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2572,7 +2576,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2690,7 +2694,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -2831,7 +2835,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -3017,7 +3021,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -3130,7 +3134,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -3271,7 +3275,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -3413,7 +3417,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0-91839",
         "targets": [
           {
             "datasource": {
@@ -3560,7 +3564,7 @@
       ]
     },
     "time": {
-      "from": "now-30d",
+      "from": "now-24h",
       "to": "now"
     },
     "timepicker": {},
