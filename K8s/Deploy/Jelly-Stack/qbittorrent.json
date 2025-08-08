@@ -420,7 +420,7 @@
                 }
               ]
             },
-            "unit": "Bps"
+            "unit": "bps"
           },
           "overrides": []
         },
@@ -452,7 +452,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum (qbittorrent_global_download_speed_bytes)",
+            "expr": "sum (qbittorrent_global_download_speed_bytes * 8)",
             "interval": "",
             "legendFormat": "Download",
             "range": true,
@@ -464,14 +464,14 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum (qbittorrent_global_upload_speed_bytes)",
+            "expr": "sum (qbittorrent_global_upload_speed_bytes * 8)",
             "interval": "",
             "legendFormat": "Upload",
             "range": true,
             "refId": "B"
           }
         ],
-        "title": "Cumulative Download/Upload Speed",
+        "title": "Cumulative Download/Upload Speed in bits/s",
         "type": "timeseries"
       },
       {
