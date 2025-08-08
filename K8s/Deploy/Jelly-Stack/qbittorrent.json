@@ -78,7 +78,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -152,7 +152,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -218,7 +218,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -280,7 +280,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -345,7 +345,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -444,7 +444,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -557,7 +557,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -624,7 +624,7 @@
           "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -707,7 +707,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -790,7 +790,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -866,7 +866,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1332,7 +1332,7 @@
           ]
         },
         "gridPos": {
-          "h": 7,
+          "h": 11,
           "w": 24,
           "x": 0,
           "y": 23
@@ -1351,12 +1351,12 @@
           "showHeader": true,
           "sortBy": [
             {
-              "desc": false,
-              "displayName": "Name"
+              "desc": true,
+              "displayName": "State"
             }
           ]
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1486,7 +1486,7 @@
           "h": 3,
           "w": 8,
           "x": 0,
-          "y": 30
+          "y": 34
         },
         "id": 6,
         "maxDataPoints": 100,
@@ -1508,7 +1508,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1570,7 +1570,7 @@
           "h": 3,
           "w": 8,
           "x": 8,
-          "y": 30
+          "y": 34
         },
         "id": 8,
         "maxDataPoints": 100,
@@ -1592,7 +1592,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1653,7 +1653,7 @@
           "h": 3,
           "w": 8,
           "x": 16,
-          "y": 30
+          "y": 34
         },
         "id": 10,
         "maxDataPoints": 100,
@@ -1675,7 +1675,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1756,7 +1756,7 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 33
+          "y": 37
         },
         "id": 39,
         "options": {
@@ -1772,7 +1772,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1828,7 +1828,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 40
+          "y": 44
         },
         "id": 16,
         "maxDataPoints": 3,
@@ -1854,7 +1854,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2019,7 +2019,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 40
+          "y": 44
         },
         "id": 18,
         "options": {
@@ -2036,7 +2036,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2124,7 +2124,7 @@
           "h": 9,
           "w": 24,
           "x": 0,
-          "y": 49
+          "y": 53
         },
         "id": 26,
         "options": {
@@ -2141,7 +2141,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2201,7 +2201,7 @@
           "h": 9,
           "w": 4,
           "x": 0,
-          "y": 58
+          "y": 62
         },
         "id": 43,
         "options": {
@@ -2295,7 +2295,7 @@
           "h": 9,
           "w": 4,
           "x": 4,
-          "y": 58
+          "y": 62
         },
         "id": 42,
         "options": {
@@ -2414,7 +2414,7 @@
           "h": 9,
           "w": 16,
           "x": 8,
-          "y": 58
+          "y": 62
         },
         "id": 41,
         "options": {
