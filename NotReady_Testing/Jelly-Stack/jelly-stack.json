@@ -1635,2854 +1635,2919 @@
         "type": "table"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
           "y": 30
         },
-        "id": 11,
-        "panels": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Down"
-                      },
-                      "1": {
-                        "color": "green",
-                        "index": 0,
-                        "text": "Up"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 3,
-              "x": 0,
-              "y": 225
-            },
-            "id": 3,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_system_status{instance=~\"${radarr_instance}\"}",
-                "instant": true,
-                "legendFormat": "Status",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Down"
-                      },
-                      "1": {
-                        "color": "green",
-                        "index": 0,
-                        "text": "Up"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red"
-                    },
-                    {
-                      "color": "semi-dark-orange",
-                      "value": 600
-                    },
-                    {
-                      "color": "yellow",
-                      "value": 3600
-                    },
-                    {
-                      "color": "green",
-                      "value": 86400
-                    }
-                  ]
-                },
-                "unit": "s"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 3,
-              "x": 3,
-              "y": 225
-            },
-            "id": 7,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "time() - container_start_time_seconds{container=\"radarr\"}",
-                "instant": true,
-                "legendFormat": "Uptime",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Disk Used"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "bytes"
-                    }
-                  ]
-                }
-              ]
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 7,
-              "x": 6,
-              "y": 225
-            },
-            "id": 5,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_movie_downloaded_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Downloaded",
-                "range": false,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_movie_monitored_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Monitored",
-                "range": false,
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_movie_wanted_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Wanted",
-                "range": false,
-                "refId": "D"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "bytes"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Downloaded"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit"
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "History"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit"
-                    }
-                  ]
-                }
-              ]
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 11,
-              "x": 13,
-              "y": 225
-            },
-            "id": 6,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_queue_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Queued",
-                "range": false,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_movie_downloaded_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Downloaded",
-                "range": false,
-                "refId": "D"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_history_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "History",
-                "range": false,
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_movie_filesize_total{instance=~\"${radarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Disk Used",
-                "range": false,
-                "refId": "E"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                }
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 10,
-              "w": 24,
-              "x": 0,
-              "y": 229
-            },
-            "id": 9,
-            "options": {
-              "displayMode": "lcd",
-              "maxVizHeight": 300,
-              "minVizHeight": 10,
-              "minVizWidth": 0,
-              "namePlacement": "top",
-              "orientation": "horizontal",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showUnfilled": true,
-              "sizing": "auto",
-              "text": {},
-              "valueMode": "color"
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "exemplar": false,
-                "expr": "sort_desc(radarr_movie_quality_total{instance=~\"${radarr_instance}\"})",
-                "format": "time_series",
-                "fullMetaSearch": false,
-                "includeNullMetadata": true,
-                "instant": true,
-                "legendFormat": "{{quality}}",
-                "range": false,
-                "refId": "A",
-                "useBackend": false
-              }
-            ],
-            "title": "Qualities",
-            "type": "bargauge"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "hue",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 3,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "binBps"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 8,
-              "x": 0,
-              "y": 239
-            },
-            "id": 15,
-            "options": {
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              }
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sum(irate(container_network_transmit_bytes_total{pod=~\"radarr.*\"}[$__rate_interval]))",
-                "legendFormat": "Network Transmit",
-                "range": true,
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sum(irate(container_network_receive_bytes_total{pod=~\"radarr.*\"}[$__rate_interval])) * -1",
-                "hide": false,
-                "legendFormat": "Network Receive",
-                "range": true,
-                "refId": "B"
-              }
-            ],
-            "title": "Network",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 3,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "bytes"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 8,
-              "x": 8,
-              "y": 239
-            },
-            "id": 16,
-            "options": {
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              }
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "radarr_movie_filesize_total{instance=~\"${radarr_instance}\"}",
-                "legendFormat": "Used",
-                "range": true,
-                "refId": "A"
-              }
-            ],
-            "title": "Disk",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "custom": {
-                  "align": "auto",
-                  "cellOptions": {
-                    "type": "auto"
-                  },
-                  "inspect": false
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Expires In"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "s"
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Expiration Date"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "dateTimeAsUS"
-                    }
-                  ]
-                }
-              ]
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 8,
-              "x": 16,
-              "y": 239
-            },
-            "id": 56,
-            "options": {
-              "cellHeight": "sm",
-              "footer": {
-                "countRows": false,
-                "fields": "",
-                "reducer": [
-                  "sum"
-                ],
-                "show": false
-              },
-              "frameIndex": 1,
-              "showHeader": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "radarr_system_health_issues{instance=~\"${radarr_instance}\"}",
-                "format": "table",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "__auto",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "System Health Issues",
-            "transformations": [
-              {
-                "id": "organize",
-                "options": {
-                  "excludeByName": {
-                    "Time": true,
-                    "Value": true,
-                    "__name__": true,
-                    "cluster": true,
-                    "cluster 1": true,
-                    "cluster 2": true,
-                    "endpoint": true,
-                    "endpoint 1": true,
-                    "endpoint 2": true,
-                    "indexer 2": true,
-                    "instance": true,
-                    "instance 1": true,
-                    "instance 2": true,
-                    "job": true,
-                    "job 1": true,
-                    "job 2": true,
-                    "namespace": true,
-                    "namespace 1": true,
-                    "namespace 2": true,
-                    "pod": true,
-                    "pod 1": true,
-                    "pod 2": true,
-                    "prometheus": true,
-                    "prometheus 1": true,
-                    "prometheus 2": true,
-                    "service": true,
-                    "service 1": true,
-                    "service 2": true,
-                    "source": true,
-                    "type": true,
-                    "url": true,
-                    "url 1": true,
-                    "url 2": true
-                  },
-                  "indexByName": {},
-                  "renameByName": {
-                    "Value": "",
-                    "Value #A": "Expires In",
-                    "Value #B": "Expiration Date"
-                  }
-                }
-              }
-            ],
-            "type": "table"
-          }
-        ],
-        "repeat": "radarr_instance",
-        "title": "Radarr - ${radarr_instance}",
-        "type": "row"
-      },
-      {
-        "collapsed": true,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 31
-        },
         "id": 13,
-        "panels": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Down"
-                      },
-                      "1": {
-                        "color": "green",
-                        "index": 0,
-                        "text": "Up"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 2,
-              "x": 0,
-              "y": 286
-            },
-            "id": 17,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "sonarr_system_status{instance=~\"${sonarr_instance}\"}",
-                "instant": true,
-                "legendFormat": "Status",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Down"
-                      },
-                      "1": {
-                        "color": "green",
-                        "index": 0,
-                        "text": "Up"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red"
-                    },
-                    {
-                      "color": "semi-dark-orange",
-                      "value": 600
-                    },
-                    {
-                      "color": "yellow",
-                      "value": 3600
-                    },
-                    {
-                      "color": "green",
-                      "value": 86400
-                    }
-                  ]
-                },
-                "unit": "s"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 3,
-              "x": 2,
-              "y": 286
-            },
-            "id": 18,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "time() - container_start_time_seconds{container=\"sonarr\"}",
-                "instant": true,
-                "legendFormat": "Uptime",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Disk Used"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "bytes"
-                    }
-                  ]
-                }
-              ]
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 9,
-              "x": 5,
-              "y": 286
-            },
-            "id": 19,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "sonarr_queue_total{instance=~\"${sonarr_instance}\"}",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Queued",
-                "range": false,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "sonarr_history_total{instance=~\"${sonarr_instance}\"}[$__rate_interval]",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "History",
-                "range": false,
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "sonarr_episode_downloaded_total{instance=~\"${sonarr_instance}\"}[$__rate_interval]",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Downloaded",
-                "range": false,
-                "refId": "D"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sonarr_series_filesize_bytes{instance=~\"${sonarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Disk Used",
-                "range": true,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 3,
-              "x": 14,
-              "y": 286
-            },
-            "id": 20,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(sonarr_series_monitored_total{instance=~\"${sonarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Series Monitored",
-                "range": true,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(sonarr_series_total{instance=~\"${sonarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Series Total",
-                "range": true,
-                "refId": "D"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 3,
-              "x": 17,
-              "y": 286
-            },
-            "id": 21,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(sonarr_season_monitored_total{instance=~\"${sonarr_instance}\"})",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Seasons Monitored",
-                "range": false,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(sonarr_season_total{instance=~\"${sonarr_instance}\"})",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "Seasons Total",
-                "range": false,
-                "refId": "D"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 4,
-              "x": 20,
-              "y": 286
-            },
-            "id": 22,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(sonarr_episode_missing_total{instance=~\"${sonarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Episodes Missing",
-                "range": true,
-                "refId": "D"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(sonarr_episode_total{instance=~\"${sonarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Episodes Total",
-                "range": true,
-                "refId": "B"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 10,
-              "w": 24,
-              "x": 0,
-              "y": 290
-            },
-            "id": 23,
-            "options": {
-              "displayMode": "lcd",
-              "maxVizHeight": 300,
-              "minVizHeight": 10,
-              "minVizWidth": 0,
-              "namePlacement": "top",
-              "orientation": "horizontal",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showUnfilled": true,
-              "sizing": "auto",
-              "valueMode": "color"
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "exemplar": false,
-                "expr": "sort_desc(sonarr_episode_quality_total{instance=~\"${sonarr_instance}\"})",
-                "format": "time_series",
-                "fullMetaSearch": false,
-                "includeNullMetadata": true,
-                "instant": true,
-                "legendFormat": "{{quality}}",
-                "range": false,
-                "refId": "A",
-                "useBackend": false
-              }
-            ],
-            "title": "Qualities",
-            "type": "bargauge"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "hue",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 3,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "binBps"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 8,
-              "x": 0,
-              "y": 300
-            },
-            "id": 24,
-            "options": {
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              }
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sum(irate(container_network_transmit_bytes_total{pod=~\"sonarr.*\"}[$__rate_interval]))",
-                "legendFormat": "Network Transmit",
-                "range": true,
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sum(irate(container_network_receive_bytes_total{pod=~\"sonarr.*\"}[$__rate_interval])) * -1",
-                "hide": false,
-                "legendFormat": "Network Receive",
-                "range": true,
-                "refId": "B"
-              }
-            ],
-            "title": "Network",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "hue",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 3,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "bytes"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 8,
-              "x": 8,
-              "y": 300
-            },
-            "id": 25,
-            "options": {
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": false
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              }
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "sonarr_series_filesize_bytes{instance=~\"${sonarr_instance}\"}",
-                "instant": false,
-                "legendFormat": "Used",
-                "range": true,
-                "refId": "A"
-              }
-            ],
-            "title": "Disk Used",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "custom": {
-                  "align": "auto",
-                  "cellOptions": {
-                    "type": "auto"
-                  },
-                  "inspect": false
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Expires In"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "s"
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Expiration Date"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "dateTimeAsUS"
-                    }
-                  ]
-                }
-              ]
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 8,
-              "x": 16,
-              "y": 300
-            },
-            "id": 55,
-            "options": {
-              "cellHeight": "sm",
-              "footer": {
-                "countRows": false,
-                "fields": "",
-                "reducer": [
-                  "sum"
-                ],
-                "show": false
-              },
-              "frameIndex": 1,
-              "showHeader": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "sonarr_system_health_issues{instance=~\"${sonarr_instance}\"}",
-                "format": "table",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "__auto",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "System Health Issues",
-            "transformations": [
-              {
-                "id": "organize",
-                "options": {
-                  "excludeByName": {
-                    "Time": true,
-                    "Value": true,
-                    "__name__": true,
-                    "cluster": true,
-                    "cluster 1": true,
-                    "cluster 2": true,
-                    "endpoint": true,
-                    "endpoint 1": true,
-                    "endpoint 2": true,
-                    "indexer 2": true,
-                    "instance": true,
-                    "instance 1": true,
-                    "instance 2": true,
-                    "job": true,
-                    "job 1": true,
-                    "job 2": true,
-                    "namespace": true,
-                    "namespace 1": true,
-                    "namespace 2": true,
-                    "pod": true,
-                    "pod 1": true,
-                    "pod 2": true,
-                    "prometheus": true,
-                    "prometheus 1": true,
-                    "prometheus 2": true,
-                    "service": true,
-                    "service 1": true,
-                    "service 2": true,
-                    "source": true,
-                    "type": true,
-                    "url": true,
-                    "url 1": true,
-                    "url 2": true
-                  },
-                  "indexByName": {},
-                  "renameByName": {
-                    "Value": "",
-                    "Value #A": "Expires In",
-                    "Value #B": "Expiration Date"
-                  }
-                }
-              }
-            ],
-            "type": "table"
-          }
-        ],
+        "panels": [],
         "repeat": "sonarr_instance",
         "title": "Sonarr - ${sonarr_instance}",
         "type": "row"
       },
       {
-        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Down"
+                  },
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 2,
+          "x": 0,
+          "y": 31
+        },
+        "id": 17,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sonarr_system_status{service=~\"${sonarr_instance}\"}",
+            "instant": true,
+            "legendFormat": "Status",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Down"
+                  },
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "semi-dark-orange",
+                  "value": 600
+                },
+                {
+                  "color": "yellow",
+                  "value": 3600
+                },
+                {
+                  "color": "green",
+                  "value": 86400
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 2,
+          "y": 31
+        },
+        "id": 18,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "time() - max (container_start_time_seconds{pod=~\"$sonarr_instance.*\"})",
+            "instant": true,
+            "legendFormat": "Uptime",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Disk Used"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "bytes"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 9,
+          "x": 5,
+          "y": 31
+        },
+        "id": 19,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sonarr_queue_total{service=~\"${sonarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Queued",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sonarr_history_total{service=~\"${sonarr_instance}\"}[$__rate_interval]",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "History",
+            "range": false,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sonarr_episode_downloaded_total{service=~\"${sonarr_instance}\"}[$__rate_interval]",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Downloaded",
+            "range": false,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sonarr_series_filesize_bytes{service=~\"${sonarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Disk Used",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 14,
+          "y": 31
+        },
+        "id": 20,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(sonarr_series_monitored_total{service=~\"${sonarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Series Monitored",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(sonarr_series_total{service=~\"${sonarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Series Total",
+            "range": true,
+            "refId": "D"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 17,
+          "y": 31
+        },
+        "id": 21,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(sonarr_season_monitored_total{service=~\"${sonarr_instance}\"})",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Seasons Monitored",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(sonarr_season_total{service=~\"${sonarr_instance}\"})",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Seasons Total",
+            "range": false,
+            "refId": "D"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 31
+        },
+        "id": 22,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(sonarr_episode_missing_total{service=~\"${sonarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Episodes Missing",
+            "range": true,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(sonarr_episode_total{service=~\"${sonarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Episodes Total",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 35
+        },
+        "id": 23,
+        "options": {
+          "displayMode": "lcd",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "maxVizHeight": 300,
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "namePlacement": "top",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "valueMode": "color"
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sort_desc(sonarr_episode_quality_total{service=~\"${sonarr_instance}\"})",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{quality}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Qualities",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 3,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "binBps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 0,
+          "y": 45
+        },
+        "id": 24,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(container_network_transmit_bytes_total{pod=~\"$sonarr_instance.*\"}[$__rate_interval]))",
+            "legendFormat": "Network Transmit",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(container_network_receive_bytes_total{pod=~\"$sonarr_instance.*\"}[$__rate_interval])) * -1",
+            "hide": false,
+            "legendFormat": "Network Receive",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Network",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 3,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 8,
+          "y": 45
+        },
+        "id": 25,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sonarr_series_filesize_bytes{service=~\"${sonarr_instance}\"}",
+            "instant": false,
+            "legendFormat": "Used",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Disk Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Expires In"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "s"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Expiration Date"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "dateTimeAsUS"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 16,
+          "y": 45
+        },
+        "id": 55,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "frameIndex": 1,
+          "showHeader": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sonarr_system_health_issues{service=~\"${sonarr_instance}\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "System Health Issues",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "__name__": true,
+                "cluster": true,
+                "cluster 1": true,
+                "cluster 2": true,
+                "endpoint": true,
+                "endpoint 1": true,
+                "endpoint 2": true,
+                "indexer 2": true,
+                "instance": true,
+                "instance 1": true,
+                "instance 2": true,
+                "job": true,
+                "job 1": true,
+                "job 2": true,
+                "namespace": true,
+                "namespace 1": true,
+                "namespace 2": true,
+                "pod": true,
+                "pod 1": true,
+                "pod 2": true,
+                "prometheus": true,
+                "prometheus 1": true,
+                "prometheus 2": true,
+                "service": true,
+                "service 1": true,
+                "service 2": true,
+                "source": true,
+                "type": true,
+                "url": true,
+                "url 1": true,
+                "url 2": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Value": "",
+                "Value #A": "Expires In",
+                "Value #B": "Expiration Date"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 32
+          "y": 54
         },
-        "id": 125,
-        "panels": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "id": 11,
+        "panels": [],
+        "repeat": "radarr_instance",
+        "title": "Radarr - ${radarr_instance}",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
             },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Down"
-                      },
-                      "1": {
-                        "color": "green",
-                        "index": 0,
-                        "text": "Up"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 7,
-              "x": 0,
-              "y": 323
-            },
-            "id": 126,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
+            "mappings": [
               {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_system_status{instance=~\"${bazarr_instance}\"}",
-                "instant": true,
-                "legendFormat": "Status",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "color": "red",
-                        "index": 1,
-                        "text": "Down"
-                      },
-                      "1": {
-                        "color": "green",
-                        "index": 0,
-                        "text": "Up"
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red"
-                    },
-                    {
-                      "color": "semi-dark-orange",
-                      "value": 600
-                    },
-                    {
-                      "color": "yellow",
-                      "value": 3600
-                    },
-                    {
-                      "color": "green",
-                      "value": 86400
-                    }
-                  ]
-                },
-                "unit": "s",
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 5,
-              "x": 7,
-              "y": 323
-            },
-            "id": 127,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "area",
-              "justifyMode": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "time() - container_start_time_seconds{container=\"bazarr\"}",
-                "instant": true,
-                "legendFormat": "Uptime",
-                "range": false,
-                "refId": "A"
-              }
-            ],
-            "title": "",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "hue",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Down"
                   },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 3,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Up"
                   }
                 },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "binBps",
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 12,
-              "x": 12,
-              "y": 323
-            },
-            "id": 119,
-            "options": {
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              }
-            },
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sum(irate(container_network_transmit_bytes_total{pod=~\"sabnzbd.*\"}[$__rate_interval]))",
-                "legendFormat": "Network Transmit",
-                "range": true,
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "sum(irate(container_network_receive_bytes_total{pod=~\"sabnzbd.*\"}[$__rate_interval])) * -1",
-                "hide": false,
-                "legendFormat": "Network Receive",
-                "range": true,
-                "refId": "B"
+                "type": "value"
               }
             ],
-            "title": "Network",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none",
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 24,
-              "x": 0,
-              "y": 327
-            },
-            "id": 128,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "area",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": true,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_queue_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Queued",
-                "range": true,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_history_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "History",
-                "range": true,
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_subtitles_downloaded_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Downloaded",
-                "range": true,
-                "refId": "D"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_subtitles_monitored_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Monitored",
-                "range": true,
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_subtitles_unmonitored_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Unmonitored",
-                "range": true,
-                "refId": "E"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_subtitles_missing_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Missing",
-                "range": true,
-                "refId": "F"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_subtitles_wanted_total{instance=~\"${bazarr_instance}\"}",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Wanted",
-                "range": true,
-                "refId": "G"
-              }
-            ],
-            "title": "Subtitle Totals",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none",
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 12,
-              "x": 0,
-              "y": 331
-            },
-            "id": 129,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "area",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(bazarr_episode_subtitles_monitored_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Monitored",
-                "range": true,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(bazarr_episode_subtitles_downloaded_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Total",
-                "range": true,
-                "refId": "D"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(bazarr_episode_subtitles_unmonitored_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Unmonitored",
-                "range": true,
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(bazarr_episode_subtitles_wanted_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "legendFormat": "Wanted",
-                "range": true,
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "expr": "max(bazarr_episode_subtitles_missing_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Missing",
-                "range": true,
-                "refId": "E"
-              }
-            ],
-            "title": "Episode Subtitles",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "none",
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 12,
-              "x": 12,
-              "y": 331
-            },
-            "id": 130,
-            "options": {
-              "colorMode": "value",
-              "graphMode": "area",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(bazarr_movie_subtitles_downloaded_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Total",
-                "range": true,
-                "refId": "B"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(bazarr_movie_subtitles_monitored_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Monitored",
-                "range": true,
-                "refId": "D"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(bazarr_movie_subtitles_unmonitored_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Unmonitored",
-                "range": true,
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(bazarr_movie_subtitles_wanted_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Wanted",
-                "range": true,
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "max(bazarr_movie_subtitles_missing_total{instance=~\"${bazarr_instance}\"})",
-                "hide": false,
-                "instant": false,
-                "legendFormat": "Missing",
-                "range": true,
-                "refId": "E"
-              }
-            ],
-            "title": "Movie Subtitles",
-            "type": "stat"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisGridShow": true,
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "fillOpacity": 80,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "lineWidth": 1,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "displayName": "${__field.displayName}",
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "none",
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 19,
-              "w": 12,
-              "x": 0,
-              "y": 335
-            },
-            "id": 137,
-            "options": {
-              "barRadius": 0.5,
-              "barWidth": 1,
-              "fullHighlight": false,
-              "groupWidth": 1,
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": false
-              },
-              "orientation": "horizontal",
-              "showValue": "auto",
-              "stacking": "none",
-              "tooltip": {
-                "mode": "single",
-                "sort": "none"
-              },
-              "xField": "score",
-              "xTickLabelRotation": 0,
-              "xTickLabelSpacing": 0
-            },
-            "pluginVersion": "10.1.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "exemplar": false,
-                "expr": "sort_desc(bazarr_subtitles_score_total{instance=~\"${bazarr_instance}\"})",
-                "format": "table",
-                "fullMetaSearch": false,
-                "includeNullMetadata": true,
-                "instant": true,
-                "legendFormat": "{{score}}",
-                "range": false,
-                "refId": "A",
-                "useBackend": false
-              }
-            ],
-            "title": "Scores",
-            "type": "barchart"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "continuous-BlPu"
-                },
-                "displayName": "${__field.displayName}",
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unitScale": true
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 9,
-              "w": 12,
-              "x": 12,
-              "y": 335
-            },
-            "id": 136,
-            "options": {
-              "displayMode": "lcd",
-              "maxVizHeight": 300,
-              "minVizHeight": 10,
-              "minVizWidth": 0,
-              "namePlacement": "auto",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showUnfilled": true,
-              "sizing": "auto",
-              "valueMode": "color"
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "exemplar": false,
-                "expr": "bazarr_subtitles_provider_total{instance=~\"${bazarr_instance}\"}",
-                "format": "time_series",
-                "fullMetaSearch": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{provider}}",
-                "range": true,
-                "refId": "A",
-                "useBackend": false
-              }
-            ],
-            "title": "Providers",
-            "type": "bargauge"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-            },
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "custom": {
-                  "align": "auto",
-                  "cellOptions": {
-                    "type": "auto"
-                  },
-                  "inspect": false
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unitScale": true
-              },
-              "overrides": [
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
                 {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Expires In"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "s"
-                    }
-                  ]
+                  "color": "green",
+                  "value": 0
                 },
                 {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Expiration Date"
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 55
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_system_status{service=~\"${radarr_instance}\"}",
+            "instant": true,
+            "legendFormat": "Status",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Down"
                   },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "dateTimeAsUS"
-                    }
-                  ]
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "semi-dark-orange",
+                  "value": 600
+                },
+                {
+                  "color": "yellow",
+                  "value": 3600
+                },
+                {
+                  "color": "green",
+                  "value": 86400
                 }
               ]
             },
-            "gridPos": {
-              "h": 10,
-              "w": 12,
-              "x": 12,
-              "y": 344
-            },
-            "id": 135,
-            "options": {
-              "cellHeight": "sm",
-              "footer": {
-                "countRows": false,
-                "fields": "",
-                "reducer": [
-                  "sum"
-                ],
-                "show": false
-              },
-              "frameIndex": 1,
-              "showHeader": true
-            },
-            "pluginVersion": "10.3.3",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-                },
-                "editorMode": "code",
-                "exemplar": false,
-                "expr": "bazarr_system_health_issues{instance=~\"${bazarr_instance}\"}",
-                "format": "table",
-                "hide": false,
-                "instant": true,
-                "legendFormat": "__auto",
-                "range": false,
-                "refId": "A"
-              }
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 55
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
             ],
-            "title": "System Health Issues",
-            "transformations": [
-              {
-                "id": "organize",
-                "options": {
-                  "excludeByName": {
-                    "Time": true,
-                    "Value": true,
-                    "__name__": true,
-                    "cluster": true,
-                    "cluster 1": true,
-                    "cluster 2": true,
-                    "endpoint": true,
-                    "endpoint 1": true,
-                    "endpoint 2": true,
-                    "indexer 2": true,
-                    "instance": true,
-                    "instance 1": true,
-                    "instance 2": true,
-                    "job": true,
-                    "job 1": true,
-                    "job 2": true,
-                    "namespace": true,
-                    "namespace 1": true,
-                    "namespace 2": true,
-                    "pod": true,
-                    "pod 1": true,
-                    "pod 2": true,
-                    "prometheus": true,
-                    "prometheus 1": true,
-                    "prometheus 2": true,
-                    "service": true,
-                    "service 1": true,
-                    "service 2": true,
-                    "source": true,
-                    "type": true,
-                    "url": true,
-                    "url 1": true,
-                    "url 2": true
-                  },
-                  "indexByName": {},
-                  "renameByName": {
-                    "Value": "",
-                    "Value #A": "Expires In",
-                    "Value #B": "Expiration Date"
-                  }
-                }
-              }
-            ],
-            "type": "table"
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "time() - max (container_start_time_seconds{pod=~\"$radarr_instance.*\"})",
+            "instant": true,
+            "legendFormat": "Uptime",
+            "range": false,
+            "refId": "A"
           }
         ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Disk Used"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "bytes"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 7,
+          "x": 6,
+          "y": 55
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_downloaded_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Downloaded",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_monitored_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Monitored",
+            "range": false,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_wanted_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Wanted",
+            "range": false,
+            "refId": "D"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Downloaded"
+              },
+              "properties": [
+                {
+                  "id": "unit"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "History"
+              },
+              "properties": [
+                {
+                  "id": "unit"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 11,
+          "x": 13,
+          "y": 55
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_queue_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Queued",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_downloaded_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Downloaded",
+            "range": false,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_history_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "History",
+            "range": false,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_filesize_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Disk Used",
+            "range": false,
+            "refId": "E"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 59
+        },
+        "id": 9,
+        "options": {
+          "displayMode": "lcd",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "maxVizHeight": 300,
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "namePlacement": "top",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "text": {},
+          "valueMode": "color"
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sort_desc(radarr_movie_quality_total{service=~\"${radarr_instance}\"})",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{quality}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Qualities",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 3,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "binBps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 0,
+          "y": 69
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(container_network_transmit_bytes_total{pod=~\"$radarr_instance.*\"}[$__rate_interval]))",
+            "legendFormat": "Network Transmit",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(container_network_receive_bytes_total{pod=~\"$radarr_instance.*\"}[$__rate_interval])) * -1",
+            "hide": false,
+            "legendFormat": "Network Receive",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Network",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 3,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 8,
+          "y": 69
+        },
+        "id": 16,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "radarr_movie_filesize_total{service=~\"${radarr_instance}\"}",
+            "legendFormat": "Used",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Disk",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Expires In"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "s"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Expiration Date"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "dateTimeAsUS"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 16,
+          "y": 69
+        },
+        "id": 56,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "frameIndex": 1,
+          "showHeader": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_system_health_issues{service=~\"${radarr_instance}\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "System Health Issues",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "__name__": true,
+                "cluster": true,
+                "cluster 1": true,
+                "cluster 2": true,
+                "endpoint": true,
+                "endpoint 1": true,
+                "endpoint 2": true,
+                "indexer 2": true,
+                "instance": true,
+                "instance 1": true,
+                "instance 2": true,
+                "job": true,
+                "job 1": true,
+                "job 2": true,
+                "namespace": true,
+                "namespace 1": true,
+                "namespace 2": true,
+                "pod": true,
+                "pod 1": true,
+                "pod 2": true,
+                "prometheus": true,
+                "prometheus 1": true,
+                "prometheus 2": true,
+                "service": true,
+                "service 1": true,
+                "service 2": true,
+                "source": true,
+                "type": true,
+                "url": true,
+                "url 1": true,
+                "url 2": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Value": "",
+                "Value #A": "Expires In",
+                "Value #B": "Expiration Date"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 78
+        },
+        "id": 125,
+        "panels": [],
         "repeat": "bazarr_instance",
         "title": "Bazarr - ${bazarr_instance}",
         "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Down"
+                  },
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 7,
+          "x": 0,
+          "y": 79
+        },
+        "id": 126,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_system_status{service=~\"${bazarr_instance}\"}",
+            "instant": true,
+            "legendFormat": "Status",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Down"
+                  },
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Up"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "semi-dark-orange",
+                  "value": 600
+                },
+                {
+                  "color": "yellow",
+                  "value": 3600
+                },
+                {
+                  "color": "green",
+                  "value": 86400
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 7,
+          "y": 79
+        },
+        "id": 127,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "time() - max (container_start_time_seconds{pod=~\"$bazarr_instance.*\"})",
+            "instant": true,
+            "legendFormat": "Uptime",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 3,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "binBps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 12,
+          "y": 79
+        },
+        "id": 119,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(container_network_transmit_bytes_total{pod=~\"$bazarr_instance.*\"}[$__rate_interval]))",
+            "legendFormat": "Network Transmit",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(container_network_receive_bytes_total{pod=~\"$bazarr_instance.*\"}[$__rate_interval])) * -1",
+            "hide": false,
+            "legendFormat": "Network Receive",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Network",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 24,
+          "x": 0,
+          "y": 83
+        },
+        "id": 128,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": true,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_queue_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Queued",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_history_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "History",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_subtitles_downloaded_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Downloaded",
+            "range": true,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_subtitles_monitored_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Monitored",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_subtitles_unmonitored_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Unmonitored",
+            "range": true,
+            "refId": "E"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_subtitles_missing_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Missing",
+            "range": true,
+            "refId": "F"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_subtitles_wanted_total{service=~\"${bazarr_instance}\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Wanted",
+            "range": true,
+            "refId": "G"
+          }
+        ],
+        "title": "Subtitle Totals",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 0,
+          "y": 87
+        },
+        "id": 129,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(bazarr_episode_subtitles_monitored_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Monitored",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(bazarr_episode_subtitles_downloaded_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Total",
+            "range": true,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(bazarr_episode_subtitles_unmonitored_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Unmonitored",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(bazarr_episode_subtitles_wanted_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "legendFormat": "Wanted",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "max(bazarr_episode_subtitles_missing_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Missing",
+            "range": true,
+            "refId": "E"
+          }
+        ],
+        "title": "Episode Subtitles",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 12,
+          "y": 87
+        },
+        "id": 130,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(bazarr_movie_subtitles_downloaded_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(bazarr_movie_subtitles_monitored_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Monitored",
+            "range": true,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(bazarr_movie_subtitles_unmonitored_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Unmonitored",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(bazarr_movie_subtitles_wanted_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Wanted",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(bazarr_movie_subtitles_missing_total{service=~\"${bazarr_instance}\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Missing",
+            "range": true,
+            "refId": "E"
+          }
+        ],
+        "title": "Movie Subtitles",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisGridShow": true,
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "displayName": "${__field.displayName}",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 19,
+          "w": 12,
+          "x": 0,
+          "y": 91
+        },
+        "id": 137,
+        "options": {
+          "barRadius": 0.5,
+          "barWidth": 1,
+          "fullHighlight": false,
+          "groupWidth": 1,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "orientation": "horizontal",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "score",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sort_desc(bazarr_subtitles_score_total{service=~\"${bazarr_instance}\"})",
+            "format": "table",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{score}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Scores",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "displayName": "${__field.displayName}",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 91
+        },
+        "id": 136,
+        "options": {
+          "displayMode": "lcd",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "maxVizHeight": 300,
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "namePlacement": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "valueMode": "color"
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_subtitles_provider_total{service=~\"${bazarr_instance}\"}",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{provider}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Providers",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Expires In"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "s"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Expiration Date"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "dateTimeAsUS"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 12,
+          "x": 12,
+          "y": 100
+        },
+        "id": 135,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "frameIndex": 1,
+          "showHeader": true
+        },
+        "pluginVersion": "12.1.0-91839",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "bazarr_system_health_issues{service=~\"${bazarr_instance}\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "System Health Issues",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "__name__": true,
+                "cluster": true,
+                "cluster 1": true,
+                "cluster 2": true,
+                "endpoint": true,
+                "endpoint 1": true,
+                "endpoint 2": true,
+                "indexer 2": true,
+                "instance": true,
+                "instance 1": true,
+                "instance 2": true,
+                "job": true,
+                "job 1": true,
+                "job 2": true,
+                "namespace": true,
+                "namespace 1": true,
+                "namespace 2": true,
+                "pod": true,
+                "pod 1": true,
+                "pod 2": true,
+                "prometheus": true,
+                "prometheus 1": true,
+                "prometheus 2": true,
+                "service": true,
+                "service 1": true,
+                "service 2": true,
+                "source": true,
+                "type": true,
+                "url": true,
+                "url 1": true,
+                "url 2": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Value": "",
+                "Value #A": "Expires In",
+                "Value #B": "Expiration Date"
+              }
+            }
+          }
+        ],
+        "type": "table"
       },
       {
         "collapsed": true,
@@ -4490,7 +4555,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 33
+          "y": 110
         },
         "id": 58,
         "panels": [
@@ -4541,7 +4606,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 422
+              "y": 4160
             },
             "id": 60,
             "options": {
@@ -4636,7 +4701,7 @@
               "h": 4,
               "w": 3,
               "x": 3,
-              "y": 422
+              "y": 4160
             },
             "id": 62,
             "options": {
@@ -4741,7 +4806,7 @@
               "h": 4,
               "w": 8,
               "x": 6,
-              "y": 422
+              "y": 4160
             },
             "id": 64,
             "options": {
@@ -4855,7 +4920,7 @@
               "h": 4,
               "w": 4,
               "x": 14,
-              "y": 422
+              "y": 4160
             },
             "id": 66,
             "options": {
@@ -4937,7 +5002,7 @@
               "h": 4,
               "w": 6,
               "x": 18,
-              "y": 422
+              "y": 4160
             },
             "id": 68,
             "options": {
@@ -5030,7 +5095,7 @@
               "h": 10,
               "w": 24,
               "x": 0,
-              "y": 426
+              "y": 4164
             },
             "id": 70,
             "options": {
@@ -5135,7 +5200,7 @@
               "h": 9,
               "w": 8,
               "x": 0,
-              "y": 436
+              "y": 4174
             },
             "id": 72,
             "options": {
@@ -5243,7 +5308,7 @@
               "h": 9,
               "w": 8,
               "x": 8,
-              "y": 436
+              "y": 4174
             },
             "id": 74,
             "options": {
@@ -5337,7 +5402,7 @@
               "h": 9,
               "w": 8,
               "x": 16,
-              "y": 436
+              "y": 4174
             },
             "id": 76,
             "options": {
@@ -5434,7 +5499,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 34
+          "y": 111
         },
         "id": 78,
         "panels": [
@@ -5542,7 +5607,7 @@
               "h": 4,
               "w": 15,
               "x": 0,
-              "y": 489
+              "y": 5132
             },
             "id": 84,
             "options": {
@@ -5730,7 +5795,7 @@
               "h": 4,
               "w": 5,
               "x": 15,
-              "y": 489
+              "y": 5132
             },
             "id": 122,
             "options": {
@@ -5847,7 +5912,7 @@
               "h": 4,
               "w": 4,
               "x": 20,
-              "y": 489
+              "y": 5132
             },
             "id": 86,
             "options": {
@@ -5948,7 +6013,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 493
+              "y": 5136
             },
             "id": 80,
             "options": {
@@ -5998,7 +6063,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 35
+          "y": 112
         },
         "id": 47,
         "panels": [
@@ -6048,7 +6113,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 693
+              "y": 8012
             },
             "id": 48,
             "options": {
@@ -6140,7 +6205,7 @@
               "h": 4,
               "w": 3,
               "x": 3,
-              "y": 693
+              "y": 8012
             },
             "id": 49,
             "options": {
@@ -6221,7 +6286,7 @@
               "h": 4,
               "w": 6,
               "x": 6,
-              "y": 693
+              "y": 8012
             },
             "id": 50,
             "options": {
@@ -6361,7 +6426,7 @@
               "h": 4,
               "w": 12,
               "x": 12,
-              "y": 693
+              "y": 8012
             },
             "id": 51,
             "options": {
@@ -6508,7 +6573,7 @@
               "h": 9,
               "w": 8,
               "x": 0,
-              "y": 697
+              "y": 8016
             },
             "id": 52,
             "options": {
@@ -6612,7 +6677,7 @@
               "h": 9,
               "w": 8,
               "x": 8,
-              "y": 697
+              "y": 8016
             },
             "id": 53,
             "options": {
@@ -6705,7 +6770,7 @@
               "h": 9,
               "w": 8,
               "x": 16,
-              "y": 697
+              "y": 8016
             },
             "id": 54,
             "options": {
@@ -6805,8 +6870,8 @@
         {
           "allowCustomValue": false,
           "current": {
-            "text": "k8_dev_hla1",
-            "value": "aef9f9k9lvwn4b"
+            "text": "k8_live_hla1",
+            "value": "eef9f89usay9sb"
           },
           "name": "datasource",
           "options": [],
@@ -6818,9 +6883,7 @@
         {
           "current": {
             "text": "All",
-            "value": [
-              "$__all"
-            ]
+            "value": "$__all"
           },
           "datasource": {
             "type": "prometheus",
@@ -6848,62 +6911,17 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+            "uid": "${datasource}"
           },
-          "definition": "label_values({__name__=~\"sabnzbd_.*\"},instance)",
-          "includeAll": true,
-          "label": "SABnzbd Instance",
-          "multi": true,
-          "name": "sabnzbd_instance",
-          "options": [],
-          "query": {
-            "query": "label_values({__name__=~\"sabnzbd_.*\"},instance)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
-          },
-          "refresh": 2,
-          "regex": "",
-          "type": "query"
-        },
-        {
-          "current": {
-            "text": "All",
-            "value": "$__all"
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-          },
-          "definition": "label_values({__name__=~\"radarr_.*\"},instance)",
-          "includeAll": true,
-          "label": "Radarr Instance",
-          "multi": true,
-          "name": "radarr_instance",
-          "options": [],
-          "query": {
-            "query": "label_values({__name__=~\"radarr_.*\"},instance)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
-          },
-          "refresh": 2,
-          "regex": "",
-          "type": "query"
-        },
-        {
-          "current": {
-            "text": "All",
-            "value": "$__all"
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-          },
-          "definition": "label_values({__name__=~\"sonarr_.*\"},instance)",
+          "definition": "label_values({__name__=~\"sonarr_.*\"},service)",
           "includeAll": true,
           "label": "Sonarr Instance",
           "multi": true,
           "name": "sonarr_instance",
           "options": [],
           "query": {
-            "query": "label_values({__name__=~\"sonarr_.*\"},instance)",
+            "qryType": 1,
+            "query": "label_values({__name__=~\"sonarr_.*\"},service)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
@@ -6917,16 +6935,17 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+            "uid": "${datasource}"
           },
-          "definition": "label_values({__name__=~\"lidarr_.*\"},instance)",
+          "definition": "label_values({__name__=~\"radarr_.*\"},service)",
           "includeAll": true,
-          "label": "Lidarr Instance",
+          "label": "Radarr Instance",
           "multi": true,
-          "name": "lidarr_instance",
+          "name": "radarr_instance",
           "options": [],
           "query": {
-            "query": "label_values({__name__=~\"lidarr_.*\"},instance)",
+            "qryType": 1,
+            "query": "label_values({__name__=~\"radarr_.*\"},service)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
@@ -6940,39 +6959,89 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+            "uid": "${datasource}"
           },
-          "definition": "label_values({__name__=~\"readarr_.*\"},instance)",
-          "includeAll": true,
-          "label": "Readarr Instance",
-          "multi": true,
-          "name": "readarr_instance",
-          "options": [],
-          "query": {
-            "query": "label_values({__name__=~\"readarr_.*\"},instance)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
-          },
-          "refresh": 2,
-          "regex": "",
-          "type": "query"
-        },
-        {
-          "current": {
-            "text": "All",
-            "value": "$__all"
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-          },
-          "definition": "label_values({__name__=~\"bazarr_.*\"},instance)",
+          "definition": "label_values({__name__=~\"bazarr_.*\"},service)",
           "includeAll": true,
           "label": "Bazarr Instance",
           "multi": true,
           "name": "bazarr_instance",
           "options": [],
           "query": {
-            "query": "label_values({__name__=~\"bazarr_.*\"},instance)",
+            "qryType": 1,
+            "query": "label_values({__name__=~\"bazarr_.*\"},service)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values({__name__=~\"lidarr_.*\"},service)",
+          "includeAll": true,
+          "label": "Lidarr Instance",
+          "multi": true,
+          "name": "lidarr_instance",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values({__name__=~\"lidarr_.*\"},service)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values({__name__=~\"readarr_.*\"},service)",
+          "includeAll": true,
+          "label": "Readarr Instance",
+          "multi": true,
+          "name": "readarr_instance",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values({__name__=~\"readarr_.*\"},service)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values({__name__=~\"sabnzbd_.*\"},service)",
+          "includeAll": true,
+          "label": "SABnzbd Instance",
+          "multi": true,
+          "name": "sabnzbd_instance",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values({__name__=~\"sabnzbd_.*\"},service)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
