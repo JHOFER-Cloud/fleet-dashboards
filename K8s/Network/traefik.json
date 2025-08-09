@@ -179,7 +179,7 @@
             },
             "direction": "backward",
             "editorMode": "code",
-            "expr": "sum by (external_ip) (\n  count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__ \n  | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n  | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n  | external_ip!~\"10.2.*\" | external_ip!=\"\" [$__auto])\n)",
+            "expr": "sum by (external_ip) (\n  count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__ \n  | ServiceName=~\"$service@.*\"\n  | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n  | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n  | external_ip!~\"10.2.*\" | external_ip!=\"\" [$__auto])\n)",
             "legendFormat": "{{external_ip}}",
             "queryType": "range",
             "refId": "logs"
@@ -1722,7 +1722,9 @@
         },
         {
           "current": {
-            "text": "All",
+            "text": [
+              "All"
+            ],
             "value": [
               "$__all"
             ]
