@@ -139,7 +139,7 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 3,
+          "w": 6,
           "x": 4,
           "y": 1
         },
@@ -151,10 +151,12 @@
           ],
           "legend": {
             "calcs": [],
-            "displayMode": "hidden",
+            "displayMode": "table",
             "placement": "right",
-            "showLegend": false,
-            "values": []
+            "showLegend": true,
+            "values": [
+              "value"
+            ]
           },
           "pieType": "donut",
           "reduceOptions": {
@@ -253,7 +255,7 @@
         "gridPos": {
           "h": 8,
           "w": 5,
-          "x": 7,
+          "x": 10,
           "y": 1
         },
         "id": 7,
@@ -291,85 +293,6 @@
         ],
         "title": "Requests per Entrypoint",
         "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "continuous-RdYlGr"
-            },
-            "custom": {
-              "axisPlacement": "auto",
-              "fillOpacity": 70,
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineWidth": 0,
-              "spanNulls": false
-            },
-            "fieldMinMax": true,
-            "mappings": [],
-            "max": 7,
-            "min": 90,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "d"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 6,
-          "x": 12,
-          "y": 1
-        },
-        "id": 25,
-        "options": {
-          "alignValue": "left",
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "mergeValues": true,
-          "rowHeight": 0.9,
-          "showValue": "always",
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "asc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "round(max by(cn) ((traefik_tls_certs_not_after - time()) / 86400))",
-            "legendFormat": "{{cn}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "TLS",
-        "type": "state-timeline"
       },
       {
         "datasource": {
@@ -434,8 +357,8 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 6,
-          "x": 18,
+          "w": 4,
+          "x": 15,
           "y": 1
         },
         "id": 6,
@@ -473,6 +396,85 @@
         ],
         "title": "Apdex score",
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-RdYlGr"
+            },
+            "custom": {
+              "axisPlacement": "auto",
+              "fillOpacity": 70,
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineWidth": 0,
+              "spanNulls": false
+            },
+            "fieldMinMax": true,
+            "mappings": [],
+            "max": 7,
+            "min": 90,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "d"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 5,
+          "x": 19,
+          "y": 1
+        },
+        "id": 25,
+        "options": {
+          "alignValue": "left",
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "mergeValues": true,
+          "rowHeight": 0.9,
+          "showValue": "always",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "asc"
+          }
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "round(max by(cn) ((traefik_tls_certs_not_after - time()) / 86400))",
+            "legendFormat": "{{cn}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "TLS",
+        "type": "state-timeline"
       },
       {
         "datasource": {
@@ -1722,9 +1724,7 @@
         },
         {
           "current": {
-            "text": [
-              "All"
-            ],
+            "text": "All",
             "value": [
               "$__all"
             ]
