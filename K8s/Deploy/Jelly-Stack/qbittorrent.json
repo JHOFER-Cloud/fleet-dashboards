@@ -2216,7 +2216,7 @@
           },
           "showHeader": false
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2310,7 +2310,7 @@
           },
           "showHeader": false
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2431,7 +2431,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2450,7 +2450,7 @@
       }
     ],
     "preload": false,
-    "refresh": "",
+    "refresh": "auto",
     "schemaVersion": 41,
     "tags": [],
     "templating": {
