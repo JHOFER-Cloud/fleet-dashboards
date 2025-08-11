@@ -1929,7 +1929,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sonarr_series_filesize_bytes{service=~\"${sonarr_instance}\"}",
+            "expr": "min (sonarr_series_filesize_bytes{service=~\"${sonarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Disk Used",
@@ -2239,7 +2239,7 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2344,7 +2344,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2454,7 +2454,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2552,7 +2552,7 @@
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2703,7 +2703,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2799,7 +2799,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2813,6 +2813,151 @@
             "legendFormat": "Uptime",
             "range": false,
             "refId": "A"
+          }
+        ],
+        "title": "",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlPu"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Downloaded"
+              },
+              "properties": [
+                {
+                  "id": "unit"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "History"
+              },
+              "properties": [
+                {
+                  "id": "unit"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Queued"
+              },
+              "properties": [
+                {
+                  "id": "unit"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 11,
+          "x": 6,
+          "y": 55
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_queue_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Queued",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_history_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "History",
+            "range": false,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_downloaded_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Downloaded",
+            "range": false,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "radarr_movie_filesize_total{service=~\"${radarr_instance}\"}",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "Disk Used",
+            "range": false,
+            "refId": "E"
           }
         ],
         "title": "",
@@ -2863,7 +3008,7 @@
         "gridPos": {
           "h": 4,
           "w": 7,
-          "x": 6,
+          "x": 17,
           "y": 55
         },
         "id": 5,
@@ -2885,22 +3030,8 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${datasource}"
-            },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "radarr_movie_downloaded_total{service=~\"${radarr_instance}\"}",
-            "hide": false,
-            "instant": true,
-            "legendFormat": "Downloaded",
-            "range": false,
-            "refId": "B"
-          },
           {
             "datasource": {
               "type": "prometheus",
@@ -2928,140 +3059,6 @@
             "legendFormat": "Wanted",
             "range": false,
             "refId": "D"
-          }
-        ],
-        "title": "",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "continuous-BlPu"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "bytes"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Downloaded"
-              },
-              "properties": [
-                {
-                  "id": "unit"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "History"
-              },
-              "properties": [
-                {
-                  "id": "unit"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 11,
-          "x": 13,
-          "y": 55
-        },
-        "id": 6,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "text": {},
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.1.0-91839",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${datasource}"
-            },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "radarr_queue_total{service=~\"${radarr_instance}\"}",
-            "hide": false,
-            "instant": true,
-            "legendFormat": "Queued",
-            "range": false,
-            "refId": "B"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${datasource}"
-            },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "radarr_movie_downloaded_total{service=~\"${radarr_instance}\"}",
-            "hide": false,
-            "instant": true,
-            "legendFormat": "Downloaded",
-            "range": false,
-            "refId": "D"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${datasource}"
-            },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "radarr_history_total{service=~\"${radarr_instance}\"}",
-            "hide": false,
-            "instant": true,
-            "legendFormat": "History",
-            "range": false,
-            "refId": "C"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${datasource}"
-            },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "radarr_movie_filesize_total{service=~\"${radarr_instance}\"}",
-            "hide": false,
-            "instant": true,
-            "legendFormat": "Disk Used",
-            "range": false,
-            "refId": "E"
           }
         ],
         "title": "",
@@ -3122,7 +3119,7 @@
           "text": {},
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3227,7 +3224,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3337,7 +3334,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3433,7 +3430,7 @@
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3584,7 +3581,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3680,7 +3677,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3780,7 +3777,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3858,7 +3855,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -4011,7 +4008,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -4127,7 +4124,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -4284,7 +4281,7 @@
           "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -4363,7 +4360,7 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -4466,7 +4463,7 @@
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -5593,7 +5590,7 @@
               "h": 4,
               "w": 15,
               "x": 0,
-              "y": 5132
+              "y": 9204
             },
             "id": 84,
             "options": {
@@ -5781,7 +5778,7 @@
               "h": 4,
               "w": 5,
               "x": 15,
-              "y": 5132
+              "y": 9204
             },
             "id": 122,
             "options": {
@@ -5898,7 +5895,7 @@
               "h": 4,
               "w": 4,
               "x": 20,
-              "y": 5132
+              "y": 9204
             },
             "id": 86,
             "options": {
@@ -5999,7 +5996,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 5136
+              "y": 9208
             },
             "id": 80,
             "options": {
@@ -6099,7 +6096,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 8012
+              "y": 21184
             },
             "id": 48,
             "options": {
@@ -6191,7 +6188,7 @@
               "h": 4,
               "w": 3,
               "x": 3,
-              "y": 8012
+              "y": 21184
             },
             "id": 49,
             "options": {
@@ -6272,7 +6269,7 @@
               "h": 4,
               "w": 6,
               "x": 6,
-              "y": 8012
+              "y": 21184
             },
             "id": 50,
             "options": {
@@ -6412,7 +6409,7 @@
               "h": 4,
               "w": 12,
               "x": 12,
-              "y": 8012
+              "y": 21184
             },
             "id": 51,
             "options": {
@@ -6559,7 +6556,7 @@
               "h": 9,
               "w": 8,
               "x": 0,
-              "y": 8016
+              "y": 21188
             },
             "id": 52,
             "options": {
@@ -6663,7 +6660,7 @@
               "h": 9,
               "w": 8,
               "x": 8,
-              "y": 8016
+              "y": 21188
             },
             "id": 53,
             "options": {
@@ -6756,7 +6753,7 @@
               "h": 9,
               "w": 8,
               "x": 16,
-              "y": 8016
+              "y": 21188
             },
             "id": 54,
             "options": {
