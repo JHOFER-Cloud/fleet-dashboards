@@ -420,7 +420,7 @@
                 }
               ]
             },
-            "unit": "bps"
+            "unit": "Bps"
           },
           "overrides": []
         },
@@ -452,7 +452,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum (qbittorrent_global_download_speed_bytes * 8)",
+            "expr": "sum (qbittorrent_global_download_speed_bytes)",
             "interval": "",
             "legendFormat": "Download",
             "range": true,
@@ -464,7 +464,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum (qbittorrent_global_upload_speed_bytes * 8)",
+            "expr": "sum (qbittorrent_global_upload_speed_bytes)",
             "interval": "",
             "legendFormat": "Upload",
             "range": true,
@@ -2044,7 +2044,7 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
+            "editorMode": "code",
             "expr": "sum by(name) (qbittorrent_torrent_download_speed_bytes)",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
