@@ -862,7 +862,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "max(prowlarr_indexer_average_response_time_ms{service=~\"${prowlarr_instance}\"}) by (indexer)",
+            "expr": "max(prowlarr_indexer_average_response_time_ms{service=~\"${prowlarr_instance}\", indexer!=\"Internet Archive\"}) by (indexer)",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
