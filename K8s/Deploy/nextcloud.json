@@ -96,7 +96,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -197,7 +197,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -319,7 +319,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -435,7 +435,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -538,7 +538,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -624,7 +624,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -699,7 +699,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -813,7 +813,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -841,7 +841,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -889,12 +889,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -911,7 +911,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -959,12 +959,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -994,7 +994,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1042,12 +1042,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -1064,7 +1064,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1112,12 +1112,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${datasource}"
             },
             "editorMode": "code",
             "exemplar": false,
