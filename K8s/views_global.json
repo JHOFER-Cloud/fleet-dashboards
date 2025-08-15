@@ -143,7 +143,7 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -302,7 +302,7 @@
           "text": {},
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -441,7 +441,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -547,7 +547,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -782,7 +782,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -847,7 +847,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1003,7 +1003,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1155,7 +1155,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1276,7 +1276,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1412,7 +1412,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1549,7 +1549,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1657,7 +1657,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1764,7 +1764,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -1884,7 +1884,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2010,20 +2010,24 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${datasource}"
             },
+            "disableTextWrap": false,
             "editorMode": "builder",
             "exemplar": true,
-            "expr": "sum(rate(container_cpu_cfs_throttled_seconds_total{image!=\"\", instance=~\"$node\"}[$__rate_interval])) by (namespace) \u003e 0",
+            "expr": "sum by(namespace) (rate(container_cpu_cfs_throttled_periods_total{image!=\"\", node=~\"$node\"}[$__rate_interval])) \u003e 0",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "$resolution",
             "legendFormat": "{{ namespace }}",
             "range": true,
-            "refId": "A"
+            "refId": "A",
+            "useBackend": false
           }
         ],
         "title": "CPU Throttled seconds by namespace",
@@ -2121,7 +2125,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2240,7 +2244,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2358,7 +2362,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2465,7 +2469,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2576,7 +2580,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2694,7 +2698,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -2835,7 +2839,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3021,7 +3025,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
@@ -3134,7 +3138,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
