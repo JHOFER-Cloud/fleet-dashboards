@@ -30,7 +30,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -72,13 +72,14 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
+            "editorMode": "code",
             "expr": "max(max_over_time(redis_uptime_in_seconds{job=~\"$cluster\"}[$__interval]))",
             "instant": true,
             "interval": "",
@@ -92,7 +93,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -175,19 +176,21 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "redis_up{job=\"$cluster\"}",
+            "editorMode": "code",
+            "expr": "sum by (pod) (redis_up{job=\"$cluster\"})",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}",
             "metric": "",
+            "range": true,
             "refId": "A",
             "step": 1800
           }
@@ -198,7 +201,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "description": "Masters have non-zero connected slaves",
         "fieldConfig": {
@@ -290,17 +293,23 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "redis_connected_slaves{job=\"$cluster\"}",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (redis_connected_slaves{job=\"$cluster\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "legendFormat": "{{ pod }}",
-            "refId": "A"
+            "range": true,
+            "refId": "A",
+            "useBackend": false
           }
         ],
         "title": "Master",
@@ -309,7 +318,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -390,22 +399,28 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "rate(redis_commands_processed_total{job=\"$cluster\"}[5m])",
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "sum by(pod) (rate(redis_commands_processed_total{job=\"$cluster\"}[5m]))",
             "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}",
             "metric": "A",
+            "range": true,
             "refId": "A",
             "step": 240,
-            "target": ""
+            "target": "",
+            "useBackend": false
           }
         ],
         "title": "Commands Executed / sec",
@@ -414,7 +429,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -496,39 +511,51 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "irate(redis_keyspace_hits_total{job=\"$cluster\"}[5m])",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (irate(redis_keyspace_hits_total{job=\"$cluster\"}[5m]))",
             "format": "time_series",
+            "fullMetaSearch": false,
             "hide": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}-hits",
             "metric": "",
+            "range": true,
             "refId": "A",
             "step": 240,
-            "target": ""
+            "target": "",
+            "useBackend": false
           },
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "irate(redis_keyspace_misses_total{job=\"$cluster\"}[5m])",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (irate(redis_keyspace_misses_total{job=\"$cluster\"}[5m]))",
             "format": "time_series",
+            "fullMetaSearch": false,
             "hide": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}-misses",
             "metric": "",
+            "range": true,
             "refId": "B",
             "step": 240,
-            "target": ""
+            "target": "",
+            "useBackend": false
           }
         ],
         "title": "Hits / Misses per Sec",
@@ -537,7 +564,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -680,36 +707,48 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "redis_memory_used_bytes{job=\"$cluster\"} ",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (redis_memory_used_bytes{job=\"$cluster\"})",
             "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}-used",
             "metric": "",
+            "range": true,
             "refId": "A",
             "step": 240,
-            "target": ""
+            "target": "",
+            "useBackend": false
           },
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "redis_config_maxmemory{job=\"$cluster\"} ",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (redis_config_maxmemory{job=\"$cluster\"})",
             "format": "time_series",
+            "fullMetaSearch": false,
             "hide": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}-max",
+            "range": true,
             "refId": "B",
-            "step": 240
+            "step": 240,
+            "useBackend": false
           }
         ],
         "title": "Total Memory Usage",
@@ -718,7 +757,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -799,33 +838,45 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "rate(redis_net_input_bytes_total{job=\"$cluster\"}[5m])",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (rate(redis_net_input_bytes_total{job=\"$cluster\"}[5m]))",
             "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}-input",
+            "range": true,
             "refId": "A",
-            "step": 240
+            "step": 240,
+            "useBackend": false
           },
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "rate(redis_net_output_bytes_total{job=\"$cluster\"}[5m])",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod) (rate(redis_net_output_bytes_total{job=\"$cluster\"}[5m]))",
             "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{pod}}-output",
+            "range": true,
             "refId": "B",
-            "step": 240
+            "step": 240,
+            "useBackend": false
           }
         ],
         "title": "Network I/O",
@@ -834,7 +885,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -915,21 +966,27 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
-            "expr": "topk(5, irate(redis_commands_total{job=\"$cluster\"} [1m]))",
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(pod, cmd) (topk(5, irate(redis_commands_total{job=\"$cluster\"}[1m])))",
             "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 2,
-            "legendFormat": "{{ cmd }}",
+            "legendFormat": "{{ pod }} - {{ cmd }}",
             "metric": "redis_command_calls_total",
+            "range": true,
             "refId": "A",
-            "step": 240
+            "step": 240,
+            "useBackend": false
           }
         ],
         "title": "Command Calls / sec",
@@ -938,7 +995,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1019,18 +1076,20 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
+            "editorMode": "code",
             "expr": "sum (redis_db_keys{job=\"$cluster\"}) - sum (redis_db_keys_expiring{job=\"$cluster\"}) ",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "not expiring",
+            "range": true,
             "refId": "A",
             "step": 240,
             "target": ""
@@ -1038,7 +1097,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
             "expr": "sum (redis_db_keys_expiring{job=\"$cluster\"}) ",
             "format": "time_series",
@@ -1056,7 +1115,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1137,18 +1196,20 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
+            "editorMode": "code",
             "expr": "sum (redis_db_keys{job=\"$cluster\"}) by (db)",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
             "legendFormat": "{{ db }}",
+            "range": true,
             "refId": "A",
             "step": 240,
             "target": ""
@@ -1160,7 +1221,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "uid": "${datasource}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1470,12 +1531,12 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.1.0",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
             "expr": "sum(rate(redis_expired_keys_total{job=\"$cluster\"}[5m])) by (addr)",
             "format": "time_series",
@@ -1490,7 +1551,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "eef9f89usay9sb"
+              "uid": "${datasource}"
             },
             "expr": "sum(rate(redis_evicted_keys_total{job=\"$cluster\"}[5m])) by (addr)",
             "format": "time_series",
@@ -1526,8 +1587,8 @@
         },
         {
           "current": {
-            "text": "renovate-redis-metrics",
-            "value": "renovate-redis-metrics"
+            "text": "cloud-redis-metrics",
+            "value": "cloud-redis-metrics"
           },
           "datasource": {
             "type": "prometheus",
