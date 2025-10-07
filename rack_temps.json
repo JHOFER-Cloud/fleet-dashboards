@@ -32,20 +32,32 @@
     "graphTooltip": 1,
     "links": [
       {
+        "asDropdown": false,
         "icon": "external link",
-        "tags": [],
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [
+          "node-exporter"
+        ],
         "targetBlank": true,
-        "title": "GitHub",
-        "type": "link",
-        "url": "https://github.com/rfmoz/grafana-dashboards"
+        "title": "Node Exporter",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
       },
       {
+        "asDropdown": false,
         "icon": "external link",
-        "tags": [],
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [
+          "airthings"
+        ],
         "targetBlank": true,
-        "title": "Grafana",
-        "type": "link",
-        "url": "https://grafana.com/grafana/dashboards/1860"
+        "title": "Airthings",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
       }
     ],
     "panels": [
