@@ -1,0 +1,1511 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "rack_temps"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [
+      {
+        "icon": "external link",
+        "tags": [],
+        "targetBlank": true,
+        "title": "GitHub",
+        "type": "link",
+        "url": "https://github.com/rfmoz/grafana-dashboards"
+      },
+      {
+        "icon": "external link",
+        "tags": [],
+        "targetBlank": true,
+        "title": "Grafana",
+        "type": "link",
+        "url": "https://grafana.com/grafana/dashboards/1860"
+      }
+    ],
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds_prometheus}"
+        },
+        "description": "Monitors hardware sensor temperatures and critical thresholds as exposed by Linux hwmon. Includes CPU, GPU, and motherboard sensors where available",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Critical*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E24D42",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Max_limit*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Temp sensor*./"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "id": 158,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "mean",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Name",
+            "sortDesc": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Alarm",
+            "range": true,
+            "refId": "B",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical",
+            "range": true,
+            "refId": "C",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Historical",
+            "range": true,
+            "refId": "D",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Max_limit",
+            "range": true,
+            "refId": "E",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Average",
+            "range": true,
+            "refId": "F",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Max",
+            "range": true,
+            "refId": "A",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Min",
+            "range": true,
+            "refId": "G",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Temp sensor: {{device_name}}",
+            "range": true,
+            "refId": "H"
+          }
+        ],
+        "title": "Hardware Temperature Monitor (Coretemp)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds_prometheus}"
+        },
+        "description": "Monitors hardware sensor temperatures and critical thresholds as exposed by Linux hwmon. Includes CPU, GPU, and motherboard sensors where available",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Critical*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E24D42",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Max_limit*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Temp sensor*./"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "id": 346,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "mean",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Name",
+            "sortDesc": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Alarm",
+            "range": true,
+            "refId": "B",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical",
+            "range": true,
+            "refId": "C",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Historical",
+            "range": true,
+            "refId": "D",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Max_limit",
+            "range": true,
+            "refId": "E",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Average",
+            "range": true,
+            "refId": "F",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Max",
+            "range": true,
+            "refId": "A",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Min",
+            "range": true,
+            "refId": "G",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Temp sensor: {{device_name}}",
+            "range": true,
+            "refId": "H"
+          }
+        ],
+        "title": "Hardware Temperature Monitor (RAM)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds_prometheus}"
+        },
+        "description": "Monitors hardware sensor temperatures and critical thresholds as exposed by Linux hwmon. Includes CPU, GPU, and motherboard sensors where available",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Critical*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E24D42",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Max_limit*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Temp sensor*./"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "id": 345,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "mean",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Name",
+            "sortDesc": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Alarm",
+            "range": true,
+            "refId": "B",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical",
+            "range": true,
+            "refId": "C",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Historical",
+            "range": true,
+            "refId": "D",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Max_limit",
+            "range": true,
+            "refId": "E",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Average",
+            "range": true,
+            "refId": "F",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Max",
+            "range": true,
+            "refId": "A",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Min",
+            "range": true,
+            "refId": "G",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Temp sensor: {{device_name}}",
+            "range": true,
+            "refId": "H"
+          }
+        ],
+        "title": "Hardware Temperature Monitor (nvme)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds_prometheus}"
+        },
+        "description": "Monitors hardware sensor temperatures and critical thresholds as exposed by Linux hwmon. Includes CPU, GPU, and motherboard sensors where available",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Critical*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E24D42",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Max_limit*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Temp sensor*./"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 8,
+          "x": 0,
+          "y": 10
+        },
+        "id": 347,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "mean",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Name",
+            "sortDesc": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Alarm",
+            "range": true,
+            "refId": "B",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical",
+            "range": true,
+            "refId": "C",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Historical",
+            "range": true,
+            "refId": "D",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Max_limit",
+            "range": true,
+            "refId": "E",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Average",
+            "range": true,
+            "refId": "F",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Max",
+            "range": true,
+            "refId": "A",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Min",
+            "range": true,
+            "refId": "G",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Temp sensor: {{device_name}}",
+            "range": true,
+            "refId": "H"
+          }
+        ],
+        "title": "Hardware Temperature Monitor (SFP+)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds_prometheus}"
+        },
+        "description": "Monitors hardware sensor temperatures and critical thresholds as exposed by Linux hwmon. Includes CPU, GPU, and motherboard sensors where available",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Critical*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E24D42",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Max_limit*./"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": false,
+                    "viz": false
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/.*Temp sensor*./"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 8,
+          "x": 8,
+          "y": 10
+        },
+        "id": 348,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "mean",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Name",
+            "sortDesc": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Alarm",
+            "range": true,
+            "refId": "B",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical",
+            "range": true,
+            "refId": "C",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Critical Historical",
+            "range": true,
+            "refId": "D",
+            "step": 240
+          },
+          {
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ chip_name }} {{ sensor }} Max_limit",
+            "range": true,
+            "refId": "E",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Average",
+            "range": true,
+            "refId": "F",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Max",
+            "range": true,
+            "refId": "A",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Min",
+            "range": true,
+            "refId": "G",
+            "step": 240
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Temp sensor: {{device_name}}",
+            "range": true,
+            "refId": "H"
+          }
+        ],
+        "title": "Hardware Temperature Monitor (Misc)",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "5m",
+    "schemaVersion": 42,
+    "tags": [
+      "linux"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "k8_dev_hla1",
+            "value": "aef9f9k9lvwn4b"
+          },
+          "includeAll": false,
+          "label": "Datasource",
+          "name": "ds_prometheus",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "node-exporter-proxmox",
+            "value": "node-exporter-proxmox"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "definition": "",
+          "includeAll": false,
+          "label": "Job",
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values(node_uname_info, job)",
+            "refId": "Prometheus-job-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "pve-1",
+            "value": "pve-1"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "definition": "label_values(node_uname_info{job=\"$job\"}, nodename)",
+          "includeAll": false,
+          "label": "Nodename",
+          "name": "nodename",
+          "options": [],
+          "query": {
+            "query": "label_values(node_uname_info{job=\"$job\"}, nodename)",
+            "refId": "Prometheus-nodename-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "pve-1.hla1.jhofer.lan",
+            "value": "pve-1.hla1.jhofer.lan"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "definition": "label_values(node_uname_info{job=\"$job\", nodename=\"$nodename\"}, instance)",
+          "includeAll": false,
+          "label": "Instance",
+          "name": "node",
+          "options": [],
+          "query": {
+            "query": "label_values(node_uname_info{job=\"$job\", nodename=\"$nodename\"}, instance)",
+            "refId": "Prometheus-node-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allowCustomValue": false,
+          "current": {
+            "text": "All",
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "definition": "label_values(airthings_temperature_celsius,device_name)",
+          "includeAll": true,
+          "label": "Temp sensors",
+          "multi": true,
+          "name": "temp_sensors",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(airthings_temperature_celsius,device_name)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-2d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Rack Temps"
+  }
+}
