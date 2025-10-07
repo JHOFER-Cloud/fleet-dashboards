@@ -39,7 +39,7 @@
         "tags": [
           "node-exporter"
         ],
-        "targetBlank": true,
+        "targetBlank": false,
         "title": "Node Exporter",
         "tooltip": "",
         "type": "dashboards",
@@ -53,7 +53,7 @@
         "tags": [
           "airthings"
         ],
-        "targetBlank": true,
+        "targetBlank": false,
         "title": "Airthings",
         "tooltip": "",
         "type": "dashboards",
