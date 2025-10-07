@@ -16949,7 +16949,8 @@
     "refresh": "auto",
     "schemaVersion": 42,
     "tags": [
-      "linux"
+      "linux",
+      "node-exporter"
     ],
     "templating": {
       "list": [
