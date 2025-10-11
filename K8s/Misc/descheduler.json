@@ -66,6 +66,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -118,7 +119,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-88661",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -127,7 +128,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(increase(descheduler_pods_evicted{namespace=~\"$namespace\",strategy=~\"$strategy\"}[15m])) by (namespace,strategy,result)",
+            "expr": "sum(increase(descheduler_pods_evicted{namespace=~\"$namespace\",strategy=~\"$strategy\", result=~\"$result\"}[15m])) by (namespace,strategy,result)",
             "instant": false,
             "legendFormat": "{{namespace}} - {{strategy}} - {{result}}",
             "range": true,
@@ -140,7 +141,7 @@
     ],
     "preload": false,
     "refresh": "",
-    "schemaVersion": 41,
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
       "list": [
@@ -183,7 +184,9 @@
         {
           "current": {
             "text": "All",
-            "value": "$__all"
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -205,7 +208,9 @@
         {
           "current": {
             "text": "All",
-            "value": "$__all"
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
