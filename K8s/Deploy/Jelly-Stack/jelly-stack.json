@@ -129,7 +129,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -225,7 +225,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -362,7 +362,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -490,7 +490,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -639,7 +639,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -755,7 +755,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -807,6 +807,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -854,7 +855,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -905,6 +906,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -952,7 +954,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1014,13 +1016,14 @@
             "fields": "",
             "values": false
           },
+          "sort": "desc",
           "tooltip": {
             "hideZeros": false,
             "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1081,13 +1084,14 @@
             "fields": "",
             "values": false
           },
+          "sort": "desc",
           "tooltip": {
             "hideZeros": false,
             "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1151,13 +1155,14 @@
             "fields": "",
             "values": false
           },
+          "sort": "desc",
           "tooltip": {
             "hideZeros": false,
             "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1218,13 +1223,14 @@
             "fields": "",
             "values": false
           },
+          "sort": "desc",
           "tooltip": {
             "hideZeros": false,
             "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1257,6 +1263,9 @@
               "align": "auto",
               "cellOptions": {
                 "type": "auto"
+              },
+              "footer": {
+                "reducers": []
               },
               "inspect": false
             },
@@ -1345,14 +1354,6 @@
         "id": 41,
         "options": {
           "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
           "frameIndex": 1,
           "showHeader": true,
           "sortBy": [
@@ -1362,7 +1363,7 @@
             }
           ]
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1487,6 +1488,9 @@
               "cellOptions": {
                 "type": "auto"
               },
+              "footer": {
+                "reducers": []
+              },
               "inspect": false
             },
             "mappings": [],
@@ -1540,18 +1544,10 @@
         "id": 42,
         "options": {
           "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1702,7 +1698,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1798,7 +1794,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1879,7 +1875,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -1989,7 +1985,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2068,7 +2064,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2151,7 +2147,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2239,7 +2235,7 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2297,6 +2293,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2344,7 +2341,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2407,6 +2404,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2454,7 +2452,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2487,6 +2485,9 @@
               "align": "auto",
               "cellOptions": {
                 "type": "auto"
+              },
+              "footer": {
+                "reducers": []
               },
               "inspect": false
             },
@@ -2541,18 +2542,10 @@
         "id": 55,
         "options": {
           "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2703,7 +2696,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2799,7 +2792,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -2901,7 +2894,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3030,7 +3023,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3119,7 +3112,7 @@
           "text": {},
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3177,6 +3170,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3224,7 +3218,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3287,6 +3281,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3334,7 +3329,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3365,6 +3360,9 @@
               "align": "auto",
               "cellOptions": {
                 "type": "auto"
+              },
+              "footer": {
+                "reducers": []
               },
               "inspect": false
             },
@@ -3419,18 +3417,10 @@
         "id": 56,
         "options": {
           "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3581,7 +3571,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3677,7 +3667,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3730,6 +3720,7 @@
                 "type": "linear"
               },
               "showPoints": "auto",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3777,7 +3768,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3855,7 +3846,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -3864,7 +3855,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_queue_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (bazarr_queue_total{service=~\"${bazarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Queued",
@@ -3878,7 +3869,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_history_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (bazarr_history_total{service=~\"${bazarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "History",
@@ -3892,7 +3883,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_subtitles_downloaded_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (sum by (service) (bazarr_subtitles_downloaded_total{service=~\"${bazarr_instance}\"}))",
             "hide": false,
             "instant": false,
             "legendFormat": "Downloaded",
@@ -3906,7 +3897,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_subtitles_monitored_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (bazarr_subtitles_monitored_total{service=~\"${bazarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Monitored",
@@ -3920,7 +3911,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_subtitles_unmonitored_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (bazarr_subtitles_unmonitored_total{service=~\"${bazarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Unmonitored",
@@ -3934,7 +3925,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_subtitles_missing_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (bazarr_subtitles_missing_total{service=~\"${bazarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Missing",
@@ -3948,7 +3939,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "bazarr_subtitles_wanted_total{service=~\"${bazarr_instance}\"}",
+            "expr": "sum by (service) (bazarr_subtitles_wanted_total{service=~\"${bazarr_instance}\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Wanted",
@@ -4008,7 +3999,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -4124,7 +4115,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -4281,7 +4272,7 @@
           "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -4360,7 +4351,7 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -4398,6 +4389,9 @@
               "align": "auto",
               "cellOptions": {
                 "type": "auto"
+              },
+              "footer": {
+                "reducers": []
               },
               "inspect": false
             },
@@ -4452,18 +4446,10 @@
         "id": 135,
         "options": {
           "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
           "frameIndex": 1,
           "showHeader": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.0-17814087142",
         "targets": [
           {
             "datasource": {
@@ -5590,7 +5576,7 @@
               "h": 4,
               "w": 15,
               "x": 0,
-              "y": 9204
+              "y": 13276
             },
             "id": 84,
             "options": {
@@ -5778,7 +5764,7 @@
               "h": 4,
               "w": 5,
               "x": 15,
-              "y": 9204
+              "y": 13276
             },
             "id": 122,
             "options": {
@@ -5895,7 +5881,7 @@
               "h": 4,
               "w": 4,
               "x": 20,
-              "y": 9204
+              "y": 13276
             },
             "id": 86,
             "options": {
@@ -5996,7 +5982,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 9208
+              "y": 13280
             },
             "id": 80,
             "options": {
@@ -6096,7 +6082,7 @@
               "h": 4,
               "w": 3,
               "x": 0,
-              "y": 21184
+              "y": 34356
             },
             "id": 48,
             "options": {
@@ -6188,7 +6174,7 @@
               "h": 4,
               "w": 3,
               "x": 3,
-              "y": 21184
+              "y": 34356
             },
             "id": 49,
             "options": {
@@ -6269,7 +6255,7 @@
               "h": 4,
               "w": 6,
               "x": 6,
-              "y": 21184
+              "y": 34356
             },
             "id": 50,
             "options": {
@@ -6409,7 +6395,7 @@
               "h": 4,
               "w": 12,
               "x": 12,
-              "y": 21184
+              "y": 34356
             },
             "id": 51,
             "options": {
@@ -6556,7 +6542,7 @@
               "h": 9,
               "w": 8,
               "x": 0,
-              "y": 21188
+              "y": 34360
             },
             "id": 52,
             "options": {
@@ -6660,7 +6646,7 @@
               "h": 9,
               "w": 8,
               "x": 8,
-              "y": 21188
+              "y": 34360
             },
             "id": 53,
             "options": {
@@ -6753,7 +6739,7 @@
               "h": 9,
               "w": 8,
               "x": 16,
-              "y": 21188
+              "y": 34360
             },
             "id": 54,
             "options": {
@@ -6846,7 +6832,7 @@
     ],
     "preload": false,
     "refresh": "auto",
-    "schemaVersion": 41,
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
       "list": [
@@ -7034,7 +7020,7 @@
       ]
     },
     "time": {
-      "from": "now/d",
+      "from": "now-7d",
       "to": "now"
     },
     "timepicker": {},
