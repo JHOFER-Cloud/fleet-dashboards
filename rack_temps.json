@@ -203,9 +203,7 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "mean",
-              "max"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
@@ -219,7 +217,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0-19020365962",
         "targets": [
           {
             "editorMode": "code",
@@ -469,9 +467,7 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "mean",
-              "max"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
@@ -485,7 +481,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0-19020365962",
         "targets": [
           {
             "editorMode": "code",
@@ -735,9 +731,7 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "mean",
-              "max"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
@@ -751,7 +745,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0-19020365962",
         "targets": [
           {
             "editorMode": "code",
@@ -1001,9 +995,7 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "mean",
-              "max"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
@@ -1017,7 +1009,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0-19020365962",
         "targets": [
           {
             "editorMode": "code",
@@ -1267,9 +1259,7 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "mean",
-              "max"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
@@ -1283,7 +1273,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0-19020365962",
         "targets": [
           {
             "editorMode": "code",
