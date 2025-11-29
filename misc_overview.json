@@ -29,7 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${ds}"
+          "uid": "aef9f9k9lvwn4b"
         },
         "fieldConfig": {
           "defaults": {
@@ -194,7 +194,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_battery_power_mw / 1000)",
@@ -205,7 +205,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_consumption_mw / 1000)",
@@ -216,7 +216,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_production_mw / 1000)",
@@ -227,7 +227,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_grid_feed_in_mw / 1000)",
@@ -238,7 +238,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "tapo_p110_power_consumption_w / 1000",
@@ -255,7 +255,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${ds}"
+          "uid": "aef9f9k9lvwn4b"
         },
         "fieldConfig": {
           "defaults": {
@@ -286,7 +286,7 @@
           "x": 18,
           "y": 0
         },
-        "id": 6,
+        "id": 5,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -309,22 +309,23 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
-            "editorMode": "builder",
-            "expr": "$eur_per_kWh",
-            "legendFormat": "__auto",
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*0.21649)",
+            "legendFormat": "{{machine}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "EUR/kWh",
+        "title": "Consumer monthly energy costs",
         "type": "stat"
       },
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${ds}"
+          "uid": "aef9f9k9lvwn4b"
         },
         "fieldConfig": {
           "defaults": {
@@ -394,7 +395,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "max by (device_name) (airthings_temperature_celsius)",
@@ -409,7 +410,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${ds}"
+          "uid": "aef9f9k9lvwn4b"
         },
         "fieldConfig": {
           "defaults": {
@@ -430,7 +431,7 @@
                 }
               ]
             },
-            "unit": "currencyEUR"
+            "unit": "watth"
           },
           "overrides": []
         },
@@ -440,7 +441,7 @@
           "x": 18,
           "y": 3
         },
-        "id": 5,
+        "id": 12,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -463,23 +464,23 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*$eur_per_kWh)",
+            "expr": "sum by (room) (tapo_p110_today_energy_wh)",
             "legendFormat": "{{machine}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Consumer Monthly energy costs",
+        "title": "Consumers todays usage",
         "type": "stat"
       },
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${ds}"
+          "uid": "aef9f9k9lvwn4b"
         },
         "description": "",
         "fieldConfig": {
@@ -534,7 +535,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "sum by (room) (tapo_p110_month_energy_wh)",
@@ -543,7 +544,7 @@
             "refId": "A"
           }
         ],
-        "title": "Consumer Monthly use",
+        "title": "Consumers monthly usage",
         "type": "stat"
       },
       {
@@ -632,8 +633,9 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "${ds}"
+          "uid": "aef9f9k9lvwn4b"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -686,7 +688,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${ds}"
+              "uid": "aef9f9k9lvwn4b"
             },
             "editorMode": "code",
             "expr": "max(tapo_p110_power_consumption_w) / max(sonnenbatterie_consumption_mw) * 100",
@@ -695,7 +697,7 @@
             "refId": "B"
           }
         ],
-        "title": "Consumption by Consumers",
+        "title": "Consumption by consumers",
         "type": "stat"
       },
       {
@@ -785,32 +787,7 @@
     "schemaVersion": 42,
     "tags": [],
     "templating": {
-      "list": [
-        {
-          "current": {
-            "text": "k8_dev_hla1",
-            "value": "aef9f9k9lvwn4b"
-          },
-          "name": "ds",
-          "options": [],
-          "query": "prometheus",
-          "refresh": 1,
-          "regex": "",
-          "type": "datasource"
-        },
-        {
-          "current": {
-            "text": "0.21649",
-            "value": "0.21649"
-          },
-          "hide": 2,
-          "label": "EUR/kWh",
-          "name": "eur_per_kWh",
-          "query": "0.21649",
-          "skipUrlSync": true,
-          "type": "constant"
-        }
-      ]
+      "list": []
     },
     "time": {
       "from": "now-30m",
