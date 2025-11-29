@@ -94,10 +94,12 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_charge_level_percent{battery_name=~\"$battery\"})",
+            "exemplar": false,
+            "expr": "sonnenbatterie_charge_level_percent{battery_name=~\"$battery\"}",
+            "instant": true,
             "interval": "",
             "legendFormat": "RSOC",
-            "range": true,
+            "range": false,
             "refId": "A"
           },
           {
@@ -106,10 +108,12 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_user_charge_level_percent{battery_name=~\"$battery\"})",
+            "exemplar": false,
+            "expr": "sonnenbatterie_user_charge_level_percent{battery_name=~\"$battery\"}",
             "hide": false,
+            "instant": true,
             "legendFormat": "USOC",
-            "range": true,
+            "range": false,
             "refId": "B"
           }
         ],
@@ -389,9 +393,11 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_scrape_success{battery_name=~\"$battery\"})",
+            "exemplar": false,
+            "expr": "sonnenbatterie_scrape_success{battery_name=~\"$battery\"}",
+            "instant": true,
             "legendFormat": "{{pod}}",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -454,8 +460,10 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_full_charge_capacity_wh{battery_name=~\"$battery\"})",
-            "range": true,
+            "exemplar": false,
+            "expr": "sonnenbatterie_full_charge_capacity_wh{battery_name=~\"$battery\"}",
+            "instant": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -533,8 +541,10 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_charging{battery_name=~\"$battery\"})",
-            "range": true,
+            "exemplar": false,
+            "expr": "sonnenbatterie_charging{battery_name=~\"$battery\"}",
+            "instant": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -612,8 +622,10 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_discharging{battery_name=~\"$battery\"})",
-            "range": true,
+            "exemplar": false,
+            "expr": "sonnenbatterie_discharging{battery_name=~\"$battery\"}",
+            "instant": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -691,9 +703,11 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_charging{battery_name=~\"$battery\"} ^ sonnenbatterie_charging{battery_name=~\"$battery\"})",
+            "exemplar": false,
+            "expr": "sonnenbatterie_charging{battery_name=~\"$battery\"} ^ sonnenbatterie_charging{battery_name=~\"$battery\"}",
+            "instant": true,
             "legendFormat": "__auto",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -710,6 +724,16 @@
             "color": {
               "mode": "thresholds"
             },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "footer": {
+                "reducers": []
+              },
+              "inspect": false
+            },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -721,31 +745,85 @@
               ]
             }
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Modules"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 71
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Battery"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 97
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "BMS"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 130
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "core_control_state"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 138
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Inverter"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 87
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
           "h": 4,
-          "w": 5,
+          "w": 6,
           "x": 15,
           "y": 8
         },
         "id": 7,
         "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
+          "cellHeight": "sm",
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": false,
+              "displayName": "Inverter"
+            }
+          ]
         },
         "pluginVersion": "12.3.0-19020365962",
         "targets": [
@@ -755,9 +833,11 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "sonnenbatterie_system_info{battery_name=~\"$battery\"}",
+            "exemplar": false,
+            "expr": "sonnenbatterie_info{battery_name=~\"$battery\"}",
             "format": "table",
-            "range": true,
+            "instant": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -774,13 +854,19 @@
                 "battery_name": false,
                 "bms_state": false,
                 "charging": true,
+                "container": true,
                 "core_control_module_state": false,
                 "discharging": true,
+                "endpoint": true,
                 "instance": true,
                 "inverter_state": false,
                 "ip": true,
-                "job": true
+                "job": true,
+                "namespace": true,
+                "pod": true,
+                "service": true
               },
+              "includeByName": {},
               "indexByName": {},
               "renameByName": {
                 "battery_modules": "Modules",
@@ -792,7 +878,7 @@
             }
           }
         ],
-        "type": "stat"
+        "type": "table"
       },
       {
         "datasource": {
@@ -836,8 +922,8 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 4,
-          "x": 20,
+          "w": 3,
+          "x": 21,
           "y": 8
         },
         "id": 8,
@@ -866,9 +952,11 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "max by (battery_name) (sonnenbatterie_ac_voltage{battery_name=~\"$battery\"})",
+            "exemplar": false,
+            "expr": "sonnenbatterie_ac_voltage{battery_name=~\"$battery\"}",
+            "instant": true,
             "legendFormat": "{{battery_name}}",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
