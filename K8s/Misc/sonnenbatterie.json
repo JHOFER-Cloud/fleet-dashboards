@@ -1226,6 +1226,126 @@
         "fieldConfig": {
           "defaults": {
             "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 7000
+                },
+                {
+                  "color": "red",
+                  "value": 10000
+                }
+              ]
+            },
+            "unit": "watth"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Import cost"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "currencyEUR"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 2
+                      },
+                      {
+                        "color": "red",
+                        "value": 3
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 7,
+          "x": 0,
+          "y": 20
+        },
+        "id": 13,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-19020365962",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
+            "legendFormat": "Imported",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  ) * $eur_per_kWh",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Import cost",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Grid (by time range)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
               "mode": "palette-classic"
             },
             "custom": {
@@ -1279,8 +1399,8 @@
         },
         "gridPos": {
           "h": 6,
-          "w": 24,
-          "x": 0,
+          "w": 17,
+          "x": 7,
           "y": 20
         },
         "id": 11,
@@ -1367,6 +1487,18 @@
           "regex": "",
           "sort": 1,
           "type": "query"
+        },
+        {
+          "current": {
+            "text": "0.21649",
+            "value": "0.21649"
+          },
+          "hide": 2,
+          "label": "EUR/kWh",
+          "name": "eur_per_kWh",
+          "query": "0.21649",
+          "skipUrlSync": true,
+          "type": "constant"
         }
       ]
     },
