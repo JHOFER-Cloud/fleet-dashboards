@@ -80,7 +80,7 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
+          "h": 6,
           "w": 6,
           "x": 0,
           "y": 0
@@ -259,7 +259,7 @@
           ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 10,
           "w": 18,
           "x": 6,
           "y": 0
@@ -378,9 +378,9 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
+          "w": 1,
           "x": 0,
-          "y": 8
+          "y": 6
         },
         "id": 3,
         "options": {
@@ -445,9 +445,9 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 3,
-          "y": 8
+          "w": 2,
+          "x": 1,
+          "y": 6
         },
         "id": 4,
         "options": {
@@ -495,6 +495,297 @@
             "color": {
               "mode": "thresholds"
             },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 7000
+                },
+                {
+                  "color": "red",
+                  "value": 10000
+                }
+              ]
+            },
+            "unit": "watth"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Import cost"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "currencyEUR"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 2
+                      },
+                      {
+                        "color": "red",
+                        "value": 3
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 6
+        },
+        "id": 13,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-19020365962",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
+            "legendFormat": "Imported",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  ) * $eur_per_kWh",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Import cost",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Grid (by time range)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 7000
+                },
+                {
+                  "color": "red",
+                  "value": 10000
+                }
+              ]
+            },
+            "unit": "watth"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Import cost"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "currencyEUR"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 2
+                      },
+                      {
+                        "color": "red",
+                        "value": 3
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 10
+        },
+        "id": 15,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-19020365962",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_consumption_mw{battery_name=~\"$battery\"}),\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
+            "legendFormat": "Imported",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Overall (by time range)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "watth"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 10
+        },
+        "id": 14,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-19020365962",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_production_mw{battery_name=~\"$battery\"}),\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
+            "legendFormat": "Imported",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Produced (by time range)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
             "mappings": [
               {
                 "options": {
@@ -528,7 +819,7 @@
           "h": 4,
           "w": 3,
           "x": 6,
-          "y": 8
+          "y": 10
         },
         "id": 5,
         "options": {
@@ -609,7 +900,7 @@
           "h": 4,
           "w": 3,
           "x": 9,
-          "y": 8
+          "y": 10
         },
         "id": 6,
         "options": {
@@ -690,7 +981,7 @@
           "h": 4,
           "w": 3,
           "x": 12,
-          "y": 8
+          "y": 10
         },
         "id": 12,
         "options": {
@@ -827,7 +1118,7 @@
           "h": 4,
           "w": 6,
           "x": 15,
-          "y": 8
+          "y": 10
         },
         "id": 7,
         "options": {
@@ -939,7 +1230,7 @@
           "h": 4,
           "w": 3,
           "x": 21,
-          "y": 8
+          "y": 10
         },
         "id": 8,
         "options": {
@@ -1073,7 +1364,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 12
+          "y": 14
         },
         "id": 9,
         "options": {
@@ -1184,7 +1475,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 12
+          "y": 14
         },
         "id": 10,
         "options": {
@@ -1232,297 +1523,6 @@
         ],
         "title": "Voltage Levels",
         "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "#EAB839",
-                  "value": 7000
-                },
-                {
-                  "color": "red",
-                  "value": 10000
-                }
-              ]
-            },
-            "unit": "watth"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Import cost"
-              },
-              "properties": [
-                {
-                  "id": "unit",
-                  "value": "currencyEUR"
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 2
-                      },
-                      {
-                        "color": "red",
-                        "value": 3
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 3,
-          "x": 0,
-          "y": 20
-        },
-        "id": 15,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.0-19020365962",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_consumption_mw{battery_name=~\"$battery\"}),\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
-            "legendFormat": "Imported",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Overall (by time range)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "watth"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 4,
-          "x": 3,
-          "y": 20
-        },
-        "id": 14,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.0-19020365962",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_production_mw{battery_name=~\"$battery\"}),\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
-            "legendFormat": "Imported",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Produced (by time range)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "#EAB839",
-                  "value": 7000
-                },
-                {
-                  "color": "red",
-                  "value": 10000
-                }
-              ]
-            },
-            "unit": "watth"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Import cost"
-              },
-              "properties": [
-                {
-                  "id": "unit",
-                  "value": "currencyEUR"
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "orange",
-                        "value": 2
-                      },
-                      {
-                        "color": "red",
-                        "value": 3
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 6,
-          "x": 7,
-          "y": 20
-        },
-        "id": 13,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.0-19020365962",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
-            "legendFormat": "Imported",
-            "range": true,
-            "refId": "A"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  ) * $eur_per_kWh",
-            "hide": false,
-            "instant": false,
-            "legendFormat": "Import cost",
-            "range": true,
-            "refId": "B"
-          }
-        ],
-        "title": "Grid (by time range)",
-        "type": "stat"
       },
       {
         "datasource": {
@@ -1585,9 +1585,9 @@
         },
         "gridPos": {
           "h": 6,
-          "w": 11,
-          "x": 13,
-          "y": 20
+          "w": 24,
+          "x": 0,
+          "y": 22
         },
         "id": 11,
         "options": {
