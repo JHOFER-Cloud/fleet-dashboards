@@ -29,7 +29,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${ds}"
         },
         "fieldConfig": {
           "defaults": {
@@ -194,7 +194,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_battery_power_mw / 1000)",
@@ -205,7 +205,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_consumption_mw / 1000)",
@@ -216,7 +216,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_production_mw / 1000)",
@@ -227,7 +227,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "max by (battery_name) (sonnenbatterie_grid_feed_in_mw / 1000)",
@@ -238,7 +238,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "tapo_p110_power_consumption_w / 1000",
@@ -255,7 +255,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${ds}"
         },
         "fieldConfig": {
           "defaults": {
@@ -309,11 +309,11 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*0.21649)",
+            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*$eur_per_kWh)",
             "legendFormat": "{{machine}}",
             "range": true,
             "refId": "A"
@@ -325,7 +325,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${ds}"
         },
         "fieldConfig": {
           "defaults": {
@@ -395,7 +395,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "max by (device_name) (airthings_temperature_celsius)",
@@ -410,7 +410,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${ds}"
         },
         "fieldConfig": {
           "defaults": {
@@ -464,7 +464,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "exemplar": false,
@@ -480,7 +480,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${ds}"
         },
         "description": "",
         "fieldConfig": {
@@ -535,7 +535,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
             "expr": "sum by (room) (tapo_p110_month_energy_wh)",
@@ -589,7 +589,7 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
+          "w": 1,
           "x": 21,
           "y": 7
         },
@@ -628,76 +628,6 @@
           }
         ],
         "title": "Alerts (DEV)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 3,
-          "x": 18,
-          "y": 11
-        },
-        "id": 11,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.0-19020365962",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
-            },
-            "editorMode": "code",
-            "expr": "max(tapo_p110_power_consumption_w) / max(sonnenbatterie_consumption_mw) * 100",
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "B"
-          }
-        ],
-        "title": "Consumption by consumers",
         "type": "stat"
       },
       {
@@ -742,9 +672,9 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 21,
-          "y": 11
+          "w": 2,
+          "x": 22,
+          "y": 7
         },
         "id": 3,
         "maxDataPoints": 100,
@@ -781,6 +711,89 @@
         ],
         "title": "Alerts (LIVE)",
         "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 18,
+          "y": 11
+        },
+        "id": 11,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-19020365962",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "max(tapo_p110_power_consumption_w) / max(sonnenbatterie_consumption_mw) * 100",
+            "legendFormat": "Usage",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "  (\n    sum(max by (battery_name) (sonnenbatterie_production_mw)) +\n    sum(clamp_min(max by (battery_name) (sonnenbatterie_battery_power_mw), 0))\n  ) / max(tapo_p110_power_consumption_w) * 100",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Usage covered (B+P)",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Consumption by consumers",
+        "type": "stat"
       }
     ],
     "preload": false,
@@ -788,7 +801,32 @@
     "schemaVersion": 42,
     "tags": [],
     "templating": {
-      "list": []
+      "list": [
+        {
+          "current": {
+            "text": "k8_dev_hla1",
+            "value": "aef9f9k9lvwn4b"
+          },
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "0.21649",
+            "value": "0.21649"
+          },
+          "hide": 2,
+          "label": "EUR/kWh",
+          "name": "eur_per_kWh",
+          "query": "0.21649",
+          "skipUrlSync": true,
+          "type": "constant"
+        }
+      ]
     },
     "time": {
       "from": "now-2d",
