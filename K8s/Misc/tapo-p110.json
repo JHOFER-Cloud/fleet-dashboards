@@ -31,7 +31,22 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "links": [],
+    "links": [
+      {
+        "asDropdown": true,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": true,
+        "tags": [
+          "energy"
+        ],
+        "targetBlank": false,
+        "title": "Energy Dashboards",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
+      }
+    ],
     "panels": [
       {
         "datasource": {
@@ -622,7 +637,9 @@
     "preload": false,
     "refresh": "30s",
     "schemaVersion": 42,
-    "tags": [],
+    "tags": [
+      "energy"
+    ],
     "templating": {
       "list": [
         {
