@@ -204,7 +204,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -256,7 +256,7 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "tapo_p110_power_consumption_w / 1000",
+            "expr": "max by(room) (tapo_p110_power_consumption_w) / 1000",
             "hide": false,
             "instant": false,
             "legendFormat": "Consumer - {{room}}",
@@ -319,7 +319,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -405,7 +405,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -474,7 +474,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -545,7 +545,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -627,7 +627,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -710,7 +710,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -780,7 +780,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-19020365962",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
