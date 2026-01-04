@@ -654,43 +654,9 @@
         "type": "stat"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
         "description": "",
         "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "0": {
-                    "color": "semi-dark-red",
-                    "index": 0,
-                    "text": "Down"
-                  },
-                  "1": {
-                    "color": "green",
-                    "index": 1,
-                    "text": "Up"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            }
-          },
+          "defaults": {},
           "overrides": []
         },
         "gridPos": {
@@ -701,45 +667,22 @@
         },
         "id": 15,
         "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "/^Value$/",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
+          "includeVars": false,
+          "keepTime": true,
+          "maxItems": 1,
+          "query": "",
+          "showFolderNames": false,
+          "showHeadings": false,
+          "showRecentlyViewed": false,
+          "showSearch": true,
+          "showStarred": false,
+          "tags": [
+            "cloudnativepg"
+          ]
         },
         "pluginVersion": "12.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "exemplar": false,
-            "expr": "pg_up{namespace=\"$NAMESPACE\", endpoint=\"http-metrics\"}",
-            "format": "table",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": true,
-            "legendFormat": "__auto",
-            "range": false,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
         "title": "PostgreSQL Health",
-        "type": "stat"
+        "type": "dashlist"
       },
       {
         "collapsed": false,
