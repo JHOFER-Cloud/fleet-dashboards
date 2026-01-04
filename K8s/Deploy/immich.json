@@ -1109,7 +1109,7 @@
                 },
                 "direction": "backward",
                 "editorMode": "builder",
-                "expr": "{namespace=\"$NAMESPACE\"}",
+                "expr": "{namespace=\"$NAMESPACE\", instance=\"immich\"}",
                 "queryType": "range",
                 "refId": "A"
               }
@@ -1198,7 +1198,7 @@
               "h": 12,
               "w": 24,
               "x": 0,
-              "y": 34
+              "y": 46
             },
             "id": 3,
             "options": {
@@ -1422,8 +1422,8 @@
         },
         {
           "current": {
-            "text": "",
-            "value": ""
+            "text": "shares",
+            "value": "shares"
           },
           "datasource": {
             "type": "prometheus",
