@@ -96,7 +96,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -198,7 +198,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -321,7 +321,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -438,7 +438,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -542,7 +542,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -628,7 +628,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -703,7 +703,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -818,7 +818,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -924,7 +924,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -1008,7 +1008,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -1079,7 +1079,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -1150,7 +1150,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -1221,7 +1221,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.0",
         "targets": [
           {
             "datasource": {
@@ -1263,8 +1263,8 @@
         },
         {
           "current": {
-            "text": "dielinke",
-            "value": "dielinke"
+            "text": "shares",
+            "value": "shares"
           },
           "datasource": {
             "type": "prometheus",
