@@ -1365,8 +1365,8 @@
         },
         {
           "current": {
-            "text": "shares",
-            "value": "shares"
+            "text": "",
+            "value": ""
           },
           "datasource": {
             "type": "prometheus",
