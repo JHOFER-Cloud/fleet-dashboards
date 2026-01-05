@@ -1372,14 +1372,14 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "definition": "label_values({service_name=\"immich-server\"},namespace)",
+          "definition": "label_values({service=\"immich-server\"},namespace)",
           "includeAll": false,
           "label": "namespace",
           "name": "NAMESPACE",
           "options": [],
           "query": {
             "qryType": 1,
-            "query": "label_values({service_name=\"immich-server\"},namespace)",
+            "query": "label_values({service=\"immich-server\"},namespace)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
