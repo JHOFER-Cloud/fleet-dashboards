@@ -104,7 +104,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -179,7 +179,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -255,7 +255,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -331,7 +331,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -453,7 +453,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -540,7 +540,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -628,7 +628,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -680,7 +680,7 @@
             "cloudnativepg"
           ]
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "title": "PostgreSQL Health",
         "type": "dashlist"
       },
@@ -776,7 +776,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -879,7 +879,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -982,7 +982,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1065,7 +1065,7 @@
         "type": "row"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1073,257 +1073,259 @@
           "y": 33
         },
         "id": 7,
-        "panels": [
+        "panels": [],
+        "title": "Jobs Info (IN WORK)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "fieldMinMax": true,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 34
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "last"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "sortBy": "Last",
+            "sortDesc": true
+          },
+          "timezone": [
+            "browser"
+          ],
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${DS_PROMETHEUS}"
             },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 0,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "showValues": false,
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "fieldMinMax": true,
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              "overrides": []
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "exemplar": false,
+            "expr": "immich_queues_background_task_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
             },
-            "gridPos": {
-              "h": 12,
-              "w": 24,
-              "x": 0,
-              "y": 46
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_library_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
             },
-            "id": 3,
-            "options": {
-              "legend": {
-                "calcs": [
-                  "min",
-                  "max"
-                ],
-                "displayMode": "table",
-                "placement": "right",
-                "showLegend": true
-              },
-              "timezone": [
-                "browser"
-              ],
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "single",
-                "sort": "none"
-              }
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_metadata_extraction_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "C",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
             },
-            "pluginVersion": "12.3.0",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "exemplar": false,
-                "expr": "immich_queues_background_task_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "includeNullMetadata": true,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "A",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_library_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "B",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_metadata_extraction_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "C",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_migration_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "D",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_sidecar_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "E",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_storage_template_migration_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "F",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_video_conversion_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "G",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_thumbnail_generation_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "H",
-                "useBackend": false
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "immich_queues_facial_recognition_active{namespace=\"$NAMESPACE\"}",
-                "fullMetaSearch": false,
-                "hide": false,
-                "includeNullMetadata": true,
-                "instant": false,
-                "legendFormat": "{{__name__}}",
-                "range": true,
-                "refId": "I",
-                "useBackend": false
-              }
-            ],
-            "title": "Active Background Tasks",
-            "type": "timeseries"
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_migration_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "D",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_sidecar_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "E",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_storage_template_migration_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "F",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_video_conversion_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "G",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_thumbnail_generation_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "H",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "immich_queues_facial_recognition_active{namespace=\"$NAMESPACE\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{__name__}}",
+            "range": true,
+            "refId": "I",
+            "useBackend": false
           }
         ],
-        "title": "Jobs Info (IN WORK)",
-        "type": "row"
+        "title": "Active Background Tasks",
+        "type": "timeseries"
       }
     ],
     "preload": false,
