@@ -1905,11 +1905,24 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum by(container) (increase(container_oom_events_total{namespace=~\"$namespace.*\", pod=~\"${pod}\", container!=\"\", node=~\"$node\"}[$__rate_interval]))",
+            "expr": "delta(node_vmstat_oom_kill[5m])\u003e0",
             "interval": "",
-            "legendFormat": "{{ container }}",
+            "legendFormat": "{{pod}} - {{instance}}",
             "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum by(container, pod) (\n  count_over_time(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\", namespace=\"$namespace\"}[$__interval])\n) \u003e 0",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "B"
           }
         ],
         "title": "OOM Events by container",
@@ -2547,8 +2560,8 @@
         },
         {
           "current": {
-            "text": "jelly-stack",
-            "value": "jelly-stack"
+            "text": "shares",
+            "value": "shares"
           },
           "datasource": {
             "type": "prometheus",
