@@ -2560,8 +2560,8 @@
         },
         {
           "current": {
-            "text": "shares",
-            "value": "shares"
+            "text": "jelly-stack",
+            "value": "jelly-stack"
           },
           "datasource": {
             "type": "prometheus",
