@@ -204,7 +204,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -278,36 +278,44 @@
               "mode": "thresholds"
             },
             "mappings": [],
+            "max": 100,
+            "min": 0,
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
+                  "color": "red",
                   "value": 0
                 },
                 {
-                  "color": "red",
-                  "value": 80
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "yellow",
+                  "value": 40
+                },
+                {
+                  "color": "green",
+                  "value": 60
                 }
               ]
             },
-            "unit": "currencyEUR"
+            "unit": "percent"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 3,
+          "h": 4,
           "w": 3,
           "x": 18,
           "y": 0
         },
-        "id": 5,
+        "id": 14,
         "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
+          "minVizHeight": 75,
+          "minVizWidth": 75,
           "orientation": "auto",
-          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -315,11 +323,11 @@
             "fields": "",
             "values": false
           },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -328,14 +336,16 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*$eur_per_kWh)",
-            "legendFormat": "{{machine}}",
-            "range": true,
-            "refId": "A"
+            "expr": "sonnenbatterie_user_charge_level_percent",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "USOC",
+            "range": false,
+            "refId": "B"
           }
         ],
-        "title": "Consumer monthly energy costs",
-        "type": "stat"
+        "title": "Battery Charge Level",
+        "type": "gauge"
       },
       {
         "datasource": {
@@ -405,7 +415,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -446,6 +456,76 @@
                 }
               ]
             },
+            "unit": "currencyEUR"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 18,
+          "y": 4
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*$eur_per_kWh)",
+            "legendFormat": "{{machine}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Consumer monthly energy costs",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
             "unit": "watth"
           },
           "overrides": []
@@ -454,7 +534,7 @@
           "h": 4,
           "w": 3,
           "x": 18,
-          "y": 3
+          "y": 7
         },
         "id": 12,
         "options": {
@@ -474,7 +554,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -490,6 +570,88 @@
           }
         ],
         "title": "Consumers todays usage",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "eef9f89usay9sb"
+        },
+        "description": "Current number of active alerts.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "#bf1b00",
+              "mode": "fixed"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 7
+        },
+        "id": 3,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "max(alertmanager_alerts{state=\"active\"})",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Alerts (LIVE)",
         "type": "stat"
       },
       {
@@ -522,10 +684,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
+          "h": 3,
           "w": 3,
           "x": 18,
-          "y": 7
+          "y": 11
         },
         "id": 7,
         "options": {
@@ -545,7 +707,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -603,10 +765,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
-          "w": 1,
+          "h": 3,
+          "w": 3,
           "x": 21,
-          "y": 7
+          "y": 11
         },
         "id": 4,
         "maxDataPoints": 100,
@@ -627,7 +789,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -643,88 +805,6 @@
           }
         ],
         "title": "Alerts (DEV)",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "eef9f89usay9sb"
-        },
-        "description": "Current number of active alerts.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "fixedColor": "#bf1b00",
-              "mode": "fixed"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "text": "N/A"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 2,
-          "x": 22,
-          "y": 7
-        },
-        "id": 3,
-        "maxDataPoints": 100,
-        "options": {
-          "colorMode": "none",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.0",
-        "targets": [
-          {
-            "datasource": {
-              "uid": "$datasource"
-            },
-            "editorMode": "code",
-            "expr": "max(alertmanager_alerts{state=\"active\"})",
-            "format": "time_series",
-            "intervalFactor": 1,
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Alerts (LIVE)",
         "type": "stat"
       },
       {
@@ -760,7 +840,7 @@
           "h": 5,
           "w": 6,
           "x": 18,
-          "y": 11
+          "y": 14
         },
         "id": 11,
         "options": {
@@ -780,7 +860,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.3.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
