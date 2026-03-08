@@ -84,15 +84,15 @@
                 },
                 {
                   "color": "orange",
-                  "value": 10
-                },
-                {
-                  "color": "green",
                   "value": 15
                 },
                 {
+                  "color": "green",
+                  "value": 20
+                },
+                {
                   "color": "#EAB839",
-                  "value": 25
+                  "value": 27
                 },
                 {
                   "color": "red",
@@ -124,7 +124,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -235,7 +235,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -340,7 +340,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -444,7 +444,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.3.0-17814087142",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
