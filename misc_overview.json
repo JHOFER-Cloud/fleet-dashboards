@@ -189,14 +189,16 @@
         "options": {
           "legend": {
             "calcs": [
-              "mean",
-              "lastNotNull",
+              "min",
               "max",
-              "min"
+              "mean",
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "hideZeros": false,
