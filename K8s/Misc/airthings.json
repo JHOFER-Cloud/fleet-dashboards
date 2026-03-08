@@ -31,6 +31,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
+        "description": "At 26° rack fan will spin up (23° avg load + 3° high load)",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -79,12 +80,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": 0
-                },
-                {
-                  "color": "orange",
-                  "value": 15
                 },
                 {
                   "color": "green",
@@ -92,7 +89,7 @@
                 },
                 {
                   "color": "#EAB839",
-                  "value": 27
+                  "value": 26
                 },
                 {
                   "color": "red",
