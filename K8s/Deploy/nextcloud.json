@@ -74,7 +74,7 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 4,
+          "w": 2,
           "x": 0,
           "y": 1
         },
@@ -180,8 +180,8 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 8,
-          "x": 4,
+          "w": 6,
+          "x": 2,
           "y": 1
         },
         "id": 1,
@@ -206,12 +206,12 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
+            "editorMode": "code",
             "expr": "sum by(namespace) (nextcloud_users_total{namespace=~\"$namespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "intervalFactor": 1,
-            "legendFormat": "total ({{namespace}})",
+            "legendFormat": "total",
             "metric": "",
             "range": true,
             "refId": "A",
@@ -224,13 +224,13 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
+            "editorMode": "code",
             "expr": "sum by(namespace) (nextcloud_active_users_total{namespace=~\"$namespace\"})",
             "fullMetaSearch": false,
             "hide": false,
             "includeNullMetadata": true,
             "intervalFactor": 1,
-            "legendFormat": "active ({{namespace}})",
+            "legendFormat": "active",
             "metric": "",
             "range": true,
             "refId": "B",
@@ -240,6 +240,208 @@
         ],
         "title": "Users",
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 8,
+          "y": 1
+        },
+        "id": 26,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(namespace, time) (nextcloud_active_sessions{time=\"Last 5 minutes\", namespace=~\"$namespace\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "intervalFactor": 1,
+            "legendFormat": "{{time}}",
+            "metric": "",
+            "range": true,
+            "refId": "A",
+            "step": 900,
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(namespace, time) (nextcloud_active_sessions{time=\"Last 15 minutes\", namespace=~\"$namespace\"})",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "intervalFactor": 1,
+            "legendFormat": "{{time}}",
+            "metric": "",
+            "range": true,
+            "refId": "B",
+            "step": 900,
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(namespace, time) (nextcloud_active_sessions{time=\"Last hour\", namespace=~\"$namespace\"})",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "intervalFactor": 1,
+            "legendFormat": "{{time}}",
+            "metric": "",
+            "range": true,
+            "refId": "C",
+            "step": 900,
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(namespace, time) (nextcloud_active_sessions{time=\"Last day\", namespace=~\"$namespace\"})",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "intervalFactor": 1,
+            "legendFormat": "{{time}}",
+            "metric": "",
+            "range": true,
+            "refId": "D",
+            "step": 900,
+            "useBackend": false
+          }
+        ],
+        "title": "Users",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 2,
+          "x": 14,
+          "y": 1
+        },
+        "id": 23,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "sort": "desc",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (backend) (nextcloud_users{namespace=~\"$namespace\"})",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Users by backend",
+        "type": "piechart"
       },
       {
         "datasource": {
@@ -303,8 +505,8 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 12,
-          "x": 12,
+          "w": 5,
+          "x": 16,
           "y": 1
         },
         "id": 11,
@@ -329,12 +531,12 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "sum by(namespace) (nextcloud_files_total{namespace=~\"$namespace\"})",
+            "editorMode": "code",
+            "expr": "nextcloud_files_total{namespace=~\"$namespace\"}",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "intervalFactor": 1,
-            "legendFormat": "__auto",
+            "legendFormat": "{{__name__}}",
             "metric": "",
             "range": true,
             "refId": "B",
@@ -344,6 +546,84 @@
         ],
         "title": "Files",
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 3,
+          "x": 21,
+          "y": 1
+        },
+        "id": 22,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "sort": "desc",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max by(mimetype) (nextcloud_files{namespace=~\"$namespace\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{mimetype}}",
+            "metric": "",
+            "range": true,
+            "refId": "B",
+            "step": 900,
+            "useBackend": false
+          }
+        ],
+        "title": "File types",
+        "type": "piechart"
       },
       {
         "collapsed": false,
@@ -636,19 +916,172 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "sum by(namespace) (nextcloud_apps_installed_total{namespace=~\"$namespace\"})",
+            "editorMode": "code",
+            "expr": "sum by(namespace) (nextcloud_installed_applications{namespace=~\"$namespace\", status=\"enabled\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
-            "legendFormat": "__auto",
+            "legendFormat": "Enabled",
             "range": true,
             "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "sum by(namespace) (nextcloud_installed_applications{namespace=~\"$namespace\", status=\"disabled\"})",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "Disabled",
+            "range": true,
+            "refId": "B",
             "useBackend": false
           }
         ],
         "title": "Installed Apps",
         "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "footer": {
+                "reducers": []
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 5,
+          "x": 4,
+          "y": 17
+        },
+        "id": 25,
+        "options": {
+          "cellHeight": "sm",
+          "showHeader": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "editorMode": "code",
+            "expr": "nextcloud_apps_info{namespace=~\"$namespace\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Installed Apps",
+        "transformations": [
+          {
+            "id": "labelsToFields",
+            "options": {
+              "keepLabels": [
+                "activity",
+                "announcementcenter",
+                "app_api",
+                "bruteforcesettings",
+                "circles",
+                "cloud_federation_api",
+                "comments",
+                "contactsinteraction",
+                "container",
+                "dashboard",
+                "dav",
+                "endpoint",
+                "federatedfilesharing",
+                "federation",
+                "files",
+                "files_antivirus",
+                "files_downloadlimit",
+                "files_pdfviewer",
+                "files_reminders",
+                "files_sharing",
+                "files_trashbin",
+                "files_versions",
+                "firstrunwizard",
+                "forms",
+                "group_everyone",
+                "groupfolders",
+                "instance",
+                "job",
+                "logreader",
+                "lookup_server_connector",
+                "memories",
+                "namespace",
+                "nextcloud_announcements",
+                "notifications",
+                "oauth2",
+                "password_policy",
+                "pod",
+                "polls",
+                "previewgenerator",
+                "privacy",
+                "profile",
+                "provisioning_api",
+                "quota_warning",
+                "recommendations",
+                "related_resources",
+                "richdocuments",
+                "richdocumentscode",
+                "serverinfo",
+                "service",
+                "settings",
+                "sharebymail",
+                "side_menu",
+                "support",
+                "survey_client",
+                "systemtags",
+                "text",
+                "theming",
+                "twofactor_backupcodes",
+                "twofactor_totp",
+                "updatenotification",
+                "user_oidc",
+                "user_status",
+                "viewer",
+                "weather_status",
+                "webhook_listeners",
+                "workflowengine"
+              ],
+              "mode": "rows"
+            }
+          }
+        ],
+        "type": "table"
       },
       {
         "datasource": {
@@ -681,8 +1114,8 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 4,
-          "x": 4,
+          "w": 3,
+          "x": 9,
           "y": 17
         },
         "id": 10,
@@ -724,6 +1157,105 @@
         ],
         "title": "Available Updates",
         "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 17
+        },
+        "id": 19,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (cause) (rate(nextcloud_scrape_errors_total{namespace=\"$namespace\"}[5m]))",
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Exporter Scrape Errors",
+        "type": "timeseries"
       },
       {
         "collapsed": false,
@@ -826,13 +1358,13 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "sum by(namespace) (nextcloud_free_space_bytes{namespace=~\"$namespace\"})",
+            "editorMode": "code",
+            "expr": "nextcloud_free_space_bytes{namespace=~\"$namespace\"}",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "interval": "",
             "intervalFactor": 1,
-            "legendFormat": "__auto",
+            "legendFormat": "{{__name__}}",
             "metric": "",
             "range": true,
             "refId": "A",
@@ -906,11 +1438,11 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 12,
+          "w": 4,
           "x": 12,
           "y": 25
         },
-        "id": 19,
+        "id": 24,
         "options": {
           "legend": {
             "calcs": [],
@@ -920,8 +1452,8 @@
           },
           "tooltip": {
             "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
+            "mode": "single",
+            "sort": "none"
           }
         },
         "pluginVersion": "12.3.1",
@@ -932,15 +1464,98 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum by (cause) (rate(nextcloud_scrape_errors_total{namespace=\"$namespace\"}[5m]))",
-            "instant": false,
+            "expr": "sum by (job) (nextcloud_running_jobs{namespace=~\"$namespace\"})",
             "legendFormat": "__auto",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Exporter Scrape Errors",
+        "title": "Running jobs",
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 0,
+                    "text": "Off"
+                  },
+                  "1": {
+                    "index": 1,
+                    "text": "On"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 2,
+          "x": 16,
+          "y": 25
+        },
+        "id": 20,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "nextcloud_maintenance{namespace=~\"$namespace\"}",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Maintenance Mode",
+        "type": "stat"
       },
       {
         "collapsed": false,
@@ -952,8 +1567,7 @@
         },
         "id": 16,
         "panels": [],
-        "repeat": "namespace",
-        "title": "Environment Information ($namespace)",
+        "title": "Environment Information",
         "type": "row"
       },
       {
@@ -1017,9 +1631,9 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by(version) (nextcloud_php_info{namespace=~\"$namespace\"})",
+            "expr": "sum by(version, namespace) (nextcloud_php_info)",
             "instant": true,
-            "legendFormat": "__auto",
+            "legendFormat": "{{namespace}} {{version}}",
             "range": false,
             "refId": "A"
           }
@@ -1088,9 +1702,9 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by(type, version) (nextcloud_database_info)",
+            "expr": "sum by(type, version, namespace) (nextcloud_database_info)",
             "instant": true,
-            "legendFormat": "{{type}} {{version}}",
+            "legendFormat": "{{namespace}} {{type}} {{version}}",
             "range": false,
             "refId": "A"
           }
@@ -1121,7 +1735,7 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 6,
+          "w": 5,
           "x": 13,
           "y": 33
         },
@@ -1159,9 +1773,9 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by(version) (nextcloud_system_info)",
+            "expr": "sum by(version, namespace) (nextcloud_system_info)",
             "instant": true,
-            "legendFormat": "__auto",
+            "legendFormat": "{{namespace}} {{version}}",
             "range": false,
             "refId": "A"
           }
@@ -1192,8 +1806,8 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 5,
-          "x": 19,
+          "w": 4,
+          "x": 18,
           "y": 33
         },
         "id": 17,
@@ -1230,15 +1844,107 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by(version) (nextcloud_exporter_info)",
+            "expr": "sum by(version, namespace) (nextcloud_exporter_info)",
             "instant": true,
-            "legendFormat": "__auto",
+            "legendFormat": "{{namespace}} {{version}}",
             "range": false,
             "refId": "A"
           }
         ],
         "title": "Exporter Versions",
         "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 0,
+                    "text": "DEBUG"
+                  },
+                  "1": {
+                    "index": 1,
+                    "text": "INFO"
+                  },
+                  "2": {
+                    "index": 2,
+                    "text": "WARN"
+                  },
+                  "3": {
+                    "index": 3,
+                    "text": "ERROR"
+                  },
+                  "4": {
+                    "index": 4,
+                    "text": "FATAL"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 2,
+          "x": 22,
+          "y": 33
+        },
+        "id": 21,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "nextcloud_log_level{namespace=~\"$namespace\"}",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Log Level ($namespace)",
+        "type": "stat"
       }
     ],
     "preload": false,
