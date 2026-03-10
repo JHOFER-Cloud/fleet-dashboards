@@ -609,7 +609,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": false,
-            "expr": "nextcloud_files{namespace=~\"$namespace\"}",
+            "expr": "max by(mimetype) (nextcloud_files{namespace=~\"$namespace\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -1159,19 +1159,6 @@
         "type": "stat"
       },
       {
-        "collapsed": false,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 24
-        },
-        "id": 8,
-        "panels": [],
-        "title": "System Information",
-        "type": "row"
-      },
-      {
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
@@ -1269,6 +1256,19 @@
         ],
         "title": "Exporter Scrape Errors",
         "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        },
+        "id": 8,
+        "panels": [],
+        "title": "System Information",
+        "type": "row"
       },
       {
         "datasource": {
@@ -1547,7 +1547,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "nextcloud_maintenance",
+            "expr": "nextcloud_maintenance{namespace=~\"$namespace\"}",
             "instant": true,
             "legendFormat": "__auto",
             "range": false,
@@ -1704,7 +1704,7 @@
             "exemplar": false,
             "expr": "sum by(type, version, namespace) (nextcloud_database_info)",
             "instant": true,
-            "legendFormat": "{{namespace }} {{type}} {{version}}",
+            "legendFormat": "{{namespace}} {{type}} {{version}}",
             "range": false,
             "refId": "A"
           }
