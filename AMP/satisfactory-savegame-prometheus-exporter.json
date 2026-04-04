@@ -96,9 +96,9 @@
                   "type": "prometheus",
                   "uid": "${ds}"
                 },
-                "editorMode": "builder",
+                "editorMode": "code",
                 "exemplar": false,
-                "expr": "satisfactory_server_game_state_num_connected_players{}",
+                "expr": "satisfactory_server_num_connected_players",
                 "instant": false,
                 "interval": "",
                 "legendFormat": "${metric} (average)",
@@ -160,6 +160,7 @@
                   }
                 },
                 "decimals": 0,
+                "fieldMinMax": false,
                 "mappings": [],
                 "min": 0,
                 "thresholds": {
@@ -168,10 +169,6 @@
                     {
                       "color": "green",
                       "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
                     }
                   ]
                 }
@@ -207,12 +204,27 @@
                 },
                 "editorMode": "code",
                 "exemplar": false,
-                "expr": "satisfactory_server_game_state_num_connected_players{}",
+                "expr": "satisfactory_server_num_connected_players",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "Limit",
+                "range": true,
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "satisfactory_server_player_limit",
+                "hide": false,
                 "instant": false,
                 "interval": "",
                 "legendFormat": "Players",
                 "range": true,
-                "refId": "A"
+                "refId": "B"
               }
             ],
             "title": "Players Online",
@@ -292,7 +304,7 @@
                 },
                 "disableTextWrap": false,
                 "editorMode": "builder",
-                "expr": "satisfactory_server_game_state_total_game_duration",
+                "expr": "satisfactory_server_total_game_duration",
                 "fullMetaSearch": false,
                 "includeNullMetadata": true,
                 "instant": false,
@@ -372,8 +384,8 @@
                   "uid": "${ds}"
                 },
                 "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "satisfactory_server_game_state_tech_tier",
+                "editorMode": "code",
+                "expr": "satisfactory_server_tech_tier{}",
                 "fullMetaSearch": false,
                 "includeNullMetadata": true,
                 "instant": false,
