@@ -69,7 +69,7 @@
             },
             "gridPos": {
               "h": 8,
-              "w": 6,
+              "w": 4,
               "x": 0,
               "y": 1
             },
@@ -96,9 +96,9 @@
                   "type": "prometheus",
                   "uid": "${ds}"
                 },
-                "editorMode": "builder",
+                "editorMode": "code",
                 "exemplar": false,
-                "expr": "satisfactory_server_game_state_num_connected_players{}",
+                "expr": "satisfactory_server_num_connected_players",
                 "instant": false,
                 "interval": "",
                 "legendFormat": "${metric} (average)",
@@ -160,6 +160,7 @@
                   }
                 },
                 "decimals": 0,
+                "fieldMinMax": false,
                 "mappings": [],
                 "min": 0,
                 "thresholds": {
@@ -168,10 +169,6 @@
                     {
                       "color": "green",
                       "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
                     }
                   ]
                 }
@@ -181,7 +178,7 @@
             "gridPos": {
               "h": 8,
               "w": 6,
-              "x": 6,
+              "x": 4,
               "y": 1
             },
             "id": 1,
@@ -207,12 +204,27 @@
                 },
                 "editorMode": "code",
                 "exemplar": false,
-                "expr": "satisfactory_server_game_state_num_connected_players{}",
+                "expr": "satisfactory_server_num_connected_players",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "Limit",
+                "range": true,
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "satisfactory_server_player_limit",
+                "hide": false,
                 "instant": false,
                 "interval": "",
                 "legendFormat": "Players",
                 "range": true,
-                "refId": "A"
+                "refId": "B"
               }
             ],
             "title": "Players Online",
@@ -262,7 +274,7 @@
             "gridPos": {
               "h": 8,
               "w": 6,
-              "x": 12,
+              "x": 10,
               "y": 1
             },
             "id": 4,
@@ -292,7 +304,7 @@
                 },
                 "disableTextWrap": false,
                 "editorMode": "builder",
-                "expr": "satisfactory_server_game_state_total_game_duration",
+                "expr": "satisfactory_server_total_game_duration",
                 "fullMetaSearch": false,
                 "includeNullMetadata": true,
                 "instant": false,
@@ -309,6 +321,84 @@
                 "options": {}
               }
             ],
+            "type": "stat"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 0,
+                        "text": "▶️ Running"
+                      },
+                      "1": {
+                        "index": 1,
+                        "text": "⏸️ Paused"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 4,
+              "x": 16,
+              "y": 1
+            },
+            "id": 18,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "percentChangeColorMode": "standard",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showPercentChange": false,
+              "textMode": "auto",
+              "wideLayout": true
+            },
+            "pluginVersion": "12.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "editorMode": "code",
+                "expr": "satisfactory_server_is_game_paused",
+                "legendFormat": "__auto",
+                "range": true,
+                "refId": "A"
+              }
+            ],
+            "title": "Game paused?",
             "type": "stat"
           },
           {
@@ -343,8 +433,8 @@
             },
             "gridPos": {
               "h": 8,
-              "w": 6,
-              "x": 18,
+              "w": 4,
+              "x": 20,
               "y": 1
             },
             "id": 2,
@@ -372,8 +462,8 @@
                   "uid": "${ds}"
                 },
                 "disableTextWrap": false,
-                "editorMode": "builder",
-                "expr": "satisfactory_server_game_state_tech_tier",
+                "editorMode": "code",
+                "expr": "satisfactory_server_tech_tier{}",
                 "fullMetaSearch": false,
                 "includeNullMetadata": true,
                 "instant": false,
@@ -532,7 +622,7 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "satisfactory_savegame_power_consumption_megawatts{sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName) (satisfactory_savegame_power_consumption_megawatts{sessionName=\"$sessionName\"})",
             "hide": false,
             "instant": false,
             "legendFormat": "Consumption",
@@ -545,8 +635,8 @@
               "uid": "${ds}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "satisfactory_savegame_power_production_megawatts{sessionName=\"$sessionName\"}",
+            "editorMode": "code",
+            "expr": "max by(sessionName) (satisfactory_savegame_power_production_megawatts{sessionName=\"$sessionName\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "legendFormat": "{{building}}",
@@ -625,32 +715,7 @@
             },
             "unit": "velocitykmh"
           },
-          "overrides": [
-            {
-              "__systemRef": "hideSeriesFrom",
-              "matcher": {
-                "id": "byNames",
-                "options": {
-                  "mode": "exclude",
-                  "names": [
-                    "p90"
-                  ],
-                  "prefix": "All except:",
-                  "readOnly": true
-                }
-              },
-              "properties": [
-                {
-                  "id": "custom.hideFrom",
-                  "value": {
-                    "legend": false,
-                    "tooltip": true,
-                    "viz": true
-                  }
-                }
-              ]
-            }
-          ]
+          "overrides": []
         },
         "gridPos": {
           "h": 8,
@@ -682,7 +747,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "satisfactory_savegame_trains_current_speed{quantile=\"0.5\", sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName) (satisfactory_savegame_trains_current_speed{quantile=\"0.5\", sessionName=\"$sessionName\"})",
             "format": "time_series",
             "instant": false,
             "interval": "",
@@ -698,7 +763,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "satisfactory_savegame_trains_current_speed{quantile=\"0.9\", sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName) (satisfactory_savegame_trains_current_speed{quantile=\"0.9\", sessionName=\"$sessionName\"})",
             "format": "time_series",
             "hide": false,
             "instant": false,
@@ -715,7 +780,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "satisfactory_savegame_trains_current_speed{quantile=\"0.95\", sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName) (satisfactory_savegame_trains_current_speed{quantile=\"0.95\", sessionName=\"$sessionName\"})",
             "format": "time_series",
             "hide": false,
             "instant": false,
@@ -786,7 +851,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "avg_over_time(deriv(satisfactory_savegame_awesome_points{sessionName=\"$sessionName\"}[15m])[60m:]) * 60",
+            "expr": "max by(sessionName) (avg_over_time(deriv(satisfactory_savegame_awesome_points{sessionName=\"$sessionName\"}[15m])[60m:]) * 60)",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "legendFormat": "{{sessionName}}",
@@ -856,7 +921,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "satisfactory_savegame_conveyors_meters{sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName, mk) (satisfactory_savegame_conveyors_meters{sessionName=\"$sessionName\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -960,7 +1025,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "((satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} - satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"}) or satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} or (satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"} * -1)) * 60",
+            "expr": "max by(sessionName, item) (((satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} - satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"}) or satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} or (satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"} * -1)) * 60)",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "legendFormat": "{{item}}",
@@ -1029,7 +1094,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "satisfactory_savegame_pipes_meters{sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName, mk) (satisfactory_savegame_pipes_meters{sessionName=\"$sessionName\"})",
             "fullMetaSearch": false,
             "hide": false,
             "includeNullMetadata": true,
@@ -1105,7 +1170,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": false,
-            "expr": "satisfactory_savegame_buildings_lightweight_total{building=~\"Foundation|Wall\",sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName, building) (satisfactory_savegame_buildings_lightweight_total{building=~\"Foundation|Wall\",sessionName=\"$sessionName\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": false,
@@ -1179,7 +1244,7 @@
             "disableTextWrap": false,
             "editorMode": "code",
             "exemplar": false,
-            "expr": "((satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} - satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"}) or satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} or (satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"} * -1)) * 60",
+            "expr": "max by(sessionName, item) (((satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} - satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"}) or satisfactory_savegame_resources_production_per_second{sessionName=\"$sessionName\"} or (satisfactory_savegame_resources_consumption_per_second{sessionName=\"$sessionName\"} * -1)) * 60)",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "instant": true,
@@ -1329,7 +1394,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "satisfactory_savegame_buildings_total{sessionName=\"$sessionName\",\"building\"!~\".*(Conveyor|Pipeline|Power|Outlet|Hypert|Railway|Signal).*|.*Wall|Ladder\"}",
+            "expr": "max by(sessionName, building) (satisfactory_savegame_buildings_total{sessionName=\"$sessionName\",\"building\"!~\".*(Conveyor|Pipeline|Power|Outlet|Hypert|Railway|Signal).*|.*Wall|Ladder\"})",
             "format": "time_series",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
@@ -1405,8 +1470,8 @@
               "uid": "${ds}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "satisfactory_savegame_power_powerlines_meters{sessionName=\"$sessionName\"}",
+            "editorMode": "code",
+            "expr": "max by(sessionName) (satisfactory_savegame_power_powerlines_meters{sessionName=\"$sessionName\"})",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "legendFormat": "Power lines",
@@ -1474,7 +1539,7 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "satisfactory_savegame_trains_tracks_meters{sessionName=\"$sessionName\"}",
+            "expr": "max by(sessionName, item) (satisfactory_savegame_trains_tracks_meters{sessionName=\"$sessionName\"})",
             "legendFormat": "Train tracks",
             "range": true,
             "refId": "A"
