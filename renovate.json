@@ -1,15 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "reviewers": ["ojsef39"],
-  "git-submodules": {
-    "enabled": true
-  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^build/AMP/Satisfactory/satisfactory-monitoring\\.version$/"
+      ],
+      "matchStrings": ["(?<currentDigest>[a-f0-9]{40})"],
+      "currentValueTemplate": "main",
+      "datasourceTemplate": "git-refs",
+      "depNameTemplate": "https://github.com/featheredtoast/satisfactory-monitoring"
+    }
+  ],
   "packageRules": [
     {
-      "matchManagers": ["git-submodules"],
-      "matchPackageNames": ["build/satisfactory-monitoring"],
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": [
+        "https://github.com/featheredtoast/satisfactory-monitoring"
+      ],
       "postUpgradeTasks": {
-        "commands": ["python3 build/generate.py"],
+        "commands": ["python3 build/AMP/Satisfactory/generate.py"],
         "fileFilters": ["sync/AMP/Satisfactory/**"],
         "executionMode": "update"
       }
