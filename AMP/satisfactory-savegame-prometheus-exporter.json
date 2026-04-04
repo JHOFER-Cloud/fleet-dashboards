@@ -27,360 +27,387 @@
     "links": [],
     "panels": [
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${ds}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "decimals": 0,
-            "displayName": "PLAYERS 🧑‍🚀",
-            "mappings": [],
-            "max": 8,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 6
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
+        "collapsed": true,
         "gridPos": {
-          "h": 8,
-          "w": 6,
+          "h": 1,
+          "w": 24,
           "x": 0,
           "y": 0
         },
-        "id": 3,
-        "options": {
-          "minVizHeight": 75,
-          "minVizWidth": 75,
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true,
-          "sizing": "auto"
-        },
-        "pluginVersion": "12.3.1",
-        "targets": [
+        "id": 16,
+        "panels": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${ds}"
             },
-            "editorMode": "builder",
-            "exemplar": false,
-            "expr": "satisfactory_server_game_state_num_connected_players{}",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "${metric} (average)",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Players Online",
-        "transformations": [
-          {
-            "id": "merge",
-            "options": {}
-          }
-        ],
-        "type": "gauge"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${ds}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "decimals": 0,
+                "displayName": "PLAYERS 🧑‍🚀",
+                "mappings": [],
+                "max": 8,
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 6
+                    }
+                  ]
+                }
+              },
+              "overrides": []
             },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
+            "gridPos": {
+              "h": 8,
+              "w": 6,
+              "x": 0,
+              "y": 1
+            },
+            "id": 3,
+            "options": {
+              "minVizHeight": 75,
+              "minVizWidth": 75,
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
               },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true,
+              "sizing": "auto"
+            },
+            "pluginVersion": "12.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "editorMode": "builder",
+                "exemplar": false,
+                "expr": "satisfactory_server_game_state_num_connected_players{}",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "${metric} (average)",
+                "range": true,
+                "refId": "A"
+              }
+            ],
+            "title": "Players Online",
+            "transformations": [
+              {
+                "id": "merge",
+                "options": {}
+              }
+            ],
+            "type": "gauge"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "showValues": false,
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "mappings": [],
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
               },
-              "showPoints": "auto",
-              "showValues": false,
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 6,
+              "x": 6,
+              "y": 1
+            },
+            "id": 1,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": false
               },
-              "thresholdsStyle": {
-                "mode": "off"
+              "tooltip": {
+                "hideZeros": false,
+                "mode": "single",
+                "sort": "none"
               }
             },
-            "decimals": 0,
-            "mappings": [],
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
+            "pluginVersion": "12.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
                 },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "satisfactory_server_game_state_num_connected_players{}",
+                "instant": false,
+                "interval": "",
+                "legendFormat": "Players",
+                "range": true,
+                "refId": "A"
+              }
+            ],
+            "title": "Players Online",
+            "transformations": [
+              {
+                "id": "merge",
+                "options": {}
+              }
+            ],
+            "type": "timeseries"
           },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 6,
-          "x": 6,
-          "y": 0
-        },
-        "id": 1,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "12.3.1",
-        "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${ds}"
             },
-            "editorMode": "code",
-            "exemplar": false,
-            "expr": "satisfactory_server_game_state_num_connected_players{}",
-            "instant": false,
-            "interval": "",
-            "legendFormat": "Players",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Players Online",
-        "transformations": [
+            "description": "How long the game has been running in total, i.e. had at least one player online.",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "semi-dark-purple",
+                  "mode": "fixed"
+                },
+                "mappings": [],
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 604800
+                    },
+                    {
+                      "color": "red",
+                      "value": 2629800
+                    }
+                  ]
+                },
+                "unit": "dtdhms"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 6,
+              "x": 12,
+              "y": 1
+            },
+            "id": 4,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "percentChangeColorMode": "standard",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showPercentChange": false,
+              "textMode": "auto",
+              "wideLayout": true
+            },
+            "pluginVersion": "12.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "disableTextWrap": false,
+                "editorMode": "builder",
+                "expr": "satisfactory_server_game_state_total_game_duration",
+                "fullMetaSearch": false,
+                "includeNullMetadata": true,
+                "instant": false,
+                "legendFormat": "__auto",
+                "range": true,
+                "refId": "A",
+                "useBackend": false
+              }
+            ],
+            "title": "Unpaused Game Time",
+            "transformations": [
+              {
+                "id": "merge",
+                "options": {}
+              }
+            ],
+            "type": "stat"
+          },
           {
-            "id": "merge",
-            "options": {}
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "neutral": 1
+                },
+                "displayName": "TECH TIER 🚀",
+                "mappings": [],
+                "max": 9,
+                "min": 1,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 6,
+              "x": 18,
+              "y": 1
+            },
+            "id": 2,
+            "options": {
+              "minVizHeight": 75,
+              "minVizWidth": 75,
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": false,
+              "sizing": "auto",
+              "text": {}
+            },
+            "pluginVersion": "12.3.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "disableTextWrap": false,
+                "editorMode": "builder",
+                "expr": "satisfactory_server_game_state_tech_tier",
+                "fullMetaSearch": false,
+                "includeNullMetadata": true,
+                "instant": false,
+                "legendFormat": "__auto",
+                "range": true,
+                "refId": "A",
+                "useBackend": false
+              }
+            ],
+            "title": "Tech Tier",
+            "transformations": [
+              {
+                "id": "merge",
+                "options": {}
+              }
+            ],
+            "type": "gauge"
           }
         ],
-        "type": "timeseries"
+        "title": "Server",
+        "type": "row"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${ds}"
-        },
-        "description": "How long the game has been running in total, i.e. had at least one player online.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "fixedColor": "semi-dark-purple",
-              "mode": "fixed"
-            },
-            "mappings": [],
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "#EAB839",
-                  "value": 604800
-                },
-                {
-                  "color": "red",
-                  "value": 2629800
-                }
-              ]
-            },
-            "unit": "dtdhms"
-          },
-          "overrides": []
-        },
+        "collapsed": false,
         "gridPos": {
-          "h": 8,
-          "w": 6,
-          "x": 12,
-          "y": 0
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 1
         },
-        "id": 4,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${ds}"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "satisfactory_server_game_state_total_game_duration",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": false,
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
-        "title": "Unpaused Game Time",
-        "transformations": [
-          {
-            "id": "merge",
-            "options": {}
-          }
-        ],
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${ds}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "neutral": 1
-            },
-            "displayName": "TECH TIER 🚀",
-            "mappings": [],
-            "max": 9,
-            "min": 1,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 6,
-          "x": 18,
-          "y": 0
-        },
-        "id": 2,
-        "options": {
-          "minVizHeight": 75,
-          "minVizWidth": 75,
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": false,
-          "sizing": "auto",
-          "text": {}
-        },
-        "pluginVersion": "12.3.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${ds}"
-            },
-            "disableTextWrap": false,
-            "editorMode": "builder",
-            "expr": "satisfactory_server_game_state_tech_tier",
-            "fullMetaSearch": false,
-            "includeNullMetadata": true,
-            "instant": false,
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A",
-            "useBackend": false
-          }
-        ],
-        "title": "Tech Tier",
-        "transformations": [
-          {
-            "id": "merge",
-            "options": {}
-          }
-        ],
-        "type": "gauge"
+        "id": 17,
+        "panels": [],
+        "title": "Savegame",
+        "type": "row"
       },
       {
         "datasource": {
@@ -481,7 +508,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 8
+          "y": 2
         },
         "id": 9,
         "options": {
@@ -629,7 +656,7 @@
           "h": 8,
           "w": 6,
           "x": 12,
-          "y": 8
+          "y": 2
         },
         "id": 15,
         "options": {
@@ -730,7 +757,7 @@
           "h": 8,
           "w": 6,
           "x": 18,
-          "y": 8
+          "y": 2
         },
         "id": 5,
         "options": {
@@ -800,7 +827,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 16
+          "y": 10
         },
         "id": 6,
         "options": {
@@ -908,7 +935,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 16
+          "y": 10
         },
         "id": 10,
         "options": {
@@ -973,7 +1000,7 @@
           "h": 8,
           "w": 6,
           "x": 0,
-          "y": 24
+          "y": 18
         },
         "id": 13,
         "options": {
@@ -1047,7 +1074,7 @@
           "h": 8,
           "w": 6,
           "x": 6,
-          "y": 24
+          "y": 18
         },
         "id": 8,
         "options": {
@@ -1135,7 +1162,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 24
+          "y": 18
         },
         "id": 14,
         "options": {
@@ -1277,7 +1304,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 32
+          "y": 26
         },
         "id": 7,
         "options": {
@@ -1350,7 +1377,7 @@
           "h": 8,
           "w": 6,
           "x": 12,
-          "y": 32
+          "y": 26
         },
         "id": 11,
         "options": {
@@ -1419,7 +1446,7 @@
           "h": 8,
           "w": 6,
           "x": 18,
-          "y": 32
+          "y": 26
         },
         "id": 12,
         "options": {
