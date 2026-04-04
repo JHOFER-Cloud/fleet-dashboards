@@ -1073,8 +1073,8 @@
     "list": [
       {
         "current": {
-          "text": "http://fakeserver:8080",
-          "value": "http://fakeserver:8080"
+          "text": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
+          "value": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080"
         },
         "datasource": {
           "type": "prometheus",

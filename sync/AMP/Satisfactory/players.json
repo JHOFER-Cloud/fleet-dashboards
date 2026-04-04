@@ -453,8 +453,8 @@
     "list": [
       {
         "current": {
-          "text": "http://frm-server:8080",
-          "value": "http://frm-server:8080"
+          "text": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
+          "value": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080"
         },
         "datasource": {
           "type": "prometheus",

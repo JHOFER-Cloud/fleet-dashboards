@@ -19,6 +19,13 @@ VERSION_FILE = os.path.join(SCRIPT_DIR, "satisfactory-monitoring.version")
 UPSTREAM_URL = "https://github.com/featheredtoast/satisfactory-monitoring"
 OUTPUT = os.path.join(SCRIPT_DIR, "..", "..", "..", "sync", "AMP", "Satisfactory")
 
+# String replacements applied to all string values
+STRING_REPLACEMENTS = {
+    "http://fakeserver:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
+    "http://frm-server:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
+    "http://192.168.2.97:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
+}
+
 # Datasource UID replacements: upstream UID -> local UID
 DATASOURCE_UIDS = {
     "PBFA97CFB590B2093": "eef9f89usay9sb",  # Prometheus (live)
@@ -64,6 +71,9 @@ def walk(obj):
         }
     elif isinstance(obj, list):
         return [walk(v) for v in obj]
+    elif isinstance(obj, str):
+        for old, new in STRING_REPLACEMENTS.items():
+            obj = obj.replace(old, new)
     return obj
 
 
