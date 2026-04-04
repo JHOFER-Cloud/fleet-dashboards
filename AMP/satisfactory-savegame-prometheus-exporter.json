@@ -187,7 +187,7 @@
                 "calcs": [],
                 "displayMode": "list",
                 "placement": "bottom",
-                "showLegend": false
+                "showLegend": true
               },
               "tooltip": {
                 "hideZeros": false,
@@ -207,7 +207,7 @@
                 "expr": "satisfactory_server_num_connected_players",
                 "instant": false,
                 "interval": "",
-                "legendFormat": "Limit",
+                "legendFormat": "Players",
                 "range": true,
                 "refId": "A"
               },
@@ -222,7 +222,7 @@
                 "hide": false,
                 "instant": false,
                 "interval": "",
-                "legendFormat": "Players",
+                "legendFormat": "Limit",
                 "range": true,
                 "refId": "B"
               }
