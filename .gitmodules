@@ -1,0 +1,3 @@
+[submodule "build/satisfactory-monitoring"]
+	path = build/satisfactory-monitoring
+	url = https://github.com/featheredtoast/satisfactory-monitoring

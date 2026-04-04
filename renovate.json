@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "reviewers": ["ojsef39"],
+  "git-submodules": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["git-submodules"],
+      "matchPackageNames": ["build/satisfactory-monitoring"],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/generate.py"],
+        "fileFilters": ["sync/AMP/Satisfactory/**"],
+        "executionMode": "update"
+      }
+    }
+  ]
+}
