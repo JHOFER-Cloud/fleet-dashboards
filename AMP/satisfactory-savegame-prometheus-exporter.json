@@ -786,7 +786,7 @@
             },
             "disableTextWrap": false,
             "editorMode": "code",
-            "expr": "avg_over_time(deriv(satisfactory_savegame_awesome_points{sessionName=\"$sessionName\"}[15m])[60m:])",
+            "expr": "avg_over_time(deriv(satisfactory_savegame_awesome_points{sessionName=\"$sessionName\"}[15m])[60m:]) * 60",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "legendFormat": "{{sessionName}}",
@@ -795,7 +795,7 @@
             "useBackend": false
           }
         ],
-        "title": "AWESOME points per second",
+        "title": "AWESOME points per minute",
         "type": "stat"
       },
       {
