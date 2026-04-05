@@ -16,6 +16,10 @@
   "packageRules": [
     {
       "matchManagers": ["custom.regex"],
+      "matchDatasources": ["git-refs"],
+      "matchFileNames": [
+        "build/AMP/Satisfactory/satisfactory-monitoring.version"
+      ],
       "matchPackageNames": [
         "https://github.com/featheredtoast/satisfactory-monitoring"
       ],
