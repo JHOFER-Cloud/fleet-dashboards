@@ -177,7 +177,7 @@ def main():
                 if l.get("type") != "dashboards"
             ] + [
                 {
-                    "asDropdown": True,
+                    "asDropdown": False,
                     "icon": "external link",
                     "includeVars": False,
                     "keepTime": True,
