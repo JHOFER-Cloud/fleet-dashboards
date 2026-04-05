@@ -170,6 +170,37 @@ def main():
                 data["panels"] = filter_panels(data["panels"])
                 data["panels"] = collapse_rows(data["panels"])
                 data["panels"] = [apply_table_sort(p) for p in data["panels"]]
+            if "satisfactory-specifics" not in data.get("tags", []):
+                data["tags"] = data.get("tags", []) + ["satisfactory-specifics"]
+            data["links"] = [
+                l for l in data.get("links", [])
+                if l.get("type") != "dashboards"
+            ] + [
+                {
+                    "asDropdown": True,
+                    "icon": "external link",
+                    "includeVars": False,
+                    "keepTime": True,
+                    "tags": ["satisfactory"],
+                    "targetBlank": False,
+                    "title": "General",
+                    "tooltip": "",
+                    "type": "dashboards",
+                    "url": "",
+                },
+                {
+                    "asDropdown": True,
+                    "icon": "external link",
+                    "includeVars": False,
+                    "keepTime": True,
+                    "tags": ["satisfactory-specifics"],
+                    "targetBlank": False,
+                    "title": "Specifics",
+                    "tooltip": "",
+                    "type": "dashboards",
+                    "url": "",
+                },
+            ]
 
             dst = os.path.join(OUTPUT, name)
             with open(dst, "w") as fh:

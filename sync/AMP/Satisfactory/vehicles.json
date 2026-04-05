@@ -25,7 +25,36 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 7,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "satisfactory"
+      ],
+      "targetBlank": false,
+      "title": "General",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    },
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "satisfactory-specifics"
+      ],
+      "targetBlank": false,
+      "title": "Specifics",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -696,7 +725,9 @@
   ],
   "refresh": "5s",
   "schemaVersion": 39,
-  "tags": [],
+  "tags": [
+    "satisfactory-specifics"
+  ],
   "templating": {
     "list": [
       {
