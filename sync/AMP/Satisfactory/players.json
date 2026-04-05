@@ -141,7 +141,7 @@
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/satisfactory/location-arrow-alt.svg",
+                  "fixed": "img/icons/unicons/location-arrow-alt.svg",
                   "mode": "fixed"
                 },
                 "symbolAlign": {

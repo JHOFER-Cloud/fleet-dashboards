@@ -136,7 +136,7 @@
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/satisfactory/location-arrow-alt.svg",
+                  "fixed": "img/icons/unicons/location-arrow-alt.svg",
                   "mode": "fixed"
                 },
                 "textConfig": {
@@ -216,7 +216,7 @@
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/satisfactory/location-point.svg",
+                  "fixed": "img/icons/unicons/location-point.svg",
                   "mode": "fixed"
                 },
                 "textConfig": {
@@ -260,7 +260,7 @@
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/satisfactory/location-arrow-alt.svg",
+                  "fixed": "img/icons/unicons/location-arrow-alt.svg",
                   "mode": "fixed"
                 },
                 "textConfig": {

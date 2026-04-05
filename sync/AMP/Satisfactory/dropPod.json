@@ -225,7 +225,7 @@
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/satisfactory/location-point.svg",
+                  "fixed": "img/icons/unicons/location-point.svg",
                   "mode": "fixed"
                 },
                 "text": {
