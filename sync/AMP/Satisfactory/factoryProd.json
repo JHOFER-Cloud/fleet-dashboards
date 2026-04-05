@@ -37,32 +37,35 @@
       },
       "id": 9,
       "title": "Info",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 1
-      },
-      "id": 11,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "Calculate input and output by a square region, bounded by variables.\n\nEdit the map displayed and inspect buildings to get approximate x + y coordinates.\nThen plugin bounds for x and y. Factory exports (+/min) and imports (-/min) will be updated according to the new area.\n\nx min, x max, y min and y max are ingame coordinates.",
-        "mode": "markdown"
-      },
-      "pluginVersion": "11.2.2",
-      "title": "Factory production calculator by region",
-      "type": "text"
+      "type": "row",
+      "collapsed": true,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "Calculate input and output by a square region, bounded by variables.\n\nEdit the map displayed and inspect buildings to get approximate x + y coordinates.\nThen plugin bounds for x and y. Factory exports (+/min) and imports (-/min) will be updated according to the new area.\n\nx min, x max, y min and y max are ingame coordinates.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.2.2",
+          "title": "Factory production calculator by region",
+          "type": "text"
+        }
+      ]
     },
     {
       "collapsed": false,

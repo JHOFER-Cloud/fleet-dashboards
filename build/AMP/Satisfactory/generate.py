@@ -71,12 +71,33 @@ def clone_at_commit(commit_sha):
     return tmpdir
 
 
+COLLAPSED_ROWS = {"Info"}
+
+
 def filter_panels(panels):
     return [
         p for p in panels
         if p.get("type") != "alertlist"
         and not (p.get("type") == "row" and p.get("title") == "Alerts")
     ]
+
+
+def collapse_rows(panels):
+    result = []
+    collecting_into = None  # row panel currently collecting children
+    for p in panels:
+        if p.get("type") == "row":
+            collecting_into = None
+            if p.get("title") in COLLAPSED_ROWS:
+                collecting_into = {**p, "collapsed": True, "panels": []}
+                result.append(collecting_into)
+            else:
+                result.append(p)
+        elif collecting_into is not None:
+            collecting_into["panels"].append(p)
+        else:
+            result.append(p)
+    return result
 
 
 def walk(obj):
@@ -131,6 +152,7 @@ def main():
             data = walk(data)
             if "panels" in data:
                 data["panels"] = filter_panels(data["panels"])
+                data["panels"] = collapse_rows(data["panels"])
 
             dst = os.path.join(OUTPUT, name)
             with open(dst, "w") as fh:
