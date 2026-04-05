@@ -1567,7 +1567,9 @@
     "preload": false,
     "refresh": "5m",
     "schemaVersion": 42,
-    "tags": [],
+    "tags": [
+      "satisfactory"
+    ],
     "templating": {
       "list": [
         {
