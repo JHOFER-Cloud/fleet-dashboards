@@ -63,7 +63,8 @@ def clone_at_commit(commit_sha):
     subprocess.run(["git", "init", tmpdir], check=True, capture_output=True)
     subprocess.run(
         ["git", "-C", tmpdir, "remote", "add", "origin", UPSTREAM_URL],
-        check=True, capture_output=True,
+        check=True,
+        capture_output=True,
     )
     subprocess.run(
         ["git", "-C", tmpdir, "fetch", "--depth=1", "origin", commit_sha],
@@ -71,12 +72,74 @@ def clone_at_commit(commit_sha):
     )
     subprocess.run(
         ["git", "-C", tmpdir, "checkout", "FETCH_HEAD"],
-        check=True, capture_output=True,
+        check=True,
+        capture_output=True,
     )
     return tmpdir
 
 
 COLLAPSED_ROWS = {"Info"}
+
+# Height increase per dashboard map panel (power excluded intentionally)
+MAP_HEIGHT_DELTA = {
+    "players": 10,
+    "dropPod": 12,
+    "efficiencyMap": 18,
+    "drone": 15,
+    "factoryProd": 7,
+    "storage": 15,
+    "vehicles": 15,
+    "train": 6,
+}
+
+
+def resize_map(panels, dashboard):
+    delta = MAP_HEIGHT_DELTA.get(dashboard)
+    if not delta:
+        return panels
+
+    geomap = next((p for p in panels if p.get("type") == "geomap"), None)
+    if not geomap:
+        return panels
+
+    map_y = geomap["gridPos"]["y"]
+    map_h = geomap["gridPos"]["h"]
+    map_w = geomap["gridPos"]["w"]
+    new_h = map_h + delta
+
+    result = []
+    for p in panels:
+        gp = p["gridPos"]
+
+        if p.get("type") == "geomap":
+            p = {**p, "gridPos": {**gp, "h": new_h}}
+        elif map_w == 24:
+            # Standalone: shift everything below the map down
+            if gp["y"] >= map_y + map_h:
+                p = {**p, "gridPos": {**gp, "y": gp["y"] + delta}}
+        else:
+            # Shared row: panel beside the map
+            if map_y <= gp["y"] < map_y + map_h and gp["x"] != geomap["gridPos"]["x"]:
+                if dashboard == "train" and p.get("title") == "$train timetable":
+                    # Expand timetable to fill remaining height beside map
+                    next_stop_h = next(
+                        (
+                            q["gridPos"]["h"]
+                            for q in panels
+                            if q.get("title") == "Next stop"
+                        ),
+                        3,
+                    )
+                    p = {**p, "gridPos": {**gp, "h": new_h - next_stop_h}}
+                elif dashboard != "train":
+                    p = {**p, "gridPos": {**gp, "h": new_h}}
+            # Shift panels below the original map row down
+            elif gp["y"] >= map_y + map_h:
+                p = {**p, "gridPos": {**gp, "y": gp["y"] + delta}}
+
+        result.append(p)
+    return result
+
 
 SORT_COLUMNS = ["count", "rate", "amount"]
 SORT_COLUMN_RE = re.compile(
@@ -98,7 +161,10 @@ def patch_looted_layer(panel):
                 "color": {**style.get("color", {}), "fixed": "green"},
                 "opacity": 0.9,
                 "size": {**style.get("size", {}), "fixed": 8},
-                "symbol": {"fixed": "img/icons/unicons/location-point.svg", "mode": "fixed"},
+                "symbol": {
+                    "fixed": "img/icons/unicons/location-point.svg",
+                    "mode": "fixed",
+                },
             }
             layer = {**layer, "config": {**layer.get("config", {}), "style": new_style}}
             changed = True
@@ -116,12 +182,19 @@ def apply_table_sort(panel):
     if not m:
         return panel
     col = m.group(1).lower()
-    return {**panel, "options": {**panel.get("options", {}), "sortBy": [{"desc": True, "displayName": col}]}}
+    return {
+        **panel,
+        "options": {
+            **panel.get("options", {}),
+            "sortBy": [{"desc": True, "displayName": col}],
+        },
+    }
 
 
 def filter_panels(panels):
     return [
-        p for p in panels
+        p
+        for p in panels
         if p.get("type") != "alertlist"
         and not (p.get("type") == "row" and p.get("title") == "Alerts")
     ]
@@ -187,10 +260,13 @@ def main():
 
         dashboard_files = sorted(f for f in os.listdir(upstream) if f.endswith(".json"))
         if not dashboard_files:
-            print(f"ERROR: No dashboard JSON files found in {upstream}", file=sys.stderr)
+            print(
+                f"ERROR: No dashboard JSON files found in {upstream}", file=sys.stderr
+            )
             sys.exit(1)
 
         for name in dashboard_files:
+            dashboard = name.replace(".json", "")
             with open(os.path.join(upstream, name)) as fh:
                 data = json.load(fh)
 
@@ -200,11 +276,11 @@ def main():
                 data["panels"] = collapse_rows(data["panels"])
                 data["panels"] = [apply_table_sort(p) for p in data["panels"]]
                 data["panels"] = [patch_looted_layer(p) for p in data["panels"]]
+                data["panels"] = resize_map(data["panels"], dashboard)
             if "satisfactory-specifics" not in data.get("tags", []):
                 data["tags"] = data.get("tags", []) + ["satisfactory-specifics"]
             data["links"] = [
-                l for l in data.get("links", [])
-                if l.get("type") != "dashboards"
+                l for l in data.get("links", []) if l.get("type") != "dashboards"
             ] + [
                 {
                     "asDropdown": False,
