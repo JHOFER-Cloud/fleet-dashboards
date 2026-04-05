@@ -147,6 +147,23 @@ SORT_COLUMN_RE = re.compile(
 )
 
 
+def patch_player_layers(panel):
+    if panel.get("type") != "geomap":
+        return panel
+    layers = panel.get("options", {}).get("layers", [])
+    new_layers = []
+    changed = False
+    for layer in layers:
+        if layer.get("filterData", {}).get("options") in ("OnlineDead", "Offline"):
+            config = layer.get("config", {})
+            layer = {**layer, "config": {**config, "style": {**config.get("style", {}), "opacity": 0.9}}}
+            changed = True
+        new_layers.append(layer)
+    if not changed:
+        return panel
+    return {**panel, "options": {**panel.get("options", {}), "layers": new_layers}}
+
+
 def patch_looted_layer(panel):
     if panel.get("type") != "geomap":
         return panel
@@ -276,6 +293,7 @@ def main():
                 data["panels"] = collapse_rows(data["panels"])
                 data["panels"] = [apply_table_sort(p) for p in data["panels"]]
                 data["panels"] = [patch_looted_layer(p) for p in data["panels"]]
+                data["panels"] = [patch_player_layers(p) for p in data["panels"]]
                 data["panels"] = resize_map(data["panels"], dashboard)
             if "satisfactory-specifics" not in data.get("tags", []):
                 data["tags"] = data.get("tags", []) + ["satisfactory-specifics"]

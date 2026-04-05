@@ -175,7 +175,7 @@
                 "color": {
                   "fixed": "dark-red"
                 },
-                "opacity": 0.4,
+                "opacity": 0.9,
                 "rotation": {
                   "fixed": 0,
                   "max": 360,
@@ -227,7 +227,7 @@
                 "color": {
                   "fixed": "text"
                 },
-                "opacity": 0.4,
+                "opacity": 0.9,
                 "rotation": {
                   "fixed": 0,
                   "max": 360,
