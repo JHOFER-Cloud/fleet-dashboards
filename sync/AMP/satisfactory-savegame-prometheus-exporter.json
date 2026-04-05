@@ -24,7 +24,22 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "links": [],
+    "links": [
+      {
+        "asDropdown": true,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": true,
+        "tags": [
+          "satisfactory-specifics"
+        ],
+        "targetBlank": false,
+        "title": "Specifics",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
+      }
+    ],
     "panels": [
       {
         "collapsed": true,
