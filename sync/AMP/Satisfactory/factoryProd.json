@@ -502,7 +502,13 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "count"
+          }
+        ]
       },
       "pluginVersion": "11.2.2",
       "targets": [
@@ -606,7 +612,12 @@
         },
         "frameIndex": 2,
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "rate"
+          }
+        ]
       },
       "pluginVersion": "11.2.2",
       "targets": [
@@ -716,7 +727,12 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "rate"
+          }
+        ]
       },
       "pluginVersion": "11.2.2",
       "targets": [

@@ -73,6 +73,22 @@ def clone_at_commit(commit_sha):
 
 COLLAPSED_ROWS = {"Info"}
 
+SORT_COLUMNS = ["count", "rate", "amount"]
+SORT_COLUMN_RE = re.compile(
+    r"\bas\s+(" + "|".join(SORT_COLUMNS) + r")\b", re.IGNORECASE
+)
+
+
+def apply_table_sort(panel):
+    if panel.get("type") != "table":
+        return panel
+    sql = " ".join(t.get("rawSql", "") for t in panel.get("targets", []))
+    m = SORT_COLUMN_RE.search(sql)
+    if not m:
+        return panel
+    col = m.group(1).lower()
+    return {**panel, "options": {**panel.get("options", {}), "sortBy": [{"desc": True, "displayName": col}]}}
+
 
 def filter_panels(panels):
     return [
@@ -153,6 +169,7 @@ def main():
             if "panels" in data:
                 data["panels"] = filter_panels(data["panels"])
                 data["panels"] = collapse_rows(data["panels"])
+                data["panels"] = [apply_table_sort(p) for p in data["panels"]]
 
             dst = os.path.join(OUTPUT, name)
             with open(dst, "w") as fh:

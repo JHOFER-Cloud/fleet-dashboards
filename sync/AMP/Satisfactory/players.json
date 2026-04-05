@@ -405,7 +405,13 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "amount"
+          }
+        ]
       },
       "pluginVersion": "11.4.0",
       "repeat": "player",

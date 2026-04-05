@@ -94,7 +94,13 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "rate"
+          }
+        ]
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -183,7 +189,13 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "rate"
+          }
+        ]
       },
       "pluginVersion": "11.4.0",
       "targets": [
