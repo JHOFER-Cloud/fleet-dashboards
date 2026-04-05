@@ -258,9 +258,9 @@
               "showLegend": false,
               "style": {
                 "color": {
-                  "fixed": "text"
+                  "fixed": "green"
                 },
-                "opacity": 0.4,
+                "opacity": 0.9,
                 "rotation": {
                   "fixed": 0,
                   "max": 360,
@@ -268,12 +268,12 @@
                   "mode": "mod"
                 },
                 "size": {
-                  "fixed": 3,
+                  "fixed": 8,
                   "max": 15,
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/marker/circle.svg",
+                  "fixed": "img/icons/unicons/location-point.svg",
                   "mode": "fixed"
                 },
                 "textConfig": {

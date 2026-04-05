@@ -80,6 +80,30 @@ SORT_COLUMN_RE = re.compile(
 )
 
 
+def patch_looted_layer(panel):
+    if panel.get("type") != "geomap":
+        return panel
+    layers = panel.get("options", {}).get("layers", [])
+    new_layers = []
+    changed = False
+    for layer in layers:
+        if layer.get("filterData", {}).get("options") == "Looted":
+            style = layer.get("config", {}).get("style", {})
+            new_style = {
+                **style,
+                "color": {**style.get("color", {}), "fixed": "green"},
+                "opacity": 0.9,
+                "size": {**style.get("size", {}), "fixed": 8},
+                "symbol": {"fixed": "img/icons/unicons/location-point.svg", "mode": "fixed"},
+            }
+            layer = {**layer, "config": {**layer.get("config", {}), "style": new_style}}
+            changed = True
+        new_layers.append(layer)
+    if not changed:
+        return panel
+    return {**panel, "options": {**panel.get("options", {}), "layers": new_layers}}
+
+
 def apply_table_sort(panel):
     if panel.get("type") != "table":
         return panel
@@ -171,6 +195,7 @@ def main():
                 data["panels"] = filter_panels(data["panels"])
                 data["panels"] = collapse_rows(data["panels"])
                 data["panels"] = [apply_table_sort(p) for p in data["panels"]]
+                data["panels"] = [patch_looted_layer(p) for p in data["panels"]]
             if "satisfactory-specifics" not in data.get("tags", []):
                 data["tags"] = data.get("tags", []) + ["satisfactory-specifics"]
             data["links"] = [
