@@ -57,6 +57,14 @@ def clone_at_commit(commit_sha):
     return tmpdir
 
 
+def filter_panels(panels):
+    return [
+        p for p in panels
+        if p.get("type") != "alertlist"
+        and not (p.get("type") == "row" and p.get("title") == "Alerts")
+    ]
+
+
 def walk(obj):
     if isinstance(obj, dict):
         if obj.get("uid") in DATASOURCE_UIDS:
@@ -98,6 +106,8 @@ def main():
                 data = json.load(fh)
 
             data = walk(data)
+            if "panels" in data:
+                data["panels"] = filter_panels(data["panels"])
 
             dst = os.path.join(OUTPUT, name)
             with open(dst, "w") as fh:

@@ -1061,40 +1061,6 @@
       ],
       "title": "Station Travel Time",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "grafana"
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 26
-      },
-      "id": 24,
-      "options": {
-        "alertInstanceLabelFilter": "url=~\"$server\",session_name=~\"$session\"",
-        "alertName": "TrainDerailed",
-        "dashboardAlerts": false,
-        "groupBy": [
-          "name"
-        ],
-        "groupMode": "custom",
-        "maxItems": 20,
-        "sortOrder": 1,
-        "stateFilter": {
-          "error": true,
-          "firing": true,
-          "noData": false,
-          "normal": false,
-          "pending": true
-        },
-        "viewMode": "list"
-      },
-      "title": "Derail Alerts",
-      "type": "alertlist"
     }
   ],
   "refresh": "5s",

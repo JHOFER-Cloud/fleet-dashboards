@@ -178,8 +178,8 @@
       {
         "current": {
           "selected": false,
-          "text": "http://192.168.2.97:8080",
-          "value": "http://192.168.2.97:8080"
+          "text": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
+          "value": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080"
         },
         "datasource": {
           "type": "prometheus",
