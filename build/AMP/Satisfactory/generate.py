@@ -27,6 +27,10 @@ STRING_REPLACEMENTS = {
     "http://frm-server:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
     "http://192.168.2.97:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
     "img/icons/satisfactory/location-": "img/icons/unicons/location-",
+    # dropPod: upstream uses wrong JSON keys, actual data has RequiredItem/RequiredPower
+    "data ->> 'RepairItem'": "data -> 'RequiredItem' ->> 'Name'",
+    "data ->> 'RepairAmount'": "data -> 'RequiredItem' ->> 'Amount'",
+    "data ->> 'PowerRequired'": "data ->> 'RequiredPower'",
 }
 
 # Datasource UID replacements: upstream UID -> local UID
