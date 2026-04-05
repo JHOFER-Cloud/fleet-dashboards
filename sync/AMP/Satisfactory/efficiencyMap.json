@@ -421,7 +421,7 @@
           "type": "prometheus",
           "uid": "eef9f89usay9sb"
         },
-        "definition": "label_values(item_production_capacity_per_min{url=\"$server\", session_name=\"$session\"},item_name)",
+        "definition": "label_values(satisfactory_frm_item_production_capacity_per_min{url=\"$server\", session_name=\"$session\"},item_name)",
         "hide": 0,
         "includeAll": true,
         "multi": true,
@@ -429,7 +429,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(item_production_capacity_per_min{url=\"$server\", session_name=\"$session\"},item_name)",
+          "query": "label_values(satisfactory_frm_item_production_capacity_per_min{url=\"$server\", session_name=\"$session\"},item_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

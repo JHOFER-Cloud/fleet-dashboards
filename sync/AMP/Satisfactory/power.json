@@ -486,7 +486,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "power_capacity"
+              "options": "satisfactory_frm_power_capacity"
             },
             "properties": [
               {
@@ -501,7 +501,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "power_max_consumed"
+              "options": "satisfactory_frm_power_max_consumed"
             },
             "properties": [
               {
@@ -526,7 +526,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "power_consumed"
+              "options": "satisfactory_frm_power_consumed"
             },
             "properties": [
               {
@@ -541,7 +541,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "real_power_consumed_max"
+              "options": "satisfactory_frm_real_power_consumed_max"
             },
             "properties": [
               {
@@ -679,7 +679,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "OTHER"
+              "options": "satisfactory_frm_OTHER"
             },
             "properties": [
               {
@@ -697,7 +697,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Truck Stations"
+              "options": "satisfactory_frm_Truck Stations"
             },
             "properties": [
               {
@@ -712,7 +712,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Train Stations"
+              "options": "satisfactory_frm_Train Stations"
             },
             "properties": [
               {
@@ -727,7 +727,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Trains"
+              "options": "satisfactory_frm_Trains"
             },
             "properties": [
               {
@@ -742,7 +742,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Drone Ports"
+              "options": "satisfactory_frm_Drone Ports"
             },
             "properties": [
               {
@@ -757,7 +757,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Factory"
+              "options": "satisfactory_frm_Factory"
             },
             "properties": [
               {
@@ -772,7 +772,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Sinks"
+              "options": "satisfactory_frm_Sinks"
             },
             "properties": [
               {
@@ -787,7 +787,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Pumps"
+              "options": "satisfactory_frm_Pumps"
             },
             "properties": [
               {
@@ -802,7 +802,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Extractors"
+              "options": "satisfactory_frm_Extractors"
             },
             "properties": [
               {
@@ -817,7 +817,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Hypertubes"
+              "options": "satisfactory_frm_Hypertubes"
             },
             "properties": [
               {
@@ -832,7 +832,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Portals"
+              "options": "satisfactory_frm_Portals"
             },
             "properties": [
               {
@@ -847,7 +847,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Resource Well Pressurizers"
+              "options": "satisfactory_frm_Resource Well Pressurizers"
             },
             "properties": [
               {
@@ -1377,7 +1377,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "factory_power_max"
+              "options": "satisfactory_frm_factory_power_max"
             },
             "properties": [
               {
@@ -1513,7 +1513,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "vehicle_station_power_max"
+              "options": "satisfactory_frm_vehicle_station_power_max"
             },
             "properties": [
               {
@@ -1649,7 +1649,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "train_station_power_max"
+              "options": "satisfactory_frm_train_station_power_max"
             },
             "properties": [
               {

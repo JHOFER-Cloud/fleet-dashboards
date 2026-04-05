@@ -296,7 +296,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "item_production_capacity_per_min"
+              "options": "satisfactory_frm_item_production_capacity_per_min"
             },
             "properties": [
               {
@@ -321,7 +321,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "item_consumption_capacity_per_min"
+              "options": "satisfactory_frm_item_consumption_capacity_per_min"
             },
             "properties": [
               {
@@ -346,7 +346,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "items_produced_per_min"
+              "options": "satisfactory_frm_items_produced_per_min"
             },
             "properties": [
               {
@@ -361,7 +361,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "items_consumed_per_min"
+              "options": "satisfactory_frm_items_consumed_per_min"
             },
             "properties": [
               {
@@ -518,7 +518,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "item_production_capacity_pc"
+              "options": "satisfactory_frm_item_production_capacity_pc"
             },
             "properties": [
               {
@@ -533,7 +533,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "item_consumption_capacity_pc"
+              "options": "satisfactory_frm_item_consumption_capacity_pc"
             },
             "properties": [
               {
@@ -676,7 +676,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Exploration"
+              "options": "satisfactory_frm_Exploration"
             },
             "properties": [
               {
@@ -691,7 +691,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Resource"
+              "options": "satisfactory_frm_Resource"
             },
             "properties": [
               {
@@ -773,7 +773,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Exploration"
+              "options": "satisfactory_frm_Exploration"
             },
             "properties": [
               {
@@ -788,7 +788,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Resource"
+              "options": "satisfactory_frm_Resource"
             },
             "properties": [
               {
@@ -944,7 +944,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Exploration"
+              "options": "satisfactory_frm_Exploration"
             },
             "properties": [
               {
@@ -959,7 +959,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Resource"
+              "options": "satisfactory_frm_Resource"
             },
             "properties": [
               {
@@ -1077,14 +1077,14 @@
           "type": "prometheus",
           "uid": "eef9f89usay9sb"
         },
-        "definition": "label_values(item_production_capacity_per_min,item_name)",
+        "definition": "label_values(satisfactory_frm_item_production_capacity_per_min,item_name)",
         "description": "Item",
         "includeAll": false,
         "name": "item",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(item_production_capacity_per_min,item_name)",
+          "query": "label_values(satisfactory_frm_item_production_capacity_per_min,item_name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

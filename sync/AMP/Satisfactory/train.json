@@ -795,7 +795,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "d"
+              "options": "satisfactory_frm_d"
             },
             "properties": [
               {

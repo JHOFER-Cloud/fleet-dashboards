@@ -505,7 +505,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "data"
+              "options": "satisfactory_frm_data"
             },
             "properties": [
               {

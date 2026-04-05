@@ -3,8 +3,10 @@
 Generate Grafana dashboards from upstream featheredtoast/satisfactory-monitoring.
 - Clones the upstream repo at the commit pinned in satisfactory-monitoring.version
 - Replaces datasource UIDs to match local configuration
-- Adds satisfactory_frm_ prefix to all Prometheus metric names in PromQL expressions
-  (relies on the fact that in PromQL, only metric names appear immediately before '{')
+- Adds satisfactory_frm_ prefix to all Prometheus metric names:
+  - In PromQL expressions (metric names before '{')
+  - In label_values() calls (variable queries/definitions)
+  - In byName matcher options (fieldConfig overrides)
 """
 import json
 import os
@@ -32,11 +34,23 @@ DATASOURCE_UIDS = {
     "GhzMNppVk": "satisfactory-cache",  # PostgreSQL (frmcache)
 }
 
-# In PromQL, only metric names appear immediately before '{'.
-# Match any such name not already prefixed.
-METRIC_RE = re.compile(
+# Metric name immediately before '{' in PromQL (expr fields, variable queries)
+METRIC_SELECTOR_RE = re.compile(
     r"(?<![a-zA-Z0-9_])(?!satisfactory_frm_)([a-z][a-z0-9_:]+)(?=\{)"
 )
+
+# Metric name as first argument to label_values() in two-argument form:
+# label_values(metric_name, label) or label_values(metric_name{...}, label)
+# Single-argument form label_values(label_name) must NOT be matched.
+LABEL_VALUES_RE = re.compile(
+    r"(?<=label_values\()(?!satisfactory_frm_)([a-z][a-z0-9_:]+)(?=[,{])"
+)
+
+
+def prefix_metrics(s):
+    s = METRIC_SELECTOR_RE.sub(r"satisfactory_frm_\1", s)
+    s = LABEL_VALUES_RE.sub(r"satisfactory_frm_\1", s)
+    return s
 
 
 def clone_at_commit(commit_sha):
@@ -69,11 +83,20 @@ def walk(obj):
     if isinstance(obj, dict):
         if obj.get("uid") in DATASOURCE_UIDS:
             obj["uid"] = DATASOURCE_UIDS[obj["uid"]]
+        # byName matchers reference the full metric name without '{}'
+        if obj.get("id") == "byName" and isinstance(obj.get("options"), str):
+            options = obj["options"]
+            if not options.startswith("satisfactory_frm_"):
+                obj = {**obj, "options": f"satisfactory_frm_{options}"}
         return {
             k: (
-                METRIC_RE.sub(r"satisfactory_frm_\1", v)
-                if k == "expr" and isinstance(v, str)
-                else walk(v)
+                prefix_metrics(v)
+                if k in ("expr", "definition") and isinstance(v, str)
+                else (
+                    prefix_metrics(v)
+                    if k == "query" and isinstance(v, str)
+                    else walk(v)
+                )
             )
             for k, v in obj.items()
         }
