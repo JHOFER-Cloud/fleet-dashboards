@@ -34,9 +34,8 @@ STRING_REPLACEMENTS = {
     "http://192.168.2.97:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
     "img/icons/satisfactory/location-": "img/icons/unicons/location-",
     # dropPod: upstream uses wrong JSON keys, actual data has RequiredItem/RequiredPower
-    "data ->> 'RepairItem'": "data -> 'RequiredItem' ->> 'Name'",
-    "data ->> 'RepairAmount'": "data -> 'RequiredItem' ->> 'Amount'",
-    "data ->> 'PowerRequired'": "data ->> 'RequiredPower'",
+    # This is fixed but left here as future example
+    # "data ->> 'PowerRequired'": "data ->> 'RequiredPower'",
 }
 
 # Datasource UID replacements: upstream UID -> local UID
@@ -162,7 +161,13 @@ def patch_player_layers(panel):
     for layer in layers:
         if layer.get("filterData", {}).get("options") in ("OnlineDead", "Offline"):
             config = layer.get("config", {})
-            layer = {**layer, "config": {**config, "style": {**config.get("style", {}), "opacity": 0.9}}}
+            layer = {
+                **layer,
+                "config": {
+                    **config,
+                    "style": {**config.get("style", {}), "opacity": 0.9},
+                },
+            }
             changed = True
         new_layers.append(layer)
     if not changed:
@@ -297,7 +302,11 @@ def main():
             for var_name, value in VARIABLE_DEFAULTS.get(dashboard, {}).items():
                 for v in data.get("templating", {}).get("list", []):
                     if v.get("name") == var_name:
-                        v["current"] = {"selected": False, "text": value, "value": value}
+                        v["current"] = {
+                            "selected": False,
+                            "text": value,
+                            "value": value,
+                        }
             if "panels" in data:
                 data["panels"] = filter_panels(data["panels"])
                 data["panels"] = collapse_rows(data["panels"])
