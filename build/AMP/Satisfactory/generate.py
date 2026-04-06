@@ -22,6 +22,12 @@ UPSTREAM_URL = "https://github.com/featheredtoast/satisfactory-monitoring"
 OUTPUT = os.path.join(SCRIPT_DIR, "..", "..", "..", "sync", "AMP", "Satisfactory")
 
 # String replacements applied to all string values
+# Per-dashboard variable default overrides: {dashboard: {var_name: value}}
+VARIABLE_DEFAULTS = {
+    "power": {"circuit": "0"},
+}
+
+
 STRING_REPLACEMENTS = {
     "http://fakeserver:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
     "http://frm-server:8080": "http://amp-p1.vm-ct.hla1.jhofer.lan:38080",
@@ -288,6 +294,10 @@ def main():
                 data = json.load(fh)
 
             data = walk(data)
+            for var_name, value in VARIABLE_DEFAULTS.get(dashboard, {}).items():
+                for v in data.get("templating", {}).get("list", []):
+                    if v.get("name") == var_name:
+                        v["current"] = {"selected": False, "text": value, "value": value}
             if "panels" in data:
                 data["panels"] = filter_panels(data["panels"])
                 data["panels"] = collapse_rows(data["panels"])
