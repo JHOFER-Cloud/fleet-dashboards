@@ -137,7 +137,7 @@
           "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -212,7 +212,7 @@
           "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -265,6 +265,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -318,7 +319,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -503,7 +504,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -605,7 +606,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -707,6 +708,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -754,7 +756,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -807,6 +809,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -854,7 +857,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -911,6 +914,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -965,7 +969,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1035,6 +1039,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1088,7 +1093,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1153,6 +1158,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1206,7 +1212,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1260,6 +1266,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1297,14 +1304,12 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "max",
-              "mean"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "right",
             "showLegend": true,
-            "sortBy": "Max",
+            "sortBy": "Last *",
             "sortDesc": true
           },
           "tooltip": {
@@ -1313,7 +1318,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1322,11 +1327,26 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(container_oom_events_total{namespace=~\"$namespace.*\"}[$__rate_interval])) by (namespace, pod) \u003e 0",
+            "expr": "kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\",namespace=~\"$namespace\"}==1",
+            "hide": false,
             "interval": "",
-            "legendFormat": "namespace: {{ namespace }} - pod: {{ pod }}",
+            "legendFormat": "pod: {{ pod }}",
             "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum by(container,pod)(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\",namespace=\"$namespace\"} \u003e0)",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "pod: {{ pod }}",
+            "range": true,
+            "refId": "B"
           }
         ],
         "title": "OOM Events by namespace, pod",
@@ -1367,6 +1387,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1404,23 +1425,21 @@
         "options": {
           "legend": {
             "calcs": [
-              "min",
-              "max",
-              "mean"
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "right",
             "showLegend": true,
-            "sortBy": "Max",
+            "sortBy": "Last *",
             "sortDesc": true
           },
           "tooltip": {
             "hideZeros": false,
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1429,11 +1448,24 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace.*\"}[$__rate_interval])) by (namespace, pod) \u003e 0",
+            "expr": "round(sum by (container,pod)(increase(kube_pod_container_status_restarts_total{namespace=\"$namespace\"}[5m]))\u003e0)",
             "interval": "",
-            "legendFormat": "namespace: {{ namespace }} - pod: {{ pod }}",
+            "legendFormat": "Restart 5 Minutes: {{pod}}",
             "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (pod,container,namespace)(kube_pod_container_status_restarts_total{namespace=\"$namespace\"})\u003e0",
+            "hide": true,
+            "instant": false,
+            "legendFormat": "Restart Total: {{pod}}",
+            "range": true,
+            "refId": "B"
           }
         ],
         "title": "Container Restarts by namespace, pod",
@@ -1473,6 +1505,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1521,7 +1554,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1621,6 +1654,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1669,7 +1703,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1721,6 +1755,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1768,7 +1803,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1821,6 +1856,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1868,7 +1904,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1922,6 +1958,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1936,7 +1973,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -1968,7 +2006,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2021,6 +2059,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2035,7 +2074,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2073,7 +2113,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2138,6 +2178,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2153,7 +2194,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2185,7 +2227,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2238,6 +2280,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2253,7 +2296,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2285,7 +2329,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2352,6 +2396,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2367,7 +2412,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2399,7 +2445,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2466,6 +2512,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2480,7 +2527,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2512,7 +2560,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2579,6 +2627,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2593,7 +2642,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2625,7 +2675,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2692,6 +2742,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2706,7 +2757,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2738,7 +2790,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2805,6 +2857,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2819,7 +2872,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -2851,7 +2905,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "11.5.2",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2886,7 +2940,7 @@
     ],
     "preload": false,
     "refresh": "30s",
-    "schemaVersion": 41,
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
       "list": [
