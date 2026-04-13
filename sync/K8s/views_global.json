@@ -143,7 +143,7 @@
           "sizing": "auto",
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -302,7 +302,7 @@
           "text": {},
           "valueMode": "color"
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -441,7 +441,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -494,6 +494,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -547,7 +548,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -782,7 +783,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -847,7 +848,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1003,7 +1004,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1155,7 +1156,7 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1224,6 +1225,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1276,7 +1278,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1356,6 +1358,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1412,7 +1415,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1495,6 +1498,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1549,7 +1553,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1604,6 +1608,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1657,7 +1662,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1710,6 +1715,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1764,7 +1770,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1831,6 +1837,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -1884,7 +1891,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -1956,6 +1963,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2010,7 +2018,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2071,6 +2079,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2125,7 +2134,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2191,6 +2200,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2244,7 +2254,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2309,6 +2319,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2362,7 +2373,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2416,6 +2427,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2469,7 +2481,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2477,9 +2489,9 @@
               "uid": "${datasource}"
             },
             "disableTextWrap": false,
-            "editorMode": "builder",
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum by(namespace) (increase(container_oom_events_total{node=~\"$node\"}[$__rate_interval])) \u003e 0",
+            "expr": "sum by(namespace) (kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\"}==1) \u003e 0",
             "fullMetaSearch": false,
             "includeNullMetadata": true,
             "interval": "",
@@ -2527,6 +2539,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2580,7 +2593,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2651,6 +2664,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2698,7 +2712,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2792,6 +2806,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -2839,7 +2854,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -2978,6 +2993,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3025,7 +3041,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -3091,6 +3107,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3138,7 +3155,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -3232,6 +3249,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3279,7 +3297,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -3374,6 +3392,7 @@
                 "type": "linear"
               },
               "showPoints": "never",
+              "showValues": false,
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3421,7 +3440,7 @@
             "sort": "desc"
           }
         },
-        "pluginVersion": "12.1.0-91839",
+        "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
@@ -3606,7 +3625,7 @@
     ],
     "preload": false,
     "refresh": "30s",
-    "schemaVersion": 41,
+    "schemaVersion": 42,
     "tags": [],
     "templating": {
       "list": [
