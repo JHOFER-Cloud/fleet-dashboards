@@ -11,6 +11,15 @@
       "currentValueTemplate": "main",
       "datasourceTemplate": "git-refs",
       "depNameTemplate": "https://github.com/featheredtoast/satisfactory-monitoring"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^build/K8s/Thanos/thanos\\.version$/"
+      ],
+      "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "thanos-io/thanos"
     }
   ],
   "packageRules": [
@@ -26,6 +35,21 @@
       "postUpgradeTasks": {
         "commands": ["python3 build/AMP/Satisfactory/generate.py"],
         "fileFilters": ["sync/AMP/Satisfactory/**"],
+        "executionMode": "update"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-releases"],
+      "matchFileNames": [
+        "build/K8s/Thanos/thanos.version"
+      ],
+      "matchPackageNames": [
+        "thanos-io/thanos"
+      ],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/K8s/Thanos/generate.py"],
+        "fileFilters": ["sync/K8s/Thanos/**"],
         "executionMode": "update"
       }
     }
