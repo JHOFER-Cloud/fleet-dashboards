@@ -20,6 +20,11 @@ VERSION_FILE = os.path.join(SCRIPT_DIR, "cilium.version")
 OUTPUT = os.path.join(SCRIPT_DIR, "..", "..", "..", "sync", "K8s", "Cilium")
 RAW_BASE = "https://raw.githubusercontent.com/cilium/cilium"
 
+# Pin Grafana datasource template variables to the live cluster's Prometheus.
+# Matches the convention used by sync/K8s/Network/traefik.json so dashboards
+# load with a usable datasource by default instead of an empty selector.
+PROMETHEUS_DS = {"text": "k8_live_hla1", "value": "eef9f89usay9sb"}
+
 # (upstream_path, output_filename) — output_filename is what lands in sync/K8s/Cilium/
 DASHBOARDS = [
     (
@@ -49,6 +54,23 @@ DASHBOARDS = [
 ]
 
 
+def pin_prometheus_datasource(data):
+    """Set the default value of any datasource template variable querying
+    'prometheus' to the live cluster's UID, so dashboards open with a usable
+    datasource instead of an empty selector."""
+    for var in data.get("templating", {}).get("list", []):
+        if var.get("type") == "datasource" and var.get("query") == "prometheus":
+            var["current"] = dict(PROMETHEUS_DS)
+    return data
+
+
+def pin_time_range(data):
+    """Default time range to the last 2 days. Override Cilium's upstream
+    default (typically now-1h) which is too narrow for spotting trends."""
+    data["time"] = {"from": "now-2d", "to": "now"}
+    return data
+
+
 def fetch(url):
     req = urllib.request.Request(url, headers={"User-Agent": "fleet-dashboards-generate.py"})
     with urllib.request.urlopen(req, timeout=30) as resp:
@@ -72,6 +94,8 @@ def main():
         data = json.loads(body)
         if "panels" not in data and "rows" not in data:
             print(f"WARN: {out_name} has neither 'panels' nor 'rows'", file=sys.stderr)
+        data = pin_prometheus_datasource(data)
+        data = pin_time_range(data)
 
         dst = os.path.join(OUTPUT, out_name)
         with open(dst, "w") as fh:

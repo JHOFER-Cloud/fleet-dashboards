@@ -1005,12 +1005,16 @@
       {
         "type": "datasource",
         "name": "DS_PROMETHEUS",
-        "query": "prometheus"
+        "query": "prometheus",
+        "current": {
+          "text": "k8_live_hla1",
+          "value": "eef9f89usay9sb"
+        }
       }
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {

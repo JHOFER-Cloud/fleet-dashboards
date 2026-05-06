@@ -875,9 +875,8 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
+          "text": "k8_live_hla1",
+          "value": "eef9f89usay9sb"
         },
         "hide": 0,
         "includeAll": false,
@@ -965,7 +964,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
