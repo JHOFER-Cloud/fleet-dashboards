@@ -1222,11 +1222,17 @@
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "cilium",
+    "hubble"
+  ],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": "k8_live_hla1",
+          "value": "eef9f89usay9sb"
+        },
         "hide": 0,
         "includeAll": false,
         "label": "Prometheus",
@@ -1382,7 +1388,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {},
