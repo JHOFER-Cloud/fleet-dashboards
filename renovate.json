@@ -20,6 +20,15 @@
       "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "thanos-io/thanos"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^build/K8s/Cilium/cilium\\.version$/"
+      ],
+      "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "cilium/cilium"
     }
   ],
   "packageRules": [
@@ -50,6 +59,21 @@
       "postUpgradeTasks": {
         "commands": ["python3 build/K8s/Thanos/generate.py"],
         "fileFilters": ["sync/K8s/Thanos/**"],
+        "executionMode": "update"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-releases"],
+      "matchFileNames": [
+        "build/K8s/Cilium/cilium.version"
+      ],
+      "matchPackageNames": [
+        "cilium/cilium"
+      ],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/K8s/Cilium/generate.py"],
+        "fileFilters": ["sync/K8s/Cilium/**"],
         "executionMode": "update"
       }
     }
