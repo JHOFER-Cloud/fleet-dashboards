@@ -1015,7 +1015,6 @@
         },
         "id": 18,
         "interval": "1m",
-        "maxDataPoints": "",
         "options": {
           "dataLinks": [],
           "legend": {

@@ -16,7 +16,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations \u0026 Alerts",
+          "name": "Annotations & Alerts",
           "target": {
             "limit": 100,
             "matchAny": false,
@@ -2360,7 +2360,7 @@
             "type": "timeseries"
           }
         ],
-        "title": "CPU \u0026 Memory",
+        "title": "CPU & Memory",
         "type": "row"
       },
       {
@@ -2393,7 +2393,10 @@
           "alertInstanceLabelFilter": "",
           "alertName": "Longhorn",
           "dashboardAlerts": false,
-          "datasource": "k8_live_hla1",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eef9f89usay9sb"
+          },
           "groupBy": [],
           "groupMode": "default",
           "maxItems": 20,
@@ -2430,7 +2433,10 @@
           "alertInstanceLabelFilter": "",
           "alertName": "Longhorn",
           "dashboardAlerts": false,
-          "datasource": "k8_dev_hla1",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "aef9f9k9lvwn4b"
+          },
           "groupBy": [],
           "groupMode": "default",
           "maxItems": 20,

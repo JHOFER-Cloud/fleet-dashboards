@@ -16,7 +16,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations \u0026 Alerts",
+          "name": "Annotations & Alerts",
           "target": {
             "limit": 100,
             "matchAny": false,
@@ -63,7 +63,10 @@
           "alertInstanceLabelFilter": "{namespace=~\"$namespace\",pod=~\"$instances\"}",
           "alertName": "",
           "dashboardAlerts": false,
-          "datasource": "k8_live_hla1",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eef9f89usay9sb"
+          },
           "groupBy": [],
           "groupMode": "default",
           "maxItems": 20,
@@ -1502,7 +1505,10 @@
           "alertInstanceLabelFilter": "{namespace=~\"$namespace\",pod=~\"$instances\"}",
           "alertName": "",
           "dashboardAlerts": false,
-          "datasource": "k8_dev_hla1",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "aef9f9k9lvwn4b"
+          },
           "groupBy": [],
           "groupMode": "default",
           "maxItems": 20,
@@ -1928,7 +1934,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "description": "WAL is considered Healthy when the last WAL is 0min to 6min old, Delayed when it is less than 15min and Unsynced for \u003e15min.",
+        "description": "WAL is considered Healthy when the last WAL is 0min to 6min old, Delayed when it is less than 15min and Unsynced for >15min.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -2987,7 +2993,7 @@
             "showLineNumbers": false,
             "showMiniMap": false
           },
-          "content": "\u003ctable style=\"width:100%; height:100%;border:0px solid black;\"\u003e\n  \u003ctd style=\"text-align: center;vertical-align: middle;border:0px solid black; \"\u003e\u003cp style=\"font-weight: bold;\"\u003e$instances\u003c/p\u003e\n  \u003c/td\u003e\n\u003c/table\u003e",
+          "content": "<table style=\"width:100%; height:100%;border:0px solid black;\">\n  <td style=\"text-align: center;vertical-align: middle;border:0px solid black; \"><p style=\"font-weight: bold;\">$instances</p>\n  </td>\n</table>",
           "mode": "html"
         },
         "pluginVersion": "12.3.0",
@@ -3438,7 +3444,7 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "noValue": "\u003c1%",
+            "noValue": "<1%",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -3968,7 +3974,7 @@
                 "showLineNumbers": false,
                 "showMiniMap": false
               },
-              "content": "\u003ctable style=\"width:100%; height:100%;border:0px solid black;\"\u003e\n  \u003ctd style=\"text-align: center;vertical-align: middle;border:0px solid black; \"\u003e\u003cp style=\"font-weight: bold;\"\u003e$instances\u003c/p\u003e\n  \u003c/td\u003e\n\u003c/table\u003e",
+              "content": "<table style=\"width:100%; height:100%;border:0px solid black;\">\n  <td style=\"text-align: center;vertical-align: middle;border:0px solid black; \"><p style=\"font-weight: bold;\">$instances</p>\n  </td>\n</table>",
               "mode": "html"
             },
             "pluginVersion": "12.3.0",
@@ -6135,7 +6141,7 @@
             "type": "timeseries"
           }
         ],
-        "title": "Storage \u0026 I/O",
+        "title": "Storage & I/O",
         "type": "row"
       },
       {
@@ -6779,7 +6785,7 @@
                 "expr": "cnpg_pg_stat_replication_write_lag_seconds{namespace=~\"$namespace\",pod=~\"$instances\"}",
                 "instant": false,
                 "interval": "",
-                "legendFormat": "{{pod}} -\u003e {{application_name}}",
+                "legendFormat": "{{pod}} -> {{application_name}}",
                 "refId": "A"
               }
             ],
@@ -6880,7 +6886,7 @@
                 "expr": "cnpg_pg_stat_replication_flush_lag_seconds{namespace=~\"$namespace\",pod=~\"$instances\"}",
                 "instant": false,
                 "interval": "",
-                "legendFormat": "{{pod}} -\u003e {{application_name}}",
+                "legendFormat": "{{pod}} -> {{application_name}}",
                 "refId": "A"
               }
             ],
@@ -6981,7 +6987,7 @@
                 "exemplar": true,
                 "expr": "cnpg_pg_stat_replication_replay_lag_seconds{namespace=~\"$namespace\",pod=~\"$instances\"}",
                 "interval": "",
-                "legendFormat": "{{pod}} -\u003e {{application_name}}",
+                "legendFormat": "{{pod}} -> {{application_name}}",
                 "range": true,
                 "refId": "A"
               }
@@ -7048,7 +7054,7 @@
                 "color": "rgba(255,0,255,0.7)"
               },
               "filterValues": {
-                "le": 1e-9
+                "le": 1e-09
               },
               "legend": {
                 "show": false
@@ -7287,7 +7293,7 @@
                   "uid": "${DS_PROMETHEUS}"
                 },
                 "exemplar": true,
-                "expr": "{__name__=~\"cnpg_collector_first_recoverability_point|barman_cloud_cloudnative_pg_io_first_recoverability_point\",namespace=~\"$namespace\",pod=~\"$instances\"}*1000 \u003e 0",
+                "expr": "{__name__=~\"cnpg_collector_first_recoverability_point|barman_cloud_cloudnative_pg_io_first_recoverability_point\",namespace=~\"$namespace\",pod=~\"$instances\"}*1000 > 0",
                 "format": "time_series",
                 "interval": "",
                 "legendFormat": "{{pod}}",
@@ -8952,7 +8958,7 @@
             "refId": "StandardVariableQuery"
           },
           "refresh": 2,
-          "regex": "/namespace=\"(?\u003ctext\u003e[^\"]+)/g",
+          "regex": "/namespace=\"(?<text>[^\"]+)/g",
           "type": "query"
         },
         {
@@ -8975,7 +8981,7 @@
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
-          "regex": "/\\bcluster\\b=\"(?\u003ctext\u003e[^\"]+)/g",
+          "regex": "/\\bcluster\\b=\"(?<text>[^\"]+)/g",
           "sort": 1,
           "type": "query"
         },
@@ -9002,7 +9008,7 @@
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
-          "regex": "/pod=\"(?\u003ctext\u003e[^\"]+)/g",
+          "regex": "/pod=\"(?<text>[^\"]+)/g",
           "sort": 1,
           "type": "query"
         }

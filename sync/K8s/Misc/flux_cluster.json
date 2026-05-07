@@ -329,7 +329,10 @@
         "type": "stat"
       },
       {
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -401,7 +404,10 @@
         "type": "bargauge"
       },
       {
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -1018,7 +1024,10 @@
         "type": "row"
       },
       {
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -1155,7 +1164,10 @@
         "type": "timeseries"
       },
       {
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "description": "",
         "fieldConfig": {
           "defaults": {
