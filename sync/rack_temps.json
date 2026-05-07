@@ -221,7 +221,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -232,7 +232,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -243,7 +243,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -254,7 +254,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -269,7 +269,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -284,7 +284,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -299,7 +299,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"})",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"coretemp\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -485,7 +485,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -496,7 +496,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -507,7 +507,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -518,7 +518,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -533,7 +533,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -548,7 +548,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -563,7 +563,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"})",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"spd5118\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -749,7 +749,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -760,7 +760,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -771,7 +771,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -782,7 +782,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -797,7 +797,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -812,7 +812,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -827,7 +827,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"})",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"nvme\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1013,7 +1013,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -1024,7 +1024,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1035,7 +1035,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -1046,7 +1046,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1061,7 +1061,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1076,7 +1076,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1091,7 +1091,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"})",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name=~\"r8169_0_.*\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1277,7 +1277,7 @@
         "targets": [
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -1288,7 +1288,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1299,7 +1299,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
             "format": "time_series",
             "hide": true,
             "interval": "",
@@ -1310,7 +1310,7 @@
           },
           {
             "editorMode": "code",
-            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}",
+            "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1325,7 +1325,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
+            "expr": "avg(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1340,7 +1340,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
+            "expr": "max(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1355,7 +1355,7 @@
               "uid": "${ds_prometheus}"
             },
             "editorMode": "code",
-            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"})",
+            "expr": "min(node_hwmon_temp_celsius{instance=\"$node\",job=\"$job\"} * on(chip) group_left(chip_name) max without (cluster) (node_hwmon_chip_names{instance=\"$node\",job=\"$job\", chip_name!~\"coretemp|nvme|spd5118|r8169_0_.*\"}))",
             "format": "time_series",
             "hide": false,
             "interval": "",
