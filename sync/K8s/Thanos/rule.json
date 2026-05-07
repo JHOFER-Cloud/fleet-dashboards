@@ -50,7 +50,10 @@
           "text": "all",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
         "hide": 0,
         "includeAll": true,
         "label": "job",
@@ -121,7 +124,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 1,
       "legend": {
@@ -203,7 +209,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 2,
       "legend": {
@@ -285,7 +294,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 3,
       "legend": {
@@ -367,7 +379,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 4,
       "legend": {
@@ -462,7 +477,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of dropped alerts.",
       "fill": 1,
       "id": 5,
@@ -545,7 +563,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of alerts that successfully sent to alert manager.",
       "fill": 10,
       "id": 6,
@@ -630,7 +651,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of sent alerts.",
       "fill": 10,
       "id": 7,
@@ -712,7 +736,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to send alerts to alert manager.",
       "fill": 1,
       "id": 8,
@@ -849,7 +876,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of queued alerts.",
       "fill": 1,
       "id": 9,
@@ -934,7 +964,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of dropped alerts compared to the total number of queued alerts.",
       "fill": 10,
       "id": 10,
@@ -1029,7 +1062,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of handled Unary gRPC requests.",
       "fill": 10,
       "id": 11,
@@ -1186,7 +1222,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of handled requests.",
       "fill": 10,
       "id": 12,
@@ -1267,7 +1306,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to handle requests, in quantiles.",
       "fill": 1,
       "id": 13,
@@ -1404,7 +1446,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of handled Streamed gRPC requests.",
       "fill": 10,
       "id": 14,
@@ -1561,7 +1606,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of handled requests.",
       "fill": 10,
       "id": 15,
@@ -1642,7 +1690,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to handle requests, in quantiles",
       "fill": 1,
       "id": 16,
@@ -1778,7 +1829,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 17,
           "legend": {
@@ -1900,7 +1954,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 18,
           "legend": {
@@ -1982,7 +2039,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 19,
           "legend": {

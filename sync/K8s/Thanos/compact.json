@@ -50,7 +50,10 @@
           "text": "all",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
         "hide": 0,
         "includeAll": true,
         "label": "job",
@@ -121,7 +124,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of execution for compactions against blocks that are stored in the bucket by compaction resolution.",
       "fill": 10,
       "id": 1,
@@ -206,7 +212,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of executed compactions against blocks that are stored in the bucket.",
       "fill": 10,
       "id": 2,
@@ -301,7 +310,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of execution for downsampling against blocks that are stored in the bucket by compaction resolution.",
       "fill": 10,
       "id": 3,
@@ -386,7 +398,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of executed downsampling against blocks that are stored in the bucket.",
       "fill": 10,
       "id": 4,
@@ -481,7 +496,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of execution for removals of blocks if their data is available as part of a block with a higher compaction level.",
       "fill": 10,
       "id": 5,
@@ -566,7 +584,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of executed garbage collections.",
       "fill": 10,
       "id": 6,
@@ -648,7 +669,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to execute garbage collection in quantiles.",
       "fill": 1,
       "id": 7,
@@ -785,7 +809,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows deletion rate of blocks already marked for deletion.",
       "fill": 10,
       "id": 8,
@@ -868,7 +895,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows deletion failures rate of blocks already marked for deletion.",
       "fill": 1,
       "id": 9,
@@ -951,7 +981,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate at which blocks are marked for deletion (from GC and retention policy).",
       "fill": 1,
       "id": 10,
@@ -1047,7 +1080,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of execution for all meta files from blocks in the bucket into the memory.",
       "fill": 10,
       "id": 11,
@@ -1132,7 +1168,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of executed meta file sync.",
       "fill": 10,
       "id": 12,
@@ -1214,7 +1253,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to execute meta file sync, in quantiles.",
       "fill": 1,
       "id": 13,
@@ -1351,7 +1393,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of execution for operations against the bucket.",
       "fill": 10,
       "id": 14,
@@ -1436,7 +1481,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of executed operations against the bucket.",
       "fill": 10,
       "id": 15,
@@ -1518,7 +1566,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to execute operations against the bucket, in quantiles.",
       "fill": 1,
       "id": 16,
@@ -1654,7 +1705,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 17,
           "legend": {
@@ -1776,7 +1830,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 18,
           "legend": {
@@ -1858,7 +1915,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 19,
           "legend": {

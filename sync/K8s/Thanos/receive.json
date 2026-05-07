@@ -35,7 +35,10 @@
           "text": "all",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
         "hide": 0,
         "includeAll": true,
         "label": "tenant",
@@ -73,7 +76,10 @@
           "text": "all",
           "value": "$__all"
         },
-        "datasource": "$datasource",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
         "hide": 0,
         "includeAll": true,
         "label": "job",
@@ -144,7 +150,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of incoming requests.",
       "fill": 10,
       "id": 1,
@@ -249,7 +258,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of handled incoming requests.",
       "fill": 10,
       "id": 2,
@@ -330,7 +342,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to handle incoming requests in quantiles.",
       "fill": 1,
       "id": 3,
@@ -467,7 +482,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 4,
       "legend": {
@@ -549,7 +567,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 5,
       "legend": {
@@ -631,7 +652,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 6,
       "legend": {
@@ -726,7 +750,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 7,
       "legend": {
@@ -808,7 +835,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 8,
       "legend": {
@@ -890,7 +920,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 9,
       "legend": {
@@ -985,7 +1018,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 10,
       "legend": {
@@ -1067,7 +1103,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 11,
       "legend": {
@@ -1149,7 +1188,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 12,
       "legend": {
@@ -1231,7 +1273,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "fill": 1,
       "id": 13,
       "legend": {
@@ -1326,7 +1371,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of replications to other receive nodes.",
       "fill": 1,
       "id": 14,
@@ -1411,7 +1459,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of replications to other receive nodes.",
       "fill": 10,
       "id": 15,
@@ -1506,7 +1557,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of forwarded requests to other receive nodes.",
       "fill": 1,
       "id": 16,
@@ -1591,7 +1645,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of forwarded requests to other receive nodes.",
       "fill": 10,
       "id": 17,
@@ -1686,7 +1743,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of handled Unary gRPC requests from queriers.",
       "fill": 10,
       "id": 18,
@@ -1843,7 +1903,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of handled requests from queriers.",
       "fill": 10,
       "id": 19,
@@ -1924,7 +1987,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to handle requests from queriers, in quantiles.",
       "fill": 1,
       "id": 20,
@@ -2061,7 +2127,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of handled Unary gRPC requests from queriers.",
       "fill": 10,
       "id": 21,
@@ -2218,7 +2287,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of handled requests from queriers.",
       "fill": 10,
       "id": 22,
@@ -2299,7 +2371,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to handle requests from queriers, in quantiles.",
       "fill": 1,
       "id": 23,
@@ -2436,7 +2511,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows rate of handled Streamed gRPC requests from queriers.",
       "fill": 10,
       "id": 24,
@@ -2593,7 +2671,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows ratio of errors compared to the total number of handled requests from queriers.",
       "fill": 10,
       "id": 25,
@@ -2674,7 +2755,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows how long has it taken to handle requests from queriers, in quantiles.",
       "fill": 1,
       "id": 26,
@@ -2811,7 +2895,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
       "description": "Shows the relative time of last successful upload to the object-store bucket.",
       "fill": 1,
       "id": 27,
@@ -2942,7 +3029,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 28,
           "legend": {
@@ -3064,7 +3154,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 29,
           "legend": {
@@ -3146,7 +3239,10 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
           "fill": 1,
           "id": 30,
           "legend": {

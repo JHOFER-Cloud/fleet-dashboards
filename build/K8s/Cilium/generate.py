@@ -16,6 +16,8 @@ import sys
 import urllib.request
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.normpath(os.path.join(SCRIPT_DIR, "..", "..")))
+from lib.v1beta1_schema import fix as fix_v1beta1_schema  # noqa: E402  # pyright: ignore[reportMissingImports]
 VERSION_FILE = os.path.join(SCRIPT_DIR, "cilium.version")
 OUTPUT = os.path.join(SCRIPT_DIR, "..", "..", "..", "sync", "K8s", "Cilium")
 RAW_BASE = "https://raw.githubusercontent.com/cilium/cilium"
@@ -52,27 +54,6 @@ DASHBOARDS = [
         "hubble_network.json",
     ),
 ]
-
-
-def convert_legacy_datasource_strings(data):
-    """Walk the dashboard and rewrite legacy string-form datasource references
-    to the object form Grafana 13's dashboard.grafana.app/v1beta1 schema
-    requires. Only the built-in "-- Grafana --" annotation source needs this;
-    templated ${DS_*} references and the PROMETHEUS_DS template variable are
-    left alone."""
-    def walk(node):
-        if isinstance(node, dict):
-            for k, v in list(node.items()):
-                if k == "datasource" and v == "-- Grafana --":
-                    node[k] = {"type": "grafana", "uid": "-- Grafana --"}
-                else:
-                    walk(v)
-        elif isinstance(node, list):
-            for item in node:
-                walk(item)
-
-    walk(data)
-    return data
 
 
 def pin_prometheus_datasource(data):
@@ -131,7 +112,7 @@ def main():
         data = json.loads(body)
         if "panels" not in data and "rows" not in data:
             print(f"WARN: {out_name} has neither 'panels' nor 'rows'", file=sys.stderr)
-        data = convert_legacy_datasource_strings(data)
+        data = fix_v1beta1_schema(data)
         data = pin_prometheus_datasource(data)
         data = pin_time_range(data)
         data = pin_tags(data, out_name)

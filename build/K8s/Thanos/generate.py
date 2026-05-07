@@ -12,6 +12,8 @@ import sys
 import tempfile
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.normpath(os.path.join(SCRIPT_DIR, "..", "..")))
+from lib.v1beta1_schema import fix as fix_v1beta1_schema  # noqa: E402  # pyright: ignore[reportMissingImports]
 VERSION_FILE = os.path.join(SCRIPT_DIR, "thanos.version")
 UPSTREAM_URL = "https://github.com/thanos-io/thanos"
 OUTPUT = os.path.join(SCRIPT_DIR, "..", "..", "..", "sync", "K8s", "Thanos")
@@ -135,6 +137,7 @@ def main():
             data = fix_job_selectors(data)
             if "panels" in data:
                 data["panels"] = strip_dashboard_links(data["panels"])
+            data = fix_v1beta1_schema(data)
 
             dst = os.path.join(OUTPUT, name)
             with open(dst, "w") as fh:

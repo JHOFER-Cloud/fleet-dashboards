@@ -87,7 +87,9 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -165,7 +167,9 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -243,7 +247,9 @@
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -416,7 +422,9 @@
             "footer": {
               "countRows": false,
               "fields": "",
-              "reducer": ["sum"],
+              "reducer": [
+                "sum"
+              ],
               "show": false
             },
             "showHeader": true
@@ -941,7 +949,9 @@
             "footer": {
               "countRows": false,
               "fields": "",
-              "reducer": ["sum"],
+              "reducer": [
+                "sum"
+              ],
               "show": false
             },
             "frameIndex": 4,
@@ -1167,7 +1177,9 @@
             "orientation": "horizontal",
             "percentChangeColorMode": "standard",
             "reduceOptions": {
-              "calcs": ["lastNotNull"],
+              "calcs": [
+                "lastNotNull"
+              ],
               "fields": "",
               "values": false
             },
@@ -1490,7 +1502,9 @@
             "footer": {
               "countRows": false,
               "fields": "",
-              "reducer": ["sum"],
+              "reducer": [
+                "sum"
+              ],
               "show": false
             },
             "showHeader": true
@@ -2058,7 +2072,9 @@
       "options": {
         "dataLinks": [],
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -2181,7 +2197,9 @@
       "options": {
         "dataLinks": [],
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
@@ -2282,7 +2300,9 @@
       "options": {
         "dataLinks": [],
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
@@ -2383,7 +2403,9 @@
       "options": {
         "dataLinks": [],
         "legend": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
@@ -2418,7 +2440,11 @@
   "preload": false,
   "refresh": "auto",
   "schemaVersion": 41,
-  "tags": ["openshift", "k8s", "storage"],
+  "tags": [
+    "openshift",
+    "k8s",
+    "storage"
+  ],
   "templating": {
     "list": [
       {
@@ -2440,7 +2466,10 @@
           "text": "monitoring",
           "value": "monitoring"
         },
-        "datasource": "$DS_OPENSHIFT_PROMETHEUS",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$DS_OPENSHIFT_PROMETHEUS"
+        },
         "definition": "",
         "includeAll": false,
         "label": "namespace",
@@ -2473,7 +2502,10 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "$DS_OPENSHIFT_PROMETHEUS",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$DS_OPENSHIFT_PROMETHEUS"
+        },
         "definition": "label_values(kubelet_volume_stats_used_bytes{namespace=~\"$namespace.*\"},persistentvolumeclaim)",
         "hide": 2,
         "includeAll": true,
