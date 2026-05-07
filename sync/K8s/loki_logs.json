@@ -1,1293 +1,1534 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
     "name": "loki_logs"
   },
   "spec": {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
-          "type": "dashboard"
-        },
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "datasource": {
+              "name": "grafana"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "version": "v0"
+          }
+        }
+      },
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
           "enable": true,
           "hide": false,
           "iconColor": "blue",
           "name": "flux (source)",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "refId": "Anno",
-            "tags": [
-              "flux",
-              "source-controller",
-              "environment:$environment"
-            ],
-            "type": "tags"
+          "query": {
+            "datasource": {
+              "name": "grafana"
+            },
+            "group": "datasource",
+            "kind": "DataQuery",
+            "spec": {
+              "limit": 100,
+              "matchAny": false,
+              "refId": "Anno",
+              "tags": [
+                "flux",
+                "source-controller",
+                "environment:$environment"
+              ],
+              "type": "tags"
+            },
+            "version": "v0"
           }
-        },
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
+        }
+      },
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
           "enable": true,
           "hide": false,
           "iconColor": "yellow",
           "name": "flux (kustomize)",
-          "target": {
-            "limit": 100,
-            "queryType": "annotations",
-            "refId": "Anno",
-            "tags": [
-              "flux",
-              "kustomize-controller",
-              "environment:$environment",
-              "namespace:$namespace"
-            ],
-            "type": "tags"
+          "query": {
+            "datasource": {
+              "name": "grafana"
+            },
+            "group": "datasource",
+            "kind": "DataQuery",
+            "spec": {
+              "limit": 100,
+              "queryType": "annotations",
+              "refId": "Anno",
+              "tags": [
+                "flux",
+                "kustomize-controller",
+                "environment:$environment",
+                "namespace:$namespace"
+              ],
+              "type": "tags"
+            },
+            "version": "v0"
           }
-        },
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
+        }
+      },
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
           "enable": true,
           "hide": false,
           "iconColor": "green",
           "name": "flux (helm)",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [
-              "flux",
-              "helm-controller",
-              "environment:$environment",
-              "namespace:$namespace"
-            ],
-            "type": "tags"
+          "query": {
+            "datasource": {
+              "name": "grafana"
+            },
+            "group": "datasource",
+            "kind": "DataQuery",
+            "spec": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [
+                "flux",
+                "helm-controller",
+                "environment:$environment",
+                "namespace:$namespace"
+              ],
+              "type": "tags"
+            },
+            "version": "v0"
           }
         }
-      ]
-    },
-    "description": "Container/Pod Log Dashboard(Loki as DataSource)",
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 1,
-    "links": [],
-    "liveNow": true,
-    "panels": [
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "description": "Total  Count of log lines in the specified time range",
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "color": "rgb(31, 255, 7)",
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "rgb(31, 255, 7)",
-                  "value": 0
-                },
-                {
-                  "color": "rgb(31, 255, 7)",
-                  "value": 10
-                },
-                {
-                  "color": "rgb(31, 255, 7)",
-                  "value": 50
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        },
-        "id": 11,
-        "maxDataPoints": 100,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "sum"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"})[$__interval]))",
-            "hide": false,
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Total  Count of logs",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "description": "Total Count: of $searchable_pattern in the specified time range",
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 12,
-          "x": 12,
-          "y": 0
-        },
-        "id": 6,
-        "maxDataPoints": 100,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "sum"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[$__interval]))",
-            "hide": false,
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Total Count of $searchable_pattern",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "color": "#299c46",
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "unit": "none"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "stderr"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "red",
-                    "mode": "fixed"
-                  }
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "stdout"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "green",
-                    "mode": "fixed"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 4,
-          "x": 0,
-          "y": 3
-        },
-        "id": 19,
-        "maxDataPoints": 100,
-        "options": {
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "pieType": "pie",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\"})[$__interval])) by (stream)",
-            "hide": false,
-            "legendFormat": "{{stream}}",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Total count of stderr / stdout pie",
-        "type": "piechart"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {},
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 20,
-          "w": 20,
-          "x": 4,
-          "y": 3
-        },
-        "id": 2,
-        "options": {
-          "dedupStrategy": "numbers",
-          "enableInfiniteScrolling": true,
-          "enableLogDetails": false,
-          "prettifyLogMessage": true,
-          "showCommonLabels": false,
-          "showLabels": false,
-          "showTime": true,
-          "sortOrder": "Descending",
-          "wrapLogMessage": false
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "{namespace=\"$namespace\", pod=~\"$pod\", stream=~\"$stream\"} |~ \"(?i)$searchable_pattern\" ",
-            "hide": false,
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Live logs",
-        "transparent": true,
-        "type": "logs"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": []
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 0,
-          "y": 9
-        },
-        "id": 20,
-        "interval": "1m",
-        "options": {
-          "legend": {
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "pieType": "pie",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\", stream=~\"$stream\"} |~ \"(?i)$searchable_pattern\")[$__interval])) by (pod)",
-            "legendFormat": "{{pod}}",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Matched word: \"$searchable_pattern\" donut",
-        "type": "piechart"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "color": "green",
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "max": 100,
-            "min": 0,
-            "noValue": "0",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 4,
-          "x": 0,
-          "y": 17
-        },
-        "id": 9,
-        "maxDataPoints": 100,
-        "options": {
-          "minVizHeight": 75,
-          "minVizWidth": 75,
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "mean"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": false,
-          "sizing": "auto"
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[$__interval])) * 100 / sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"})[$__interval]))",
-            "hide": false,
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "\"$searchable_pattern\" Percentage for specified time",
-        "type": "gauge"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 40,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 6,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "always",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "color": "#299c46",
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "#299c46",
-                  "value": 0
-                },
-                {
-                  "color": "rgba(237, 129, 40, 0.89)",
-                  "value": 10
-                },
-                {
-                  "color": "#C4162A",
-                  "value": 50
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{stream=\"stderr\"} stderr"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#C4162A",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{stream=\"stdout\"} stdout"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#56A64B",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "stderr"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#C4162A",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "stdout"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#56A64B",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 23
-        },
-        "id": 7,
-        "maxDataPoints": 100,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\"})[$__interval])) by (stream)",
-            "hide": false,
-            "legendFormat": "{{stream}}",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Count of stderr / stdout historical",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 40,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 6,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "always",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "color": "#299c46",
-                    "text": "0"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "#299c46",
-                  "value": 0
-                },
-                {
-                  "color": "rgba(237, 129, 40, 0.89)",
-                  "value": 10
-                },
-                {
-                  "color": "#C4162A",
-                  "value": 50
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{stream=\"stderr\"} stderr"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#C4162A",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "{stream=\"stdout\"} stdout"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#56A64B",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "stderr"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#C4162A",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "stdout"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "#56A64B",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.lineWidth",
-                  "value": 2
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 31
-        },
-        "id": 21,
-        "maxDataPoints": 100,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[$__interval])) by (stream)",
-            "hide": false,
-            "legendFormat": "{{stream}}",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Count of stderr / stdout historical: $searchable_pattern",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "Count",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "bars",
-              "fillOpacity": 100,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 3,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "decimals": 0,
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 12,
-          "x": 0,
-          "y": 39
-        },
-        "id": 18,
-        "interval": "1m",
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.0.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\", stream=~\"$stream\"} |~ \"(?i)$searchable_pattern\")[$__interval])) by (pod)",
-            "legendFormat": "{{pod}}",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "Matched word: \"$searchable_pattern\" historical",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${datasource}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 100,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "log": 10,
-                "type": "log"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 12,
-          "x": 12,
-          "y": 39
-        },
-        "id": 10,
-        "maxDataPoints": 100,
-        "options": {
-          "dataLinks": [],
-          "legend": {
-            "calcs": [],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.0.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum(rate(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[30s])) by (pod)",
-            "hide": false,
-            "legendFormat": "{{pod}}",
-            "queryType": "range",
-            "refId": "A"
-          }
-        ],
-        "title": "\"$searchable_pattern\" Rate per Pod",
-        "type": "timeseries"
       }
     ],
-    "preload": false,
-    "refresh": "30s",
-    "schemaVersion": 41,
-    "tags": [],
-    "templating": {
-      "list": [
-        {
-          "current": {
-            "text": "loki_k8_live_hla1",
-            "value": "eegmz7m03591ce"
+    "cursorSync": "Crosshair",
+    "description": "Container/Pod Log Dashboard(Loki as DataSource)",
+    "editable": true,
+    "elements": {
+      "panel-10": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(rate(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[30s])) by (pod)",
+                        "legendFormat": "{{pod}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
           },
           "description": "",
-          "name": "datasource",
-          "options": [],
-          "query": "loki",
-          "refresh": 1,
-          "regex": "",
-          "type": "datasource"
-        },
-        {
-          "current": {
-            "text": "renovate",
-            "value": "renovate"
-          },
-          "datasource": {
-            "type": "loki",
-            "uid": "${datasource}"
-          },
-          "definition": "",
-          "includeAll": false,
-          "label": "Namespace",
-          "name": "namespace",
-          "options": [],
-          "query": {
-            "label": "namespace",
-            "refId": "LokiVariableQueryEditor-VariableQuery",
-            "stream": "{namespace=~\".+\"}",
-            "type": 1
-          },
-          "refresh": 2,
-          "regex": "",
-          "type": "query"
-        },
-        {
-          "current": {
-            "text": "All",
-            "value": "$__all"
-          },
-          "datasource": {
-            "type": "loki",
-            "uid": "${datasource}"
-          },
-          "definition": "",
-          "includeAll": true,
-          "label": "Pod",
-          "multi": true,
-          "name": "pod",
-          "options": [],
-          "query": {
-            "label": "pod",
-            "refId": "LokiVariableQueryEditor-VariableQuery",
-            "stream": "{namespace=\"$namespace\"}",
-            "type": 1
-          },
-          "refresh": 2,
-          "regex": "",
-          "type": "query"
-        },
-        {
-          "current": {
-            "text": "All",
-            "value": "$__all"
-          },
-          "datasource": {
-            "type": "loki",
-            "uid": "${datasource}"
-          },
-          "definition": "",
-          "includeAll": true,
-          "label": "Stream",
-          "name": "stream",
-          "options": [],
-          "query": {
-            "label": "stream",
-            "refId": "LokiVariableQueryEditor-VariableQuery",
-            "stream": "{namespace=\"$namespace\"}",
-            "type": 1
-          },
-          "refresh": 2,
-          "regex": "",
-          "type": "query"
-        },
-        {
-          "current": {
-            "text": "",
-            "value": ""
-          },
-          "label": "Search (case insensitive)",
-          "name": "searchable_pattern",
-          "options": [
-            {
-              "selected": true,
-              "text": "",
-              "value": ""
-            }
-          ],
-          "query": "",
-          "type": "textbox"
-        },
-        {
-          "current": {
-            "text": "live",
-            "value": "live"
-          },
-          "definition": "label_values({datasource=\"${datasource:text}\"},datasource)",
-          "description": "Query the used grafana instance for datasources",
-          "hide": 2,
-          "name": "environment",
-          "options": [],
-          "query": {
-            "qryType": 1,
-            "query": "label_values({datasource=\"${datasource:text}\"},datasource)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
-          },
-          "refresh": 1,
-          "regex": "/(dev|live)/",
-          "type": "query"
+          "id": 10,
+          "links": [],
+          "title": "\"$searchable_pattern\" Rate per Pod",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 100,
+                    "gradientMode": "opacity",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "log": 10,
+                      "type": "log"
+                    },
+                    "showPoints": "never",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "dataLinks": [],
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "table",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "12.0.0"
+          }
         }
-      ]
+      },
+      "panel-11": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"})[$__interval]))",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "Total  Count of log lines in the specified time range",
+          "id": 11,
+          "links": [],
+          "title": "Total  Count of logs",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "color": "rgb(31, 255, 7)",
+                          "text": "0"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "rgb(31, 255, 7)",
+                        "value": 0
+                      },
+                      {
+                        "color": "rgb(31, 255, 7)",
+                        "value": 10
+                      },
+                      {
+                        "color": "rgb(31, 255, 7)",
+                        "value": 50
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "sum"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\", stream=~\"$stream\"} |~ \"(?i)$searchable_pattern\")[$__interval])) by (pod)",
+                        "legendFormat": "{{pod}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "interval": "1m"
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 18,
+          "links": [],
+          "title": "Matched word: \"$searchable_pattern\" historical",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "Count",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "bars",
+                    "fillOpacity": 100,
+                    "gradientMode": "opacity",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 3,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "decimals": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "dataLinks": [],
+                "legend": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "displayMode": "table",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "12.0.0"
+          }
+        }
+      },
+      "panel-19": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\"})[$__interval])) by (stream)",
+                        "legendFormat": "{{stream}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 19,
+          "links": [],
+          "title": "Total count of stderr / stdout pie",
+          "vizConfig": {
+            "group": "piechart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "color": "#299c46",
+                          "text": "0"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "unit": "none"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "stderr"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "red",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "stdout"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "green",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "legend": {
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "sort": "desc",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-2": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "{namespace=\"$namespace\", pod=~\"$pod\", stream=~\"$stream\"} |~ \"(?i)$searchable_pattern\" ",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 2,
+          "links": [],
+          "title": "Live logs",
+          "transparent": true,
+          "vizConfig": {
+            "group": "logs",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dedupStrategy": "numbers",
+                "detailsMode": "sidebar",
+                "displayedFields": [],
+                "enableInfiniteScrolling": true,
+                "enableLogDetails": true,
+                "prettifyLogMessage": true,
+                "showCommonLabels": false,
+                "showControls": false,
+                "showFieldSelector": true,
+                "showLabels": false,
+                "showLevel": true,
+                "showTime": true,
+                "sortOrder": "Descending",
+                "syntaxHighlighting": true,
+                "timestampResolution": "ms",
+                "unwrappedColumns": true,
+                "wrapLogMessage": false
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-20": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\", stream=~\"$stream\"} |~ \"(?i)$searchable_pattern\")[$__interval])) by (pod)",
+                        "legendFormat": "{{pod}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "interval": "1m"
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 20,
+          "links": [],
+          "title": "Matched word: \"$searchable_pattern\" donut",
+          "vizConfig": {
+            "group": "piechart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "legend": {
+                  "displayMode": "table",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "sort": "desc",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-21": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[$__interval])) by (stream)",
+                        "legendFormat": "{{stream}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 21,
+          "links": [],
+          "title": "Count of stderr / stdout historical: $searchable_pattern",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 40,
+                    "gradientMode": "opacity",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 6,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "always",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "color": "#299c46",
+                          "text": "0"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#299c46",
+                        "value": 0
+                      },
+                      {
+                        "color": "rgba(237, 129, 40, 0.89)",
+                        "value": 10
+                      },
+                      {
+                        "color": "#C4162A",
+                        "value": 50
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "{stream=\"stderr\"} stderr"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#C4162A",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "{stream=\"stdout\"} stdout"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#56A64B",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "stderr"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#C4162A",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "stdout"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#56A64B",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "dataLinks": [],
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-6": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[$__interval]))",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "Total Count: of $searchable_pattern in the specified time range",
+          "id": 6,
+          "links": [],
+          "title": "Total Count of $searchable_pattern",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "0"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "sum"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-7": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", pod=~\"$pod\"})[$__interval])) by (stream)",
+                        "legendFormat": "{{stream}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 7,
+          "links": [],
+          "title": "Count of stderr / stdout historical",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 40,
+                    "gradientMode": "opacity",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 6,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "always",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "color": "#299c46",
+                          "text": "0"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "#299c46",
+                        "value": 0
+                      },
+                      {
+                        "color": "rgba(237, 129, 40, 0.89)",
+                        "value": 10
+                      },
+                      {
+                        "color": "#C4162A",
+                        "value": 50
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "{stream=\"stderr\"} stderr"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#C4162A",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "{stream=\"stdout\"} stdout"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#56A64B",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "stderr"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#C4162A",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "stdout"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#56A64B",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "dataLinks": [],
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-9": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"} |~ \"(?i)$searchable_pattern\")[$__interval])) * 100 / sum(count_over_time(({namespace=\"$namespace\", stream=~\"$stream\", pod=~\"$pod\"})[$__interval]))",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 9,
+          "links": [],
+          "title": "\"$searchable_pattern\" Percentage for specified time",
+          "vizConfig": {
+            "group": "gauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "color": "green",
+                          "text": "0"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "max": 100,
+                  "min": 0,
+                  "noValue": "0",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      }
+                    ]
+                  },
+                  "unit": "percent"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": false
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto",
+                "sparkline": false,
+                "textMode": "auto"
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      }
     },
-    "time": {
-      "from": "now-24h",
-      "to": "now"
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-11"
+              },
+              "height": 3,
+              "width": 12,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-6"
+              },
+              "height": 3,
+              "width": 12,
+              "x": 12,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-19"
+              },
+              "height": 6,
+              "width": 4,
+              "x": 0,
+              "y": 3
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-2"
+              },
+              "height": 20,
+              "width": 20,
+              "x": 4,
+              "y": 3
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-20"
+              },
+              "height": 8,
+              "width": 4,
+              "x": 0,
+              "y": 9
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-9"
+              },
+              "height": 6,
+              "width": 4,
+              "x": 0,
+              "y": 17
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-7"
+              },
+              "height": 8,
+              "width": 24,
+              "x": 0,
+              "y": 23
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-21"
+              },
+              "height": 8,
+              "width": 24,
+              "x": 0,
+              "y": 31
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-18"
+              },
+              "height": 9,
+              "width": 12,
+              "x": 0,
+              "y": 39
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-10"
+              },
+              "height": 9,
+              "width": 12,
+              "x": 12,
+              "y": 39
+            }
+          }
+        ]
+      }
     },
-    "timepicker": {
-      "refresh_intervals": [
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/K8s/loki_logs.json"
+      }
+    ],
+    "liveNow": true,
+    "preload": false,
+    "tags": [],
+    "timeSettings": {
+      "autoRefresh": "30s",
+      "autoRefreshIntervals": [
         "10s",
         "30s",
         "1m",
@@ -1297,9 +1538,188 @@
         "1h",
         "2h",
         "1d"
-      ]
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-1h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
     },
-    "timezone": "",
-    "title": "Loki / Logs"
+    "title": "Loki / Logs",
+    "variables": [
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "loki_k8_live_hla1",
+            "value": "eegmz7m03591ce"
+          },
+          "hide": "dontHide",
+          "includeAll": false,
+          "multi": false,
+          "name": "datasource",
+          "options": [],
+          "pluginId": "loki",
+          "refresh": "onDashboardLoad",
+          "regex": "",
+          "skipUrlSync": false
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "renovate",
+            "value": "renovate"
+          },
+          "definition": "",
+          "hide": "dontHide",
+          "includeAll": false,
+          "label": "Namespace",
+          "multi": false,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "${datasource}"
+            },
+            "group": "loki",
+            "kind": "DataQuery",
+            "spec": {
+              "label": "namespace",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "{namespace=~\".+\"}",
+              "type": 1
+            },
+            "version": "v0"
+          },
+          "refresh": "onTimeRangeChanged",
+          "regex": "",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Pod",
+          "multi": true,
+          "name": "pod",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "${datasource}"
+            },
+            "group": "loki",
+            "kind": "DataQuery",
+            "spec": {
+              "label": "pod",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "{namespace=\"$namespace\"}",
+              "type": 1
+            },
+            "version": "v0"
+          },
+          "refresh": "onTimeRangeChanged",
+          "regex": "",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Stream",
+          "multi": false,
+          "name": "stream",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "${datasource}"
+            },
+            "group": "loki",
+            "kind": "DataQuery",
+            "spec": {
+              "label": "stream",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "{namespace=\"$namespace\"}",
+              "type": 1
+            },
+            "version": "v0"
+          },
+          "refresh": "onTimeRangeChanged",
+          "regex": "",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
+        }
+      },
+      {
+        "kind": "TextVariable",
+        "spec": {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "hide": "dontHide",
+          "label": "Search (case insensitive)",
+          "name": "searchable_pattern",
+          "query": "",
+          "skipUrlSync": false
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "live",
+            "value": "live"
+          },
+          "definition": "label_values({datasource=\"${datasource:text}\"},datasource)",
+          "description": "Query the used grafana instance for datasources",
+          "hide": "hideVariable",
+          "includeAll": false,
+          "multi": false,
+          "name": "environment",
+          "options": [],
+          "query": {
+            "group": "prometheus",
+            "kind": "DataQuery",
+            "spec": {
+              "qryType": 1,
+              "query": "label_values({datasource=\"${datasource:text}\"},datasource)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "version": "v0"
+          },
+          "refresh": "onDashboardLoad",
+          "regex": "/(dev|live)/",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
+        }
+      }
+    ]
   }
 }
