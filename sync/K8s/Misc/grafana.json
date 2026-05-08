@@ -1,1757 +1,1775 @@
 {
-  "annotations": [
-    {
-      "kind": "AnnotationQuery",
-      "spec": {
-        "builtIn": true,
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "query": {
-          "datasource": {
-            "name": "grafana"
-          },
-          "group": "grafana",
-          "kind": "DataQuery",
-          "spec": {},
-          "version": "v0"
-        }
-      }
-    }
-  ],
-  "cursorSync": "Off",
-  "description": "Metrics about Grafana",
-  "editable": true,
-  "elements": {
-    "panel-10": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "grafana_stat_total_playlists",
-                      "format": "time_series",
-                      "instant": true,
-                      "intervalFactor": 2,
-                      "step": 60
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {
-              "maxDataPoints": 100
-            },
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 10,
-        "links": [],
-        "title": "Playlist count",
-        "vizConfig": {
-          "group": "stat",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "match": "null",
-                      "result": {
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "special"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "options": {
-              "colorMode": "none",
-              "graphMode": "none",
-              "justifyMode": "auto",
-              "orientation": "horizontal",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": ["mean"],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-11": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "sum(irate(grafana_api_response_status_total[5m]))",
-                      "format": "time_series",
-                      "intervalFactor": 4,
-                      "legendFormat": "api",
-                      "step": 20
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              },
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "sum(irate(grafana_proxy_response_status_total[5m]))",
-                      "format": "time_series",
-                      "intervalFactor": 4,
-                      "legendFormat": "proxy",
-                      "step": 20
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "B"
-                }
-              },
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "sum(irate(grafana_page_response_status_total[5m]))",
-                      "format": "time_series",
-                      "intervalFactor": 4,
-                      "legendFormat": "web",
-                      "step": 20
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "C"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 11,
-        "links": [],
-        "title": "Requests by routing group",
-        "vizConfig": {
-          "group": "timeseries",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 2,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "never",
-                  "showValues": false,
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "400"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#447EBC",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "500"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#BF1B00",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "annotations": {
-                "clustering": -1,
-                "multiLane": false
-              },
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "single",
-                "sort": "none"
-              }
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-12": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "sort(topk(8, sum by (handler) (http_request_total{job=\"grafana\"})))",
-                      "format": "time_series",
-                      "instant": true,
-                      "intervalFactor": 10,
-                      "legendFormat": "{{handler}}",
-                      "step": 100
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": [
-              {
-                "group": "merge",
-                "kind": "Transformation",
-                "spec": {
-                  "options": {
-                    "reducers": []
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "description": "",
-        "id": 12,
-        "links": [],
-        "title": "Most used handlers",
-        "vizConfig": {
-          "group": "table",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "custom": {
-                  "cellOptions": {
-                    "type": "auto"
-                  },
-                  "footer": {
-                    "reducers": []
-                  },
-                  "inspect": false
-                },
-                "decimals": 0,
-                "displayName": "",
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Time"
-                  },
-                  "properties": [
-                    {
-                      "id": "displayName",
-                      "value": "Time"
-                    },
-                    {
-                      "id": "custom.hideFrom.viz",
-                      "value": true
-                    },
-                    {
-                      "id": "custom.align"
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "cellHeight": "sm",
-              "showHeader": true
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-15": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "sum by (statuscode) (irate(http_request_total{job='grafana'}[5m]))",
-                      "format": "time_series",
-                      "intervalFactor": 3,
-                      "legendFormat": "{{statuscode}}",
-                      "step": 15,
-                      "target": "dev.grafana.cb-office.alerting.active_alerts"
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "B"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 15,
-        "links": [],
-        "title": "http status codes",
-        "vizConfig": {
-          "group": "timeseries",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 2,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "never",
-                  "showValues": false,
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "400"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#447EBC",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "500"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#BF1B00",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "annotations": {
-                "clustering": -1,
-                "multiLane": false
-              },
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "single",
-                "sort": "none"
-              }
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-17": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "topk(1, grafana_info or grafana_build_info)",
-                      "format": "time_series",
-                      "instant": true,
-                      "intervalFactor": 2,
-                      "legendFormat": "{{version}}",
-                      "step": 20
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": [
-              {
-                "group": "merge",
-                "kind": "Transformation",
-                "spec": {
-                  "options": {
-                    "reducers": []
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "description": "",
-        "id": 17,
-        "links": [],
-        "title": "Grafana version",
-        "vizConfig": {
-          "group": "table",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "custom": {
-                  "cellOptions": {
-                    "type": "auto"
-                  },
-                  "footer": {
-                    "reducers": []
-                  },
-                  "inspect": false
-                },
-                "decimals": 0,
-                "displayName": "",
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "Time"
-                  },
-                  "properties": [
-                    {
-                      "id": "displayName",
-                      "value": "Time"
-                    },
-                    {
-                      "id": "custom.hideFrom.viz",
-                      "value": true
-                    },
-                    {
-                      "id": "custom.align"
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "cellHeight": "sm",
-              "showHeader": true
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-18": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": " sum (ALERTS)",
-                      "format": "time_series",
-                      "intervalFactor": 3,
-                      "legendFormat": "firing alerts",
-                      "step": 15
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 18,
-        "links": [],
-        "title": "Prometheus alerts",
-        "vizConfig": {
-          "group": "timeseries",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 2,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "never",
-                  "showValues": false,
-                  "spanNulls": true,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "alerting"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#890F02",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "alertname"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#BF1B00",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "firing alerts"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#BF1B00",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "ok"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#7EB26D",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "annotations": {
-                "clustering": -1,
-                "multiLane": false
-              },
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "single",
-                "sort": "none"
-              }
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-4": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "up{job=\"grafana\"}",
-                      "format": "time_series",
-                      "instant": true,
-                      "intervalFactor": 2,
-                      "step": 60
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {
-              "maxDataPoints": 100
-            },
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 4,
-        "links": [],
-        "title": "Active instances",
-        "vizConfig": {
-          "group": "stat",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "decimals": 0,
-                "mappings": [
-                  {
-                    "options": {
-                      "0": {
-                        "text": ":("
-                      }
-                    },
-                    "type": "value"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "rgba(222, 3, 3, 0.9)",
-                      "value": 0
-                    },
-                    {
-                      "color": "rgb(234, 245, 234)",
-                      "value": 1
-                    },
-                    {
-                      "color": "rgb(235, 244, 235)",
-                      "value": 10000
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "options": {
-              "colorMode": "value",
-              "graphMode": "none",
-              "justifyMode": "auto",
-              "orientation": "horizontal",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": ["mean"],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-6": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "increase(grafana_alerting_active_alerts[1m])",
-                      "format": "time_series",
-                      "intervalFactor": 3,
-                      "legendFormat": "{{state}}",
-                      "step": 15
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 6,
-        "links": [],
-        "title": "Grafana active alerts",
-        "vizConfig": {
-          "group": "timeseries",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 2,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "never",
-                  "showValues": false,
-                  "spanNulls": true,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "normal"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "alerting"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#890F02",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "ok"
-                  },
-                  "properties": [
-                    {
-                      "id": "color",
-                      "value": {
-                        "fixedColor": "#7EB26D",
-                        "mode": "fixed"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "annotations": {
-                "clustering": -1,
-                "multiLane": false
-              },
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "single",
-                "sort": "none"
-              }
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-7": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "editorMode": "code",
-                      "expr": "sum(go_goroutines{job=\"grafana\"})",
-                      "format": "time_series",
-                      "intervalFactor": 4,
-                      "legendFormat": "go routines",
-                      "range": true,
-                      "step": 8,
-                      "target": "select metric",
-                      "type": "timeserie"
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              },
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "editorMode": "code",
-                      "expr": "sum(process_resident_memory_bytes{job=\"grafana\"})",
-                      "format": "time_series",
-                      "intervalFactor": 4,
-                      "legendFormat": "memory usage",
-                      "range": true,
-                      "step": 8
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "B"
-                }
-              }
-            ],
-            "queryOptions": {},
-            "transformations": []
-          }
-        },
-        "description": "Aggregated over all Grafana nodes.",
-        "id": 7,
-        "links": [],
-        "title": "Grafana performance",
-        "vizConfig": {
-          "group": "timeseries",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 10,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 2,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "never",
-                  "showValues": false,
-                  "spanNulls": true,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "short"
-              },
-              "overrides": [
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "avg gc duration"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "decbytes"
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "allocated memory"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "decbytes"
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "used memory"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "decbytes"
-                    }
-                  ]
-                },
-                {
-                  "matcher": {
-                    "id": "byName",
-                    "options": "memory usage"
-                  },
-                  "properties": [
-                    {
-                      "id": "unit",
-                      "value": "decbytes"
-                    }
-                  ]
-                }
-              ]
-            },
-            "options": {
-              "annotations": {
-                "clustering": -1,
-                "multiLane": false
-              },
-              "legend": {
-                "calcs": [],
-                "displayMode": "list",
-                "placement": "bottom",
-                "showLegend": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "single",
-                "sort": "none"
-              }
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-8": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "grafana_stat_totals_dashboard",
-                      "format": "time_series",
-                      "instant": true,
-                      "intervalFactor": 2,
-                      "step": 60
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {
-              "maxDataPoints": 100
-            },
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 8,
-        "links": [],
-        "title": "Dashboard count",
-        "vizConfig": {
-          "group": "stat",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "match": "null",
-                      "result": {
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "special"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "options": {
-              "colorMode": "none",
-              "graphMode": "none",
-              "justifyMode": "auto",
-              "orientation": "horizontal",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": ["mean"],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    },
-    "panel-9": {
-      "kind": "Panel",
-      "spec": {
-        "data": {
-          "kind": "QueryGroup",
-          "spec": {
-            "queries": [
-              {
-                "kind": "PanelQuery",
-                "spec": {
-                  "hidden": false,
-                  "query": {
-                    "datasource": {
-                      "name": "${ds}"
-                    },
-                    "group": "prometheus",
-                    "kind": "DataQuery",
-                    "spec": {
-                      "expr": "grafana_stat_total_users",
-                      "format": "time_series",
-                      "instant": true,
-                      "intervalFactor": 2,
-                      "step": 60
-                    },
-                    "version": "v0"
-                  },
-                  "refId": "A"
-                }
-              }
-            ],
-            "queryOptions": {
-              "maxDataPoints": 100
-            },
-            "transformations": []
-          }
-        },
-        "description": "",
-        "id": 9,
-        "links": [],
-        "title": "User count",
-        "vizConfig": {
-          "group": "stat",
-          "kind": "VizConfig",
-          "spec": {
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [
-                  {
-                    "options": {
-                      "match": "null",
-                      "result": {
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "special"
-                  }
-                ],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 80
-                    }
-                  ]
-                },
-                "unit": "none"
-              },
-              "overrides": []
-            },
-            "options": {
-              "colorMode": "none",
-              "graphMode": "none",
-              "justifyMode": "auto",
-              "orientation": "horizontal",
-              "percentChangeColorMode": "standard",
-              "reduceOptions": {
-                "calcs": ["mean"],
-                "fields": "",
-                "values": false
-              },
-              "showPercentChange": false,
-              "text": {},
-              "textMode": "auto",
-              "wideLayout": true
-            }
-          },
-          "version": "13.0.1"
-        }
-      }
-    }
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "grafana"
   },
-  "layout": {
-    "kind": "GridLayout",
-    "spec": {
-      "items": [
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-4"
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "query": {
+            "datasource": {
+              "name": "grafana"
             },
-            "height": 5,
-            "width": 5,
-            "x": 0,
-            "y": 0
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-8"
-            },
-            "height": 5,
-            "width": 5,
-            "x": 5,
-            "y": 0
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-9"
-            },
-            "height": 5,
-            "width": 5,
-            "x": 10,
-            "y": 0
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-10"
-            },
-            "height": 5,
-            "width": 5,
-            "x": 15,
-            "y": 0
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-17"
-            },
-            "height": 5,
-            "width": 4,
-            "x": 20,
-            "y": 0
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-15"
-            },
-            "height": 10,
-            "width": 10,
-            "x": 0,
-            "y": 5
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-11"
-            },
-            "height": 10,
-            "width": 10,
-            "x": 10,
-            "y": 5
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-12"
-            },
-            "height": 10,
-            "width": 4,
-            "x": 20,
-            "y": 5
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-6"
-            },
-            "height": 5,
-            "width": 12,
-            "x": 0,
-            "y": 15
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-18"
-            },
-            "height": 5,
-            "width": 12,
-            "x": 12,
-            "y": 15
-          }
-        },
-        {
-          "kind": "GridLayoutItem",
-          "spec": {
-            "element": {
-              "kind": "ElementReference",
-              "name": "panel-7"
-            },
-            "height": 7,
-            "width": 24,
-            "x": 0,
-            "y": 20
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
           }
         }
-      ]
-    }
-  },
-  "links": [
-    {
-      "asDropdown": false,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "Available metrics",
-      "tooltip": "",
-      "type": "link",
-      "url": "/metrics"
-    },
-    {
-      "asDropdown": false,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "Grafana docs",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://grafana.com/docs/grafana/latest/"
-    },
-    {
-      "asDropdown": false,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [],
-      "targetBlank": true,
-      "title": "Prometheus docs",
-      "tooltip": "",
-      "type": "link",
-      "url": "http://prometheus.io/docs/introduction/overview/"
-    }
-  ],
-  "liveNow": false,
-  "preload": false,
-  "tags": ["grafana", "prometheus"],
-  "timeSettings": {
-    "autoRefresh": "auto",
-    "autoRefreshIntervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
+      }
     ],
-    "fiscalYearStartMonth": 0,
-    "from": "now-24h",
-    "hideTimepicker": false,
-    "timezone": "browser",
-    "to": "now"
-  },
-  "title": "Grafana metrics",
-  "variables": [
-    {
-      "kind": "DatasourceVariable",
-      "spec": {
-        "allowCustomValue": true,
-        "current": {
-          "text": "k8_live_hla1",
-          "value": "eef9f89usay9sb"
-        },
-        "hide": "dontHide",
-        "includeAll": false,
-        "multi": false,
-        "name": "ds",
-        "options": [],
-        "pluginId": "prometheus",
-        "refresh": "onDashboardLoad",
-        "regex": "",
-        "skipUrlSync": false
+    "cursorSync": "Off",
+    "description": "Metrics about Grafana",
+    "editable": true,
+    "elements": {
+      "panel-10": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "grafana_stat_total_playlists",
+                        "format": "time_series",
+                        "instant": true,
+                        "intervalFactor": 2,
+                        "step": 60
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 10,
+          "links": [],
+          "title": "Playlist count",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "none"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {},
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-11": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "sum(irate(grafana_api_response_status_total[5m]))",
+                        "format": "time_series",
+                        "intervalFactor": 4,
+                        "legendFormat": "api",
+                        "step": 20
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "sum(irate(grafana_proxy_response_status_total[5m]))",
+                        "format": "time_series",
+                        "intervalFactor": 4,
+                        "legendFormat": "proxy",
+                        "step": 20
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "sum(irate(grafana_page_response_status_total[5m]))",
+                        "format": "time_series",
+                        "intervalFactor": 4,
+                        "legendFormat": "web",
+                        "step": 20
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 11,
+          "links": [],
+          "title": "Requests by routing group",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "400"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#447EBC",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "500"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#BF1B00",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-12": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "sort(topk(8, sum by (handler) (http_request_total{job=\"grafana\"})))",
+                        "format": "time_series",
+                        "instant": true,
+                        "intervalFactor": 10,
+                        "legendFormat": "{{handler}}",
+                        "step": 100
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": [
+                {
+                  "group": "merge",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "reducers": []
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "",
+          "id": 12,
+          "links": [],
+          "title": "Most used handlers",
+          "vizConfig": {
+            "group": "table",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "custom": {
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "footer": {
+                      "reducers": []
+                    },
+                    "inspect": false
+                  },
+                  "decimals": 0,
+                  "displayName": "",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Time"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Time"
+                      },
+                      {
+                        "id": "custom.hideFrom.viz",
+                        "value": true
+                      },
+                      {
+                        "id": "custom.align"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-15": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "sum by (statuscode) (irate(http_request_total{job='grafana'}[5m]))",
+                        "format": "time_series",
+                        "intervalFactor": 3,
+                        "legendFormat": "{{statuscode}}",
+                        "step": 15,
+                        "target": "dev.grafana.cb-office.alerting.active_alerts"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 15,
+          "links": [],
+          "title": "http status codes",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "400"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#447EBC",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "500"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#BF1B00",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-17": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "topk(1, grafana_info or grafana_build_info)",
+                        "format": "time_series",
+                        "instant": true,
+                        "intervalFactor": 2,
+                        "legendFormat": "{{version}}",
+                        "step": 20
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": [
+                {
+                  "group": "merge",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "reducers": []
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "",
+          "id": 17,
+          "links": [],
+          "title": "Grafana version",
+          "vizConfig": {
+            "group": "table",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "custom": {
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "footer": {
+                      "reducers": []
+                    },
+                    "inspect": false
+                  },
+                  "decimals": 0,
+                  "displayName": "",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Time"
+                    },
+                    "properties": [
+                      {
+                        "id": "displayName",
+                        "value": "Time"
+                      },
+                      {
+                        "id": "custom.hideFrom.viz",
+                        "value": true
+                      },
+                      {
+                        "id": "custom.align"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": " sum (ALERTS)",
+                        "format": "time_series",
+                        "intervalFactor": 3,
+                        "legendFormat": "firing alerts",
+                        "step": 15
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 18,
+          "links": [],
+          "title": "Prometheus alerts",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": true,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "alerting"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#890F02",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "alertname"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#BF1B00",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "firing alerts"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#BF1B00",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "ok"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#7EB26D",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-4": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "up{job=\"grafana\"}",
+                        "format": "time_series",
+                        "instant": true,
+                        "intervalFactor": 2,
+                        "step": 60
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 4,
+          "links": [],
+          "title": "Active instances",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 0,
+                  "mappings": [
+                    {
+                      "options": {
+                        "0": {
+                          "text": ":("
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "rgba(222, 3, 3, 0.9)",
+                        "value": 0
+                      },
+                      {
+                        "color": "rgb(234, 245, 234)",
+                        "value": 1
+                      },
+                      {
+                        "color": "rgb(235, 244, 235)",
+                        "value": 10000
+                      }
+                    ]
+                  },
+                  "unit": "none"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {},
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-6": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "increase(grafana_alerting_active_alerts[1m])",
+                        "format": "time_series",
+                        "intervalFactor": 3,
+                        "legendFormat": "{{state}}",
+                        "step": 15
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 6,
+          "links": [],
+          "title": "Grafana active alerts",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": true,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "normal"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "alerting"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#890F02",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "ok"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#7EB26D",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-7": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum(go_goroutines{job=\"grafana\"})",
+                        "format": "time_series",
+                        "intervalFactor": 4,
+                        "legendFormat": "go routines",
+                        "range": true,
+                        "step": 8,
+                        "target": "select metric",
+                        "type": "timeserie"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum(process_resident_memory_bytes{job=\"grafana\"})",
+                        "format": "time_series",
+                        "intervalFactor": 4,
+                        "legendFormat": "memory usage",
+                        "range": true,
+                        "step": 8
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Aggregated over all Grafana nodes.",
+          "id": 7,
+          "links": [],
+          "title": "Grafana performance",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 10,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": true,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "avg gc duration"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "decbytes"
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "allocated memory"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "decbytes"
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "used memory"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "decbytes"
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "memory usage"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "decbytes"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-8": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "grafana_stat_totals_dashboard",
+                        "format": "time_series",
+                        "instant": true,
+                        "intervalFactor": 2,
+                        "step": 60
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 8,
+          "links": [],
+          "title": "Dashboard count",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "none"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {},
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
+      },
+      "panel-9": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "expr": "grafana_stat_total_users",
+                        "format": "time_series",
+                        "instant": true,
+                        "intervalFactor": 2,
+                        "step": 60
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "maxDataPoints": 100
+              },
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 9,
+          "links": [],
+          "title": "User count",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      },
+                      "type": "special"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "none"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "text": {},
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.0.1"
+          }
+        }
       }
-    }
-  ]
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-4"
+              },
+              "height": 5,
+              "width": 5,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-8"
+              },
+              "height": 5,
+              "width": 5,
+              "x": 5,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-9"
+              },
+              "height": 5,
+              "width": 5,
+              "x": 10,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-10"
+              },
+              "height": 5,
+              "width": 5,
+              "x": 15,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-17"
+              },
+              "height": 5,
+              "width": 4,
+              "x": 20,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-15"
+              },
+              "height": 10,
+              "width": 10,
+              "x": 0,
+              "y": 5
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-11"
+              },
+              "height": 10,
+              "width": 10,
+              "x": 10,
+              "y": 5
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-12"
+              },
+              "height": 10,
+              "width": 4,
+              "x": 20,
+              "y": 5
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-6"
+              },
+              "height": 5,
+              "width": 12,
+              "x": 0,
+              "y": 15
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-18"
+              },
+              "height": 5,
+              "width": 12,
+              "x": 12,
+              "y": 15
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-7"
+              },
+              "height": 7,
+              "width": 24,
+              "x": 0,
+              "y": 20
+            }
+          }
+        ]
+      }
+    },
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Available metrics",
+        "tooltip": "",
+        "type": "link",
+        "url": "/metrics"
+      },
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Grafana docs",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://grafana.com/docs/grafana/latest/"
+      },
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Prometheus docs",
+        "tooltip": "",
+        "type": "link",
+        "url": "http://prometheus.io/docs/introduction/overview/"
+      }
+    ],
+    "liveNow": false,
+    "preload": false,
+    "tags": [
+      "grafana",
+      "prometheus"
+    ],
+    "timeSettings": {
+      "autoRefresh": "auto",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-24h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "Grafana metrics",
+    "variables": [
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "k8_live_hla1",
+            "value": "eef9f89usay9sb"
+          },
+          "hide": "dontHide",
+          "includeAll": false,
+          "multi": false,
+          "name": "ds",
+          "options": [],
+          "pluginId": "prometheus",
+          "refresh": "onDashboardLoad",
+          "regex": "",
+          "skipUrlSync": false
+        }
+      }
+    ]
+  }
 }
