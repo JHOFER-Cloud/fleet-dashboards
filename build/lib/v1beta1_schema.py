@@ -11,17 +11,18 @@ sweep across sync/*.json:
 
     python3 build/lib/v1beta1_schema.py
 """
+
 import json
 import os
 import sys
 
 # Datasource names we own and whose UID/type we know.
 KNOWN_DATASOURCES = {
-    "-- Grafana --":    {"type": "grafana",    "uid": "-- Grafana --"},
-    "k8_live_hla1":     {"type": "prometheus", "uid": "eef9f89usay9sb"},
-    "k8_dev_hla1":      {"type": "prometheus", "uid": "aef9f9k9lvwn4b"},
-    "loki_k8_live_hla1": {"type": "loki",      "uid": "eegmz7m03591ce"},
-    "loki_k8_dev_hla1":  {"type": "loki",      "uid": "degmx13wdszk0c"},
+    "-- Grafana --": {"type": "grafana", "uid": "-- Grafana --"},
+    "k8_live_hla1": {"type": "prometheus", "uid": "eef9f89usay9sb"},
+    "k8_dev_hla1": {"type": "prometheus", "uid": "aef9f9k9lvwn4b"},
+    "loki_k8_live_hla1": {"type": "loki", "uid": "eegmz7m03591ce"},
+    "loki_k8_dev_hla1": {"type": "loki", "uid": "degmx13wdszk0c"},
     "satisfactory-cache": {"type": "postgres", "uid": "satisfactory-cache"},
 }
 
@@ -46,6 +47,7 @@ def _convert_datasource(value):
 def fix(data):
     """Walk the dashboard tree in-place applying the transforms. Returns
     the same dict for chaining."""
+
     def walk(node):
         if isinstance(node, dict):
             if isinstance(node.get("datasource"), str):
