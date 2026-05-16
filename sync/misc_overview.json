@@ -394,7 +394,7 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
+          "h": 4,
           "w": 3,
           "x": 21,
           "y": 0
@@ -439,6 +439,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
+        "description": "Total energy cost for the previous calendar month — the figure to send dad. Panel time override (`now-1M/M` → start of last month) is combined with a PromQL `@` modifier to pin `max_over_time` to exactly last month's window. The metric `tapo_p110_month_energy_wh` resets at month start, so its peak inside a calendar month equals that month's total.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -495,13 +496,86 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*$eur_per_kWh)",
-            "legendFormat": "{{machine}}",
+            "expr": "sum(max_over_time(tapo_p110_month_energy_wh[31d] @ ($__from / 1000 + 2678400))) / 1000 * $eur_per_kWh",
+            "instant": true,
+            "legendFormat": "Last Month",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "timeFrom": "1M/M",
+        "title": "Last Month €",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Running total cost for the current calendar month so far. Updates live as `tapo_p110_month_energy_wh` accumulates; resets to 0 at month start.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 21,
+          "y": 4
+        },
+        "id": 15,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "legendFormat": "This Month",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Consumer monthly energy costs",
+        "title": "This Month € (running)",
         "type": "stat"
       },
       {
@@ -891,6 +965,104 @@
         ],
         "title": "Consumption by consumers",
         "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "12-month energy cost history. The counter `tapo_p110_month_energy_wh` resets at the start of each month, so the chart climbs through each month and drops back to zero — each peak height equals that month's total cost. Useful for trend / sanity-checking against the 'Last Month €' tile.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.9,
+              "drawStyle": "bars",
+              "fillOpacity": 60,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 19
+        },
+        "id": 16,
+        "options": {
+          "legend": {
+            "calcs": [
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (room) (tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "legendFormat": "{{room}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "timeFrom": "12M/M",
+        "title": "Monthly Cost History (last 12 months)",
+        "type": "timeseries"
       }
     ],
     "preload": false,
