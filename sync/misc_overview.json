@@ -439,7 +439,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Total energy cost for the previous calendar month — the figure to send dad. Panel time override `timeFrom: 1M/M` sets the panel range to [start of last month, now]; the metric `tapo_p110_month_energy_wh` resets at month start, so its highest value inside that range equals last month's total. Stat reduce uses `max`. Caveat: once this month's running total exceeds last month's, the tile will flip to showing this month — for perpetual correctness, add a Prometheus recording rule that snapshots month-end totals.",
+        "description": "Total energy cost for the previous calendar month.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -466,7 +466,7 @@
         "gridPos": {
           "h": 3,
           "w": 3,
-          "x": 18,
+          "x": 21,
           "y": 4
         },
         "id": 5,
@@ -512,7 +512,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Running total cost for the current calendar month so far. Updates live as `tapo_p110_month_energy_wh` accumulates; resets to 0 at month start.",
+        "description": "Running cost for the current calendar month so far.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -539,7 +539,7 @@
         "gridPos": {
           "h": 3,
           "w": 3,
-          "x": 21,
+          "x": 18,
           "y": 4
         },
         "id": 15,
@@ -650,8 +650,8 @@
       },
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "type": "datasource",
+          "uid": "-- Mixed --"
         },
         "description": "Current number of active alerts.",
         "fieldConfig": {
@@ -750,7 +750,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Total energy used last calendar month, in Wh/kWh (auto-scaled). Same panel-time-override + `max` reduce trick as 'Last Month €' — accurate for the first ~2/3 of each month; would need a recording rule for perpetual correctness.",
+        "description": "Total energy used last calendar month.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -777,7 +777,7 @@
         "gridPos": {
           "h": 3,
           "w": 3,
-          "x": 18,
+          "x": 21,
           "y": 11
         },
         "id": 7,
@@ -821,7 +821,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Running energy usage for the current calendar month so far, in Wh/kWh (auto-scaled).",
+        "description": "Energy used this month so far.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -848,7 +848,7 @@
         "gridPos": {
           "h": 3,
           "w": 3,
-          "x": 21,
+          "x": 18,
           "y": 11
         },
         "id": 17,
@@ -974,7 +974,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Energy cost history. The counter `tapo_p110_month_energy_wh` resets at the start of each month, so the bar chart climbs through each month and drops to zero — each peak height equals that month's total cost. Step pinned to 1d so the sawtooth renders cleanly without months collapsing into a single category.",
+        "description": "Monthly energy cost over the last 12 months. The counter resets at month start, so each sawtooth peak equals that month's total.",
         "fieldConfig": {
           "defaults": {
             "color": {
