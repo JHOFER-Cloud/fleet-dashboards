@@ -439,7 +439,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Total energy cost for the previous calendar month — the figure to send dad. Panel time override (`now-1M/M` → start of last month) is combined with a PromQL `@` modifier to pin `max_over_time` to exactly last month's window. The metric `tapo_p110_month_energy_wh` resets at month start, so its peak inside a calendar month equals that month's total.",
+        "description": "Total energy cost for the previous calendar month — the figure to send dad. Panel time override `timeFrom: 1M/M` sets the panel range to [start of last month, now]; the metric `tapo_p110_month_energy_wh` resets at month start, so its highest value inside that range equals last month's total. Stat reduce uses `max`. Caveat: once this month's running total exceeds last month's, the tile will flip to showing this month — for perpetual correctness, add a Prometheus recording rule that snapshots month-end totals.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -478,7 +478,7 @@
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
-              "lastNotNull"
+              "max"
             ],
             "fields": "",
             "values": false
@@ -496,10 +496,10 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(max_over_time(tapo_p110_month_energy_wh[31d] @ ($__from / 1000 + 2678400))) / 1000 * $eur_per_kWh",
-            "instant": true,
+            "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "instant": false,
             "legendFormat": "Last Month",
-            "range": false,
+            "range": true,
             "refId": "A"
           }
         ],
@@ -697,10 +697,10 @@
         "id": 3,
         "maxDataPoints": 100,
         "options": {
-          "colorMode": "none",
-          "graphMode": "area",
+          "colorMode": "value",
+          "graphMode": "none",
           "justifyMode": "auto",
-          "orientation": "horizontal",
+          "orientation": "vertical",
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
@@ -710,24 +710,39 @@
             "values": false
           },
           "showPercentChange": false,
-          "textMode": "auto",
+          "textMode": "value_and_name",
           "wideLayout": true
         },
         "pluginVersion": "12.3.1",
         "targets": [
           {
             "datasource": {
-              "uid": "$datasource"
+              "type": "prometheus",
+              "uid": "eef9f89usay9sb"
             },
             "editorMode": "code",
             "expr": "max(alertmanager_alerts{state=\"active\"})",
             "format": "time_series",
             "intervalFactor": 1,
+            "legendFormat": "LIVE",
             "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aef9f9k9lvwn4b"
+            },
+            "editorMode": "code",
+            "expr": "max(alertmanager_alerts{state=\"active\"})",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "DEV",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Alerts (LIVE)",
+        "title": "Alerts (LIVE / DEV)",
         "type": "stat"
       },
       {
@@ -735,7 +750,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "",
+        "description": "Total energy used last calendar month, in Wh/kWh (auto-scaled). Same panel-time-override + `max` reduce trick as 'Last Month €' — accurate for the first ~2/3 of each month; would need a recording rule for perpetual correctness.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -774,7 +789,7 @@
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
-              "lastNotNull"
+              "max"
             ],
             "fields": "",
             "values": false
@@ -791,38 +806,28 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "sum by (room) (tapo_p110_month_energy_wh)",
-            "legendFormat": "{{machine}}",
+            "expr": "sum(tapo_p110_month_energy_wh)",
+            "legendFormat": "Last Month",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Consumers monthly usage",
+        "timeFrom": "1M/M",
+        "title": "Last Month kWh",
         "type": "stat"
       },
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
+          "uid": "${ds}"
         },
-        "description": "Current number of active alerts.",
+        "description": "Running energy usage for the current calendar month so far, in Wh/kWh (auto-scaled).",
         "fieldConfig": {
           "defaults": {
             "color": {
-              "fixedColor": "#bf1b00",
-              "mode": "fixed"
+              "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "text": "N/A"
-                  }
-                },
-                "type": "special"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -836,7 +841,7 @@
                 }
               ]
             },
-            "unit": "none"
+            "unit": "watth"
           },
           "overrides": []
         },
@@ -846,13 +851,12 @@
           "x": 21,
           "y": 11
         },
-        "id": 4,
-        "maxDataPoints": 100,
+        "id": 17,
         "options": {
-          "colorMode": "none",
+          "colorMode": "value",
           "graphMode": "area",
           "justifyMode": "auto",
-          "orientation": "horizontal",
+          "orientation": "auto",
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
@@ -870,17 +874,16 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
+              "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "max(alertmanager_alerts{state=\"active\"})",
-            "format": "time_series",
-            "intervalFactor": 1,
+            "expr": "sum(tapo_p110_month_energy_wh)",
+            "legendFormat": "This Month",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Alerts (DEV)",
+        "title": "This Month kWh (running)",
         "type": "stat"
       },
       {
@@ -971,7 +974,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "12-month energy cost history. Each bar shows the peak of `tapo_p110_month_energy_wh` within a rolling 31-day window — since the counter resets at month start, that peak equals the previous month's total cost. Step is pinned to 30d to get roughly one bar per month over the 12-month window.",
+        "description": "Energy cost history. The counter `tapo_p110_month_energy_wh` resets at the start of each month, so the bar chart climbs through each month and drops to zero — each peak height equals that month's total cost. Step pinned to 1d so the sawtooth renders cleanly without months collapsing into a single category.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1052,8 +1055,8 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "sum by (room) (max_over_time(tapo_p110_month_energy_wh[31d])) / 1000 * $eur_per_kWh",
-            "interval": "30d",
+            "expr": "sum by (room) (tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "interval": "1d",
             "legendFormat": "{{room}}",
             "range": true,
             "refId": "A"
@@ -1061,21 +1064,6 @@
         ],
         "timeFrom": "12M/M",
         "title": "Monthly Cost History (last 12 months)",
-        "transformations": [
-          {
-            "id": "convertFieldType",
-            "options": {
-              "conversions": [
-                {
-                  "destinationType": "string",
-                  "dateFormat": "YYYY-MM",
-                  "targetField": "Time"
-                }
-              ],
-              "fields": {}
-            }
-          }
-        ],
         "type": "barchart"
       }
     ],
