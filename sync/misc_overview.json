@@ -570,8 +570,9 @@
             "editorMode": "code",
             "exemplar": false,
             "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "instant": true,
             "legendFormat": "This Month",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -878,8 +879,9 @@
             },
             "editorMode": "code",
             "expr": "sum(tapo_p110_month_energy_wh)",
+            "instant": true,
             "legendFormat": "This Month",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
@@ -974,7 +976,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "Monthly energy cost over the last 12 months. The counter resets at month start, so each sawtooth peak equals that month's total.",
+        "description": "Energy cost over the last 12 months, per room.",
         "fieldConfig": {
           "defaults": {
             "color": {
