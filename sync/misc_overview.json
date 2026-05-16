@@ -394,7 +394,7 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
+          "h": 4,
           "w": 3,
           "x": 21,
           "y": 0
@@ -439,6 +439,80 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
+        "description": "Total energy cost for the previous calendar month.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 21,
+          "y": 4
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "instant": false,
+            "legendFormat": "Last Month",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "timeFrom": "1M/M",
+        "title": "Last Month €",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Running cost for the current calendar month so far.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -468,7 +542,7 @@
           "x": 18,
           "y": 4
         },
-        "id": 5,
+        "id": 15,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -495,13 +569,13 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum by (room)(tapo_p110_month_energy_wh/1000*$eur_per_kWh)",
-            "legendFormat": "{{machine}}",
+            "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "legendFormat": "This Month",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Consumer monthly energy costs",
+        "title": "This Month € (running)",
         "type": "stat"
       },
       {
@@ -576,8 +650,8 @@
       },
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "eef9f89usay9sb"
+          "type": "datasource",
+          "uid": "-- Mixed --"
         },
         "description": "Current number of active alerts.",
         "fieldConfig": {
@@ -623,14 +697,99 @@
         "id": 3,
         "maxDataPoints": 100,
         "options": {
-          "colorMode": "none",
-          "graphMode": "area",
+          "colorMode": "value",
+          "graphMode": "none",
           "justifyMode": "auto",
-          "orientation": "horizontal",
+          "orientation": "vertical",
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "eef9f89usay9sb"
+            },
+            "editorMode": "code",
+            "expr": "max(alertmanager_alerts{state=\"active\"})",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "LIVE",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "aef9f9k9lvwn4b"
+            },
+            "editorMode": "code",
+            "expr": "max(alertmanager_alerts{state=\"active\"})",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "DEV",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Alerts (LIVE / DEV)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Total energy used last calendar month.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "watth"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 21,
+          "y": 11
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "max"
             ],
             "fields": "",
             "values": false
@@ -643,17 +802,18 @@
         "targets": [
           {
             "datasource": {
-              "uid": "$datasource"
+              "type": "prometheus",
+              "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "max(alertmanager_alerts{state=\"active\"})",
-            "format": "time_series",
-            "intervalFactor": 1,
+            "expr": "sum(tapo_p110_month_energy_wh)",
+            "legendFormat": "Last Month",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Alerts (LIVE)",
+        "timeFrom": "1M/M",
+        "title": "Last Month kWh",
         "type": "stat"
       },
       {
@@ -661,7 +821,7 @@
           "type": "prometheus",
           "uid": "${ds}"
         },
-        "description": "",
+        "description": "Energy used this month so far.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -691,7 +851,7 @@
           "x": 18,
           "y": 11
         },
-        "id": 7,
+        "id": 17,
         "options": {
           "colorMode": "value",
           "graphMode": "area",
@@ -717,96 +877,13 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "sum by (room) (tapo_p110_month_energy_wh)",
-            "legendFormat": "{{machine}}",
+            "expr": "sum(tapo_p110_month_energy_wh)",
+            "legendFormat": "This Month",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Consumers monthly usage",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "aef9f9k9lvwn4b"
-        },
-        "description": "Current number of active alerts.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "fixedColor": "#bf1b00",
-              "mode": "fixed"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "text": "N/A"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 3,
-          "x": 21,
-          "y": 11
-        },
-        "id": 4,
-        "maxDataPoints": 100,
-        "options": {
-          "colorMode": "none",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.3.1",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "aef9f9k9lvwn4b"
-            },
-            "editorMode": "code",
-            "expr": "max(alertmanager_alerts{state=\"active\"})",
-            "format": "time_series",
-            "intervalFactor": 1,
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Alerts (DEV)",
+        "title": "This Month kWh (running)",
         "type": "stat"
       },
       {
@@ -891,6 +968,103 @@
         ],
         "title": "Consumption by consumers",
         "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Monthly energy cost over the last 12 months. The counter resets at month start, so each sawtooth peak equals that month's total.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisGridShow": true,
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 19
+        },
+        "id": 16,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.85,
+          "fullHighlight": false,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          },
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 100
+        },
+        "pluginVersion": "12.3.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (room) (tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+            "interval": "1d",
+            "legendFormat": "{{room}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "timeFrom": "12M/M",
+        "title": "Monthly Cost History (last 12 months)",
+        "type": "barchart"
       }
     ],
     "preload": false,
