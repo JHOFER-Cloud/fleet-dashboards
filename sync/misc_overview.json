@@ -478,7 +478,7 @@
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
-              "max"
+              "lastNotNull"
             ],
             "fields": "",
             "values": false
@@ -496,14 +496,13 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
-            "instant": false,
+            "expr": "sum(tapo_p110_previous_month_energy_wh) / 1000 * $eur_per_kWh",
+            "instant": true,
             "legendFormat": "Last Month",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
-        "timeFrom": "1M/M",
         "title": "Last Month €",
         "type": "stat"
       },
@@ -790,7 +789,7 @@
           "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
-              "max"
+              "lastNotNull"
             ],
             "fields": "",
             "values": false
@@ -807,13 +806,13 @@
               "uid": "${ds}"
             },
             "editorMode": "code",
-            "expr": "sum(tapo_p110_month_energy_wh)",
+            "expr": "sum(tapo_p110_previous_month_energy_wh)",
+            "instant": true,
             "legendFormat": "Last Month",
-            "range": true,
+            "range": false,
             "refId": "A"
           }
         ],
-        "timeFrom": "1M/M",
         "title": "Last Month kWh",
         "type": "stat"
       },
