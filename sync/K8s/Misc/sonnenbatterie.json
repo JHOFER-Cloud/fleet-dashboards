@@ -954,12 +954,17 @@
                   "0": {
                     "color": "text",
                     "index": 0,
-                    "text": "No"
+                    "text": "Idle"
                   },
                   "1": {
                     "color": "red",
                     "index": 1,
                     "text": "Direct Grid"
+                  },
+                  "2": {
+                    "color": "green",
+                    "index": 2,
+                    "text": "Feeding Grid"
                   }
                 },
                 "type": "value"
@@ -1010,7 +1015,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sonnenbatterie_charging{battery_name=~\"$battery\"} ^ sonnenbatterie_charging{battery_name=~\"$battery\"}",
+            "expr": "max by (battery_name) (sonnenbatterie_power_flow_state{battery_name=~\"$battery\"})",
             "instant": true,
             "legendFormat": "__auto",
             "range": false,
