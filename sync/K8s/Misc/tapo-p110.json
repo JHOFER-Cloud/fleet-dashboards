@@ -643,16 +643,31 @@
     "templating": {
       "list": [
         {
+          "allowCustomValue": true,
           "current": {
-            "text": "0.21649",
-            "value": "0.21649"
+            "text": "",
+            "value": ""
           },
-          "hide": 2,
-          "label": "EUR/kWh",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "aef9f9k9lvwn4b"
+          },
+          "definition": "label_values(jhc:eur_per_kwh_handshake, amount)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "EUR/kWh (handshake)",
+          "multi": false,
           "name": "eur_per_kWh",
-          "query": "0.21649",
+          "options": [],
+          "query": {
+            "query": "label_values(jhc:eur_per_kwh_handshake, amount)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
           "skipUrlSync": true,
-          "type": "constant"
+          "sort": 0,
+          "type": "query"
         },
         {
           "current": {
