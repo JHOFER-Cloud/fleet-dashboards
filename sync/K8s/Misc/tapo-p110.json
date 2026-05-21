@@ -55,8 +55,9 @@
                       "spec": {
                         "editorMode": "code",
                         "expr": "sum by (room) (tapo_p110_month_energy_wh{job=\"$job\", room=~\"$rooms\"})",
+                        "instant": true,
                         "legendFormat": "{{machine}}",
-                        "range": true
+                        "range": false
                       },
                       "version": "v0"
                     },
@@ -71,7 +72,7 @@
           "description": "",
           "id": 10,
           "links": [],
-          "title": "Monthly use",
+          "title": "This Month",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -95,92 +96,6 @@
                     ]
                   },
                   "unit": "watth"
-                },
-                "overrides": []
-              },
-              "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                  "calcs": [
-                    "lastNotNull"
-                  ],
-                  "fields": "",
-                  "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-              }
-            },
-            "version": "13.0.1"
-          }
-        }
-      },
-      "panel-12": {
-        "kind": "Panel",
-        "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "datasource": {
-                        "name": "aef9f9k9lvwn4b"
-                      },
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "editorMode": "code",
-                        "exemplar": false,
-                        "expr": "sum by (room)(tapo_p110_today_energy_wh{job=\"$job\", room=~\"$rooms\"}/1000*$eur_per_kWh)",
-                        "legendFormat": "{{machine}}",
-                        "range": true
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "A"
-                  }
-                }
-              ],
-              "queryOptions": {},
-              "transformations": []
-            }
-          },
-          "description": "",
-          "id": 12,
-          "links": [],
-          "title": "Todays price",
-          "vizConfig": {
-            "group": "stat",
-            "kind": "VizConfig",
-            "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "red",
-                        "value": 80
-                      }
-                    ]
-                  },
-                  "unit": "currencyEUR"
                 },
                 "overrides": []
               },
@@ -227,8 +142,9 @@
                         "editorMode": "code",
                         "exemplar": false,
                         "expr": "sum by (room) (tapo_p110_today_energy_wh{job=\"$job\", room=~\"$rooms\"})",
+                        "instant": true,
                         "legendFormat": "{{machine}}",
-                        "range": true
+                        "range": false
                       },
                       "version": "v0"
                     },
@@ -243,7 +159,7 @@
           "description": "",
           "id": 13,
           "links": [],
-          "title": "Todays usage",
+          "title": "Today",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -292,7 +208,7 @@
           }
         }
       },
-      "panel-14": {
+      "panel-15": {
         "kind": "Panel",
         "spec": {
           "data": {
@@ -311,10 +227,10 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "exemplar": false,
-                        "expr": "sum by (room)(tapo_p110_month_energy_wh{job=\"$job\", room=~\"$rooms\"}/1000*$eur_per_kWh)",
+                        "expr": "sum by (room) (tapo_p110_previous_month_energy_wh{job=\"$job\", room=~\"$rooms\"})",
+                        "instant": true,
                         "legendFormat": "{{machine}}",
-                        "range": true
+                        "range": false
                       },
                       "version": "v0"
                     },
@@ -327,9 +243,9 @@
             }
           },
           "description": "",
-          "id": 14,
+          "id": 15,
           "links": [],
-          "title": "Months price",
+          "title": "Last Month",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -352,92 +268,7 @@
                       }
                     ]
                   },
-                  "unit": "currencyEUR"
-                },
-                "overrides": []
-              },
-              "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                  "calcs": [
-                    "lastNotNull"
-                  ],
-                  "fields": "",
-                  "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-              }
-            },
-            "version": "13.0.1"
-          }
-        }
-      },
-      "panel-16": {
-        "kind": "Panel",
-        "spec": {
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "datasource": {
-                        "name": "aef9f9k9lvwn4b"
-                      },
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "editorMode": "builder",
-                        "expr": "$eur_per_kWh",
-                        "legendFormat": "__auto",
-                        "range": true
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "A"
-                  }
-                }
-              ],
-              "queryOptions": {},
-              "transformations": []
-            }
-          },
-          "description": "",
-          "id": 16,
-          "links": [],
-          "title": "EUR/kWh",
-          "vizConfig": {
-            "group": "stat",
-            "kind": "VizConfig",
-            "spec": {
-              "fieldConfig": {
-                "defaults": {
-                  "color": {
-                    "mode": "thresholds"
-                  },
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": 0
-                      },
-                      {
-                        "color": "red",
-                        "value": 80
-                      }
-                    ]
-                  },
-                  "unit": "currencyEUR"
+                  "unit": "watth"
                 },
                 "overrides": []
               },
@@ -483,8 +314,9 @@
                       "spec": {
                         "editorMode": "code",
                         "expr": "sum by (room)(tapo_p110_power_consumption_w{job=\"$job\", room=~\"$rooms\"})",
+                        "instant": true,
                         "legendFormat": "__auto",
-                        "range": true
+                        "range": false
                       },
                       "version": "v0"
                     },
@@ -581,8 +413,9 @@
                       "spec": {
                         "editorMode": "builder",
                         "expr": "max by(__name__) (tapo_p110_device_count{job=\"$job\"})",
+                        "instant": true,
                         "legendFormat": "{{machine}}",
-                        "range": true
+                        "range": false
                       },
                       "version": "v0"
                     },
@@ -787,11 +620,37 @@
             "spec": {
               "element": {
                 "kind": "ElementReference",
-                "name": "panel-12"
+                "name": "panel-10"
               },
               "height": 6,
-              "width": 5,
+              "width": 4,
               "x": 4,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-15"
+              },
+              "height": 6,
+              "width": 4,
+              "x": 8,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-4"
+              },
+              "height": 6,
+              "width": 9,
+              "x": 12,
               "y": 0
             }
           },
@@ -804,60 +663,8 @@
               },
               "height": 6,
               "width": 3,
-              "x": 9,
+              "x": 21,
               "y": 0
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-4"
-              },
-              "height": 12,
-              "width": 12,
-              "x": 12,
-              "y": 0
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-10"
-              },
-              "height": 6,
-              "width": 4,
-              "x": 0,
-              "y": 6
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-14"
-              },
-              "height": 6,
-              "width": 5,
-              "x": 4,
-              "y": 6
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-16"
-              },
-              "height": 6,
-              "width": 3,
-              "x": 9,
-              "y": 6
             }
           },
           {
@@ -870,7 +677,7 @@
               "height": 10,
               "width": 24,
               "x": 0,
-              "y": 12
+              "y": 6
             }
           }
         ]
@@ -988,40 +795,6 @@
           "regex": "",
           "regexApplyTo": "value",
           "skipUrlSync": false,
-          "sort": "disabled"
-        }
-      },
-      {
-        "kind": "QueryVariable",
-        "spec": {
-          "allowCustomValue": true,
-          "current": {
-            "text": "0.21649",
-            "value": "0.21649"
-          },
-          "definition": "label_values(jhc:eur_per_kwh_handshake, amount)",
-          "hide": "inControlsMenu",
-          "includeAll": false,
-          "label": "EUR/kWh (handshake)",
-          "multi": false,
-          "name": "eur_per_kWh",
-          "options": [],
-          "query": {
-            "datasource": {
-              "name": "aef9f9k9lvwn4b"
-            },
-            "group": "prometheus",
-            "kind": "DataQuery",
-            "spec": {
-              "query": "label_values(jhc:eur_per_kwh_handshake, amount)",
-              "refId": "StandardVariableQuery"
-            },
-            "version": "v0"
-          },
-          "refresh": "onDashboardLoad",
-          "regex": "",
-          "regexApplyTo": "value",
-          "skipUrlSync": true,
           "sort": "disabled"
         }
       }
