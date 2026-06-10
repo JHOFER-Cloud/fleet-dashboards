@@ -295,10 +295,10 @@
                 },
                 "legend": {
                   "calcs": [
-                    "min",
-                    "max",
+                    "lastNotNull",
                     "mean",
-                    "lastNotNull"
+                    "min",
+                    "max"
                   ],
                   "displayMode": "table",
                   "placement": "bottom",
