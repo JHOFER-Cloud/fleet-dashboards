@@ -295,10 +295,10 @@
                 },
                 "legend": {
                   "calcs": [
-                    "min",
-                    "max",
+                    "lastNotNull",
                     "mean",
-                    "lastNotNull"
+                    "min",
+                    "max"
                   ],
                   "displayMode": "table",
                   "placement": "bottom",
@@ -1454,6 +1454,18 @@
       }
     },
     "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/misc_overview.json"
+      },
       {
         "asDropdown": true,
         "icon": "external link",
