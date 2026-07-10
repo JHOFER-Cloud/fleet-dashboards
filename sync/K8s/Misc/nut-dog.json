@@ -571,6 +571,29 @@
                     },
                     "refId": "B"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "nut_dog_ups_output_realpower_watts{ups=~\"$ups\"}",
+                        "instant": false,
+                        "legendFormat": "{{ups}} W (real)",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -580,7 +603,7 @@
           "description": "",
           "id": 13,
           "links": [],
-          "title": "Output power (VA)",
+          "title": "Output power",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -662,6 +685,25 @@
                             10,
                             10
                           ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "C"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "watt"
+                      },
+                      {
+                        "id": "color",
+                        "value": {
+                          "mode": "fixed",
+                          "fixedColor": "green"
                         }
                       }
                     ]
