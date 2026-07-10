@@ -2251,10 +2251,10 @@
           "allowCustomValue": false,
           "current": {
             "text": [
-              "HLA1-Out"
+              "All"
             ],
             "value": [
-              "HLA1-Out"
+              "$__all"
             ]
           },
           "definition": "label_values(airthings_temperature_celsius,device_name)",
