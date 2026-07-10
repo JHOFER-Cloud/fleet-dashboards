@@ -1981,7 +1981,7 @@
                 "kind": "ElementReference",
                 "name": "panel-12"
               },
-              "height": 8,
+              "height": 9,
               "width": 12,
               "x": 0,
               "y": 18
@@ -1994,7 +1994,7 @@
                 "kind": "ElementReference",
                 "name": "panel-13"
               },
-              "height": 8,
+              "height": 9,
               "width": 6,
               "x": 12,
               "y": 18
@@ -2007,7 +2007,7 @@
                 "kind": "ElementReference",
                 "name": "panel-14"
               },
-              "height": 8,
+              "height": 9,
               "width": 6,
               "x": 18,
               "y": 18
