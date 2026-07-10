@@ -539,29 +539,6 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"})",
-                        "instant": false,
-                        "legendFormat": "{{ups}}",
-                        "range": true
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "A"
-                  }
-                },
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "datasource": {
-                        "name": "${DS_PROMETHEUS}"
-                      },
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "editorMode": "code",
-                        "exemplar": false,
                         "expr": "max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}) * 0.75",
                         "instant": false,
                         "legendFormat": "{{ups}} ~W (est, PF 0.75)",
@@ -626,7 +603,7 @@
           "description": "Σ W sums each selected UPS's real watts where reported (ups-a), else estimated from VA x 0.75 (ups-b).",
           "id": 13,
           "links": [],
-          "title": "Output power",
+          "title": "Output power (W)",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -684,7 +661,7 @@
                       }
                     ]
                   },
-                  "unit": "voltamp"
+                  "unit": "watt"
                 },
                 "overrides": [
                   {
@@ -693,10 +670,6 @@
                       "options": "B"
                     },
                     "properties": [
-                      {
-                        "id": "unit",
-                        "value": "watt"
-                      },
                       {
                         "id": "color",
                         "value": {
@@ -723,10 +696,6 @@
                     },
                     "properties": [
                       {
-                        "id": "unit",
-                        "value": "watt"
-                      },
-                      {
                         "id": "color",
                         "value": {
                           "fixedColor": "green",
@@ -741,10 +710,6 @@
                       "options": "D"
                     },
                     "properties": [
-                      {
-                        "id": "unit",
-                        "value": "watt"
-                      },
                       {
                         "id": "color",
                         "value": {
@@ -1825,6 +1790,133 @@
             "version": "13.1.0"
           }
         }
+      },
+      "panel-15": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"})",
+                        "instant": false,
+                        "legendFormat": "{{ups}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Apparent power (VA). Only the UniFi (ups-b) reports it; the CyberPower exposes VA only via an unmapped OID.",
+          "id": 15,
+          "links": [],
+          "title": "Output power (VA)",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic",
+                    "seriesBy": "max"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.9,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineStyle": {
+                      "fill": "solid"
+                    },
+                    "lineWidth": 1,
+                    "pointSize": 1,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "always",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      }
+                    ]
+                  },
+                  "unit": "voltamp"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "last",
+                    "max"
+                  ],
+                  "displayMode": "list",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.1.0"
+          }
+        }
       }
     },
     "layout": {
@@ -1982,8 +2074,21 @@
                 "name": "panel-12"
               },
               "height": 9,
-              "width": 12,
+              "width": 6,
               "x": 0,
+              "y": 18
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-15"
+              },
+              "height": 9,
+              "width": 6,
+              "x": 6,
               "y": 18
             }
           },
