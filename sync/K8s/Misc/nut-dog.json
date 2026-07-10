@@ -594,13 +594,36 @@
                     },
                     "refId": "C"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "sum(max by (ups) (nut_dog_ups_output_realpower_watts{ups=~\"$ups\"}) or max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}) * 0.75)",
+                        "instant": false,
+                        "legendFormat": "Σ W (real+est)",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "D"
+                  }
                 }
               ],
               "queryOptions": {},
               "transformations": []
             }
           },
-          "description": "",
+          "description": "Σ W sums each selected UPS's real watts where reported (ups-a), else estimated from VA x 0.75 (ups-b).",
           "id": 13,
           "links": [],
           "title": "Output power",
@@ -709,6 +732,29 @@
                           "fixedColor": "green",
                           "mode": "fixed"
                         }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byFrameRefID",
+                      "options": "D"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "watt"
+                      },
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "blue",
+                          "mode": "fixed"
+                        }
+                      },
+                      {
+                        "id": "custom.lineWidth",
+                        "value": 2
                       }
                     ]
                   }
