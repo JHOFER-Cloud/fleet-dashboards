@@ -814,7 +814,7 @@
           "description": "",
           "id": 14,
           "links": [],
-          "title": "Temperature (UPS-B only)",
+          "title": "Temperature",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -1715,7 +1715,7 @@
           "description": "",
           "id": 8,
           "links": [],
-          "title": "UPS load (comparable across UPSes)",
+          "title": "UPS load",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
