@@ -157,7 +157,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_load_actual_state{state=\"up\"}",
+                        "expr": "max by (load) (nut_dog_load_actual_state{state=\"up\"})",
                         "instant": false,
                         "legendFormat": "{{load}}",
                         "range": true
@@ -276,7 +276,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_load_shed_signal{state=\"asserted\"}",
+                        "expr": "max by (load) (nut_dog_load_shed_signal{state=\"asserted\"})",
                         "instant": false,
                         "legendFormat": "{{load}}",
                         "range": true
@@ -395,7 +395,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_input_voltage_volts{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_input_voltage_volts{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}} in",
                         "range": true
@@ -418,7 +418,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_output_voltage_volts{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_output_voltage_volts{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}} out",
                         "range": true
@@ -539,7 +539,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}}",
                         "range": true
@@ -562,7 +562,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"} * 0.75",
+                        "expr": "max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}) * 0.75",
                         "instant": false,
                         "legendFormat": "{{ups}} ~W (est, PF 0.75)",
                         "range": true
@@ -585,7 +585,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_output_realpower_watts{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_output_realpower_watts{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}} W (real)",
                         "range": true
@@ -761,7 +761,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_temperature_celsius{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_temperature_celsius{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}}",
                         "range": true
@@ -1085,7 +1085,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_reachable{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_reachable{ups=~\"$ups\"})",
                         "instant": true,
                         "legendFormat": "{{ups}}",
                         "range": false
@@ -1187,7 +1187,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_build_info",
+                        "expr": "max by (version) (nut_dog_build_info)",
                         "instant": true,
                         "legendFormat": "{{version}}",
                         "range": false
@@ -1270,7 +1270,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_battery_charge_percent{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_battery_charge_percent{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}}",
                         "range": true
@@ -1403,7 +1403,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_battery_runtime_seconds{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_battery_runtime_seconds{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}}",
                         "range": true
@@ -1535,7 +1535,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "nut_dog_ups_load_percent{ups=~\"$ups\"}",
+                        "expr": "max by (ups) (nut_dog_ups_load_percent{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}}",
                         "range": true
@@ -1663,7 +1663,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum by (ups) (nut_dog_ups_source_state{state=\"healthy\", ups=~\"$ups\"}) * 3 + sum by (ups) (nut_dog_ups_source_state{state=\"hold\", ups=~\"$ups\"}) * 2 + sum by (ups) (nut_dog_ups_source_state{state=\"shed\", ups=~\"$ups\"})",
+                        "expr": "max by (ups) (nut_dog_ups_source_state{state=\"healthy\", ups=~\"$ups\"}) * 3 + max by (ups) (nut_dog_ups_source_state{state=\"hold\", ups=~\"$ups\"}) * 2 + max by (ups) (nut_dog_ups_source_state{state=\"shed\", ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}}",
                         "range": true
