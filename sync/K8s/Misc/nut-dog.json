@@ -1,0 +1,515 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "nut-dog"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "UPS shed/recover controller: telemetry freshness, decisions, and raw UPS readings (JHC-501 / JHC-527).",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "mappings": [
+              { "type": "value", "options": { "0": { "text": "Live", "index": 0 }, "1": { "text": "Dry-run", "index": 1 } } }
+            ],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 1 } ] },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 4, "w": 4, "x": 0, "y": 0 },
+        "id": 1,
+        "options": {
+          "colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto",
+          "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false },
+          "textMode": "value", "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "max(nut_dog_dry_run)", "instant": true, "legendFormat": "mode", "range": false, "refId": "A" }
+        ],
+        "title": "Mode",
+        "type": "stat"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 60 }, { "color": "red", "value": 120 } ] },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 4, "w": 4, "x": 4, "y": 0 },
+        "id": 2,
+        "options": {
+          "colorMode": "value", "graphMode": "none", "justifyMode": "auto", "orientation": "auto",
+          "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false },
+          "textMode": "value", "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "time() - max(nut_dog_reconcile_timestamp_seconds)", "instant": true, "legendFormat": "age", "range": false, "refId": "A" }
+        ],
+        "title": "Reconcile age",
+        "type": "stat"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "mappings": [
+              { "type": "value", "options": { "0": { "text": "No", "index": 0 }, "1": { "text": "SHEDDING", "index": 1 } } }
+            ],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 1 } ] },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 4, "w": 4, "x": 8, "y": 0 },
+        "id": 3,
+        "options": {
+          "colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto",
+          "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false },
+          "textMode": "value", "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "max(nut_dog_ups_source_state{state=\"shed\", ups=~\"$ups\"})", "instant": true, "legendFormat": "shedding", "range": false, "refId": "A" }
+        ],
+        "title": "Shedding",
+        "type": "stat"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "mappings": [
+              { "type": "value", "options": { "0": { "text": "Down", "index": 0 }, "1": { "text": "Up", "index": 1 } } }
+            ],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 1 } ] },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 4, "w": 8, "x": 12, "y": 0 },
+        "id": 4,
+        "options": {
+          "colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto",
+          "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false },
+          "textMode": "value_and_name", "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_reachable{ups=~\"$ups\"}", "instant": true, "legendFormat": "{{ups}}", "range": false, "refId": "A" }
+        ],
+        "title": "UPS reachable",
+        "type": "stat"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "fixed", "fixedColor": "text" },
+            "mappings": [],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "text", "value": null } ] }
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 4, "w": 4, "x": 20, "y": 0 },
+        "id": 5,
+        "options": {
+          "colorMode": "none", "graphMode": "none", "justifyMode": "auto", "orientation": "auto",
+          "reduceOptions": { "calcs": [ "lastNotNull" ], "fields": "", "values": false },
+          "textMode": "name", "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_build_info", "instant": true, "legendFormat": "{{version}}", "range": false, "refId": "A" }
+        ],
+        "title": "Version",
+        "type": "stat"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "palette-classic" },
+            "custom": {
+              "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto",
+              "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none",
+              "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+              "insertNulls": false, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 5,
+              "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false,
+              "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" }
+            },
+            "decimals": 0, "mappings": [], "max": 100, "min": 0,
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 30 } ] },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 8, "w": 8, "x": 0, "y": 4 },
+        "id": 6,
+        "options": {
+          "legend": { "calcs": [ "last", "min" ], "displayMode": "table", "placement": "bottom", "showLegend": true },
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_battery_charge_percent{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}}", "range": true, "refId": "A" }
+        ],
+        "title": "Battery charge",
+        "type": "timeseries"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "custom": {
+              "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto",
+              "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none",
+              "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+              "insertNulls": false, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 5,
+              "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false,
+              "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "line" }
+            },
+            "decimals": 0, "mappings": [], "min": 0,
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 300 } ] },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 8, "w": 8, "x": 8, "y": 4 },
+        "id": 7,
+        "options": {
+          "legend": { "calcs": [ "last", "min" ], "displayMode": "table", "placement": "bottom", "showLegend": true },
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_battery_runtime_seconds{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}}", "range": true, "refId": "A" }
+        ],
+        "title": "Battery runtime (line = 5m shed floor)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "palette-classic" },
+            "custom": {
+              "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto",
+              "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none",
+              "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+              "insertNulls": false, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 5,
+              "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false,
+              "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" }
+            },
+            "decimals": 0, "mappings": [], "min": 0,
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 8, "w": 8, "x": 16, "y": 4 },
+        "id": 8,
+        "options": {
+          "legend": { "calcs": [ "last", "max" ], "displayMode": "table", "placement": "bottom", "showLegend": true },
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_load_percent{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}}", "range": true, "refId": "A" }
+        ],
+        "title": "UPS load (comparable across UPSes)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "custom": { "fillOpacity": 80, "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "insertNulls": false, "lineWidth": 0 },
+            "mappings": [
+              { "type": "value", "options": {
+                "0": { "text": "unknown", "color": "text", "index": 0 },
+                "1": { "text": "shed", "color": "red", "index": 1 },
+                "2": { "text": "hold", "color": "yellow", "index": 2 },
+                "3": { "text": "healthy", "color": "green", "index": 3 }
+              } }
+            ],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "text", "value": null } ] }
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 6, "w": 8, "x": 0, "y": 12 },
+        "id": 9,
+        "options": {
+          "alignValue": "left",
+          "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true },
+          "mergeValues": true, "rowHeight": 0.9, "showValue": "auto",
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "sum by (ups) (nut_dog_ups_source_state{state=\"healthy\", ups=~\"$ups\"}) * 3 + sum by (ups) (nut_dog_ups_source_state{state=\"hold\", ups=~\"$ups\"}) * 2 + sum by (ups) (nut_dog_ups_source_state{state=\"shed\", ups=~\"$ups\"})", "instant": false, "legendFormat": "{{ups}}", "range": true, "refId": "A" }
+        ],
+        "title": "UPS source state",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "custom": { "fillOpacity": 80, "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "insertNulls": false, "lineWidth": 0 },
+            "mappings": [
+              { "type": "value", "options": {
+                "0": { "text": "down", "color": "dark-red", "index": 0 },
+                "1": { "text": "up", "color": "green", "index": 1 }
+              } }
+            ],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "dark-red", "value": null }, { "color": "green", "value": 1 } ] }
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 6, "w": 8, "x": 8, "y": 12 },
+        "id": 10,
+        "options": {
+          "alignValue": "left",
+          "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true },
+          "mergeValues": true, "rowHeight": 0.9, "showValue": "never",
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_load_actual_state{state=\"up\"}", "instant": false, "legendFormat": "{{load}}", "range": true, "refId": "A" }
+        ],
+        "title": "Load power (actual)",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "thresholds" },
+            "custom": { "fillOpacity": 80, "hideFrom": { "legend": false, "tooltip": false, "viz": false }, "insertNulls": false, "lineWidth": 0 },
+            "mappings": [
+              { "type": "value", "options": {
+                "0": { "text": "released", "color": "green", "index": 0 },
+                "1": { "text": "asserted", "color": "red", "index": 1 }
+              } }
+            ],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 1 } ] }
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 6, "w": 8, "x": 16, "y": 12 },
+        "id": 11,
+        "options": {
+          "alignValue": "left",
+          "legend": { "displayMode": "list", "placement": "bottom", "showLegend": true },
+          "mergeValues": true, "rowHeight": 0.9, "showValue": "never",
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_load_shed_signal{state=\"asserted\"}", "instant": false, "legendFormat": "{{load}}", "range": true, "refId": "A" }
+        ],
+        "title": "Shed signal",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "palette-classic" },
+            "custom": {
+              "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto",
+              "barAlignment": 0, "drawStyle": "line", "fillOpacity": 0, "gradientMode": "none",
+              "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+              "insertNulls": false, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 5,
+              "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false,
+              "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" }
+            },
+            "mappings": [],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] },
+            "unit": "volt"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 18 },
+        "id": 12,
+        "options": {
+          "legend": { "calcs": [ "last" ], "displayMode": "table", "placement": "bottom", "showLegend": true },
+          "tooltip": { "mode": "multi", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_input_voltage_volts{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}} in", "range": true, "refId": "A" },
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_output_voltage_volts{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}} out", "range": true, "refId": "B" }
+        ],
+        "title": "Line voltage (in / out)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "palette-classic" },
+            "custom": {
+              "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto",
+              "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none",
+              "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+              "insertNulls": false, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 5,
+              "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false,
+              "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" }
+            },
+            "mappings": [], "min": 0,
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] },
+            "unit": "voltamp"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 8, "w": 6, "x": 12, "y": 18 },
+        "id": 13,
+        "options": {
+          "legend": { "calcs": [ "last", "max" ], "displayMode": "list", "placement": "bottom", "showLegend": true },
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}}", "range": true, "refId": "A" }
+        ],
+        "title": "Output power (VA)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "fieldConfig": {
+          "defaults": {
+            "color": { "mode": "palette-classic" },
+            "custom": {
+              "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "", "axisPlacement": "auto",
+              "barAlignment": 0, "drawStyle": "line", "fillOpacity": 10, "gradientMode": "none",
+              "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+              "insertNulls": false, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 5,
+              "scaleDistribution": { "type": "linear" }, "showPoints": "auto", "spanNulls": false,
+              "stacking": { "group": "A", "mode": "none" }, "thresholdsStyle": { "mode": "off" }
+            },
+            "mappings": [],
+            "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 40 } ] },
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": { "h": 8, "w": 6, "x": 18, "y": 18 },
+        "id": 14,
+        "options": {
+          "legend": { "calcs": [ "last", "max" ], "displayMode": "list", "placement": "bottom", "showLegend": true },
+          "tooltip": { "mode": "single", "sort": "none" }
+        },
+        "pluginVersion": "12.3.0-17814087142",
+        "targets": [
+          { "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" }, "editorMode": "code", "exemplar": false, "expr": "nut_dog_ups_temperature_celsius{ups=~\"$ups\"}", "instant": false, "legendFormat": "{{ups}}", "range": true, "refId": "A" }
+        ],
+        "title": "Temperature (UPS-B only)",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "30s",
+    "schemaVersion": 42,
+    "tags": [
+      "energy",
+      "ups",
+      "nut-dog"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "k8_dev_hla1",
+            "value": "aef9f9k9lvwn4b"
+          },
+          "includeAll": false,
+          "label": "Source",
+          "name": "DS_PROMETHEUS",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "definition": "label_values(nut_dog_ups_reachable, ups)",
+          "includeAll": true,
+          "label": "UPS",
+          "multi": true,
+          "name": "ups",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(nut_dog_ups_reachable, ups)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "nut-dog"
+  }
+}
