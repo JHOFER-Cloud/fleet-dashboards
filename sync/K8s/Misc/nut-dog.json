@@ -783,6 +783,28 @@
                     },
                     "refId": "A"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
+                        "instant": false,
+                        "legendFormat": "{{device_name}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -792,7 +814,7 @@
           "description": "",
           "id": 14,
           "links": [],
-          "title": "Temperature (UPS-B only)",
+          "title": "Temperature",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -800,8 +822,8 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "mode": "continuous-GrYlRd",
-                    "seriesBy": "last"
+                    "mode": "palette-classic",
+                    "seriesBy": "max"
                   },
                   "custom": {
                     "axisBorderShow": false,
@@ -810,10 +832,10 @@
                     "axisLabel": "",
                     "axisPlacement": "auto",
                     "barAlignment": 0,
-                    "barWidthFactor": 0.6,
-                    "drawStyle": "bars",
-                    "fillOpacity": 70,
-                    "gradientMode": "scheme",
+                    "barWidthFactor": 0.9,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
                     "hideFrom": {
                       "legend": false,
                       "tooltip": false,
@@ -825,11 +847,11 @@
                       "fill": "solid"
                     },
                     "lineWidth": 1,
-                    "pointSize": 5,
+                    "pointSize": 1,
                     "scaleDistribution": {
                       "type": "linear"
                     },
-                    "showPoints": "auto",
+                    "showPoints": "always",
                     "showValues": false,
                     "spanNulls": false,
                     "stacking": {
@@ -1693,7 +1715,7 @@
           "description": "",
           "id": 8,
           "links": [],
-          "title": "UPS load (comparable across UPSes)",
+          "title": "UPS load",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -2221,6 +2243,45 @@
           "regexApplyTo": "value",
           "skipUrlSync": false,
           "sort": "alphabeticalAsc"
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": false,
+          "current": {
+            "text": [
+              "HLA1-Out"
+            ],
+            "value": [
+              "HLA1-Out"
+            ]
+          },
+          "definition": "label_values(airthings_temperature_celsius,device_name)",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Temp sensors",
+          "multi": true,
+          "name": "temp_sensors",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "${DS_PROMETHEUS}"
+            },
+            "group": "prometheus",
+            "kind": "DataQuery",
+            "spec": {
+              "qryType": 1,
+              "query": "label_values(airthings_temperature_celsius,device_name)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "version": "v0"
+          },
+          "refresh": "onDashboardLoad",
+          "regex": "",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
         }
       }
     ]
