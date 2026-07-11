@@ -2157,6 +2157,20 @@
         "tooltip": "View source file in repository",
         "type": "link",
         "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/K8s/Misc/nut-dog.json"
+      },
+      {
+        "asDropdown": true,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": true,
+        "tags": [
+          "energy"
+        ],
+        "targetBlank": false,
+        "title": "Energy Dashboards",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
       }
     ],
     "liveNow": false,
@@ -2186,7 +2200,7 @@
       "timezone": "browser",
       "to": "now"
     },
-    "title": "nut-dog",
+    "title": "NUT Dog",
     "variables": [
       {
         "kind": "DatasourceVariable",
@@ -2250,9 +2264,7 @@
         "spec": {
           "allowCustomValue": false,
           "current": {
-            "text": [
-              "All"
-            ],
+            "text": "All",
             "value": [
               "$__all"
             ]
