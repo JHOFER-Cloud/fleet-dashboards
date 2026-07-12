@@ -1033,6 +1033,125 @@
           }
         }
       },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "clamp_max(max by (load) (increase(nut_dog_wake_inhibited_total[1m])), 1) or (max by (load) (nut_dog_load_shed_signal{state=\"asserted\"}) * 0)",
+                        "instant": false,
+                        "legendFormat": "{{load}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "1\t\tpower-on deferred to an external hold (e.g. energy-watchdog)\n0\t\tnot inhibited",
+          "id": 16,
+          "links": [],
+          "title": "Wake inhibited",
+          "vizConfig": {
+            "group": "state-timeline",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "axisPlacement": "auto",
+                    "fillOpacity": 80,
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineWidth": 0,
+                    "spanNulls": false
+                  },
+                  "mappings": [
+                    {
+                      "options": {
+                        "0": {
+                          "color": "green",
+                          "index": 0,
+                          "text": "not inhibited"
+                        },
+                        "1": {
+                          "color": "blue",
+                          "index": 1,
+                          "text": "inhibited (deferred)"
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "blue",
+                        "value": 1
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "alignValue": "left",
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "displayMode": "list",
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "mergeValues": true,
+                "rowHeight": 0.9,
+                "showValue": "never",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.1.0"
+          }
+        }
+      },
       "panel-2": {
         "kind": "Panel",
         "spec": {
@@ -1981,8 +2100,21 @@
                 "name": "panel-3"
               },
               "height": 4,
-              "width": 4,
+              "width": 3,
               "x": 8,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-16"
+              },
+              "height": 4,
+              "width": 3,
+              "x": 11,
               "y": 0
             }
           },
@@ -1995,7 +2127,7 @@
               },
               "height": 4,
               "width": 8,
-              "x": 12,
+              "x": 14,
               "y": 0
             }
           },
@@ -2007,8 +2139,8 @@
                 "name": "panel-5"
               },
               "height": 4,
-              "width": 4,
-              "x": 20,
+              "width": 2,
+              "x": 22,
               "y": 0
             }
           },
