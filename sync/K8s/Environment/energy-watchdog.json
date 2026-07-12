@@ -774,7 +774,7 @@
                         "exemplar": false,
                         "expr": "max(energy_watchdog_surplus_watts)",
                         "instant": false,
-                        "legendFormat": "surplus (30m avg, drives decision)",
+                        "legendFormat": "surplus (1h avg, drives decision)",
                         "range": true
                       },
                       "version": "v0"
@@ -1480,7 +1480,7 @@
         "title": "Source (GitHub)",
         "tooltip": "View source file in repository",
         "type": "link",
-        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/K8s/Misc/energy-watchdog.json"
+        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/K8s/Environment/energy-watchdog.json"
       },
       {
         "asDropdown": true,
@@ -1518,7 +1518,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-6h",
+      "from": "now-12h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
