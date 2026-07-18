@@ -774,7 +774,7 @@
                         "exemplar": false,
                         "expr": "max(energy_watchdog_surplus_watts)",
                         "instant": false,
-                        "legendFormat": "surplus (1h avg, drives decision)",
+                        "legendFormat": "surplus (30m avg, drives decision)",
                         "range": true
                       },
                       "version": "v0"
