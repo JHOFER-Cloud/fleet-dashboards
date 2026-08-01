@@ -670,9 +670,9 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max(energy_watchdog_dry_run)",
+                        "expr": "max(energy_watchdog_dry_run) + 2 * max(energy_watchdog_manual_shed)",
                         "instant": true,
-                        "legendFormat": "dry-run",
+                        "legendFormat": "mode safety",
                         "range": false
                       },
                       "version": "v0"
@@ -685,7 +685,7 @@
               "transformations": []
             }
           },
-          "description": "",
+          "description": "Live vs dry-run, and whether p1 is held off by hand. A manual shed still reports mode=shed, which is what nut-dog's wake inhibit needs.",
           "id": 6,
           "links": [],
           "title": "Mode safety",
@@ -702,12 +702,24 @@
                     {
                       "options": {
                         "0": {
+                          "color": "green",
                           "index": 0,
                           "text": "Live"
                         },
                         "1": {
+                          "color": "yellow",
                           "index": 1,
                           "text": "Dry-run"
+                        },
+                        "2": {
+                          "color": "blue",
+                          "index": 2,
+                          "text": "Manual shed"
+                        },
+                        "3": {
+                          "color": "yellow",
+                          "index": 3,
+                          "text": "Dry-run + manual"
                         }
                       },
                       "type": "value"
@@ -719,10 +731,6 @@
                       {
                         "color": "green",
                         "value": 0
-                      },
-                      {
-                        "color": "yellow",
-                        "value": 1
                       }
                     ]
                   },
