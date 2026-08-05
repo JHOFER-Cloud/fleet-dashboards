@@ -539,29 +539,6 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}) * 0.75",
-                        "instant": false,
-                        "legendFormat": "{{ups}} ~W (est, PF 0.75)",
-                        "range": true
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "B"
-                  }
-                },
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "datasource": {
-                        "name": "${DS_PROMETHEUS}"
-                      },
-                      "group": "prometheus",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "editorMode": "code",
-                        "exemplar": false,
                         "expr": "max by (ups) (nut_dog_ups_output_realpower_watts{ups=~\"$ups\"})",
                         "instant": false,
                         "legendFormat": "{{ups}} W (real)",
@@ -585,9 +562,9 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(max by (ups) (nut_dog_ups_output_realpower_watts{ups=~\"$ups\"}) or max by (ups) (nut_dog_ups_output_power_voltamperes{ups=~\"$ups\"}) * 0.75)",
+                        "expr": "sum(max by (ups) (nut_dog_ups_output_realpower_watts{ups=~\"$ups\"}))",
                         "instant": false,
-                        "legendFormat": "Σ W (real+est)",
+                        "legendFormat": "Σ W",
                         "range": true
                       },
                       "version": "v0"
@@ -600,7 +577,7 @@
               "transformations": []
             }
           },
-          "description": "Σ W sums each selected UPS's real watts where reported (ups-a), else estimated from VA x 0.75 (ups-b).",
+          "description": "Σ W sums each selected UPS's reported real watts. ups-a (CyberPower) measures it. ups-b (UniFi) derives it as ups.load x 1000 W, so it steps in 10 W and reads high at low load — 100 W where the UniFi UI showed 80 W.",
           "id": 13,
           "links": [],
           "title": "Output power (W)",
@@ -941,7 +918,7 @@
               "transformations": []
             }
           },
-          "description": "Apparent power (VA). Only the UniFi (ups-b) reports it; the CyberPower exposes VA only via an unmapped OID.",
+          "description": "Apparent power (VA), from ups.power (measured V x A). Only the UniFi (ups-b) reports it; the CyberPower exposes VA only via an unmapped OID. This is the one power reading that matches the UniFi UI exactly.",
           "id": 15,
           "links": [],
           "title": "Output power (VA)",
