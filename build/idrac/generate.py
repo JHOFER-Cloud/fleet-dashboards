@@ -37,18 +37,23 @@ def pin_prometheus_datasource(data):
 
 
 def use_instant_table_queries(data):
-    """Make table panels use instant queries.
+    """Make joined inventory tables use instant queries.
 
     idrac.json queries inventory metrics (DIMMs, drives, ports) as range
     queries in table format, so each series contributes one row per sample
     and joinByField multiplies them out — a single DIMM renders as a dozen
     identical rows. status-alternative.json does the same panels correctly
     with instant queries.
+
+    Only joinByField panels are touched. The SEL tables filter on the
+    dashboard time window and dedupe with groupBy, so range mode is
+    deliberate there.
     """
 
     def walk(panels):
         for panel in panels:
-            if panel.get("type") == "table":
+            transforms = {t.get("id") for t in panel.get("transformations", [])}
+            if panel.get("type") == "table" and "joinByField" in transforms:
                 for target in panel.get("targets", []):
                     if target.get("format") == "table":
                         target["instant"] = True

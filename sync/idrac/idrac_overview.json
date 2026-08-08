@@ -1910,9 +1910,9 @@
           "exemplar": false,
           "expr": "last_over_time(idrac_events_log_entry{job=~\"$job\", instance=~\"$instance\"}[$__interval] offset -$__interval) * 1000 < ${__to}\nand \nlast_over_time(idrac_events_log_entry{job=~\"$job\", instance=~\"$instance\"}[$__interval] offset -$__interval) * 1000 > ${__from}",
           "format": "table",
-          "instant": true,
+          "instant": false,
           "legendFormat": "{{ id }}: {{ message }}",
-          "range": false,
+          "range": true,
           "refId": "A"
         }
       ],
