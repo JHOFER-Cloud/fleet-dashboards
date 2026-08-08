@@ -775,12 +775,34 @@
                         "editorMode": "code",
                         "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
                         "instant": false,
-                        "legendFormat": "{{device_name}}",
+                        "legendFormat": "Outlet: {{device_name}}",
                         "range": true
                       },
                       "version": "v0"
                     },
                     "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "jhc:rack_inlet_temp_celsius:mean",
+                        "instant": false,
+                        "legendFormat": "Rack inlet (mean)",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
                   }
                 }
               ],

@@ -317,9 +317,22 @@
             "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Temp sensor: {{device_name}}",
+            "legendFormat": "Outlet: {{device_name}}",
             "range": true,
             "refId": "H"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Inlet: {{nodename}}",
+            "range": true,
+            "refId": "I"
           }
         ],
         "title": "Hardware Temperature Monitor (Coretemp)",
@@ -581,9 +594,22 @@
             "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Temp sensor: {{device_name}}",
+            "legendFormat": "Outlet: {{device_name}}",
             "range": true,
             "refId": "H"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Inlet: {{nodename}}",
+            "range": true,
+            "refId": "I"
           }
         ],
         "title": "Hardware Temperature Monitor (RAM)",
@@ -845,9 +871,22 @@
             "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Temp sensor: {{device_name}}",
+            "legendFormat": "Outlet: {{device_name}}",
             "range": true,
             "refId": "H"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Inlet: {{nodename}}",
+            "range": true,
+            "refId": "I"
           }
         ],
         "title": "Hardware Temperature Monitor (nvme)",
@@ -1109,9 +1148,22 @@
             "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Temp sensor: {{device_name}}",
+            "legendFormat": "Outlet: {{device_name}}",
             "range": true,
             "refId": "H"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Inlet: {{nodename}}",
+            "range": true,
+            "refId": "I"
           }
         ],
         "title": "Hardware Temperature Monitor (SFP+)",
@@ -1373,9 +1425,22 @@
             "expr": "max by(device_name) (airthings_temperature_celsius{device_name=~\"$temp_sensors\"})",
             "hide": false,
             "instant": false,
-            "legendFormat": "Temp sensor: {{device_name}}",
+            "legendFormat": "Outlet: {{device_name}}",
             "range": true,
             "refId": "H"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds_prometheus}"
+            },
+            "editorMode": "code",
+            "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Inlet: {{nodename}}",
+            "range": true,
+            "refId": "I"
           }
         ],
         "title": "Hardware Temperature Monitor (Misc)",
