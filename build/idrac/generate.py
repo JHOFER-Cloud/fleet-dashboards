@@ -21,6 +21,10 @@ RAW_BASE = "https://raw.githubusercontent.com/mrlhansen/idrac_exporter"
 # The exporter only runs in the dev cluster, so pin the datasource there.
 PROMETHEUS_DS = {"text": "k8_dev_hla1", "value": "aef9f9k9lvwn4b"}
 
+# Upstream leaves status-alternative.json untagged, so it drops out of the tag
+# search that finds the other two.
+TAGS = ["dell", "idrac", "lenovo", "redfish"]
+
 # (upstream_filename, output_filename)
 DASHBOARDS = [
     ("idrac.json", "idrac.json"),
@@ -33,6 +37,12 @@ def pin_prometheus_datasource(data):
     for var in data.get("templating", {}).get("list", []):
         if var.get("type") == "datasource" and var.get("query") == "prometheus":
             var["current"] = dict(PROMETHEUS_DS)
+    return data
+
+
+def pin_tags(data):
+    if not data.get("tags"):
+        data["tags"] = list(TAGS)
     return data
 
 
@@ -89,6 +99,7 @@ def main():
         data = fix_v1beta1_schema(data)
         data = pin_prometheus_datasource(data)
         data = use_instant_table_queries(data)
+        data = pin_tags(data)
 
         dst = os.path.join(OUTPUT, out_name)
         with open(dst, "w") as fh:

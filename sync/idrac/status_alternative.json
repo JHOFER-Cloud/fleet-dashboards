@@ -2446,7 +2446,12 @@
   "preload": false,
   "refresh": "5m",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": [
+    "dell",
+    "idrac",
+    "lenovo",
+    "redfish"
+  ],
   "templating": {
     "list": [
       {
