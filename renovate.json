@@ -29,6 +29,15 @@
       "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "cilium/cilium"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^build/idrac/idrac\\.version$/"
+      ],
+      "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "mrlhansen/idrac_exporter"
     }
   ],
   "packageRules": [
@@ -74,6 +83,21 @@
       "postUpgradeTasks": {
         "commands": ["python3 build/K8s/Cilium/generate.py"],
         "fileFilters": ["sync/K8s/Cilium/**"],
+        "executionMode": "update"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-releases"],
+      "matchFileNames": [
+        "build/idrac/idrac.version"
+      ],
+      "matchPackageNames": [
+        "mrlhansen/idrac_exporter"
+      ],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/idrac/generate.py"],
+        "fileFilters": ["sync/idrac/**"],
         "executionMode": "update"
       }
     }
