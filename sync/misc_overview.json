@@ -927,7 +927,7 @@
                       "spec": {
                         "editorMode": "code",
                         "expr": "jhc:rack_inlet_temp_celsius:mean",
-                        "legendFormat": "Inlet - blades (mean)",
+                        "legendFormat": "Inlet - iDRAC (mean)",
                         "range": true
                       },
                       "version": "v0"
