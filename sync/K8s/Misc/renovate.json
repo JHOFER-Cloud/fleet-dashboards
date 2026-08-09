@@ -664,7 +664,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(kind) (rate(renovate_operator_jobs_dispatched_total{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"}[$__rate_interval]))",
-          "legendFormat": "{{`{{kind}}`}}",
+          "legendFormat": "{{kind}}",
           "range": true,
           "refId": "A"
         }
@@ -957,7 +957,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(reason) (rate(renovate_operator_job_failures_total{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"}[$__rate_interval]))",
-          "legendFormat": "{{`{{reason}}`}}",
+          "legendFormat": "{{reason}}",
           "range": true,
           "refId": "A"
         }
@@ -1061,7 +1061,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(renovate_job) (renovate_operator_projects_scheduled{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"})",
-          "legendFormat": "scheduled: {{`{{renovate_job}}`}}",
+          "legendFormat": "scheduled: {{renovate_job}}",
           "range": true,
           "refId": "A"
         },
@@ -1069,7 +1069,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(renovate_job) (renovate_operator_projects_running{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"})",
-          "legendFormat": "running: {{`{{renovate_job}}`}}",
+          "legendFormat": "running: {{renovate_job}}",
           "range": true,
           "refId": "B"
         }
@@ -1420,7 +1420,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(result) (rate(renovate_operator_schedule_runs_total{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"}[$__rate_interval]))",
-          "legendFormat": "{{`{{result}}`}}",
+          "legendFormat": "{{result}}",
           "range": true,
           "refId": "A"
         }
@@ -1627,7 +1627,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(renovate_job) (renovate_operator_discovered_repositories{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"})",
-          "legendFormat": "{{`{{renovate_job}}`}}",
+          "legendFormat": "{{renovate_job}}",
           "range": true,
           "refId": "A"
         }
@@ -1749,7 +1749,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(status) (rate(renovate_operator_discovery_jobs_total{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"}[$__rate_interval]))",
-          "legendFormat": "{{`{{status}}`}}",
+          "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
         }
@@ -1840,7 +1840,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(reason) (rate(renovate_operator_repositories_filtered_total{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"}[$__rate_interval]))",
-          "legendFormat": "{{`{{reason}}`}}",
+          "legendFormat": "{{reason}}",
           "range": true,
           "refId": "A"
         }
@@ -2059,7 +2059,7 @@
           "exemplar": false,
           "expr": "sum by(status) (renovate_operator_repositories_by_status{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"})",
           "instant": true,
-          "legendFormat": "{{`{{status}}`}}",
+          "legendFormat": "{{status}}",
           "range": false,
           "refId": "A"
         }
@@ -2148,7 +2148,7 @@
           "expr": "topk(10, sum by(project) (renovate_operator_open_pull_requests{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"}) > 0)",
           "format": "time_series",
           "instant": true,
-          "legendFormat": "{{`{{project}}`}}",
+          "legendFormat": "{{project}}",
           "range": false,
           "refId": "A"
         }
@@ -2237,7 +2237,7 @@
           "expr": "topk(15, renovate_operator_last_execution_duration_seconds{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"})",
           "format": "time_series",
           "instant": true,
-          "legendFormat": "{{`{{project}}`}}",
+          "legendFormat": "{{project}}",
           "range": false,
           "refId": "A"
         }
@@ -2472,7 +2472,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum by(level) (renovate_operator_log_issues{renovate_namespace=~\"$RenovateNamespace\", renovate_job=~\"$RenovateJob\"})",
-          "legendFormat": "{{`{{level}}`}}",
+          "legendFormat": "{{level}}",
           "range": true,
           "refId": "A"
         }
@@ -2703,7 +2703,7 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sum by(provider, result) (rate(renovate_operator_webhook_requests_total[$__rate_interval]))",
-              "legendFormat": "{{`{{provider}}`}} / {{`{{result}}`}}",
+              "legendFormat": "{{provider}} / {{result}}",
               "range": true,
               "refId": "A"
             }
@@ -2798,7 +2798,7 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sum by(provider) (rate(renovate_operator_webhook_signature_verification_failures_total[$__rate_interval]))",
-              "legendFormat": "sig fail: {{`{{provider}}`}}",
+              "legendFormat": "sig fail: {{provider}}",
               "range": true,
               "refId": "A"
             },
@@ -2806,7 +2806,7 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sum by(provider, error_type) (rate(renovate_operator_webhook_auth_failures_total[$__rate_interval]))",
-              "legendFormat": "auth fail: {{`{{provider}}`}}/{{`{{error_type}}`}}",
+              "legendFormat": "auth fail: {{provider}}/{{error_type}}",
               "range": true,
               "refId": "B"
             }
@@ -2897,7 +2897,7 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sum by(provider) (rate(renovate_operator_webhook_payload_decode_failures_total[$__rate_interval]))",
-              "legendFormat": "{{`{{provider}}`}}",
+              "legendFormat": "{{provider}}",
               "range": true,
               "refId": "A"
             }
@@ -2992,7 +2992,7 @@
               "editorMode": "code",
               "exemplar": false,
               "expr": "sum by(error_type) (rate(renovate_operator_secret_resolution_errors_total[$__rate_interval]))",
-              "legendFormat": "{{`{{error_type}}`}}",
+              "legendFormat": "{{error_type}}",
               "range": true,
               "refId": "A"
             }
