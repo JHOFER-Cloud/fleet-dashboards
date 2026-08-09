@@ -80,6 +80,20 @@ def value_column(panel):
     return None
 
 
+def is_timestamp_column(panel, column):
+    """True when the column renders as a date, in which case soonest is the
+    useful top row rather than largest."""
+    for override in panel.get("fieldConfig", {}).get("overrides", []):
+        if override.get("matcher", {}).get("options") != column:
+            continue
+        for prop in override.get("properties", []):
+            if prop.get("id") == "unit" and str(prop.get("value", "")).startswith(
+                "dateTime"
+            ):
+                return True
+    return False
+
+
 def sort_panels(data):
     """Sort legend tables and table panels by value, highest first."""
     for panel in walk_panels(data.get("panels", [])):
@@ -95,7 +109,10 @@ def sort_panels(data):
             column = value_column(panel)
             if column:
                 panel.setdefault("options", {})["sortBy"] = [
-                    {"displayName": column, "desc": True}
+                    {
+                        "displayName": column,
+                        "desc": not is_timestamp_column(panel, column),
+                    }
                 ]
     return data
 
