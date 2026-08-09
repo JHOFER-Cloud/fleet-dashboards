@@ -33,6 +33,15 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/^build/K8s/Renovate/renovate-operator\\.version$/"
+      ],
+      "matchStrings": ["(?<currentValue>[0-9]+\\.[0-9]+\\.[0-9]+)"],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "mogenius/renovate-operator"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/^build/idrac/idrac\\.version$/"
       ],
       "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
@@ -83,6 +92,21 @@
       "postUpgradeTasks": {
         "commands": ["python3 build/K8s/Cilium/generate.py"],
         "fileFilters": ["sync/K8s/Cilium/**"],
+        "executionMode": "update"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-tags"],
+      "matchFileNames": [
+        "build/K8s/Renovate/renovate-operator.version"
+      ],
+      "matchPackageNames": [
+        "mogenius/renovate-operator"
+      ],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/K8s/Renovate/generate.py"],
+        "fileFilters": ["sync/K8s/Misc/renovate.json"],
         "executionMode": "update"
       }
     },
