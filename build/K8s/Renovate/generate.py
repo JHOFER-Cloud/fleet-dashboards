@@ -10,6 +10,7 @@ is inlined in charts/renovate-operator/templates/dashboard.yaml under the
 """
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -33,6 +34,16 @@ def clone_at_tag(tag):
         check=True,
     )
     return tmpdir
+
+
+def unescape_helm(text):
+    """Undo Helm's escaping of Grafana's own interpolations.
+
+    Grafana legend fields use {{label}}, which the chart has to escape so Helm
+    does not evaluate it. Helm resolves that at render time; this generator reads
+    the raw template, so it has to do the same.
+    """
+    return re.sub(r"\{\{`(.*?)`\}\}", r"\1", text)
 
 
 def extract_dashboard(path):
@@ -65,7 +76,7 @@ def extract_dashboard(path):
             break
         block.append(line[indent:])
 
-    return json.loads("\n".join(block))
+    return json.loads(unescape_helm("\n".join(block)))
 
 
 def main():
