@@ -46,6 +46,77 @@ def unescape_helm(text):
     return re.sub(r"\{\{`(.*?)`\}\}", r"\1", text)
 
 
+# Grafana displays reducers under these names, which is what sortBy matches on.
+CALC_DISPLAY_NAMES = {
+    "lastNotNull": "Last *",
+    "last": "Last",
+    "max": "Max",
+    "mean": "Mean",
+    "min": "Min",
+    "sum": "Total",
+    "count": "Count",
+}
+
+# When a legend carries several calcs, sort by the first of these present.
+CALC_PRIORITY = ["lastNotNull", "last", "max", "sum", "mean", "count", "min"]
+
+
+def walk_panels(panels):
+    for panel in panels:
+        yield panel
+        yield from walk_panels(panel.get("panels", []))
+
+
+def value_column(panel):
+    """Name the numeric column of a table panel carries after its organize
+    transformation, or None when the value is dropped."""
+    for transform in panel.get("transformations", []):
+        if transform.get("id") != "organize":
+            continue
+        options = transform.get("options", {})
+        if options.get("excludeByName", {}).get("Value"):
+            return None
+        return options.get("renameByName", {}).get("Value") or "Value"
+    return None
+
+
+def is_timestamp_column(panel, column):
+    """True when the column renders as a date, in which case soonest is the
+    useful top row rather than largest."""
+    for override in panel.get("fieldConfig", {}).get("overrides", []):
+        if override.get("matcher", {}).get("options") != column:
+            continue
+        for prop in override.get("properties", []):
+            if prop.get("id") == "unit" and str(prop.get("value", "")).startswith(
+                "dateTime"
+            ):
+                return True
+    return False
+
+
+def sort_panels(data):
+    """Sort legend tables and table panels by value, highest first."""
+    for panel in walk_panels(data.get("panels", [])):
+        legend = panel.get("options", {}).get("legend", {})
+        if legend.get("displayMode") == "table":
+            for calc in CALC_PRIORITY:
+                if calc in (legend.get("calcs") or []):
+                    legend["sortBy"] = CALC_DISPLAY_NAMES[calc]
+                    legend["sortDesc"] = True
+                    break
+
+        if panel.get("type") == "table":
+            column = value_column(panel)
+            if column:
+                panel.setdefault("options", {})["sortBy"] = [
+                    {
+                        "displayName": column,
+                        "desc": not is_timestamp_column(panel, column),
+                    }
+                ]
+    return data
+
+
 def extract_dashboard(path):
     """Pull the JSON out of the `<key>: |` literal block in a Helm template.
 
@@ -88,6 +159,7 @@ def main():
 
     try:
         data = extract_dashboard(os.path.join(tmpdir, TEMPLATE))
+        data = sort_panels(data)
         data = fix_v1beta1_schema(data)
 
         os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
