@@ -13,7 +13,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations \u0026 Alerts",
+          "name": "Annotations & Alerts",
           "query": {
             "datasource": {
               "name": "-- Grafana --"
@@ -170,16 +170,39 @@
                     },
                     "refId": "B"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "min(energy_watchdog_power_request_success)",
+                        "instant": false,
+                        "legendFormat": "nut-dog link",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
                 }
               ],
               "queryOptions": {},
               "transformations": []
             }
           },
-          "description": "",
+          "description": "nut-dog link is energy_watchdog_power_request_success: off means p1's power requests are not reaching nut-dog, so the solar loop no longer controls it.",
           "id": 10,
           "links": [],
-          "title": "p1 power \u0026 gaming",
+          "title": "p1 power, gaming & power delegation",
           "vizConfig": {
             "group": "state-timeline",
             "kind": "VizConfig",
@@ -670,7 +693,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max(energy_watchdog_dry_run) + 2 * max(energy_watchdog_manual_shed)",
+                        "expr": "max(energy_watchdog_dry_run) + 2 * max(energy_watchdog_manual_shed) + 4 * (max(energy_watchdog_manual_on) or vector(0))",
                         "instant": true,
                         "legendFormat": "mode safety",
                         "range": false
@@ -685,7 +708,7 @@
               "transformations": []
             }
           },
-          "description": "Live vs dry-run, and whether p1 is held off by hand. A manual shed still reports mode=shed, which is what nut-dog's wake inhibit needs.",
+          "description": "Live vs dry-run, and whether p1 is held off or on by hand. A manual shed still reports mode=shed, which is what nut-dog's wake inhibit needs. The two holds are mutually exclusive at the source, so 6 and 7 are unreachable. manual_on is guarded with `or vector(0)` so the tile still reads on a watchdog too old to export it.",
           "id": 6,
           "links": [],
           "title": "Mode safety",
@@ -719,7 +742,17 @@
                         "3": {
                           "color": "yellow",
                           "index": 3,
-                          "text": "Dry-run + manual"
+                          "text": "Dry-run + manual shed"
+                        },
+                        "4": {
+                          "color": "orange",
+                          "index": 4,
+                          "text": "Manual on"
+                        },
+                        "5": {
+                          "color": "yellow",
+                          "index": 5,
+                          "text": "Dry-run + manual on"
                         }
                       },
                       "type": "value"
