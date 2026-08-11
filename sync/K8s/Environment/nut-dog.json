@@ -1052,7 +1052,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (load) (nut_dog_load_requested_state{state=\"hold\"}) or (max by (load) (nut_dog_load_shed_signal{state=\"asserted\"}) * 0)",
+                        "expr": "sum by (load) (nut_dog_load_requested_state{state=\"hold\"}) + 2 * sum by (load) (nut_dog_load_requested_state{state=\"off\"}) + 3 * sum by (load) (nut_dog_load_requested_state{state=\"on\"})",
                         "instant": false,
                         "legendFormat": "{{load}}",
                         "range": true
@@ -1067,10 +1067,10 @@
               "transformations": []
             }
           },
-          "description": "1\tthe other controller has asked nut-dog to leave this load alone\n0\tno hold\n\nReplaces the old wake-inhibit counter: nut-dog no longer gates on Prometheus, it resolves the request itself. See also nut_dog_startup_grace_active.",
+          "description": "0\t\tnone\t\n1\t\thold\t\n2\t\toff\t\n3\t\ton",
           "id": 16,
           "links": [],
-          "title": "External hold",
+          "title": "External power request",
           "vizConfig": {
             "group": "state-timeline",
             "kind": "VizConfig",
@@ -1096,14 +1096,24 @@
                     {
                       "options": {
                         "0": {
-                          "color": "green",
+                          "color": "text",
                           "index": 0,
-                          "text": "no hold"
+                          "text": "none"
                         },
                         "1": {
                           "color": "blue",
                           "index": 1,
-                          "text": "held by request"
+                          "text": "hold"
+                        },
+                        "2": {
+                          "color": "dark-red",
+                          "index": 2,
+                          "text": "off"
+                        },
+                        "3": {
+                          "color": "green",
+                          "index": 3,
+                          "text": "on"
                         }
                       },
                       "type": "value"
@@ -1113,12 +1123,20 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green",
+                        "color": "text",
                         "value": 0
                       },
                       {
-                        "color": "orange",
+                        "color": "blue",
                         "value": 1
+                      },
+                      {
+                        "color": "dark-red",
+                        "value": 2
+                      },
+                      {
+                        "color": "green",
+                        "value": 3
                       }
                     ]
                   }
