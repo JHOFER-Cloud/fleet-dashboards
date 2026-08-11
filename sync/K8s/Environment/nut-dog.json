@@ -13,7 +13,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations \u0026 Alerts",
+          "name": "Annotations & Alerts",
           "query": {
             "datasource": {
               "name": "-- Grafana --"
@@ -1052,7 +1052,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "clamp_max(max by (load) (increase(nut_dog_wake_inhibited_total[1m])), 1) or (max by (load) (nut_dog_load_shed_signal{state=\"asserted\"}) * 0)",
+                        "expr": "max by (load) (nut_dog_load_requested_state{state=\"hold\"}) or (max by (load) (nut_dog_load_shed_signal{state=\"asserted\"}) * 0)",
                         "instant": false,
                         "legendFormat": "{{load}}",
                         "range": true
@@ -1067,10 +1067,10 @@
               "transformations": []
             }
           },
-          "description": "1\t\tpower-on deferred to an external hold (e.g. energy-watchdog)\n0\t\tnot inhibited",
+          "description": "1\tthe other controller has asked nut-dog to leave this load alone\n0\tno hold\n\nReplaces the old wake-inhibit counter: nut-dog no longer gates on Prometheus, it resolves the request itself. See also nut_dog_startup_grace_active.",
           "id": 16,
           "links": [],
-          "title": "Wake inhibited",
+          "title": "External hold",
           "vizConfig": {
             "group": "state-timeline",
             "kind": "VizConfig",
@@ -1098,12 +1098,12 @@
                         "0": {
                           "color": "green",
                           "index": 0,
-                          "text": "not inhibited"
+                          "text": "no hold"
                         },
                         "1": {
                           "color": "blue",
                           "index": 1,
-                          "text": "inhibited (deferred)"
+                          "text": "held by request"
                         }
                       },
                       "type": "value"
