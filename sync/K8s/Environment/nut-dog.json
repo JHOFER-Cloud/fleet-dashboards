@@ -13,7 +13,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
+          "name": "Annotations \u0026 Alerts",
           "query": {
             "datasource": {
               "name": "-- Grafana --"
@@ -133,7 +133,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -252,7 +252,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -371,7 +371,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -515,7 +515,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -727,7 +727,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -901,7 +901,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1028,7 +1028,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1165,7 +1165,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1257,7 +1257,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1359,7 +1359,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1461,7 +1461,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1544,7 +1544,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1677,7 +1677,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1710,6 +1710,50 @@
                     },
                     "refId": "A"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "600",
+                        "instant": false,
+                        "legendFormat": "ups-b: shed",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "300",
+                        "instant": false,
+                        "legendFormat": "ups-a: shed",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -1719,7 +1763,7 @@
           "description": "",
           "id": 7,
           "links": [],
-          "title": "Battery runtime (line = 5m shed floor)",
+          "title": "Battery runtime",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -1775,16 +1819,62 @@
                       {
                         "color": "red",
                         "value": 0
-                      },
-                      {
-                        "color": "green",
-                        "value": 300
                       }
                     ]
                   },
                   "unit": "s"
                 },
-                "overrides": []
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "ups-.*:.*",
+                      "scope": "series"
+                    },
+                    "properties": [
+                      {
+                        "id": "custom.hideFrom",
+                        "value": {
+                          "legend": true,
+                          "tooltip": false,
+                          "viz": false
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "ups-a.*",
+                      "scope": "series"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "green",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byRegexp",
+                      "options": "ups-b.*",
+                      "scope": "series"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "blue",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
               },
               "options": {
                 "annotations": {
@@ -1809,7 +1899,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -1937,7 +2027,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       },
@@ -2074,7 +2164,7 @@
                 }
               }
             },
-            "version": "13.1.0"
+            "version": "13.1.3"
           }
         }
       }
@@ -2305,7 +2395,7 @@
         "title": "Source (GitHub)",
         "tooltip": "View source file in repository",
         "type": "link",
-        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/K8s/Misc/nut-dog.json"
+        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/K8s/Environment/nut-dog.json"
       },
       {
         "asDropdown": true,
