@@ -1,2024 +1,2718 @@
 {
-  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
     "name": "k8s_traefik"
   },
   "spec": {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "grafana",
-            "uid": "-- Grafana --"
-          },
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
           "name": "Annotations \u0026 Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
-          "type": "dashboard"
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "version": "v0"
+          }
         }
-      ]
-    },
-    "description": "Official dashboard for Traefik on Kubernetes",
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
-    "links": [],
-    "panels": [
-      {
-        "collapsed": false,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 9,
-        "panels": [],
-        "title": "General",
-        "type": "row"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 2,
-          "w": 4,
-          "x": 0,
-          "y": 1
-        },
-        "id": 13,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "percentChangeColorMode": "standard",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "count(traefik_config_reloads_total)",
-            "legendFormat": "__auto",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Traefik Instances",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${loki_datasource}"
-        },
-        "description": "- request_Cf_Connecting_Ip\n- request_X_Real_Ip\n\nexcluding 10.2.*",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": []
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 7,
-          "x": 4,
-          "y": 1
-        },
-        "id": 27,
-        "options": {
-          "displayLabels": [
-            "percent",
-            "name"
-          ],
-          "legend": {
-            "calcs": [],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true,
-            "values": [
-              "value"
-            ]
-          },
-          "pieType": "donut",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${loki_datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "sum by (external_ip) (\n  count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__ \n  | ServiceName=~\"$service@.*\"\n  | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n  | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n  | external_ip!~\"10.2.*\" | external_ip!=\"\" [$__auto])\n)",
-            "legendFormat": "{{external_ip}}",
-            "queryType": "range",
-            "refId": "logs"
-          }
-        ],
-        "title": "Connecting IPs",
-        "type": "piechart"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "reqps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 5,
-          "x": 11,
-          "y": 1
-        },
-        "id": 7,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Max",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "sum(rate(traefik_entrypoint_requests_total{entrypoint=~\"$entrypoint\"}[$interval])) by (entrypoint)",
-            "legendFormat": "{{entrypoint}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Requests per Entrypoint",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "https://medium.com/@tristan_96324/prometheus-apdex-alerting-d17a065e39d0",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 16,
-          "y": 1
-        },
-        "id": 6,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Max",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "(sum(rate(traefik_entrypoint_request_duration_seconds_bucket{le=\"0.3\",code=\"200\",entrypoint=~\"$entrypoint\"}[$interval])) by (method) + \n sum(rate(traefik_entrypoint_request_duration_seconds_bucket{le=\"1.2\",code=\"200\",entrypoint=~\"$entrypoint\"}[$interval])) by (method)) / 2 / \n sum(rate(traefik_entrypoint_request_duration_seconds_count{code=\"200\",entrypoint=~\"$entrypoint\"}[$interval])) by (method)\n",
-            "legendFormat": "{{method}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Apdex score",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "continuous-RdYlGr"
-            },
-            "custom": {
-              "axisPlacement": "auto",
-              "fillOpacity": 70,
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineWidth": 0,
-              "spanNulls": false
-            },
-            "fieldMinMax": true,
-            "mappings": [],
-            "max": 7,
-            "min": 90,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "d"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 20,
-          "y": 1
-        },
-        "id": 25,
-        "options": {
-          "alignValue": "left",
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "mergeValues": true,
-          "rowHeight": 0.9,
-          "showValue": "always",
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "asc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "round(max by(cn) ((traefik_tls_certs_not_after - time()) / 86400))",
-            "legendFormat": "{{cn}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "TLS",
-        "type": "state-timeline"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "Mean Distribution",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": [],
-            "unit": "reqps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 4,
-          "x": 0,
-          "y": 3
-        },
-        "id": 14,
-        "options": {
-          "displayLabels": [
-            "name"
-          ],
-          "legend": {
-            "displayMode": "list",
-            "placement": "right",
-            "showLegend": false,
-            "values": [
-              "percent"
-            ]
-          },
-          "pieType": "pie",
-          "reduceOptions": {
-            "calcs": [
-              "mean"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "tooltip": {
-            "hideZeros": true,
-            "mode": "single",
-            "sort": "asc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "sum(rate(traefik_service_requests_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) by (method, code)",
-            "legendFormat": "{{method}}[{{code}}]",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Http Code ",
-        "type": "piechart"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "dashed"
-              }
-            },
-            "fieldMinMax": false,
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 0.01
-                }
-              ]
-            },
-            "unit": "s"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 9
-        },
-        "id": 23,
-        "options": {
-          "legend": {
-            "calcs": [
-              "min",
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Max",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(10, \n    label_replace(\n        rate(traefik_service_request_duration_seconds_sum{exported_service=~\"$service.*\",protocol=\"http\"}[5m]) / \n        rate(traefik_service_request_duration_seconds_count{exported_service=~\"$service.*\",protocol=\"http\"}[5m]), \n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\"\n    )\n)",
-            "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Top slow services",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "reqps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 9
-        },
-        "id": 5,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Mean",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
-            "legendFormat": "[{{code}}] on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Most requested services",
-        "type": "timeseries"
-      },
-      {
-        "collapsed": false,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 17
-        },
-        "id": 31,
-        "panels": [],
-        "title": "Clients",
-        "type": "row"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${loki_datasource}"
-        },
-        "description": "Client IP taken from request_Cf_Connecting_Ip, falling back to request_X_Real_Ip.\n\nPrivate ranges (10/8, 172.16/12, 192.168/16) are excluded, so this is external traffic only.\n\nTop 10 IPs per time bucket.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.9,
-              "drawStyle": "bars",
-              "fillOpacity": 80,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 0,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "normal"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 16,
-          "x": 0,
-          "y": 18
-        },
-        "id": 28,
-        "options": {
-          "legend": {
-            "calcs": [
-              "sum"
-            ],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true,
-            "sortBy": "Total",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": true,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${loki_datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "topk(10,\n  sum by (external_ip) (\n    count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__\n    | ServiceName=~\"$service@.*\"\n    | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n    | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n    | label_format country=\"{{if .request_Cf_Ipcountry}}{{.request_Cf_Ipcountry}}{{else}}-{{end}}\"\n    | external_ip!=\"\"\n    | external_ip!~\"10\\\\..*|172\\\\.(1[6-9]|2[0-9]|3[01])\\\\..*|192\\\\.168\\\\..*\"\n    | keep external_ip [$__auto])\n  )\n)",
-            "legendFormat": "{{external_ip}}",
-            "queryType": "range",
-            "refId": "logs"
-          }
-        ],
-        "title": "Requests per client IP",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${loki_datasource}"
-        },
-        "description": "Client IP taken from request_Cf_Connecting_Ip, falling back to request_X_Real_Ip.\n\nPrivate ranges (10/8, 172.16/12, 192.168/16) are excluded, so this is external traffic only.\n\nCountry comes from request_Cf_Ipcountry ('-' when the request did not pass Cloudflare).",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "filterable": true,
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "text"
-                }
-              ]
-            }
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Requests"
-              },
-              "properties": [
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "mode": "gradient",
-                    "type": "gauge"
-                  }
-                },
-                {
-                  "id": "color",
-                  "value": {
-                    "mode": "continuous-BlYlRd"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 9,
-          "w": 8,
-          "x": 16,
-          "y": 18
-        },
-        "id": 29,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
-          "showHeader": true
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${loki_datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "topk(20,\n  sum by (external_ip, country) (\n    count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__\n    | ServiceName=~\"$service@.*\"\n    | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n    | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n    | label_format country=\"{{if .request_Cf_Ipcountry}}{{.request_Cf_Ipcountry}}{{else}}-{{end}}\"\n    | external_ip!=\"\"\n    | external_ip!~\"10\\\\..*|172\\\\.(1[6-9]|2[0-9]|3[01])\\\\..*|192\\\\.168\\\\..*\"\n    | keep external_ip, country [$__range])\n  )\n)",
-            "queryType": "instant",
-            "refId": "logs"
-          }
-        ],
-        "title": "Top client IPs",
-        "transformations": [
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Time": true
-              },
-              "includeByName": {},
-              "indexByName": {},
-              "renameByName": {
-                "Value": "Requests",
-                "country": "Country",
-                "external_ip": "Client IP"
-              }
-            }
-          },
-          {
-            "id": "sortBy",
-            "options": {
-              "fields": {},
-              "sort": [
-                {
-                  "desc": true,
-                  "field": "Requests"
-                }
-              ]
-            }
-          }
-        ],
-        "type": "table"
-      },
-      {
-        "datasource": {
-          "type": "loki",
-          "uid": "${loki_datasource}"
-        },
-        "description": "Client IP taken from request_Cf_Connecting_Ip, falling back to request_X_Real_Ip.\n\nPrivate ranges (10/8, 172.16/12, 192.168/16) are excluded, so this is external traffic only.\n\nUser agent as sent by the client (request_User_Agent).",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "filterable": true,
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "text"
-                }
-              ]
-            }
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Requests"
-              },
-              "properties": [
-                {
-                  "id": "custom.width",
-                  "value": 220
-                },
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "mode": "gradient",
-                    "type": "gauge"
-                  }
-                },
-                {
-                  "id": "color",
-                  "value": {
-                    "mode": "continuous-BlYlRd"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 27
-        },
-        "id": 30,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
-          "showHeader": true
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "loki",
-              "uid": "${loki_datasource}"
-            },
-            "direction": "backward",
-            "editorMode": "code",
-            "expr": "topk(30,\n  sum by (request_User_Agent) (\n    count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__\n    | ServiceName=~\"$service@.*\"\n    | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n    | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n    | label_format country=\"{{if .request_Cf_Ipcountry}}{{.request_Cf_Ipcountry}}{{else}}-{{end}}\"\n    | external_ip!=\"\"\n    | external_ip!~\"10\\\\..*|172\\\\.(1[6-9]|2[0-9]|3[01])\\\\..*|192\\\\.168\\\\..*\"\n    | request_User_Agent!=\"\"\n    | keep request_User_Agent [$__range])\n  )\n)",
-            "queryType": "instant",
-            "refId": "logs"
-          }
-        ],
-        "title": "Top user agents",
-        "transformations": [
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {
-                "Time": true
-              },
-              "includeByName": {},
-              "indexByName": {},
-              "renameByName": {
-                "Value": "Requests",
-                "request_User_Agent": "User agent"
-              }
-            }
-          },
-          {
-            "id": "sortBy",
-            "options": {
-              "fields": {},
-              "sort": [
-                {
-                  "desc": true,
-                  "field": "Requests"
-                }
-              ]
-            }
-          }
-        ],
-        "type": "table"
-      },
-      {
-        "collapsed": true,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 35
-        },
-        "id": 11,
-        "panels": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 0,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "percentunit"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 12,
-              "x": 0,
-              "y": 34
-            },
-            "id": 3,
-            "options": {
-              "legend": {
-                "calcs": [
-                  "mean",
-                  "max"
-                ],
-                "displayMode": "table",
-                "placement": "bottom",
-                "showLegend": true,
-                "sortBy": "Max",
-                "sortDesc": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "multi",
-                "sort": "desc"
-              }
-            },
-            "pluginVersion": "11.5.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "editorMode": "code",
-                "expr": "label_replace(\n  1 - (sum by (exported_service)\n    (rate(traefik_service_request_duration_seconds_bucket{le=\"1.2\",exported_service=~\"$service.*\"}[$interval])) / sum by (exported_service) \n    (rate(traefik_service_request_duration_seconds_count{exported_service=~\"$service.*\"}[$interval]))\n  ) \u003e 0,\n  \"service\", \"$1\", \"service\", \"([^@]+)@.*\"\n)",
-                "legendFormat": "{{service}}",
-                "range": true,
-                "refId": "A"
-              }
-            ],
-            "title": "Services failing SLO of 1200ms",
-            "type": "timeseries"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "palette-classic"
-                },
-                "custom": {
-                  "axisBorderShow": false,
-                  "axisCenteredZero": false,
-                  "axisColorMode": "text",
-                  "axisLabel": "",
-                  "axisPlacement": "auto",
-                  "barAlignment": 0,
-                  "barWidthFactor": 0.6,
-                  "drawStyle": "line",
-                  "fillOpacity": 0,
-                  "gradientMode": "none",
-                  "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                  },
-                  "insertNulls": false,
-                  "lineInterpolation": "linear",
-                  "lineWidth": 1,
-                  "pointSize": 5,
-                  "scaleDistribution": {
-                    "type": "linear"
-                  },
-                  "showPoints": "auto",
-                  "spanNulls": false,
-                  "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                  },
-                  "thresholdsStyle": {
-                    "mode": "off"
-                  }
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green"
-                    }
-                  ]
-                },
-                "unit": "percentunit"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 8,
-              "w": 12,
-              "x": 12,
-              "y": 34
-            },
-            "id": 4,
-            "options": {
-              "legend": {
-                "calcs": [
-                  "mean",
-                  "max"
-                ],
-                "displayMode": "table",
-                "placement": "bottom",
-                "showLegend": true,
-                "sortBy": "Max",
-                "sortDesc": true
-              },
-              "tooltip": {
-                "hideZeros": false,
-                "mode": "multi",
-                "sort": "desc"
-              }
-            },
-            "pluginVersion": "11.5.2",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS}"
-                },
-                "editorMode": "code",
-                "expr": "label_replace(\n  1 - (sum by (exported_service)\n    (rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\",exported_service=~\"$service.*\"}[$interval])) / sum by (exported_service) \n    (rate(traefik_service_request_duration_seconds_count{exported_service=~\"$service.*\"}[$interval]))\n  ) \u003e 0,\n  \"service\", \"$1\", \"service\", \"([^@]+)@.*\"\n)",
-                "legendFormat": "{{service}}",
-                "range": true,
-                "refId": "A"
-              }
-            ],
-            "title": "Services failing SLO of 300ms",
-            "type": "timeseries"
-          }
-        ],
-        "title": "SLO",
-        "type": "row"
-      },
-      {
-        "collapsed": false,
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 36
-        },
-        "id": 16,
-        "panels": [],
-        "title": "HTTP Details",
-        "type": "row"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "reqps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 12,
-          "w": 8,
-          "x": 0,
-          "y": 37
-        },
-        "id": 17,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Mean",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",code=~\"2..\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
-            "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "2xx over $interval",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisGridShow": true,
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "reqps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 12,
-          "w": 8,
-          "x": 8,
-          "y": 37
-        },
-        "id": 18,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Mean",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",code=~\"5..\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
-            "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "5xx over $interval",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisGridShow": true,
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "reqps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 12,
-          "w": 8,
-          "x": 16,
-          "y": 37
-        },
-        "id": 19,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Mean",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",code!~\"2..|5..\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
-            "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Other codes over $interval",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisGridShow": true,
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "binBps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 49
-        },
-        "id": 20,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Mean",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method) \n          (rate(traefik_service_requests_bytes_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
-            "legendFormat": "{{method}} on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Requests Size",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisGridShow": true,
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "binBps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 49
-        },
-        "id": 24,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Mean",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method) \n          (rate(traefik_service_responses_bytes_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
-            "legendFormat": "{{method}} on {{exported_service}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Responses Size",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": 0
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 24,
-          "x": 0,
-          "y": 57
-        },
-        "id": 21,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true,
-            "sortBy": "Max",
-            "sortDesc": true
-          },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "multi",
-            "sort": "desc"
-          }
-        },
-        "pluginVersion": "12.1.0",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "editorMode": "code",
-            "expr": "sum(traefik_open_connections{entrypoint=~\"$entrypoint\"}) by (entrypoint)\n",
-            "legendFormat": "{{entrypoint}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Connections per Entrypoint",
-        "type": "timeseries"
       }
     ],
+    "cursorSync": "Off",
+    "description": "Official dashboard for Traefik on Kubernetes",
+    "editable": true,
+    "elements": {
+      "panel-13": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "count(traefik_config_reloads_total)",
+                        "legendFormat": "__auto",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 13,
+          "links": [],
+          "title": "Traefik Instances",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-14": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum(rate(traefik_service_requests_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) by (method, code)",
+                        "legendFormat": "{{method}}[{{code}}]",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Mean Distribution",
+          "id": 14,
+          "links": [],
+          "title": "Http Code ",
+          "vizConfig": {
+            "group": "piechart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "#73BF69",
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "displayLabels": [
+                  "name"
+                ],
+                "legend": {
+                  "displayMode": "list",
+                  "overflow": "ellipsis",
+                  "placement": "right",
+                  "showLegend": false,
+                  "values": [
+                    "percent"
+                  ]
+                },
+                "pieType": "pie",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "sort": "desc",
+                "tooltip": {
+                  "hideZeros": true,
+                  "mode": "single",
+                  "sort": "asc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-17": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",code=~\"2..\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
+                        "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 17,
+          "links": [],
+          "title": "2xx over $interval",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",code=~\"5..\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
+                        "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 18,
+          "links": [],
+          "title": "5xx over $interval",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisGridShow": true,
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-19": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",code!~\"2..|5..\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
+                        "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 19,
+          "links": [],
+          "title": "Other codes over $interval",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisGridShow": true,
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-20": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method) \n          (rate(traefik_service_requests_bytes_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
+                        "legendFormat": "{{method}} on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 20,
+          "links": [],
+          "title": "Requests Size",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisGridShow": true,
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "binBps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-21": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum(traefik_open_connections{entrypoint=~\"$entrypoint\"}) by (entrypoint)\n",
+                        "legendFormat": "{{entrypoint}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 21,
+          "links": [],
+          "title": "Connections per Entrypoint",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "right",
+                  "showLegend": true,
+                  "sortBy": "Max",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-23": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(10, \n    label_replace(\n        rate(traefik_service_request_duration_seconds_sum{exported_service=~\"$service.*\",protocol=\"http\"}[5m]) / \n        rate(traefik_service_request_duration_seconds_count{exported_service=~\"$service.*\",protocol=\"http\"}[5m]), \n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\"\n    )\n)",
+                        "legendFormat": "{{method}}[{{code}}] on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 23,
+          "links": [],
+          "title": "Top slow services",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "dashed"
+                    }
+                  },
+                  "fieldMinMax": false,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.01
+                      }
+                    ]
+                  },
+                  "unit": "s"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "min",
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Max",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-24": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,method) \n          (rate(traefik_service_responses_bytes_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
+                        "legendFormat": "{{method}} on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 24,
+          "links": [],
+          "title": "Responses Size",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisGridShow": true,
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "binBps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-25": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "round(max by(cn) ((traefik_tls_certs_not_after - time()) / 86400))",
+                        "legendFormat": "{{cn}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 25,
+          "links": [],
+          "title": "TLS",
+          "vizConfig": {
+            "group": "state-timeline",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "continuous-RdYlGr"
+                  },
+                  "custom": {
+                    "axisPlacement": "auto",
+                    "fillOpacity": 70,
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineWidth": 0,
+                    "spanNulls": false
+                  },
+                  "fieldMinMax": true,
+                  "max": 7,
+                  "min": 90,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "red",
+                        "value": 0
+                      }
+                    ]
+                  },
+                  "unit": "d"
+                },
+                "overrides": []
+              },
+              "options": {
+                "alignValue": "left",
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "displayMode": "list",
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "mergeValues": true,
+                "rowHeight": 0.9,
+                "showValue": "always",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "asc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-27": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${loki_datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum by (external_ip) (\n  count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__ \n  | ServiceName=~\"$service@.*\"\n  | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n  | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n  | external_ip!~\"10.2.*\" | external_ip!=\"\" [$__auto])\n)",
+                        "legendFormat": "{{external_ip}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "logs"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "- request_Cf_Connecting_Ip\n- request_X_Real_Ip\n\nexcluding 10.2.*",
+          "id": 27,
+          "links": [],
+          "title": "Connecting IPs",
+          "vizConfig": {
+            "group": "piechart",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "#73BF69",
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    }
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "displayLabels": [
+                  "percent",
+                  "name"
+                ],
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "table",
+                  "overflow": "ellipsis",
+                  "placement": "right",
+                  "showLegend": true,
+                  "values": [
+                    "value"
+                  ]
+                },
+                "pieType": "donut",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "sort": "desc",
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-28": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${loki_datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "topk(10,\n  sum by (external_ip) (\n    count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__\n    | ServiceName=~\"$service@.*\"\n    | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n    | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n    | label_format country=\"{{if .request_Cf_Ipcountry}}{{.request_Cf_Ipcountry}}{{else}}-{{end}}\"\n    | external_ip!=\"\"\n    | external_ip!~\"10\\\\..*|172\\\\.(1[6-9]|2[0-9]|3[01])\\\\..*|192\\\\.168\\\\..*\"\n    | keep external_ip [$__auto])\n  )\n)",
+                        "legendFormat": "{{external_ip}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "logs"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Client IP taken from request_Cf_Connecting_Ip, falling back to request_X_Real_Ip.\n\nPrivate ranges (10/8, 172.16/12, 192.168/16) are excluded, so this is external traffic only.\n\nTop 10 IPs per time bucket.",
+          "id": 28,
+          "links": [],
+          "title": "Requests per client IP",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.9,
+                    "drawStyle": "bars",
+                    "fillOpacity": 80,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 0,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "normal"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      }
+                    ]
+                  },
+                  "unit": "short"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "sum"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "right",
+                  "showLegend": true,
+                  "sortBy": "Total",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": true,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-29": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${loki_datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "topk(20,\n  sum by (external_ip, country) (\n    count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__\n    | ServiceName=~\"$service@.*\"\n    | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n    | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n    | label_format country=\"{{if .request_Cf_Ipcountry}}{{.request_Cf_Ipcountry}}{{else}}-{{end}}\"\n    | external_ip!=\"\"\n    | external_ip!~\"10\\\\..*|172\\\\.(1[6-9]|2[0-9]|3[01])\\\\..*|192\\\\.168\\\\..*\"\n    | keep external_ip, country [$__range])\n  )\n)",
+                        "queryType": "instant"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "logs"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": [
+                {
+                  "group": "organize",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "excludeByName": {
+                        "Time": true
+                      },
+                      "includeByName": {},
+                      "indexByName": {},
+                      "renameByName": {
+                        "Value": "Requests",
+                        "country": "Country",
+                        "external_ip": "Client IP"
+                      }
+                    }
+                  }
+                },
+                {
+                  "group": "sortBy",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "fields": {},
+                      "sort": [
+                        {
+                          "desc": true,
+                          "field": "Requests"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "Client IP taken from request_Cf_Connecting_Ip, falling back to request_X_Real_Ip.\n\nPrivate ranges (10/8, 172.16/12, 192.168/16) are excluded, so this is external traffic only.\n\nCountry comes from request_Cf_Ipcountry ('-' when the request did not pass Cloudflare).",
+          "id": 29,
+          "links": [],
+          "title": "Top client IPs",
+          "vizConfig": {
+            "group": "table",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "align": "auto",
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "filterable": true,
+                    "footer": {
+                      "reducers": []
+                    },
+                    "inspect": false
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "text",
+                        "value": 0
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Requests"
+                    },
+                    "properties": [
+                      {
+                        "id": "custom.cellOptions",
+                        "value": {
+                          "mode": "gradient",
+                          "type": "gauge"
+                        }
+                      },
+                      {
+                        "id": "color",
+                        "value": {
+                          "mode": "continuous-BlYlRd"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": true,
+                    "displayName": "Value #logs"
+                  }
+                ]
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "label_replace(\n  1 - (sum by (exported_service)\n    (rate(traefik_service_request_duration_seconds_bucket{le=\"1.2\",exported_service=~\"$service.*\"}[$interval])) / sum by (exported_service) \n    (rate(traefik_service_request_duration_seconds_count{exported_service=~\"$service.*\"}[$interval]))\n  ) \u003e 0,\n  \"service\", \"$1\", \"service\", \"([^@]+)@.*\"\n)",
+                        "legendFormat": "{{service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 3,
+          "links": [],
+          "title": "Services failing SLO of 1200ms",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "unit": "percentunit"
+                },
+                "overrides": []
+              },
+              "options": {
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Max",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "11.5.2"
+          }
+        }
+      },
+      "panel-30": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${loki_datasource}"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "topk(30,\n  sum by (request_User_Agent) (\n    count_over_time({service_name=\"traefik\"} | json | logfmt | drop __error__, __error_details__\n    | ServiceName=~\"$service@.*\"\n    | request_Cf_Connecting_Ip!=\"\" OR request_X_Real_Ip!=\"\"\n    | label_format external_ip=\"{{if .request_Cf_Connecting_Ip}}{{.request_Cf_Connecting_Ip}}{{else}}{{.request_X_Real_Ip}}{{end}}\"\n    | label_format country=\"{{if .request_Cf_Ipcountry}}{{.request_Cf_Ipcountry}}{{else}}-{{end}}\"\n    | external_ip!=\"\"\n    | external_ip!~\"10\\\\..*|172\\\\.(1[6-9]|2[0-9]|3[01])\\\\..*|192\\\\.168\\\\..*\"\n    | request_User_Agent!=\"\"\n    | keep request_User_Agent [$__range])\n  )\n)",
+                        "queryType": "instant"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "logs"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": [
+                {
+                  "group": "organize",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "excludeByName": {
+                        "Time": true
+                      },
+                      "includeByName": {},
+                      "indexByName": {},
+                      "renameByName": {
+                        "Value": "Requests",
+                        "request_User_Agent": "User agent"
+                      }
+                    }
+                  }
+                },
+                {
+                  "group": "sortBy",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "fields": {},
+                      "sort": [
+                        {
+                          "desc": true,
+                          "field": "Requests"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "Client IP taken from request_Cf_Connecting_Ip, falling back to request_X_Real_Ip.\n\nPrivate ranges (10/8, 172.16/12, 192.168/16) are excluded, so this is external traffic only.\n\nUser agent as sent by the client (request_User_Agent).",
+          "id": 30,
+          "links": [],
+          "title": "Top user agents",
+          "vizConfig": {
+            "group": "table",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "align": "auto",
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "filterable": true,
+                    "footer": {
+                      "reducers": []
+                    },
+                    "inspect": false
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "text",
+                        "value": 0
+                      }
+                    ]
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Requests"
+                    },
+                    "properties": [
+                      {
+                        "id": "custom.width",
+                        "value": 220
+                      },
+                      {
+                        "id": "custom.cellOptions",
+                        "value": {
+                          "mode": "gradient",
+                          "type": "gauge"
+                        }
+                      },
+                      {
+                        "id": "color",
+                        "value": {
+                          "mode": "continuous-BlYlRd"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": true,
+                    "displayName": "Value #logs"
+                  }
+                ]
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-4": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "label_replace(\n  1 - (sum by (exported_service)\n    (rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\",exported_service=~\"$service.*\"}[$interval])) / sum by (exported_service) \n    (rate(traefik_service_request_duration_seconds_count{exported_service=~\"$service.*\"}[$interval]))\n  ) \u003e 0,\n  \"service\", \"$1\", \"service\", \"([^@]+)@.*\"\n)",
+                        "legendFormat": "{{service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 4,
+          "links": [],
+          "title": "Services failing SLO of 300ms",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green"
+                      }
+                    ]
+                  },
+                  "unit": "percentunit"
+                },
+                "overrides": []
+              },
+              "options": {
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Max",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "11.5.2"
+          }
+        }
+      },
+      "panel-5": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "topk(15,\n    label_replace(\n        sum by (exported_service,code) \n          (rate(traefik_service_requests_total{exported_service=~\"$service.*\",protocol=\"http\"}[$interval])) \u003e 0,\n        \"exported_service\", \"$1\", \"exported_service\", \"([^@]+)@.*\")\n)",
+                        "legendFormat": "[{{code}}] on {{exported_service}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 5,
+          "links": [],
+          "title": "Most requested services",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Mean",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-6": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "(sum(rate(traefik_entrypoint_request_duration_seconds_bucket{le=\"0.3\",code=\"200\",entrypoint=~\"$entrypoint\"}[$interval])) by (method) + \n sum(rate(traefik_entrypoint_request_duration_seconds_bucket{le=\"1.2\",code=\"200\",entrypoint=~\"$entrypoint\"}[$interval])) by (method)) / 2 / \n sum(rate(traefik_entrypoint_request_duration_seconds_count{code=\"200\",entrypoint=~\"$entrypoint\"}[$interval])) by (method)\n",
+                        "legendFormat": "{{method}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "https://medium.com/@tristan_96324/prometheus-apdex-alerting-d17a065e39d0",
+          "id": 6,
+          "links": [],
+          "title": "Apdex score",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Max",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-7": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum(rate(traefik_entrypoint_requests_total{entrypoint=~\"$entrypoint\"}[$interval])) by (entrypoint)",
+                        "legendFormat": "{{entrypoint}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 7,
+          "links": [],
+          "title": "Requests per Entrypoint",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "reqps"
+                },
+                "overrides": []
+              },
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [
+                    "mean",
+                    "max"
+                  ],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": true,
+                  "sortBy": "Max",
+                  "sortDesc": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "RowsLayout",
+      "spec": {
+        "rows": [
+          {
+            "kind": "RowsLayoutRow",
+            "spec": {
+              "collapse": false,
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-13"
+                        },
+                        "height": 2,
+                        "width": 4,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-27"
+                        },
+                        "height": 8,
+                        "width": 7,
+                        "x": 4,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-7"
+                        },
+                        "height": 8,
+                        "width": 5,
+                        "x": 11,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-6"
+                        },
+                        "height": 8,
+                        "width": 4,
+                        "x": 16,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-25"
+                        },
+                        "height": 8,
+                        "width": 4,
+                        "x": 20,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-14"
+                        },
+                        "height": 6,
+                        "width": 4,
+                        "x": 0,
+                        "y": 2
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-23"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 8
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-5"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 8
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "General"
+            }
+          },
+          {
+            "kind": "RowsLayoutRow",
+            "spec": {
+              "collapse": true,
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-3"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-4"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "SLO"
+            }
+          },
+          {
+            "kind": "RowsLayoutRow",
+            "spec": {
+              "collapse": false,
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-17"
+                        },
+                        "height": 12,
+                        "width": 8,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-18"
+                        },
+                        "height": 12,
+                        "width": 8,
+                        "x": 8,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-19"
+                        },
+                        "height": 12,
+                        "width": 8,
+                        "x": 16,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-20"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 12
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-24"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 12
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-21"
+                        },
+                        "height": 7,
+                        "width": 24,
+                        "x": 0,
+                        "y": 20
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "HTTP Details"
+            }
+          },
+          {
+            "kind": "RowsLayoutRow",
+            "spec": {
+              "collapse": false,
+              "layout": {
+                "kind": "GridLayout",
+                "spec": {
+                  "items": [
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-28"
+                        },
+                        "height": 9,
+                        "width": 16,
+                        "x": 0,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-29"
+                        },
+                        "height": 9,
+                        "width": 8,
+                        "x": 16,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-30"
+                        },
+                        "height": 8,
+                        "width": 24,
+                        "x": 0,
+                        "y": 9
+                      }
+                    }
+                  ]
+                }
+              },
+              "title": "Clients"
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
     "preload": false,
-    "refresh": "auto",
-    "schemaVersion": 41,
     "tags": [],
-    "templating": {
-      "list": [
-        {
+    "timeSettings": {
+      "autoRefresh": "auto",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-24h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "K8s / Traefik",
+    "variables": [
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "allowCustomValue": true,
           "current": {
             "text": "k8_live_hla1",
             "value": "eef9f89usay9sb"
           },
+          "hide": "dontHide",
           "includeAll": false,
           "label": "datasource",
+          "multi": false,
           "name": "DS_PROMETHEUS",
           "options": [],
-          "query": "prometheus",
-          "refresh": 1,
+          "pluginId": "prometheus",
+          "refresh": "onDashboardLoad",
           "regex": "",
-          "type": "datasource"
-        },
-        {
+          "skipUrlSync": false
+        }
+      },
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "allowCustomValue": true,
           "current": {
             "text": "loki_k8_live_hla1",
             "value": "eegmz7m03591ce"
           },
-          "hide": 2,
+          "hide": "hideVariable",
+          "includeAll": false,
+          "multi": false,
           "name": "loki_datasource",
           "options": [],
-          "query": "loki",
-          "refresh": 1,
+          "pluginId": "loki",
+          "refresh": "onDashboardLoad",
           "regex": ".*${DS_PROMETHEUS:text}",
-          "type": "datasource"
-        },
-        {
+          "skipUrlSync": false
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
           "current": {
             "text": "All",
             "value": "$__all"
           },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "aef9f9k9lvwn4b"
-          },
           "definition": "label_values(traefik_open_connections, entrypoint)",
+          "hide": "dontHide",
           "includeAll": true,
+          "multi": false,
           "name": "entrypoint",
           "options": [],
           "query": {
-            "query": "label_values(traefik_open_connections, entrypoint)",
-            "refId": "StandardVariableQuery"
+            "datasource": {
+              "name": "aef9f9k9lvwn4b"
+            },
+            "group": "prometheus",
+            "kind": "DataQuery",
+            "spec": {
+              "query": "label_values(traefik_open_connections, entrypoint)",
+              "refId": "StandardVariableQuery"
+            },
+            "version": "v0"
           },
-          "refresh": 1,
+          "refresh": "onDashboardLoad",
           "regex": "",
-          "type": "query"
-        },
-        {
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
+        }
+      },
+      {
+        "kind": "IntervalVariable",
+        "spec": {
           "auto": true,
           "auto_count": 30,
           "auto_min": "1m",
@@ -2026,6 +2720,7 @@
             "text": "$__auto",
             "value": "$__auto"
           },
+          "hide": "dontHide",
           "name": "interval",
           "options": [
             {
@@ -2070,43 +2765,46 @@
             }
           ],
           "query": "1m,5m,10m,30m,1h,2h,4h,8h",
-          "refresh": 2,
-          "type": "interval"
-        },
-        {
+          "refresh": "onTimeRangeChanged",
+          "skipUrlSync": false
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
           "current": {
             "text": "All",
             "value": [
               "$__all"
             ]
           },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
           "definition": "label_values(traefik_service_requests_total,exported_service)",
+          "hide": "dontHide",
           "includeAll": true,
           "multi": true,
           "name": "service",
           "options": [],
           "query": {
-            "qryType": 1,
-            "query": "label_values(traefik_service_requests_total,exported_service)",
-            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            "datasource": {
+              "name": "${DS_PROMETHEUS}"
+            },
+            "group": "prometheus",
+            "kind": "DataQuery",
+            "spec": {
+              "qryType": 1,
+              "query": "label_values(traefik_service_requests_total,exported_service)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "version": "v0"
           },
-          "refresh": 2,
+          "refresh": "onTimeRangeChanged",
           "regex": "/([^@]+)@.*/",
-          "sort": 1,
-          "type": "query"
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "alphabeticalAsc"
         }
-      ]
-    },
-    "time": {
-      "from": "now-24h",
-      "to": "now"
-    },
-    "timepicker": {},
-    "timezone": "",
-    "title": "K8s / Traefik"
+      }
+    ]
   }
 }
