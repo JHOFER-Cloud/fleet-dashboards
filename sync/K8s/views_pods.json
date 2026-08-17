@@ -331,7 +331,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": true,
-                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) by (container) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) by (container) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "interval": "",
                         "legendFormat": "{{ container }} REQUESTS",
                         "range": true
@@ -353,7 +353,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) by (container) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) by (container) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "legendFormat": "{{ container }} LIMITS",
                         "range": true
                       },
@@ -1176,7 +1176,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "format": "table",
                         "instant": true,
                         "interval": "",
@@ -1201,7 +1201,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "format": "table",
                         "instant": true,
                         "interval": "",
@@ -1226,7 +1226,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "format": "table",
                         "instant": true,
                         "interval": "",
@@ -1250,7 +1250,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "format": "table",
                         "instant": true,
                         "interval": "",
@@ -1522,7 +1522,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"})",
+                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1))",
                         "instant": true,
                         "interval": "$resolution",
                         "legendFormat": "Requests"
@@ -1628,7 +1628,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"})",
+                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1))",
                         "instant": true,
                         "interval": "$resolution",
                         "legendFormat": "Requests"
@@ -1814,7 +1814,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"})",
+                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1))",
                         "instant": true,
                         "interval": "$resolution",
                         "legendFormat": "Limits"
@@ -1916,7 +1916,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}) ",
+                        "expr": "sum(container_memory_working_set_bytes{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"memory\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) ",
                         "instant": true,
                         "interval": "$resolution",
                         "legendFormat": "Limits"
@@ -2018,7 +2018,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": true,
-                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) by (container) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) by (container) / sum(kube_pod_container_resource_requests{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "interval": "$resolution",
                         "legendFormat": "{{ container }}  REQUESTS",
                         "range": true
@@ -2040,7 +2040,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) by (container) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}) by (container)",
+                        "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=~\"$namespace.*\", pod=~\"$pod\", image!=\"\", node=~\"$node\"}[$__rate_interval])) by (container) / sum(kube_pod_container_resource_limits{namespace=~\"$namespace.*\", pod=~\"$pod\", resource=\"cpu\", job=~\"$job\", node=~\"$node\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1)) by (container)",
                         "legendFormat": "{{ container }}  LIMITS",
                         "range": true
                       },
@@ -2385,7 +2385,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "kube_pod_status_qos_class{namespace=~\"$namespace.*\", pod=\"$pod\"} \u003e 0",
+                        "expr": "kube_pod_status_qos_class{namespace=~\"$namespace.*\", pod=\"$pod\"}\n  * on (namespace, pod, cluster) group_left()\n    max by (namespace, pod, cluster) (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1) \u003e 0",
                         "instant": true,
                         "interval": "",
                         "legendFormat": "{{ qos_class }}"
