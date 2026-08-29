@@ -911,9 +911,9 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_import)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )\n  -\n  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_export)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
+                        "expr": "  vector(\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    / 31557600 * ${__range_s}\n  )",
                         "instant": false,
-                        "legendFormat": "Net cost",
+                        "legendFormat": "Fixed cost",
                         "range": true
                       },
                       "version": "v0"
@@ -934,14 +934,37 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  (\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_import)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n    -\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_export)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n  )\n  /\n  sum(\n    sum_over_time(\n      (\n        max by (battery_name) (sonnenbatterie_consumption_mw{battery_name=~\"$battery\"}) / 1000\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
+                        "expr": "  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_import)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )\n  -\n  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_export)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  / 31557600 * ${__range_s}",
+                        "instant": false,
+                        "legendFormat": "Net cost",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "D"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  (\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_import)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n    -\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_export)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    / 31557600 * ${__range_s}\n  )\n  /\n  sum(\n    sum_over_time(\n      (\n        max by (battery_name) (sonnenbatterie_consumption_mw{battery_name=~\"$battery\"}) / 1000\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
                         "instant": false,
                         "legendFormat": "Effective \u20ac/kWh",
                         "range": true
                       },
                       "version": "v0"
                     },
-                    "refId": "D"
+                    "refId": "E"
                   }
                 }
               ],

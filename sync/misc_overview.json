@@ -640,7 +640,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000",
+                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}",
                         "instant": true,
                         "legendFormat": "This Month",
                         "range": false
@@ -930,7 +930,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w)\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  )\n  /\n  sum_over_time( sum(tapo_p110_power_consumption_w)[${__range}:5m] )",
+                        "expr": "  (\n    sum_over_time(\n      (\n        sum(tapo_p110_power_consumption_w) / 1000\n        * (\n            scalar(jhc:eur_per_kwh_grid_import)\n            - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n              * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n          )\n      )[${__range}:5m]\n    ) * 5 / 60 / 1000\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}\n  )\n  /\n  (\n    sum_over_time( (sum(tapo_p110_power_consumption_w) / 1000)[${__range}:5m] )\n    * 5 / 60 / 1000\n  )",
                         "instant": true,
                         "legendFormat": "This Month \u20ac/kWh",
                         "range": false
@@ -1025,7 +1025,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w)\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  )\n  /\n  sum_over_time( sum(tapo_p110_power_consumption_w)[${__range}:5m] )",
+                        "expr": "  (\n    sum_over_time(\n      (\n        sum(tapo_p110_power_consumption_w) / 1000\n        * (\n            scalar(jhc:eur_per_kwh_grid_import)\n            - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n              * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n          )\n      )[${__range}:5m]\n    ) * 5 / 60 / 1000\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}\n  )\n  /\n  (\n    sum_over_time( (sum(tapo_p110_power_consumption_w) / 1000)[${__range}:5m] )\n    * 5 / 60 / 1000\n  )",
                         "instant": true,
                         "legendFormat": "Last Month \u20ac/kWh",
                         "range": false
@@ -1366,7 +1366,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000",
+                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}",
                         "instant": true,
                         "legendFormat": "Last Month",
                         "range": false
