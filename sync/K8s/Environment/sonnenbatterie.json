@@ -572,10 +572,8 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "exemplar": false,
-                        "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  ) * $eur_per_kWh",
-                        "instant": false,
-                        "legendFormat": "Import cost",
+                        "expr": "  sum(\n    sum_over_time(\n      clamp_min(\n        max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}),\n        0\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 1000 / 3600000\n  )",
+                        "legendFormat": "Exported",
                         "range": true
                       },
                       "version": "v0"
@@ -620,40 +618,7 @@
                   },
                   "unit": "watth"
                 },
-                "overrides": [
-                  {
-                    "matcher": {
-                      "id": "byName",
-                      "options": "Import cost"
-                    },
-                    "properties": [
-                      {
-                        "id": "unit",
-                        "value": "currencyEUR"
-                      },
-                      {
-                        "id": "thresholds",
-                        "value": {
-                          "mode": "absolute",
-                          "steps": [
-                            {
-                              "color": "green",
-                              "value": 0
-                            },
-                            {
-                              "color": "orange",
-                              "value": 2
-                            },
-                            {
-                              "color": "red",
-                              "value": 3
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                ]
+                "overrides": []
               },
               "options": {
                 "colorMode": "value",
@@ -850,6 +815,223 @@
                             {
                               "color": "red",
                               "value": 3
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_import)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
+                        "instant": false,
+                        "legendFormat": "Import cost",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_export)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
+                        "instant": false,
+                        "legendFormat": "Export credit",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_import)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )\n  -\n  sum(\n    sum_over_time(\n      (\n        clamp_min(\n          max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n          0\n        )\n        * scalar(jhc:eur_per_kwh_grid_export)\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
+                        "instant": false,
+                        "legendFormat": "Net cost",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${DS_PROMETHEUS}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  (\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_import)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n    -\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_export)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n  )\n  /\n  sum(\n    sum_over_time(\n      (\n        max by (battery_name) (sonnenbatterie_consumption_mw{battery_name=~\"$battery\"}) / 1000\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
+                        "instant": false,
+                        "legendFormat": "Effective \u20ac/kWh",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "D"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 16,
+          "links": [],
+          "title": "Grid cost (by time range)",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "text",
+                        "value": 0
+                      }
+                    ]
+                  },
+                  "unit": "currencyEUR"
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Net cost"
+                    },
+                    "properties": [
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "green",
+                              "value": 0
+                            },
+                            {
+                              "color": "orange",
+                              "value": 2
+                            },
+                            {
+                              "color": "red",
+                              "value": 3
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Effective \u20ac/kWh"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "suffix:\u20ac/kWh"
+                      },
+                      {
+                        "id": "decimals",
+                        "value": 3
+                      },
+                      {
+                        "id": "thresholds",
+                        "value": {
+                          "mode": "absolute",
+                          "steps": [
+                            {
+                              "color": "green",
+                              "value": 0
+                            },
+                            {
+                              "color": "orange",
+                              "value": 0.15
+                            },
+                            {
+                              "color": "red",
+                              "value": 0.25
                             }
                           ]
                         }
@@ -2141,7 +2323,7 @@
               "height": 8,
               "width": 12,
               "x": 0,
-              "y": 14
+              "y": 18
             }
           },
           {
@@ -2154,7 +2336,7 @@
               "height": 8,
               "width": 12,
               "x": 12,
-              "y": 14
+              "y": 18
             }
           },
           {
@@ -2167,7 +2349,20 @@
               "height": 6,
               "width": 24,
               "x": 0,
-              "y": 22
+              "y": 26
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-16"
+              },
+              "height": 4,
+              "width": 24,
+              "x": 0,
+              "y": 14
             }
           }
         ]
@@ -2283,40 +2478,6 @@
           "regexApplyTo": "value",
           "skipUrlSync": false,
           "sort": "alphabeticalAsc"
-        }
-      },
-      {
-        "kind": "QueryVariable",
-        "spec": {
-          "allowCustomValue": true,
-          "current": {
-            "text": "0.2493",
-            "value": "0.2493"
-          },
-          "definition": "label_values(jhc:eur_per_kwh_grid, amount)",
-          "hide": "inControlsMenu",
-          "includeAll": false,
-          "label": "EUR/kWh (grid)",
-          "multi": false,
-          "name": "eur_per_kWh",
-          "options": [],
-          "query": {
-            "datasource": {
-              "name": "${DS_PROMETHEUS}"
-            },
-            "group": "prometheus",
-            "kind": "DataQuery",
-            "spec": {
-              "query": "label_values(jhc:eur_per_kwh_grid, amount)",
-              "refId": "StandardVariableQuery"
-            },
-            "version": "v0"
-          },
-          "refresh": "onDashboardLoad",
-          "regex": "",
-          "regexApplyTo": "value",
-          "skipUrlSync": true,
-          "sort": "disabled"
         }
       }
     ]

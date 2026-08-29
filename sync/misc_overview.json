@@ -640,7 +640,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000",
                         "instant": true,
                         "legendFormat": "This Month",
                         "range": false
@@ -651,14 +651,17 @@
                   }
                 }
               ],
-              "queryOptions": {},
+              "queryOptions": {
+                "hideTimeOverride": true,
+                "timeFrom": "now/M"
+              },
               "transformations": []
             }
           },
           "description": "Running cost for the current calendar month so far.",
           "id": 15,
           "links": [],
-          "title": "This Month € (running)",
+          "title": "This Month \u20ac (running)",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -726,7 +729,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (room) (tapo_p110_month_energy_wh) / 1000 * $eur_per_kWh",
+                        "expr": "sum by (room) (tapo_p110_month_energy_wh)",
                         "interval": "1d",
                         "legendFormat": "{{room}}",
                         "range": true
@@ -746,7 +749,7 @@
           "description": "Energy cost over the last 12 months, per room.",
           "id": 16,
           "links": [],
-          "title": "Monthly Cost History (last 12 months)",
+          "title": "Monthly Energy History (last 12 months)",
           "vizConfig": {
             "group": "barchart",
             "kind": "VizConfig",
@@ -787,7 +790,7 @@
                       }
                     ]
                   },
-                  "unit": "currencyEUR"
+                  "unit": "watth"
                 },
                 "overrides": []
               },
@@ -882,6 +885,196 @@
                     ]
                   },
                   "unit": "watth"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.2"
+          }
+        }
+      },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w)\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  )\n  /\n  sum_over_time( sum(tapo_p110_power_consumption_w)[${__range}:5m] )",
+                        "instant": true,
+                        "legendFormat": "This Month \u20ac/kWh",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "hideTimeOverride": true,
+                "timeFrom": "now/M"
+              },
+              "transformations": []
+            }
+          },
+          "description": "Running cost for the current calendar month so far.",
+          "id": 18,
+          "links": [],
+          "title": "This Month \u20ac/kWh",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 3,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 0.15
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.25
+                      }
+                    ]
+                  },
+                  "unit": "suffix:\u20ac/kWh"
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.1.2"
+          }
+        }
+      },
+      "panel-19": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w)\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  )\n  /\n  sum_over_time( sum(tapo_p110_power_consumption_w)[${__range}:5m] )",
+                        "instant": true,
+                        "legendFormat": "Last Month \u20ac/kWh",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {
+                "hideTimeOverride": true,
+                "timeShift": "1M/M"
+              },
+              "transformations": []
+            }
+          },
+          "description": "Running cost for the current calendar month so far.",
+          "id": 19,
+          "links": [],
+          "title": "Last Month \u20ac/kWh",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "decimals": 3,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "orange",
+                        "value": 0.15
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.25
+                      }
+                    ]
+                  },
+                  "unit": "suffix:\u20ac/kWh"
                 },
                 "overrides": []
               },
@@ -1173,7 +1366,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(tapo_p110_previous_month_energy_wh) / 1000 * $eur_per_kWh",
+                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000",
                         "instant": true,
                         "legendFormat": "Last Month",
                         "range": false
@@ -1184,14 +1377,17 @@
                   }
                 }
               ],
-              "queryOptions": {},
+              "queryOptions": {
+                "hideTimeOverride": true,
+                "timeShift": "1M/M"
+              },
               "transformations": []
             }
           },
           "description": "Total energy cost for the previous calendar month.",
           "id": 5,
           "links": [],
-          "title": "Last Month €",
+          "title": "Last Month \u20ac",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -1338,7 +1534,7 @@
                 "kind": "ElementReference",
                 "name": "panel-10"
               },
-              "height": 19,
+              "height": 22,
               "width": 18,
               "x": 0,
               "y": 0
@@ -1458,7 +1654,7 @@
               "height": 5,
               "width": 6,
               "x": 18,
-              "y": 14
+              "y": 17
             }
           },
           {
@@ -1471,7 +1667,33 @@
               "height": 7,
               "width": 24,
               "x": 0,
-              "y": 19
+              "y": 22
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-18"
+              },
+              "height": 3,
+              "width": 3,
+              "x": 18,
+              "y": 14
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-19"
+              },
+              "height": 3,
+              "width": 3,
+              "x": 21,
+              "y": 14
             }
           }
         ]
@@ -1537,40 +1759,6 @@
           "refresh": "onDashboardLoad",
           "regex": "",
           "skipUrlSync": false
-        }
-      },
-      {
-        "kind": "QueryVariable",
-        "spec": {
-          "allowCustomValue": true,
-          "current": {
-            "text": "0.21649",
-            "value": "0.21649"
-          },
-          "definition": "label_values(jhc:eur_per_kwh_handshake, amount)",
-          "hide": "inControlsMenu",
-          "includeAll": false,
-          "label": "EUR/kWh (handshake)",
-          "multi": false,
-          "name": "eur_per_kWh",
-          "options": [],
-          "query": {
-            "datasource": {
-              "name": "$ds"
-            },
-            "group": "prometheus",
-            "kind": "DataQuery",
-            "spec": {
-              "query": "label_values(jhc:eur_per_kwh_handshake, amount)",
-              "refId": "StandardVariableQuery"
-            },
-            "version": "v0"
-          },
-          "refresh": "onDashboardLoad",
-          "regex": "",
-          "regexApplyTo": "value",
-          "skipUrlSync": true,
-          "sort": "disabled"
         }
       }
     ]
