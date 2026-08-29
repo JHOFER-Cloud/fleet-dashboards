@@ -2270,8 +2270,8 @@
         "spec": {
           "allowCustomValue": true,
           "current": {
-            "text": "0.262",
-            "value": "0.262"
+            "text": "0.2493",
+            "value": "0.2493"
           },
           "definition": "label_values(jhc:eur_per_kwh_grid, amount)",
           "hide": "inControlsMenu",
