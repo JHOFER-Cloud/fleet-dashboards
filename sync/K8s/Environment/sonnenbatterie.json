@@ -959,7 +959,7 @@
                         "exemplar": false,
                         "expr": "  (\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) * -1 / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_import)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n    -\n    sum(\n      sum_over_time(\n        (\n          clamp_min(\n            max by (battery_name) (sonnenbatterie_grid_feed_in_mw{battery_name=~\"$battery\"}) / 1000,\n            0\n          )\n          * scalar(jhc:eur_per_kwh_grid_export)\n        )[${__range}:${__interval}]\n      ) * ${__interval_ms} / 3600000 / 1000\n    )\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    / 31557600 * ${__range_s}\n  )\n  /\n  sum(\n    sum_over_time(\n      (\n        max by (battery_name) (sonnenbatterie_consumption_mw{battery_name=~\"$battery\"}) / 1000\n      )[${__range}:${__interval}]\n    ) * ${__interval_ms} / 3600000 / 1000\n  )",
                         "instant": false,
-                        "legendFormat": "Effective \u20ac/kWh",
+                        "legendFormat": "Effective €/kWh",
                         "range": true
                       },
                       "version": "v0"
@@ -1028,12 +1028,12 @@
                   {
                     "matcher": {
                       "id": "byName",
-                      "options": "Effective \u20ac/kWh"
+                      "options": "Effective €/kWh"
                     },
                     "properties": [
                       {
                         "id": "unit",
-                        "value": "suffix:\u20ac/kWh"
+                        "value": "suffix:€/kWh"
                       },
                       {
                         "id": "decimals",
@@ -2341,6 +2341,19 @@
             "spec": {
               "element": {
                 "kind": "ElementReference",
+                "name": "panel-16"
+              },
+              "height": 4,
+              "width": 24,
+              "x": 0,
+              "y": 14
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
                 "name": "panel-9"
               },
               "height": 8,
@@ -2373,19 +2386,6 @@
               "width": 24,
               "x": 0,
               "y": 26
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-16"
-              },
-              "height": 4,
-              "width": 24,
-              "x": 0,
-              "y": 14
             }
           }
         ]
@@ -2442,7 +2442,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-24h",
+      "from": "now/M",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
