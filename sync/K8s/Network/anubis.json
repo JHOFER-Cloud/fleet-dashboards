@@ -591,7 +591,7 @@
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
-                        "legendFormat": "{{embedded}}",
+                        "legendFormat": "Challenge: {{embedded}}",
                         "range": true,
                         "useBackend": false
                       },
