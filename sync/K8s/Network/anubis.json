@@ -48,7 +48,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(increase(anubis_policy_results{namespace=~\"$namespace\"}[$__range])) without (container,endpoint,pod,instance,job,namespace,action,rule)",
+                        "expr": "sum(increase(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__range]))",
                         "instant": false,
                         "legendFormat": "Requests",
                         "range": true
@@ -135,7 +135,7 @@
                         "disableTextWrap": false,
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(irate(anubis_policy_results{namespace=~\"$namespace\"}[$__rate_interval])) without (container,endpoint,pod,instance,job,namespace, rule)",
+                        "expr": "sum by (action) (irate(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__rate_interval]))",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
@@ -349,7 +349,7 @@
                         "disableTextWrap": false,
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(irate(anubis_policy_results{namespace=~\"$namespace\",action=~\"$action\"}[$__rate_interval])) without (container,endpoint,pod,instance,job,namespace, action)",
+                        "expr": "sum by (rule) (irate(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\",action=~\"$action\"}[$__rate_interval]))",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
@@ -587,11 +587,11 @@
                         "disableTextWrap": false,
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(irate(anubis_challenges_issued{namespace=~\"$namespace\"}[$__rate_interval])) without (container,endpoint,pod,instance,job,namespace)",
+                        "expr": "sum by (method) (irate(anubis_challenges_issued{namespace=~\"$namespace\",service=~\"$anubis\"}[$__rate_interval]))",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
-                        "legendFormat": "Challenge: {{embedded}}",
+                        "legendFormat": "Challenge: {{method}}",
                         "range": true,
                         "useBackend": false
                       },
@@ -817,7 +817,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(increase(anubis_challenges_issued{namespace=~\"$namespace\"}[$__range])) without (container,endpoint,pod,instance,job,namespace)",
+                        "expr": "sum by (method) (increase(anubis_challenges_issued{namespace=~\"$namespace\",service=~\"$anubis\"}[$__range]))",
                         "instant": false,
                         "legendFormat": "{{method}}",
                         "range": true
@@ -904,7 +904,7 @@
                         "disableTextWrap": false,
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum(irate(anubis_policy_results{namespace=~\"$namespace\"}[$__rate_interval])) without (container,endpoint,pod,instance,job,namespace,rule)",
+                        "expr": "sum by (action) (irate(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__rate_interval]))",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
@@ -1107,7 +1107,7 @@
                         "disableTextWrap": false,
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum (increase(anubis_policy_results{namespace=~\"$namespace\"}[$__range])) without (container,endpoint,pod,instance,job,namespace,rule)",
+                        "expr": "sum by (action) (increase(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__range]))",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
@@ -1460,6 +1460,41 @@
             "spec": {
               "qryType": 1,
               "query": "label_values(anubis_policy_results,namespace)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "version": "v0"
+          },
+          "refresh": "onDashboardLoad",
+          "regex": "",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "naturalAsc"
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "label_values(anubis_policy_results{namespace=~\"$namespace\"},service)",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Instance",
+          "multi": true,
+          "name": "anubis",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "${DS_PROMETHEUS}"
+            },
+            "group": "prometheus",
+            "kind": "DataQuery",
+            "spec": {
+              "qryType": 1,
+              "query": "label_values(anubis_policy_results{namespace=~\"$namespace\"},service)",
               "refId": "PrometheusVariableQueryEditor-VariableQuery"
             },
             "version": "v0"
