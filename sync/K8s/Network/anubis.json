@@ -135,7 +135,7 @@
                         "disableTextWrap": false,
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum by (action) (irate(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__rate_interval]))",
+                        "expr": "sum by (action) (irate(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__rate_interval])) / ignoring(action) group_left sum (irate(anubis_policy_results{namespace=~\"$namespace\",service=~\"$anubis\"}[$__rate_interval]))",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
                         "instant": false,
@@ -229,7 +229,7 @@
                     "spanNulls": false,
                     "stacking": {
                       "group": "A",
-                      "mode": "percent"
+                      "mode": "normal"
                     },
                     "thresholdsStyle": {
                       "mode": "off"
