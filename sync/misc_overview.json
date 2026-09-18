@@ -141,6 +141,28 @@
                     },
                     "refId": "E"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${ds}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) / 1000",
+                        "instant": false,
+                        "legendFormat": "Consumer - BunkaSplit",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "F"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -337,7 +359,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "max(tapo_p110_power_consumption_w) / max(sonnenbatterie_consumption_mw) * 100",
+                        "expr": "(max(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / max(sonnenbatterie_consumption_mw) * 100",
                         "legendFormat": "Usage",
                         "range": true
                       },
@@ -358,7 +380,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "  (\n    sum(max by (battery_name) (sonnenbatterie_production_mw)) +\n    sum(clamp_min(max by (battery_name) (sonnenbatterie_battery_power_mw), 0))\n  ) / max(tapo_p110_power_consumption_w) * 100",
+                        "expr": "  (\n    sum(max by (battery_name) (sonnenbatterie_production_mw)) +\n    sum(clamp_min(max by (battery_name) (sonnenbatterie_battery_power_mw), 0))\n  ) / (max(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) * 100",
                         "instant": false,
                         "legendFormat": "Usage covered (B+P)",
                         "range": true
@@ -445,7 +467,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum by (room) (tapo_p110_today_energy_wh)",
+                        "expr": "sum by (room) (tapo_p110_today_energy_wh) or label_replace(max(hass_sensor_energy_kwh{entity=\"sensor.portasplit_energy_daily\"}) * 1000, \"room\", \"bunkasplit\", \"\", \"\")",
                         "legendFormat": "{{machine}}",
                         "range": true
                       },
@@ -639,7 +661,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}",
+                        "expr": "  sum_over_time(\n    (\n      (sum(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}",
                         "instant": true,
                         "legendFormat": "This Month",
                         "range": false
@@ -660,7 +682,7 @@
           "description": "Running cost for the current calendar month so far.",
           "id": 15,
           "links": [],
-          "title": "This Month € (running)",
+          "title": "This Month \u20ac (running)",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -728,7 +750,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (room) (tapo_p110_month_energy_wh)",
+                        "expr": "sum by (room) (tapo_p110_month_energy_wh) or label_replace(max(hass_sensor_energy_kwh{entity=\"sensor.portasplit_energy_monthly\"}) * 1000, \"room\", \"bunkasplit\", \"\", \"\")",
                         "interval": "1d",
                         "legendFormat": "{{room}}",
                         "range": true
@@ -842,7 +864,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(tapo_p110_month_energy_wh)",
+                        "expr": "(sum(tapo_p110_month_energy_wh) + ((max(hass_sensor_energy_kwh{entity=\"sensor.portasplit_energy_monthly\"}) * 1000) or vector(0)))",
                         "instant": true,
                         "legendFormat": "This Month",
                         "range": false
@@ -929,9 +951,9 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  (\n    sum_over_time(\n      (\n        sum(tapo_p110_power_consumption_w) / 1000\n        * (\n            scalar(jhc:eur_per_kwh_grid_import)\n            - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n              * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n          )\n      )[${__range}:5m]\n    ) * 5 / 60 / 1000\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}\n  )\n  /\n  (\n    sum_over_time( (sum(tapo_p110_power_consumption_w) / 1000)[${__range}:5m] )\n    * 5 / 60 / 1000\n  )",
+                        "expr": "  (\n    sum_over_time(\n      (\n        (sum(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / 1000\n        * (\n            scalar(jhc:eur_per_kwh_grid_import)\n            - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n              * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n          )\n      )[${__range}:5m]\n    ) * 5 / 60 / 1000\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}\n  )\n  /\n  (\n    sum_over_time( ((sum(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / 1000)[${__range}:5m] )\n    * 5 / 60 / 1000\n  )",
                         "instant": true,
-                        "legendFormat": "This Month €/kWh",
+                        "legendFormat": "This Month \u20ac/kWh",
                         "range": false
                       },
                       "version": "v0"
@@ -950,7 +972,7 @@
           "description": "Running cost for the current calendar month so far.",
           "id": 18,
           "links": [],
-          "title": "This Month €/kWh",
+          "title": "This Month \u20ac/kWh",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -978,7 +1000,7 @@
                       }
                     ]
                   },
-                  "unit": "suffix:€/kWh"
+                  "unit": "suffix:\u20ac/kWh"
                 },
                 "overrides": []
               },
@@ -1024,9 +1046,9 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  (\n    sum_over_time(\n      (\n        sum(tapo_p110_power_consumption_w) / 1000\n        * (\n            scalar(jhc:eur_per_kwh_grid_import)\n            - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n              * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n          )\n      )[${__range}:5m]\n    ) * 5 / 60 / 1000\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}\n  )\n  /\n  (\n    sum_over_time( (sum(tapo_p110_power_consumption_w) / 1000)[${__range}:5m] )\n    * 5 / 60 / 1000\n  )",
+                        "expr": "  (\n    sum_over_time(\n      (\n        (sum(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / 1000\n        * (\n            scalar(jhc:eur_per_kwh_grid_import)\n            - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n              * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n          )\n      )[${__range}:5m]\n    ) * 5 / 60 / 1000\n    +\n    scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n    * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}\n  )\n  /\n  (\n    sum_over_time( ((sum(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / 1000)[${__range}:5m] )\n    * 5 / 60 / 1000\n  )",
                         "instant": true,
-                        "legendFormat": "Last Month €/kWh",
+                        "legendFormat": "Last Month \u20ac/kWh",
                         "range": false
                       },
                       "version": "v0"
@@ -1045,7 +1067,7 @@
           "description": "Running cost for the current calendar month so far.",
           "id": 19,
           "links": [],
-          "title": "Last Month €/kWh",
+          "title": "Last Month \u20ac/kWh",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -1073,7 +1095,7 @@
                       }
                     ]
                   },
-                  "unit": "suffix:€/kWh"
+                  "unit": "suffix:\u20ac/kWh"
                 },
                 "overrides": []
               },
@@ -1118,7 +1140,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "instant": false,
                         "legendFormat": "{{friendly_name}}",
                         "range": true
@@ -1387,7 +1409,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "  sum_over_time(\n    (\n      sum(tapo_p110_power_consumption_w) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}",
+                        "expr": "  sum_over_time(\n    (\n      (sum(tapo_p110_power_consumption_w) + (max(hass_sensor_power_w{entity=\"sensor.portasplit_verdichter_leistung\"}) or vector(0))) / 1000\n      * (\n          scalar(jhc:eur_per_kwh_grid_import)\n          - (scalar(jhc:eur_per_kwh_grid_import) - scalar(jhc:eur_per_kwh_grid_export))\n            * (max(sonnenbatterie_grid_feed_in_mw) \u003e bool 0)\n        )\n    )[${__range}:5m]\n  ) * 5 / 60 / 1000\n  +\n  scalar(jhc:eur_per_year_grid_base + jhc:eur_per_year_meter_rent)\n  * scalar(jhc:fixed_cost_share) / 31557600 * ${__range_s}",
                         "instant": true,
                         "legendFormat": "Last Month",
                         "range": false
@@ -1408,7 +1430,7 @@
           "description": "Total energy cost for the previous calendar month.",
           "id": 5,
           "links": [],
-          "title": "Last Month €",
+          "title": "Last Month \u20ac",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -1476,7 +1498,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(tapo_p110_previous_month_energy_wh)",
+                        "expr": "(sum(tapo_p110_previous_month_energy_wh) + ((max(hass_sensor_energy_kwh{entity=\"sensor.portasplit_energy_last_month\"}) * 1000) or vector(0)))",
                         "instant": true,
                         "legendFormat": "Last Month",
                         "range": false
