@@ -32,7 +32,6 @@
       }
     ],
     "cursorSync": "Crosshair",
-    "description": "",
     "editable": true,
     "elements": {
       "panel-158": {
@@ -253,6 +252,27 @@
                     },
                     "refId": "I"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "eef9f89usay9sb"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "legendFormat": "{{friendly_name}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "J"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -415,7 +435,7 @@
                 }
               }
             },
-            "version": "13.1.2"
+            "version": "13.2.1"
           }
         }
       },
@@ -637,6 +657,27 @@
                     },
                     "refId": "I"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "eef9f89usay9sb"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "legendFormat": "{{friendly_name}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "J"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -799,7 +840,7 @@
                 }
               }
             },
-            "version": "13.1.2"
+            "version": "13.2.1"
           }
         }
       },
@@ -1021,6 +1062,27 @@
                     },
                     "refId": "I"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "eef9f89usay9sb"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "legendFormat": "{{friendly_name}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "J"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -1183,7 +1245,7 @@
                 }
               }
             },
-            "version": "13.1.2"
+            "version": "13.2.1"
           }
         }
       },
@@ -1405,6 +1467,27 @@
                     },
                     "refId": "I"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "eef9f89usay9sb"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "legendFormat": "{{friendly_name}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "J"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -1567,7 +1650,7 @@
                 }
               }
             },
-            "version": "13.1.2"
+            "version": "13.2.1"
           }
         }
       },
@@ -1789,6 +1872,27 @@
                     },
                     "refId": "I"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "eef9f89usay9sb"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "legendFormat": "{{friendly_name}}",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "J"
+                  }
                 }
               ],
               "queryOptions": {},
@@ -1951,7 +2055,7 @@
                 }
               }
             },
-            "version": "13.1.2"
+            "version": "13.2.1"
           }
         }
       }
@@ -2034,18 +2138,6 @@
         "icon": "external link",
         "includeVars": false,
         "keepTime": false,
-        "tags": [],
-        "targetBlank": true,
-        "title": "Source (GitHub)",
-        "tooltip": "View source file in repository",
-        "type": "link",
-        "url": "https://github.com/JHOFER-Cloud/fleet-dashboards/blob/main/sync/rack_temps.json"
-      },
-      {
-        "asDropdown": false,
-        "icon": "external link",
-        "includeVars": false,
-        "keepTime": false,
         "tags": [
           "node-exporter"
         ],
@@ -2119,7 +2211,7 @@
             "text": "k8_dev_hla1",
             "value": "aef9f9k9lvwn4b"
           },
-          "hide": "dontHide",
+          "hide": "hideVariable",
           "includeAll": false,
           "label": "Datasource",
           "multi": false,
