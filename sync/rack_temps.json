@@ -2204,26 +2204,6 @@
     "title": "Rack Temps",
     "variables": [
       {
-        "kind": "DatasourceVariable",
-        "spec": {
-          "allowCustomValue": true,
-          "current": {
-            "text": "k8_dev_hla1",
-            "value": "aef9f9k9lvwn4b"
-          },
-          "hide": "hideVariable",
-          "includeAll": false,
-          "label": "Datasource",
-          "multi": false,
-          "name": "ds_prometheus",
-          "options": [],
-          "pluginId": "prometheus",
-          "refresh": "onDashboardLoad",
-          "regex": "",
-          "skipUrlSync": false
-        }
-      },
-      {
         "kind": "QueryVariable",
         "spec": {
           "allowCustomValue": true,
@@ -2300,7 +2280,7 @@
             "value": "pve-1.hla1.jhofer.lan"
           },
           "definition": "label_values(node_uname_info{job=\"$job\", nodename=\"$nodename\"}, instance)",
-          "hide": "dontHide",
+          "hide": "hideVariable",
           "includeAll": false,
           "label": "Instance",
           "multi": false,
@@ -2336,7 +2316,7 @@
             ]
           },
           "definition": "label_values(airthings_temperature_celsius,device_name)",
-          "hide": "dontHide",
+          "hide": "hideVariable",
           "includeAll": true,
           "label": "Temp sensors",
           "multi": true,
@@ -2360,6 +2340,26 @@
           "regexApplyTo": "value",
           "skipUrlSync": false,
           "sort": "disabled"
+        }
+      },
+      {
+        "kind": "DatasourceVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "k8_dev_hla1",
+            "value": "aef9f9k9lvwn4b"
+          },
+          "hide": "hideVariable",
+          "includeAll": false,
+          "label": "Datasource",
+          "multi": false,
+          "name": "ds_prometheus",
+          "options": [],
+          "pluginId": "prometheus",
+          "refresh": "onDashboardLoad",
+          "regex": "",
+          "skipUrlSync": false
         }
       }
     ]
