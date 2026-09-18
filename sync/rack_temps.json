@@ -2280,7 +2280,7 @@
             "value": "pve-1.hla1.jhofer.lan"
           },
           "definition": "label_values(node_uname_info{job=\"$job\", nodename=\"$nodename\"}, instance)",
-          "hide": "hideVariable",
+          "hide": "inControlsMenu",
           "includeAll": false,
           "label": "Instance",
           "multi": false,
@@ -2316,7 +2316,7 @@
             ]
           },
           "definition": "label_values(airthings_temperature_celsius,device_name)",
-          "hide": "hideVariable",
+          "hide": "inControlsMenu",
           "includeAll": true,
           "label": "Temp sensors",
           "multi": true,
