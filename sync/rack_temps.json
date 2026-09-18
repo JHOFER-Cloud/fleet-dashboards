@@ -243,7 +243,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+                        "expr": "max by (nodename) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
                         "instant": false,
                         "legendFormat": "Inlet: {{nodename}}",
                         "range": true
@@ -265,7 +265,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "legendFormat": "{{friendly_name}}",
                         "range": true
                       },
@@ -648,7 +648,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+                        "expr": "max by (nodename) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
                         "instant": false,
                         "legendFormat": "Inlet: {{nodename}}",
                         "range": true
@@ -670,7 +670,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "legendFormat": "{{friendly_name}}",
                         "range": true
                       },
@@ -1053,7 +1053,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+                        "expr": "max by (name) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
                         "instant": false,
                         "legendFormat": "Inlet: {{nodename}}",
                         "range": true
@@ -1075,7 +1075,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "legendFormat": "{{friendly_name}}",
                         "range": true
                       },
@@ -1458,7 +1458,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+                        "expr": "max by (nodename) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
                         "instant": false,
                         "legendFormat": "Inlet: {{nodename}}",
                         "range": true
@@ -1480,7 +1480,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "legendFormat": "{{friendly_name}}",
                         "range": true
                       },
@@ -1863,7 +1863,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"}",
+                        "expr": "max by (nodename) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
                         "instant": false,
                         "legendFormat": "Inlet: {{nodename}}",
                         "range": true
@@ -1885,7 +1885,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "legendFormat": "{{friendly_name}}",
                         "range": true
                       },

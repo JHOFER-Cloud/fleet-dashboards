@@ -1118,7 +1118,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"}",
+                        "expr": "max by (friendly_name) (hass_sensor_temperature_celsius{entity=\"sensor.portasplit_innentemperatur\"})",
                         "instant": false,
                         "legendFormat": "{{friendly_name}}",
                         "range": true
