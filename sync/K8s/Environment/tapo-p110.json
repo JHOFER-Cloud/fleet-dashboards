@@ -56,7 +56,7 @@
                         "editorMode": "code",
                         "expr": "sum by (room) (tapo_p110_month_energy_wh{job=\"$job\", room=~\"$rooms\"})",
                         "instant": true,
-                        "legendFormat": "{{machine}}",
+                        "legendFormat": "{{room}}",
                         "range": false
                       },
                       "version": "v0"
@@ -143,7 +143,7 @@
                         "exemplar": false,
                         "expr": "sum by (room) (tapo_p110_today_energy_wh{job=\"$job\", room=~\"$rooms\"})",
                         "instant": true,
-                        "legendFormat": "{{machine}}",
+                        "legendFormat": "{{room}}",
                         "range": false
                       },
                       "version": "v0"
@@ -229,7 +229,7 @@
                         "editorMode": "code",
                         "expr": "sum by (room) (tapo_p110_previous_month_energy_wh{job=\"$job\", room=~\"$rooms\"})",
                         "instant": true,
-                        "legendFormat": "{{machine}}",
+                        "legendFormat": "{{room}}",
                         "range": false
                       },
                       "version": "v0"
