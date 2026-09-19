@@ -337,7 +337,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "max(tapo_p110_power_consumption_w) / max(sonnenbatterie_consumption_mw) * 100",
+                        "expr": "sum(tapo_p110_power_consumption_w) / max(sonnenbatterie_consumption_mw) * 100",
                         "legendFormat": "Usage",
                         "range": true
                       },
@@ -358,7 +358,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "  (\n    sum(max by (battery_name) (sonnenbatterie_production_mw)) +\n    sum(clamp_min(max by (battery_name) (sonnenbatterie_battery_power_mw), 0))\n  ) / max(tapo_p110_power_consumption_w) * 100",
+                        "expr": "  (\n    sum(max by (battery_name) (sonnenbatterie_production_mw)) +\n    sum(clamp_min(max by (battery_name) (sonnenbatterie_battery_power_mw), 0))\n  ) / sum(tapo_p110_power_consumption_w) * 100",
                         "instant": false,
                         "legendFormat": "Usage covered (B+P)",
                         "range": true
@@ -446,7 +446,7 @@
                         "editorMode": "code",
                         "exemplar": false,
                         "expr": "sum by (room) (tapo_p110_today_energy_wh)",
-                        "legendFormat": "{{machine}}",
+                        "legendFormat": "{{room}}",
                         "range": true
                       },
                       "version": "v0"
