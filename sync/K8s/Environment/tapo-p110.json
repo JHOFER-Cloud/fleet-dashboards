@@ -117,7 +117,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.0.1"
+            "version": "13.2.1"
           }
         }
       },
@@ -204,7 +204,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.0.1"
+            "version": "13.2.1"
           }
         }
       },
@@ -290,7 +290,111 @@
                 "wideLayout": true
               }
             },
-            "version": "13.0.1"
+            "version": "13.2.1"
+          }
+        }
+      },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "aef9f9k9lvwn4b"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum by (job)(tapo_p110_power_consumption_w{job=\"$job\", room=~\"$rooms\"})",
+                        "instant": true,
+                        "legendFormat": "__auto",
+                        "range": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 16,
+          "links": [],
+          "title": "Combined draw",
+          "vizConfig": {
+            "group": "gauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "red",
+                    "mode": "thresholds"
+                  },
+                  "noValue": "off",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 1000000
+                      },
+                      {
+                        "color": "red",
+                        "value": 2000000
+                      }
+                    ]
+                  },
+                  "unit": "mwatt"
+                },
+                "overrides": []
+              },
+              "options": {
+                "barShape": "rounded",
+                "barWidthFactor": 0.25,
+                "effects": {
+                  "barGlow": true,
+                  "centerGlow": true,
+                  "gradient": false
+                },
+                "endpointMarker": "glow",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "circle",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto",
+                "sparkline": true,
+                "text": {},
+                "textMode": "auto"
+              }
+            },
+            "version": "13.2.1"
           }
         }
       },
@@ -389,7 +493,7 @@
                 "textMode": "auto"
               }
             },
-            "version": "13.0.1"
+            "version": "13.2.1"
           }
         }
       },
@@ -474,7 +578,7 @@
                 "wideLayout": true
               }
             },
-            "version": "13.0.1"
+            "version": "13.2.1"
           }
         }
       },
@@ -593,7 +697,7 @@
                 }
               }
             },
-            "version": "13.0.1"
+            "version": "13.2.1"
           }
         }
       }
@@ -649,8 +753,21 @@
                 "name": "panel-4"
               },
               "height": 6,
-              "width": 9,
+              "width": 6,
               "x": 12,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-16"
+              },
+              "height": 6,
+              "width": 3,
+              "x": 18,
               "y": 0
             }
           },
@@ -766,10 +883,10 @@
           "allowCustomValue": true,
           "current": {
             "text": [
-              "hla1_r1"
+              "All"
             ],
             "value": [
-              "hla1_r1"
+              "$__all"
             ]
           },
           "definition": "label_values(tapo_p110_today_energy_wh, room)",
