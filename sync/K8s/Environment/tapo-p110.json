@@ -331,7 +331,7 @@
           "description": "",
           "id": 16,
           "links": [],
-          "title": "Current draw",
+          "title": "Combined draw",
           "vizConfig": {
             "group": "gauge",
             "kind": "VizConfig",
