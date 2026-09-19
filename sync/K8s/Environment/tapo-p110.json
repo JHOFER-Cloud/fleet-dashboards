@@ -313,7 +313,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (job)(tapo_p110_power_consumption_w{job=\"$job\", room=~\"$rooms\"})",
+                        "expr": "sum (tapo_p110_power_consumption_w{job=\"$job\", room=~\"$rooms\"})",
                         "instant": true,
                         "legendFormat": "__auto",
                         "range": false
@@ -342,6 +342,7 @@
                     "fixedColor": "red",
                     "mode": "thresholds"
                   },
+                  "min": 0,
                   "noValue": "off",
                   "thresholds": {
                     "mode": "absolute",
@@ -352,11 +353,11 @@
                       },
                       {
                         "color": "#EAB839",
-                        "value": 1000000
+                        "value": 800000
                       },
                       {
                         "color": "red",
-                        "value": 2000000
+                        "value": 1500000
                       }
                     ]
                   },
@@ -370,7 +371,7 @@
                 "effects": {
                   "barGlow": true,
                   "centerGlow": true,
-                  "gradient": false
+                  "gradient": true
                 },
                 "endpointMarker": "glow",
                 "minVizHeight": 75,
@@ -385,7 +386,7 @@
                 },
                 "segmentCount": 1,
                 "segmentSpacing": 0.3,
-                "shape": "circle",
+                "shape": "gauge",
                 "showThresholdLabels": false,
                 "showThresholdMarkers": false,
                 "sizing": "auto",
@@ -443,19 +444,29 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
+                    "fixedColor": "red",
                     "mode": "thresholds"
                   },
+                  "max": 3680000,
                   "noValue": "off",
                   "thresholds": {
-                    "mode": "percentage",
+                    "mode": "absolute",
                     "steps": [
                       {
                         "color": "green",
                         "value": 0
                       },
                       {
+                        "color": "#EAB839",
+                        "value": 800000
+                      },
+                      {
                         "color": "red",
-                        "value": 80
+                        "value": 1500000
+                      },
+                      {
+                        "color": "purple",
+                        "value": 3680000
                       }
                     ]
                   },
@@ -464,14 +475,14 @@
                 "overrides": []
               },
               "options": {
-                "barShape": "flat",
-                "barWidthFactor": 0.5,
+                "barShape": "rounded",
+                "barWidthFactor": 0.25,
                 "effects": {
-                  "barGlow": false,
-                  "centerGlow": false,
-                  "gradient": false
+                  "barGlow": true,
+                  "centerGlow": true,
+                  "gradient": true
                 },
-                "endpointMarker": "point",
+                "endpointMarker": "glow",
                 "minVizHeight": 75,
                 "minVizWidth": 75,
                 "orientation": "auto",
@@ -488,7 +499,7 @@
                 "showThresholdLabels": false,
                 "showThresholdMarkers": true,
                 "sizing": "auto",
-                "sparkline": false,
+                "sparkline": true,
                 "text": {},
                 "textMode": "auto"
               }
@@ -601,7 +612,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "tapo_p110_power_consumption_w{job=\"$job\", room=~\"$rooms\"}",
+                        "expr": "sum by (room) (tapo_p110_power_consumption_w{job=\"$job\", room=~\"$rooms\"})",
                         "legendFormat": "{{room}}",
                         "range": true
                       },
@@ -882,9 +893,7 @@
         "spec": {
           "allowCustomValue": true,
           "current": {
-            "text": [
-              "All"
-            ],
+            "text": "All",
             "value": [
               "$__all"
             ]
