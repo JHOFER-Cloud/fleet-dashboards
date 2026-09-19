@@ -1053,7 +1053,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "max by (name) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
+                        "expr": "max by (nodename) (idrac_sensors_temperature{nodename=\"$nodename\", name=\"System Board Inlet Temp\"})",
                         "instant": false,
                         "legendFormat": "Inlet: {{nodename}}",
                         "range": true
