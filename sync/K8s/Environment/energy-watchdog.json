@@ -341,11 +341,11 @@
                       },
                       {
                         "color": "yellow",
-                        "value": 0
+                        "value": 700
                       },
                       {
                         "color": "green",
-                        "value": 1000
+                        "value": 1200
                       }
                     ]
                   },
@@ -954,11 +954,11 @@
                       },
                       {
                         "color": "yellow",
-                        "value": 0
+                        "value": 700
                       },
                       {
                         "color": "green",
-                        "value": 1000
+                        "value": 1200
                       }
                     ]
                   },
