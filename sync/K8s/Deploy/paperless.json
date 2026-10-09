@@ -58,7 +58,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "description": "Paperless' own system status (Settings \u2192 System status). Broker is Valkey.",
+        "description": "Paperless' own system status (Settings \u2192 System status). Broker is Valkey. Classifier and sanity check show Not run yet until their first scheduled run (sanity check: Sundays 00:30).",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -76,6 +76,11 @@
                     "color": "green",
                     "index": 1,
                     "text": "OK"
+                  },
+                  "2": {
+                    "color": "text",
+                    "index": 2,
+                    "text": "Not run yet"
                   }
                 },
                 "type": "value"
@@ -177,7 +182,7 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "paperless_status_classifier_status{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"}",
+            "expr": "paperless_status_classifier_status{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} + 2 * (paperless_status_classifier_last_trained_timestamp_seconds{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} <= bool 0)",
             "legendFormat": "Classifier",
             "range": false,
             "instant": true,
@@ -189,7 +194,7 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "paperless_status_sanity_check_status{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"}",
+            "expr": "paperless_status_sanity_check_status{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} + 2 * (paperless_status_sanity_check_last_run_timestamp_seconds{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} <= bool 0)",
             "legendFormat": "Sanity check",
             "range": false,
             "instant": true,
@@ -513,7 +518,8 @@
                 }
               ]
             },
-            "unit": "dateTimeFromNow"
+            "unit": "dateTimeFromNow",
+            "noValue": "Not run yet"
           },
           "overrides": []
         },
@@ -548,7 +554,7 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "paperless_status_classifier_last_trained_timestamp_seconds{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} * 1000",
+            "expr": "(paperless_status_classifier_last_trained_timestamp_seconds{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} > 0) * 1000",
             "legendFormat": "__auto",
             "range": false,
             "instant": true,
@@ -579,7 +585,8 @@
                 }
               ]
             },
-            "unit": "dateTimeFromNow"
+            "unit": "dateTimeFromNow",
+            "noValue": "Not run yet"
           },
           "overrides": []
         },
@@ -614,7 +621,7 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "paperless_status_sanity_check_last_run_timestamp_seconds{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} * 1000",
+            "expr": "(paperless_status_sanity_check_last_run_timestamp_seconds{namespace=\"$NAMESPACE\", job=\"paperless-exporter\"} > 0) * 1000",
             "legendFormat": "__auto",
             "range": false,
             "instant": true,
