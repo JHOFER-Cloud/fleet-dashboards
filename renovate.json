@@ -47,6 +47,15 @@
       "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "mrlhansen/idrac_exporter"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^build/K8s/Garage/garage-operator\\.version$/"
+      ],
+      "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "rajsinghtech/garage-operator"
     }
   ],
   "packageRules": [
@@ -122,6 +131,21 @@
       "postUpgradeTasks": {
         "commands": ["python3 build/idrac/generate.py"],
         "fileFilters": ["sync/idrac/**"],
+        "executionMode": "update"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["github-releases"],
+      "matchFileNames": [
+        "build/K8s/Garage/garage-operator.version"
+      ],
+      "matchPackageNames": [
+        "rajsinghtech/garage-operator"
+      ],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/K8s/Garage/generate.py"],
+        "fileFilters": ["sync/K8s/Storage/garage.json"],
         "executionMode": "update"
       }
     }
