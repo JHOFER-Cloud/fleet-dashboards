@@ -1,0 +1,1062 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "step-ca"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "step-ca internal PKI. Metrics come from step-ca's own /metrics listener (metricsAddress in ca.json), which exports only issuance counters, KMS counters and uptime: no latency histograms, no ACME-specific metrics, no go_/process_ series. ACME order and challenge failures are visible only in the logs panel. Certificate expiry is not here either, that is x509-certificate-exporter.",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 100,
+        "panels": [],
+        "title": "Health",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Scrape health of the step-ca metrics endpoint. Down means the pod is gone or the metrics listener is not bound, not necessarily that signing is broken.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "DOWN"
+                  },
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "UP"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 1
+        },
+        "id": 1,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "max(up{namespace=\"$namespace\", service=\"step-ca-metrics\"})",
+            "instant": true,
+            "legendFormat": "up",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "CA",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Seconds since the step-ca process started. A reset means a restart, which also resets every counter on this dashboard and reloads ca.json and the certs from disk.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": 0
+                },
+                {
+                  "color": "text",
+                  "value": 3600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 4,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "max(step_ca_uptime_seconds{namespace=\"$namespace\"})",
+            "instant": true,
+            "legendFormat": "uptime",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Uptime",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Successful signings over the dashboard time range, all provisioners. Covers new issuance, renewals and rekeys.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "green",
+              "mode": "fixed"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 9,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum(increase(step_ca_x509_signed_total{namespace=\"$namespace\", success=\"true\"}[$__range])) + sum(increase(step_ca_x509_renewed_total{namespace=\"$namespace\", success=\"true\"}[$__range])) + sum(increase(step_ca_x509_rekeyed_total{namespace=\"$namespace\", success=\"true\"}[$__range]))",
+            "instant": true,
+            "legendFormat": "ok",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Issued (range)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Failed signings over the dashboard time range. Anything above zero is worth reading the logs panel for: the counter carries no reason label.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 14,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum(increase(step_ca_x509_signed_total{namespace=\"$namespace\", success=\"false\"}[$__range])) + sum(increase(step_ca_x509_renewed_total{namespace=\"$namespace\", success=\"false\"}[$__range])) + sum(increase(step_ca_x509_rekeyed_total{namespace=\"$namespace\", success=\"false\"}[$__range]))",
+            "instant": true,
+            "legendFormat": "failed",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Failed (range)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Time since the last successful signing. This is the useful liveness signal for a CA: cert-manager renews on a schedule, so a long gap with workloads present means issuance has stopped even while /health is green. Looks back 24h only, so it reads No data when nothing was issued in that window or since the last restart.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": 0
+                },
+                {
+                  "color": "orange",
+                  "value": 604800
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 19,
+          "y": 1
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "time() - max_over_time(timestamp(sum(increase(step_ca_x509_signed_total{namespace=\"$namespace\", success=\"true\"}[10m])) > 0)[1d:5m])",
+            "instant": true,
+            "legendFormat": "since",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Since last issuance",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 101,
+        "panels": [],
+        "title": "Issuance",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "x509 signings per second by provisioner and outcome. ACME issuance lands here as provisioner=\"acme\"; step-ca has no ACME-specific counters.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "unit": "reqps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": ".*failed.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 6
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "calcs": [
+              "last",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Max",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (provisioner) (rate(step_ca_x509_signed_total{namespace=\"$namespace\", provisioner=~\"$provisioner\", success=\"true\"}[$__rate_interval]))",
+            "instant": false,
+            "legendFormat": "{{provisioner}} ok",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (provisioner) (rate(step_ca_x509_signed_total{namespace=\"$namespace\", provisioner=~\"$provisioner\", success=\"false\"}[$__rate_interval]))",
+            "instant": false,
+            "legendFormat": "{{provisioner}} failed",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Signed",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Renewals and rekeys. cert-manager with an ACME issuer orders fresh certificates rather than renewing, so these stay flat unless something calls the renew endpoint directly.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "unit": "reqps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 6
+        },
+        "id": 7,
+        "options": {
+          "legend": {
+            "calcs": [
+              "last",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Max",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (provisioner, success) (rate(step_ca_x509_renewed_total{namespace=\"$namespace\", provisioner=~\"$provisioner\"}[$__rate_interval]))",
+            "instant": false,
+            "legendFormat": "renew {{provisioner}} success={{success}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (provisioner, success) (rate(step_ca_x509_rekeyed_total{namespace=\"$namespace\", provisioner=~\"$provisioner\"}[$__rate_interval]))",
+            "instant": false,
+            "legendFormat": "rekey {{provisioner}} success={{success}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Renewed / rekeyed",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Per-provisioner totals over the dashboard time range, so a provisioner that is failing every request is obvious next to one that is idle.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Failed"
+              },
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "mode": "basic",
+                    "type": "color-background"
+                  }
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 1
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 15
+        },
+        "id": 8,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "Failed"
+            }
+          ]
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (provisioner) (increase(step_ca_x509_signed_total{namespace=\"$namespace\", provisioner=~\"$provisioner\", success=\"true\"}[$__range]))",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (provisioner) (increase(step_ca_x509_signed_total{namespace=\"$namespace\", provisioner=~\"$provisioner\", success=\"false\"}[$__range]))",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "title": "By provisioner (range)",
+        "transformations": [
+          {
+            "id": "joinByField",
+            "options": {
+              "byField": "provisioner",
+              "mode": "outer"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Time 1": true,
+                "Time 2": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Value #A": "Signed",
+                "Value #B": "Failed",
+                "provisioner": "Provisioner"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "description": "Signing-key operations. This CA holds its intermediate key on disk rather than in a KMS, so these counters stay at zero. They move only if the deployment is switched to a KMS or hardware backend.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "unit": "reqps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "errors"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 15
+        },
+        "id": 9,
+        "options": {
+          "legend": {
+            "calcs": [
+              "last",
+              "max"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(step_ca_kms_signed{namespace=\"$namespace\"}[$__rate_interval]))",
+            "instant": false,
+            "legendFormat": "signed",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(step_ca_kms_errors{namespace=\"$namespace\"}[$__rate_interval]))",
+            "instant": false,
+            "legendFormat": "errors",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "KMS",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 22
+        },
+        "id": 102,
+        "panels": [],
+        "title": "Logs",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "${DS_LOKI}"
+        },
+        "description": "ACME order and challenge failures exist only here, not in any counter. kube-probe requests to /health are dropped: both probes hit it every 10s and would otherwise be the entire stream.",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 23
+        },
+        "id": 10,
+        "options": {
+          "dedupStrategy": "none",
+          "enableInfiniteScrolling": true,
+          "enableLogDetails": true,
+          "prettifyLogMessage": true,
+          "showCommonLabels": false,
+          "showControls": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        },
+        "pluginVersion": "12.3.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "${DS_LOKI}"
+            },
+            "direction": "backward",
+            "editorMode": "code",
+            "expr": "{namespace=\"$namespace\", pod=~\"step-ca-[0-9]+\"} != `/health`",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "step-ca log (probes excluded)",
+        "type": "logs"
+      }
+    ],
+    "preload": false,
+    "refresh": "1m",
+    "schemaVersion": 42,
+    "tags": [
+      "pki"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "k8_live_hla1",
+            "value": "eef9f89usay9sb"
+          },
+          "includeAll": false,
+          "label": "Source",
+          "name": "DS_PROMETHEUS",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "loki_k8_live_hla1",
+            "value": "eegmz7m03591ce"
+          },
+          "hide": 2,
+          "includeAll": false,
+          "name": "DS_LOKI",
+          "options": [],
+          "query": "loki",
+          "refresh": 1,
+          "regex": ".*${DS_PROMETHEUS:text}",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "pki",
+            "value": "pki"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "definition": "label_values(step_ca_uptime_seconds,namespace)",
+          "includeAll": false,
+          "multi": false,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(step_ca_uptime_seconds,namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "definition": "label_values(step_ca_x509_signed_total{namespace=\"$namespace\"},provisioner)",
+          "includeAll": true,
+          "multi": true,
+          "name": "provisioner",
+          "options": [],
+          "query": {
+            "query": "label_values(step_ca_x509_signed_total{namespace=\"$namespace\"},provisioner)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "step-ca"
+  }
+}
