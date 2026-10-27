@@ -1794,9 +1794,9 @@
                       "kind": "DataQuery",
                       "spec": {
                         "disableTextWrap": false,
-                        "editorMode": "builder",
+                        "editorMode": "code",
                         "exemplar": false,
-                        "expr": "sum by(container, username, total_play_time, last_seen) (jellyfin_activity_count)",
+                        "expr": "sum by(username) (jellyfin_activity_count)",
                         "format": "table",
                         "fullMetaSearch": false,
                         "includeNullMetadata": true,
@@ -1809,42 +1809,93 @@
                     },
                     "refId": "A"
                   }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "disableTextWrap": false,
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "sum by(username) (jellyfin_activity_play_time_seconds)",
+                        "format": "table",
+                        "fullMetaSearch": false,
+                        "includeNullMetadata": true,
+                        "instant": true,
+                        "legendFormat": "__auto",
+                        "range": false,
+                        "useBackend": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "B"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "disableTextWrap": false,
+                        "editorMode": "code",
+                        "exemplar": false,
+                        "expr": "(time() - min by(username) (jellyfin_activity_last_seen_seconds)) * 1000",
+                        "format": "table",
+                        "fullMetaSearch": false,
+                        "includeNullMetadata": true,
+                        "instant": true,
+                        "legendFormat": "__auto",
+                        "range": false,
+                        "useBackend": false
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "C"
+                  }
                 }
               ],
               "queryOptions": {},
               "transformations": [
+                {
+                  "group": "merge",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {}
+                  }
+                },
                 {
                   "group": "organize",
                   "kind": "Transformation",
                   "spec": {
                     "options": {
                       "excludeByName": {
-                        "Time": true,
-                        "__name__": true,
-                        "container": true,
-                        "instance": true,
-                        "job": true,
-                        "total_time": false,
-                        "user_id": true
+                        "Time": true
                       },
                       "includeByName": {},
                       "indexByName": {
-                        "Time": 0,
-                        "Value": 5,
-                        "__name__": 1,
-                        "instance": 2,
-                        "job": 3,
-                        "last_seen": 6,
-                        "total_play_time": 7,
-                        "total_time": 8,
-                        "username": 4
+                        "username": 0,
+                        "Value #A": 1,
+                        "Value #B": 2,
+                        "Value #C": 3
                       },
                       "renameByName": {
-                        "Value": "Total Plays",
-                        "last_seen": "Last Seen",
-                        "total_play_time": "Total Time",
-                        "total_time": "Total Time",
-                        "username": "Username"
+                        "username": "Username",
+                        "Value #A": "Total Plays",
+                        "Value #B": "Total Time",
+                        "Value #C": "Last Seen"
                       }
                     }
                   }
@@ -1897,6 +1948,30 @@
                       {
                         "id": "custom.width",
                         "value": 150
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Total Time"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "dtdurations"
+                      }
+                    ]
+                  },
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "Last Seen"
+                    },
+                    "properties": [
+                      {
+                        "id": "unit",
+                        "value": "dateTimeFromNow"
                       }
                     ]
                   }
