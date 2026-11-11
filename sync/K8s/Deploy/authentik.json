@@ -2080,32 +2080,7 @@
                   },
                   "unit": "s"
                 },
-                "overrides": [
-                  {
-                    "__systemRef": "hideSeriesFrom",
-                    "matcher": {
-                      "id": "byNames",
-                      "options": {
-                        "mode": "exclude",
-                        "names": [
-                          "default-provider-authorization-implicit-consent"
-                        ],
-                        "prefix": "All except:",
-                        "readOnly": true
-                      }
-                    },
-                    "properties": [
-                      {
-                        "id": "custom.hideFrom",
-                        "value": {
-                          "legend": false,
-                          "tooltip": true,
-                          "viz": true
-                        }
-                      }
-                    ]
-                  }
-                ]
+                "overrides": []
               },
               "options": {
                 "legend": {
