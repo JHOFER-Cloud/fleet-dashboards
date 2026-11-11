@@ -13,7 +13,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
+          "name": "Annotations \u0026 Alerts",
           "query": {
             "datasource": {
               "name": "grafana"
@@ -160,7 +160,9 @@
                 },
                 "pieType": "donut",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -325,7 +327,7 @@
                   "showLineNumbers": false,
                   "showMiniMap": false
                 },
-                "content": "\n\n<img src=\"https://goauthentik.io/img/icon_top_brand.svg\">",
+                "content": "\n\n\u003cimg src=\"https://goauthentik.io/img/icon_top_brand.svg\"\u003e",
                 "mode": "html"
               }
             },
@@ -530,7 +532,9 @@
                 "orientation": "auto",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -1211,7 +1215,9 @@
                 },
                 "pieType": "pie",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -1293,7 +1299,9 @@
                 },
                 "pieType": "pie",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -1875,7 +1883,9 @@
                 "orientation": "auto",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -1957,7 +1967,9 @@
                 "orientation": "auto",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
-                  "calcs": ["lastNotNull"],
+                  "calcs": [
+                    "lastNotNull"
+                  ],
                   "fields": "",
                   "values": false
                 },
@@ -2447,7 +2459,9 @@
       }
     },
     "preload": false,
-    "tags": ["authentik"],
+    "tags": [
+      "authentik"
+    ],
     "timeSettings": {
       "autoRefresh": "",
       "autoRefreshIntervals": [
@@ -2463,7 +2477,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-3h",
+      "from": "now-24h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
@@ -2496,7 +2510,9 @@
           "allowCustomValue": true,
           "current": {
             "text": "All",
-            "value": ["$__all"]
+            "value": [
+              "$__all"
+            ]
           },
           "definition": "authentik_outpost_connection",
           "hide": "dontHide",
@@ -2530,7 +2546,9 @@
           "allowCustomValue": true,
           "current": {
             "text": "All",
-            "value": ["$__all"]
+            "value": [
+              "$__all"
+            ]
           },
           "definition": "authentik_outpost_info{outpost_type=\"proxy\"}",
           "hide": "dontHide",
