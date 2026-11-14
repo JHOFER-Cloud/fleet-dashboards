@@ -1073,13 +1073,13 @@
     },
     {
       "type": "bargauge",
-      "title": "Tenant storage quota",
-      "description": "Disk quota used per tenant namespace (native ResourceQuota). VM count, vCPU and memory quota live in AAQ and are not exported.",
+      "title": "Tenant quota",
       "id": 19,
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
       },
+      "description": "Used share of each tenant's quota: VMs, vCPUs and guest memory from AAQ, disk from the native ResourceQuota.",
       "gridPos": {
         "h": 6,
         "w": 12,
@@ -1089,6 +1089,8 @@
       "fieldConfig": {
         "defaults": {
           "unit": "percentunit",
+          "min": 0,
+          "max": 1,
           "color": {
             "mode": "thresholds"
           },
@@ -1108,9 +1110,7 @@
                 "value": 0.95
               }
             ]
-          },
-          "min": 0,
-          "max": 1
+          }
         },
         "overrides": []
       },
@@ -1132,9 +1132,20 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "expr": "sum by (namespace) (kube_resourcequota{namespace=~\"vm-tenant.*\",resource=\"requests.storage\",type=\"used\"}) / sum by (namespace) (kube_resourcequota{namespace=~\"vm-tenant.*\",resource=\"requests.storage\",type=\"hard\"})",
-          "legendFormat": "{{namespace}}",
+          "expr": "sum by (namespace, resource) (kube_application_aware_resourcequota{namespace=~\"vm-tenant.*\",resource=~\".*/vmi\",type=\"used\"}) / sum by (namespace, resource) (kube_application_aware_resourcequota{namespace=~\"vm-tenant.*\",resource=~\".*/vmi\",type=\"hard\"})",
+          "legendFormat": "{{namespace}} {{resource}}",
           "refId": "A",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum by (namespace, resource) (kube_resourcequota{namespace=~\"vm-tenant.*\",resource=\"requests.storage\",type=\"used\"}) / sum by (namespace, resource) (kube_resourcequota{namespace=~\"vm-tenant.*\",resource=\"requests.storage\",type=\"hard\"})",
+          "legendFormat": "{{namespace}} disk",
+          "refId": "B",
           "instant": true,
           "range": false
         }
