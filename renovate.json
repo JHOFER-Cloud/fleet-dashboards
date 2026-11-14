@@ -74,6 +74,16 @@
       "matchStrings": ["(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "g0ldyy/comet"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^build/K8s/KubeVirt/kubevirt-monitoring\\.version$/"
+      ],
+      "matchStrings": ["(?<currentDigest>[a-f0-9]{40})"],
+      "currentValueTemplate": "main",
+      "datasourceTemplate": "git-refs",
+      "depNameTemplate": "https://github.com/kubevirt/monitoring"
     }
   ],
   "packageRules": [
@@ -194,6 +204,21 @@
       "postUpgradeTasks": {
         "commands": ["python3 build/K8s/Comet/generate.py"],
         "fileFilters": ["sync/K8s/Deploy/Jelly-Stack/comet.json"],
+        "executionMode": "update"
+      }
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["git-refs"],
+      "matchFileNames": [
+        "build/K8s/KubeVirt/kubevirt-monitoring.version"
+      ],
+      "matchPackageNames": [
+        "https://github.com/kubevirt/monitoring"
+      ],
+      "postUpgradeTasks": {
+        "commands": ["python3 build/K8s/KubeVirt/generate.py"],
+        "fileFilters": ["sync/K8s/KubeVirt/top_consumers.json"],
         "executionMode": "update"
       }
     }
