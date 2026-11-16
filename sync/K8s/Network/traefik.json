@@ -2693,7 +2693,7 @@
           "options": [],
           "query": {
             "datasource": {
-              "name": "aef9f9k9lvwn4b"
+              "name": "${DS_PROMETHEUS}"
             },
             "group": "prometheus",
             "kind": "DataQuery",
