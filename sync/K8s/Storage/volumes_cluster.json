@@ -546,7 +546,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eef9f89usay9sb"
+            "uid": "$DS_OPENSHIFT_PROMETHEUS"
           },
           "fieldConfig": {
             "defaults": {
@@ -631,7 +631,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eef9f89usay9sb"
+                "uid": "$DS_OPENSHIFT_PROMETHEUS"
               },
               "expr": "(\n  (\n    ((kubelet_volume_stats_used_bytes {namespace=~\"(openshift-.*|kube-.*|default|logging)\"} ) * 0) + 1\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes {namespace=~\"(openshift-.*|kube-.*|default|logging)\"}[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)",
               "instant": false,
@@ -905,7 +905,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eef9f89usay9sb"
+            "uid": "$DS_OPENSHIFT_PROMETHEUS"
           },
           "fieldConfig": {
             "defaults": {
@@ -990,7 +990,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eef9f89usay9sb"
+                "uid": "$DS_OPENSHIFT_PROMETHEUS"
               },
               "expr": "(\n  (\n    (\n      (\n        (kubelet_volume_stats_used_bytes {namespace!~\"(openshift-.*|kube-.*|default|logging)\"})\n      )\n      * 0 + 1\n    )\n    and\n    (predict_linear(kubelet_volume_stats_available_bytes[1d], 7 * 24 * 60 * 60) < 0)\n  )\n)",
               "instant": false,
