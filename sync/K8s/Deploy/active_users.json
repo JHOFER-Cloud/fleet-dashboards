@@ -136,7 +136,7 @@
             "type": "loki",
             "uid": "${loki_datasource}"
           },
-          "expr": "count(count by (ClientHost) (count_over_time({namespace=\"traefik\", container=\"traefik\"} |= \"RequestHost\" | json RequestHost, ClientHost, DownstreamStatus, ua=\"[\\\"request_User-Agent\\\"]\" | DownstreamStatus < 400 | ClientHost !~ \"10\\\\.244\\\\..*\" | ua !~ \"(?i).*(bot|spider|crawl|blackbox|kube-probe|prometheus|uptime|scanner|hookshot).*\" | RequestHost !~ \"$host_exclude\" [15m]))) or vector(0)",
+          "expr": "count(count by (ClientHost) (count_over_time({namespace=\"traefik\", container=\"traefik\"} |= \"RequestHost\" | json RequestHost, ClientHost, DownstreamStatus, ua=\"[\\\"request_User-Agent\\\"]\" | DownstreamStatus < 400 | ClientHost !~ \"10\\\\.244\\\\..*\" | ua !~ \"(?i).*(bot|spider|crawl|blackbox|kube-probe|prometheus|uptime|scanner|hookshot).*\" | RequestHost !~ `$host_exclude` [15m]))) or vector(0)",
           "refId": "A",
           "instant": true,
           "range": false,
@@ -513,7 +513,7 @@
             "type": "loki",
             "uid": "${loki_datasource}"
           },
-          "expr": "count by (RequestHost) (count by (RequestHost, ClientHost) (count_over_time({namespace=\"traefik\", container=\"traefik\"} |= \"RequestHost\" | json RequestHost, ClientHost, DownstreamStatus, ua=\"[\\\"request_User-Agent\\\"]\" | DownstreamStatus < 400 | ClientHost !~ \"10\\\\.244\\\\..*\" | ua !~ \"(?i).*(bot|spider|crawl|blackbox|kube-probe|prometheus|uptime|scanner|hookshot).*\" | RequestHost !~ \"$host_exclude\" [15m])))",
+          "expr": "count by (RequestHost) (count by (RequestHost, ClientHost) (count_over_time({namespace=\"traefik\", container=\"traefik\"} |= \"RequestHost\" | json RequestHost, ClientHost, DownstreamStatus, ua=\"[\\\"request_User-Agent\\\"]\" | DownstreamStatus < 400 | ClientHost !~ \"10\\\\.244\\\\..*\" | ua !~ \"(?i).*(bot|spider|crawl|blackbox|kube-probe|prometheus|uptime|scanner|hookshot).*\" | RequestHost !~ `$host_exclude` [15m])))",
           "refId": "A",
           "queryType": "instant"
         }
@@ -753,7 +753,7 @@
             "uid": "${loki_datasource}"
           },
           "refId": "A",
-          "expr": "count by (RequestHost) (count by (RequestHost, ClientHost) (count_over_time({namespace=\"traefik\", container=\"traefik\"} |= \"RequestHost\" | json RequestHost, ClientHost, DownstreamStatus, ua=\"[\\\"request_User-Agent\\\"]\" | DownstreamStatus < 400 | ClientHost !~ \"10\\\\.244\\\\..*\" | ua !~ \"(?i).*(bot|spider|crawl|blackbox|kube-probe|prometheus|uptime|scanner|hookshot).*\" | RequestHost !~ \"$host_exclude\" [$__auto])))",
+          "expr": "count by (RequestHost) (count by (RequestHost, ClientHost) (count_over_time({namespace=\"traefik\", container=\"traefik\"} |= \"RequestHost\" | json RequestHost, ClientHost, DownstreamStatus, ua=\"[\\\"request_User-Agent\\\"]\" | DownstreamStatus < 400 | ClientHost !~ \"10\\\\.244\\\\..*\" | ua !~ \"(?i).*(bot|spider|crawl|blackbox|kube-probe|prometheus|uptime|scanner|hookshot).*\" | RequestHost !~ `$host_exclude` [$__auto])))",
           "legendFormat": "{{RequestHost}}",
           "queryType": "range"
         }
