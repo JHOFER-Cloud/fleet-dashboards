@@ -784,7 +784,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "expr": "sum by (namespace, name) (rate(kubevirt_vmi_storage_read_traffic_bytes_total{namespace=~\"$namespace\",name=~\"$vm\"}[$__rate_interval]))",
+          "expr": "sum by (namespace, name) (rate(kubevirt_vmi_storage_read_traffic_bytes_total{namespace=~\"$namespace\",name=~\"$vm\"}[5m]))",
           "legendFormat": "{{namespace}}/{{name}} read",
           "refId": "A"
         },
@@ -793,7 +793,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "expr": "-sum by (namespace, name) (rate(kubevirt_vmi_storage_write_traffic_bytes_total{namespace=~\"$namespace\",name=~\"$vm\"}[$__rate_interval]))",
+          "expr": "-sum by (namespace, name) (rate(kubevirt_vmi_storage_write_traffic_bytes_total{namespace=~\"$namespace\",name=~\"$vm\"}[5m]))",
           "legendFormat": "{{namespace}}/{{name}} write",
           "refId": "B"
         }
@@ -845,7 +845,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "expr": "sum by (namespace, name) (rate(kubevirt_vmi_storage_iops_read_total{namespace=~\"$namespace\",name=~\"$vm\"}[$__rate_interval]))",
+          "expr": "sum by (namespace, name) (rate(kubevirt_vmi_storage_iops_read_total{namespace=~\"$namespace\",name=~\"$vm\"}[5m]))",
           "legendFormat": "{{namespace}}/{{name}} read",
           "refId": "A"
         },
@@ -854,7 +854,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "expr": "-sum by (namespace, name) (rate(kubevirt_vmi_storage_iops_write_total{namespace=~\"$namespace\",name=~\"$vm\"}[$__rate_interval]))",
+          "expr": "-sum by (namespace, name) (rate(kubevirt_vmi_storage_iops_write_total{namespace=~\"$namespace\",name=~\"$vm\"}[5m]))",
           "legendFormat": "{{namespace}}/{{name}} write",
           "refId": "B"
         }

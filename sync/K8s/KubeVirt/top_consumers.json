@@ -1489,7 +1489,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sort_desc(sum(irate(kubevirt_vmi_storage_read_traffic_bytes_total[$__rate_interval]) + irate(kubevirt_vmi_storage_write_traffic_bytes_total[$__rate_interval])) by (name, namespace))>0",
+          "expr": "sort_desc(sum(irate(kubevirt_vmi_storage_read_traffic_bytes_total[5m]) + irate(kubevirt_vmi_storage_write_traffic_bytes_total[5m])) by (name, namespace))>0",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1595,7 +1595,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sort_desc(sum(irate(kubevirt_vmi_storage_iops_read_total[$__rate_interval]) + irate(kubevirt_vmi_storage_iops_write_total[$__rate_interval])) by (name, namespace))>0",
+          "expr": "sort_desc(sum(irate(kubevirt_vmi_storage_iops_read_total[5m]) + irate(kubevirt_vmi_storage_iops_write_total[5m])) by (name, namespace))>0",
           "format": "time_series",
           "instant": false,
           "interval": "",
