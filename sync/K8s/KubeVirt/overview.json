@@ -545,7 +545,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -597,7 +599,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -649,7 +653,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -710,7 +716,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -771,7 +779,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -832,7 +842,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1197,7 +1209,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1249,7 +1263,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1301,7 +1317,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1353,7 +1371,9 @@
           "calcs": [
             "mean",
             "max"
-          ]
+          ],
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "multi",
