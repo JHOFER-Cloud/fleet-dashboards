@@ -1628,8 +1628,8 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum by (admin_endpoint) (rate(api_admin_request_counter{job=\"garage\", namespace=~\"$namespace\", service=~\"$service\"}[$__rate_interval]))",
-          "legendFormat": "{{admin_endpoint}}",
+          "expr": "sum by (api_endpoint) (rate(api_admin_request_counter{job=\"garage\", namespace=~\"$namespace\", service=~\"$service\"}[$__rate_interval]))",
+          "legendFormat": "{{api_endpoint}}",
           "refId": "A"
         }
       ],
@@ -2115,7 +2115,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "expr": "sum by (rpc_endpoint) (rate(rpc_netapp_error_counter{job=\"garage\", namespace=~\"$namespace\", service=~\"$service\"}[$__rate_interval]))",
-          "legendFormat": "errors {{rpc_endpoint}}",
+          "legendFormat": "netapp errors {{rpc_endpoint}}",
           "refId": "A"
         },
         {
@@ -2126,6 +2126,15 @@
           "expr": "sum(rate(rpc_timeout_counter{job=\"garage\", namespace=~\"$namespace\", service=~\"$service\"}[$__rate_interval]))",
           "legendFormat": "timeouts",
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "sum by (rpc_endpoint) (rate(rpc_garage_error_counter{job=\"garage\", namespace=~\"$namespace\", service=~\"$service\"}[$__rate_interval]))",
+          "legendFormat": "garage errors {{rpc_endpoint}}",
+          "refId": "C"
         }
       ],
       "title": "RPC Errors and Timeouts",
